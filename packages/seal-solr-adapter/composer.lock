@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "baf5af598efe6cb60b3841d1a4532e56",
+    "content-hash": "38ad81c8e649d2e9554b9f0ff11562fb",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -436,21 +436,23 @@
         },
         {
             "name": "solarium/solarium",
-            "version": "6.4.x-dev",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/solariumphp/solarium.git",
-                "reference": "5ed828fc441510e6ea10e5f6fa1bfeb7739fb952"
+                "reference": "44739c15341c308ea5ba79942fa4c9f4198679c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/5ed828fc441510e6ea10e5f6fa1bfeb7739fb952",
-                "reference": "5ed828fc441510e6ea10e5f6fa1bfeb7739fb952",
+                "url": "https://api.github.com/repos/solariumphp/solarium/zipball/44739c15341c308ea5ba79942fa4c9f4198679c4",
+                "reference": "44739c15341c308ea5ba79942fa4c9f4198679c4",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": ">=2.0",
+                "ext-date": "*",
                 "ext-json": "*",
+                "ext-pcre": "*",
                 "halaxa/json-machine": "^1.1",
                 "php": "^8.1",
                 "psr/event-dispatcher": "^1.0",
@@ -466,16 +468,17 @@
                 "nyholm/psr7": "^1.8",
                 "php-http/guzzle7-adapter": "^1.0",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan": "^2.1.41",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.5",
                 "rawr/phpunit-data-provider": "^3.3",
                 "roave/security-advisories": "dev-master",
                 "spomky-labs/cbor-php": "^3.1",
-                "symfony/event-dispatcher": "^5.0 || ^6.0 || ^7.0"
+                "symfony/event-dispatcher": "^5.0 || ^6.0 || ^7.0 || ^8.0"
             },
             "suggest": {
+                "ext-curl": "Needed to use the cURL adapter",
                 "spomky-labs/cbor-php": "Needed to use CBOR formatted requests with Solr 9.3+"
             },
             "type": "library",
@@ -503,9 +506,9 @@
             ],
             "support": {
                 "issues": "https://github.com/solariumphp/solarium/issues",
-                "source": "https://github.com/solariumphp/solarium/tree/6.4.x"
+                "source": "https://github.com/solariumphp/solarium/tree/7.0.0"
             },
-            "time": "2025-10-18T17:49:40+00:00"
+            "time": "2026-04-27T07:40:48+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -657,16 +660,15 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "50f0d9c9d0e3cff1163c959c50aaaaa4a7115f08"
+                "reference": "fbd47f7ebcbb450138d92642a0a53b72a5285dda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/50f0d9c9d0e3cff1163c959c50aaaaa4a7115f08",
-                "reference": "50f0d9c9d0e3cff1163c959c50aaaaa4a7115f08",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fbd47f7ebcbb450138d92642a0a53b72a5285dda",
+                "reference": "fbd47f7ebcbb450138d92642a0a53b72a5285dda",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=7.4"
@@ -708,7 +710,7 @@
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
                 "source": "https://github.com/nikic/PHP-Parser/tree/master"
             },
-            "time": "2026-02-26T13:20:22+00:00"
+            "time": "2026-07-11T16:03:13+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -831,16 +833,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.95.4",
+            "version": "v3.95.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "886a7adcb685e30a9dadb484236621b011b267b9"
+                "reference": "64a33558b1b581470c8c8489048efaf9ceeb8415"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/886a7adcb685e30a9dadb484236621b011b267b9",
-                "reference": "886a7adcb685e30a9dadb484236621b011b267b9",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/64a33558b1b581470c8c8489048efaf9ceeb8415",
+                "reference": "64a33558b1b581470c8c8489048efaf9ceeb8415",
                 "shasum": ""
             },
             "require": {
@@ -877,9 +879,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.95.4"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.95.15"
             },
-            "time": "2026-06-03T18:03:14+00:00"
+            "time": "2026-07-15T09:52:14+00:00"
         },
         {
             "name": "phpstan/extension-installer",
@@ -935,8 +937,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e17e04976d94eb47a7333cd950131ab22331ffc8",
-                "reference": "e17e04976d94eb47a7333cd950131ab22331ffc8",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/905d6cdf581b0ad307924aa8e4ed95772864fe93",
+                "reference": "905d6cdf581b0ad307924aa8e4ed95772864fe93",
                 "shasum": ""
             },
             "require": {
@@ -993,7 +995,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-07T16:13:01+00:00"
+            "time": "2026-07-22T08:07:53+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1001,17 +1003,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "4a8e26fdfc14cdead6a1dc044dc5373551ce14af"
+                "reference": "6b665e33e3a4c0f9e1c40f90861f5ac543aafc3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/4a8e26fdfc14cdead6a1dc044dc5373551ce14af",
-                "reference": "4a8e26fdfc14cdead6a1dc044dc5373551ce14af",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/6b665e33e3a4c0f9e1c40f90861f5ac543aafc3c",
+                "reference": "6b665e33e3a4c0f9e1c40f90861f5ac543aafc3c",
                 "shasum": ""
             },
             "require": {
+                "phar-io/version": "^3.2",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.48"
+                "phpstan/phpstan": "^2.2.6"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -1051,7 +1054,7 @@
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
                 "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.x"
             },
-            "time": "2026-06-08T05:49:31+00:00"
+            "time": "2026-07-22T06:51:04+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -1380,20 +1383,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "bd2c636dd77eb00ebcf2b42a30b8d80079dfb094"
+                "reference": "86c615f77e4aa3a376a1fc23755dea1504c9979d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bd2c636dd77eb00ebcf2b42a30b8d80079dfb094",
-                "reference": "bd2c636dd77eb00ebcf2b42a30b8d80079dfb094",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/86c615f77e4aa3a376a1fc23755dea1504c9979d",
+                "reference": "86c615f77e4aa3a376a1fc23755dea1504c9979d",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
+                "ext-filter": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
-                "ext-xml": "*",
                 "ext-xmlwriter": "*",
                 "myclabs/deep-copy": "^1.13.4",
                 "phar-io/manifest": "^2.0.4",
@@ -1465,25 +1468,25 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-06-07T08:26:21+00:00"
+            "time": "2026-07-19T05:33:27+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "2.4.5",
+            "version": "2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "cbd86024be5014d3c14d9f0b3f7aae8ecbffd62c"
+                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/cbd86024be5014d3c14d9f0b3f7aae8ecbffd62c",
-                "reference": "cbd86024be5014d3c14d9f0b3f7aae8ecbffd62c",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ba22f8c087848278fed6b4910d4cf1108096d8d3",
+                "reference": "ba22f8c087848278fed6b4910d4cf1108096d8d3",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.56"
+                "phpstan/phpstan": "^2.2.2"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -1517,7 +1520,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.4.5"
+                "source": "https://github.com/rectorphp/rector/tree/2.5.7"
             },
             "funding": [
                 {
@@ -1525,7 +1528,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-26T21:03:22+00:00"
+            "time": "2026-07-13T15:24:18+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2488,12 +2491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "51fe3d170227be8d1772214b82ae506e15ed78ff"
+                "reference": "336e7f3b9e95aba04f93ea9143920c2186abfbb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/51fe3d170227be8d1772214b82ae506e15ed78ff",
-                "reference": "51fe3d170227be8d1772214b82ae506e15ed78ff",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/336e7f3b9e95aba04f93ea9143920c2186abfbb9",
+                "reference": "336e7f3b9e95aba04f93ea9143920c2186abfbb9",
                 "shasum": ""
             },
             "require": {
@@ -2565,7 +2568,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-06T11:10:32+00:00"
+            "time": "2026-07-21T15:13:06+00:00"
         },
         {
             "name": "theseer/tokenizer",
