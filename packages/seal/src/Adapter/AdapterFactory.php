@@ -87,7 +87,17 @@ final class AdapterFactory
 
             if (\str_contains($dsn, ':///')) {
                 // make DSN like loupe:///full/path/project/var/indexes parseable
-                $dsn = \str_replace(':///', '://' . $adapterName . '/', $dsn . $query);
+                $dsn = \str_replace(':///', '://' . $adapterName . '/', $dsn. $query);
+            } elseif (\DIRECTORY_SEPARATOR === '\\') {
+                // might be Windows and contain an absolute path like loupe://C:\path\project\var\indexes which will fail when parse_url is used
+                $dsnParts = \explode('://', $dsn);
+
+                return [
+                    'scheme' => $dsnParts[0] ?? '',
+                    'host' => '',
+                    'path' => $dsnParts[1] ?? '',
+                    'query' => [],
+                ];
             } else {
                 $dsn = $dsn . '@' . $adapterName . $query;
             }
