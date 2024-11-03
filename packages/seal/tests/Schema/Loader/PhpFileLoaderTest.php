@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Schranz\Search\SEAL\Tests\Schema\Loader;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Schranz\Search\SEAL\Schema\Field;
 use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
 
+#[CoversClass(PhpFileLoader::class)]
 class PhpFileLoaderTest extends TestCase
 {
     public function testLoadBasic(): void

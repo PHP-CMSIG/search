@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Schranz\Search\SEAL\Tests\Marshaller;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Schranz\Search\SEAL\Marshaller\FlattenMarshaller;
 use Schranz\Search\SEAL\Schema\Field;
 
+#[CoversClass(FlattenMarshaller::class)]
 class FlattenMarshallerTest extends TestCase
 {
     /**

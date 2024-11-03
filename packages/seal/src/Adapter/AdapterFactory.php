@@ -87,7 +87,7 @@ final class AdapterFactory
 
             if (\str_contains($dsn, ':///')) {
                 // make DSN like loupe:///full/path/project/var/indexes parseable
-                $dsn = \str_replace(':///', '://' . $adapterName . '/', $dsn);
+                $dsn = \str_replace(':///', '://' . $adapterName . '/', $dsn . $query);
             } else {
                 $dsn = $dsn . '@' . $adapterName . $query;
             }

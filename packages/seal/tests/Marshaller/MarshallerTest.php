@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Schranz\Search\SEAL\Tests\Marshaller;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Schranz\Search\SEAL\Marshaller\Marshaller;
 use Schranz\Search\SEAL\Testing\TestingHelper;
 
+#[CoversClass(Marshaller::class)]
 class MarshallerTest extends TestCase
 {
     public function testMarshall(): void
