@@ -85,9 +85,14 @@ final class AdapterFactory
                 $query = '?' . $query;
             }
 
+            $isWindowsLikePath = false;
             if (\str_contains($dsn, ':///')) {
                 // make DSN like loupe:///full/path/project/var/indexes parseable
                 $dsn = \str_replace(':///', '://' . $adapterName . '/', $dsn . $query);
+            } elseif (':\\' === \substr($dsn, \strlen($adapterName) + 4, 2)) { // detect windows like path
+                // make the DSN work with parseurl for URLs like loupe://C:\path\project\var\indexes
+                $dsn = $adapterName . '://' . $adapterName . '/' . \rawurlencode(\substr($dsn, \strlen($adapterName) + 3)) . $query;
+                $isWindowsLikePath = true;
             } else {
                 $dsn = $dsn . '@' . $adapterName . $query;
             }
@@ -106,6 +111,9 @@ final class AdapterFactory
              */
             $parsedDsn = \parse_url($dsn);
 
+            if ($isWindowsLikePath && isset($parsedDsn['path'])) {
+                $parsedDsn['path'] = \rawurldecode(\ltrim($parsedDsn['path'], '/'));
+            }
             $parsedDsn['host'] = '';
         }
 

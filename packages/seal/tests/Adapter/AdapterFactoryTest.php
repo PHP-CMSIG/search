@@ -155,6 +155,29 @@ class AdapterFactoryTest extends TestCase
                 'fragment' => 'fragment',
             ],
         ];
+
+        yield 'windows_path' => [
+            'scheme://C:\path\project\var',
+            [
+                'scheme' => 'scheme',
+                'host' => '',
+                'path' => 'C:\path\project\var',
+                'query' => [],
+            ],
+        ];
+
+        yield 'windows_path_with_query' => [
+            'scheme://C:\path\project\var?queryKey=queryValue#fragment',
+            [
+                'scheme' => 'scheme',
+                'host' => '',
+                'path' => 'C:\path\project\var',
+                'query' => [
+                    'queryKey' => 'queryValue',
+                ],
+                'fragment' => 'fragment',
+            ],
+        ];
     }
 
     private function createAdapterFactory(string $name): AdapterFactoryInterface
