@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Schranz\Search\SEAL\Tests\Schema;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Schranz\Search\SEAL\Schema\Field;
 use Schranz\Search\SEAL\Schema\Index;
 
+#[CoversClass(Index::class)]
 class IndexTest extends TestCase
 {
     public function testIndex(): void
