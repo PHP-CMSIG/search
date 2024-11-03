@@ -106,12 +106,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "3098c6b9cbba9d4aeeb992cf5060e2adc964e1e7"
+                "reference": "19a5a350a81e56802ae13a225c350d5cada9655a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/3098c6b9cbba9d4aeeb992cf5060e2adc964e1e7",
-                "reference": "3098c6b9cbba9d4aeeb992cf5060e2adc964e1e7",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/19a5a350a81e56802ae13a225c350d5cada9655a",
+                "reference": "19a5a350a81e56802ae13a225c350d5cada9655a",
                 "shasum": ""
             },
             "require": {
@@ -211,7 +211,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-09T15:40:53+00:00"
+            "time": "2024-10-25T12:55:56+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -267,12 +267,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/event-manager.git",
-                "reference": "f35527393dbe43da02938b4528011e45bb7bbb15"
+                "reference": "735992af130e11e5ae99298ff453df2de9228e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/f35527393dbe43da02938b4528011e45bb7bbb15",
-                "reference": "f35527393dbe43da02938b4528011e45bb7bbb15",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/735992af130e11e5ae99298ff453df2de9228e97",
+                "reference": "735992af130e11e5ae99298ff453df2de9228e97",
                 "shasum": ""
             },
             "require": {
@@ -352,7 +352,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-07T15:53:29+00:00"
+            "time": "2024-10-16T22:04:34+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -433,16 +433,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.7.2",
+            "version": "0.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "43e570f205f230f658cf0f12d45cafe0353c5116"
+                "reference": "2193f03d7a440fa64c431adef273ee067ac38879"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/43e570f205f230f658cf0f12d45cafe0353c5116",
-                "reference": "43e570f205f230f658cf0f12d45cafe0353c5116",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/2193f03d7a440fa64c431adef273ee067ac38879",
+                "reference": "2193f03d7a440fa64c431adef273ee067ac38879",
                 "shasum": ""
             },
             "require": {
@@ -452,7 +452,7 @@
                 "mjaschen/phpgeo": "^4.2",
                 "nitotm/efficient-language-detector": "^2.0",
                 "php": "^8.1",
-                "psr/log": "^3.0",
+                "psr/log": "^2.0 || ^3.0",
                 "toflar/state-set-index": "^2.0.1",
                 "voku/portable-utf8": "^6.0",
                 "wamania/php-stemmer": "^3.0"
@@ -484,7 +484,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.7.2"
+                "source": "https://github.com/loupe-php/loupe/tree/0.7.3"
             },
             "funding": [
                 {
@@ -492,7 +492,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-08T08:59:53+00:00"
+            "time": "2024-10-21T18:02:30+00:00"
         },
         {
             "name": "mjaschen/phpgeo",
@@ -1891,12 +1891,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "df396882440f0eaaa18ef2f7f6c31e06221b77fb"
+                "reference": "8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/df396882440f0eaaa18ef2f7f6c31e06221b77fb",
-                "reference": "df396882440f0eaaa18ef2f7f6c31e06221b77fb",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0",
+                "reference": "8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0",
                 "shasum": ""
             },
             "require": {
@@ -1941,7 +1941,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-09T10:39:17+00:00"
+            "time": "2024-10-30T19:20:23+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2002,12 +2002,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "8b818f1073841c1cb59547bb5853871ce8e7569f"
+                "reference": "5a5c19843209812d6c8cb91d30478dfce3d8bdad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/8b818f1073841c1cb59547bb5853871ce8e7569f",
-                "reference": "8b818f1073841c1cb59547bb5853871ce8e7569f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5a5c19843209812d6c8cb91d30478dfce3d8bdad",
+                "reference": "5a5c19843209812d6c8cb91d30478dfce3d8bdad",
                 "shasum": ""
             },
             "require": {
@@ -2072,7 +2072,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-09T06:19:11+00:00"
+            "time": "2024-10-31T05:58:31+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2325,12 +2325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d11dc31fd15a69a68698ad160eea69cfafab5bc4"
+                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d11dc31fd15a69a68698ad160eea69cfafab5bc4",
-                "reference": "d11dc31fd15a69a68698ad160eea69cfafab5bc4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/72bb868cf80c167b7b76e431d1185400051e5a39",
+                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39",
                 "shasum": ""
             },
             "require": {
@@ -2351,7 +2351,7 @@
                 "phpunit/php-timer": "^6.0.0",
                 "sebastian/cli-parser": "^2.0.1",
                 "sebastian/code-unit": "^2.0.0",
-                "sebastian/comparator": "^5.0.2",
+                "sebastian/comparator": "^5.0.3",
                 "sebastian/diff": "^5.1.1",
                 "sebastian/environment": "^6.1.0",
                 "sebastian/exporter": "^5.1.2",
@@ -2418,20 +2418,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-09T11:23:03+00:00"
+            "time": "2024-10-31T05:51:29+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "1.2.6",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "6ca85da28159dbd3bb36211c5104b7bc91278e99"
+                "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/6ca85da28159dbd3bb36211c5104b7bc91278e99",
-                "reference": "6ca85da28159dbd3bb36211c5104b7bc91278e99",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/05755bf43617449c08ee8e50fb840c85ad3b1240",
+                "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240",
                 "shasum": ""
             },
             "require": {
@@ -2469,7 +2469,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.6"
+                "source": "https://github.com/rectorphp/rector/tree/1.2.8"
             },
             "funding": [
                 {
@@ -2477,7 +2477,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-03T08:56:44+00:00"
+            "time": "2024-10-18T11:54:27+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2655,12 +2655,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "cb66e1b272e242459e9c1db45a68972e34d75835"
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/cb66e1b272e242459e9c1db45a68972e34d75835",
-                "reference": "cb66e1b272e242459e9c1db45a68972e34d75835",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
                 "shasum": ""
             },
             "require": {
@@ -2724,7 +2724,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-29T06:56:44+00:00"
+            "time": "2024-10-18T14:56:07+00:00"
         },
         {
             "name": "sebastian/complexity",
