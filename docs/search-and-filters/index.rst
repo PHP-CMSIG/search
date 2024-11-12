@@ -14,7 +14,7 @@ The following shows the basic usage as already shown in the "Getting Started" do
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(/* ... */)
@@ -42,7 +42,7 @@ The ``SearchCondition`` is the most basic condition and can be used to search fo
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\SearchCondition('Search Term'))
@@ -59,7 +59,7 @@ The ``EqualCondition`` is used to filter the result by a specific field value ma
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\EqualCondition('tags', 'UI'))
@@ -77,7 +77,7 @@ The ``NotEqualCondition`` is used to filter the result by a specific field value
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\NotEqualCondition('tags', 'UI'))
@@ -97,7 +97,7 @@ then using a ``EqualCondition``.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\IdentifierCondition('23b30f01-d8fd-4dca-b36a-4710e360a965'))
@@ -113,7 +113,7 @@ the given value.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\GreaterThanCondition('rating', 2.5))
@@ -131,7 +131,7 @@ the given value.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\GreaterThanEqualCondition('rating', 2.5))
@@ -149,7 +149,7 @@ the given value.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\LessThanCondition('rating', 2.5))
@@ -167,7 +167,7 @@ the given value.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\LessThanEqualCondition('rating', 2.5))
@@ -184,7 +184,7 @@ The ``GeoDistanceCondition`` is used to filter results within a radius by specif
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('restaurants')
         ->addFilter(new Condition\GeoDistanceCondition('location', 45.472735, 9.184019, 2000))
@@ -201,7 +201,7 @@ The ``GeoBoundingBoxCondition`` is used to filter results within a bounding box 
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('restaurants')
         ->addFilter(new Condition\GeoBoundingBoxCondition('location', 45.494181, 9.214024, 45.449484, 9.179175))
@@ -224,7 +224,7 @@ The ``OrCondition`` is used to filter by two or more conditions where at least o
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\OrCondition(
@@ -246,7 +246,7 @@ in combination with ``OrCondition`` filters.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\AndCondition(
@@ -290,7 +290,7 @@ Need to be queried this way `<object>.<field>`:
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\LessThanEqualCondition('rating.value', 2.5))
@@ -317,7 +317,7 @@ Need to be queried this way `<object>.<type>.<field>`:
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(new Condition\EqualCondition('header.image.media', 21))
@@ -376,7 +376,7 @@ your results but also ``sort`` them by a given field.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addSortBy('rating', 'desc')
@@ -386,7 +386,7 @@ your results but also ``sort`` them by a given field.
 
     <?php
 
-    use Schranz\Search\SEAL\Search\Condition;
+    use CmsIg\Seal\Search\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addSortBy('rating', 'asc')

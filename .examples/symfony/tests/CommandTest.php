@@ -15,7 +15,7 @@ final class CommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('schranz:search:index-create');
+        $command = $application->find('seal:index-create');
         $commandTester = new CommandTester($command);
         $commandTester->execute([]);
 
@@ -27,7 +27,7 @@ final class CommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('schranz:search:index-drop');
+        $command = $application->find('seal:index-drop');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             '--force' => true,
@@ -41,7 +41,7 @@ final class CommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('schranz:search:reindex');
+        $command = $application->find('seal:reindex');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             '--drop' => true,

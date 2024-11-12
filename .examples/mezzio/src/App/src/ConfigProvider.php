@@ -25,7 +25,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencies(),
-            'schranz_search' => [
+            'seal' => [
                 'index_name_prefix' => \getenv('TEST_INDEX_PREFIX') ?: $_ENV['TEST_INDEX_PREFIX'] ?? '',
                 'schemas' => [
                     'algolia' => [

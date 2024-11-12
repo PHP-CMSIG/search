@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Algolia;
+namespace CmsIg\Seal\Adapter\Algolia;
 
 use Algolia\AlgoliaSearch\Api\SearchClient;
-use Schranz\Search\SEAL\Adapter\SchemaManagerInterface;
-use Schranz\Search\SEAL\Schema\Field\GeoPointField;
-use Schranz\Search\SEAL\Schema\Index;
-use Schranz\Search\SEAL\Task\AsyncTask;
-use Schranz\Search\SEAL\Task\TaskInterface;
+use CmsIg\Seal\Adapter\SchemaManagerInterface;
+use CmsIg\Seal\Schema\Field\GeoPointField;
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Task\AsyncTask;
+use CmsIg\Seal\Task\TaskInterface;
 
 final class AlgoliaSchemaManager implements SchemaManagerInterface
 {

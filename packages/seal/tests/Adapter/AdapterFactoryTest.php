@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -16,9 +16,9 @@ namespace Adapter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
 
 #[CoversClass(AdapterFactory::class)]
 class AdapterFactoryTest extends TestCase

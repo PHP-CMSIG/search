@@ -8,7 +8,7 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineRegistry;
 
 class SearchHandler implements RequestHandlerInterface
 {

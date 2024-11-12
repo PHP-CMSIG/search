@@ -1,23 +1,23 @@
 {
-    "name": "schranz-search/seal-meilisearch-adapter",
-    "description": "An adapter to support meilisearch in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-meilisearch-adapter",
+    "description": "An adapter to support meilisearch in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "meilisearch"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Meilisearch\\": "src"
+            "CmsIg\\Seal\\Adapter\\Meilisearch\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Meilisearch\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Meilisearch\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "meilisearch/meilisearch-php": "^1.2",
         "psr/container": "^1.0 || ^2.0"
     },

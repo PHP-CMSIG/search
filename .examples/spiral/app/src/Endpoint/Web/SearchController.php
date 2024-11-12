@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Endpoint\Web;
 
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
 use Spiral\Prototype\Traits\PrototypeTrait;
 use Spiral\Router\Annotation\Route;
 

@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) into Spiral.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -55,7 +55,7 @@ The following code shows how to configure the package:
 ```php
 <?php
 
-// app/config/schranz_search.php
+// app/config/seal.php
 
 return [
     'schemas' => [
@@ -76,7 +76,7 @@ A more complex configuration can be here found:
 ```php
 <?php
 
-// app/config/schranz_search.php
+// app/config/seal.php
 
 return [
     'schemas' => [
@@ -114,7 +114,7 @@ return [
         'typesense' => [
             'adapter' => 'typesense://S3CR3T@127.0.0.1:8108',
         ],
-        
+
         // ...
         'multi' => [
             'adapter' => 'multi://elasticsearch?adapters[]=opensearch',
@@ -135,7 +135,7 @@ The default engine is available as `Engine`:
 ```php
 class Some {
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineInterface $engine,
+        private readonly \CmsIg\Seal\EngineInterface $engine,
     ) {
     }
 }
@@ -148,7 +148,7 @@ class Some {
     private Engine $engine;
 
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineRegistry $engineRegistry,
+        private readonly \CmsIg\Seal\EngineRegistry $engineRegistry,
     ) {
         $this->engine = $this->engineRegistry->get('algolia');
     }
@@ -164,13 +164,13 @@ The package provides the following commands:
 **Create configured indexes**
 
 ```bash
-php app.php schranz:search:index-create --help
+php app.php seal:index-create --help
 ```
 
 **Drop configured indexes**
 
 ```bash
-php app.php schranz:search:index-drop --help
+php app.php seal:index-drop --help
 ```
 
 ## Authors

@@ -151,9 +151,9 @@ In this section we will create a first schema for our ``Index``:
 
             <?php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
-            use Schranz\Search\SEAL\Schema\Schema;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
+            use CmsIg\Seal\Schema\Schema;
 
             $schema = new Schema([
                 'blog' => new Index('blog', [
@@ -172,8 +172,8 @@ In this section we will create a first schema for our ``Index``:
 
             <?php // resources/schemas/blog.php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
 
             return new Index('blog', [
                 'id' => new Field\IdentifierField('id'),
@@ -190,8 +190,8 @@ In this section we will create a first schema for our ``Index``:
 
             <?php // config/schemas/blog.php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
 
             return new Index('blog', [
                 'id' => new Field\IdentifierField('id'),
@@ -208,8 +208,8 @@ In this section we will create a first schema for our ``Index``:
 
             <?php // app/schemas/blog.php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
 
             return new Index('blog', [
                 'id' => new Field\IdentifierField('id'),
@@ -226,8 +226,8 @@ In this section we will create a first schema for our ``Index``:
 
             <?php // config/schemas/blog.php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
 
             return new Index('blog', [
                 'id' => new Field\IdentifierField('id'),
@@ -244,8 +244,8 @@ In this section we will create a first schema for our ``Index``:
 
             <?php // config/schemas/blog.php
 
-            use Schranz\Search\SEAL\Schema\Field;
-            use Schranz\Search\SEAL\Schema\Index;
+            use CmsIg\Seal\Schema\Field;
+            use CmsIg\Seal\Schema\Index;
 
             return new Index('blog', [
                 'id' => new Field\IdentifierField('id'),
@@ -285,8 +285,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use Meilisearch\Client;
-                    use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapter;
+                    use CmsIg\Seal\Engine;
 
                     $client = new Client('http://127.0.0.1:7700');
 
@@ -304,8 +304,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use Algolia\AlgoliaSearch\SearchClient;
-                    use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapter;
+                    use CmsIg\Seal\Engine;
 
                     $client = Algolia\AlgoliaSearch\SearchClient::create(
                         'YourApplicationID',
@@ -326,8 +326,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use Elastic\Elasticsearch\ClientBuilder;
-                    use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapter;
+                    use CmsIg\Seal\Engine;
 
                     $client = ClientBuilder::create()->setHosts([
                         '127.0.0.1:9200'
@@ -347,8 +347,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use OpenSearch\ClientBuilder;
-                    use Schranz\Search\SEAL\Adapter\Opensearch\OpensearchAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapter;
+                    use CmsIg\Seal\Engine;
 
                     $client = ClientBuilder::create()->setHosts([
                         '127.0.0.1:9200'
@@ -368,8 +368,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use Redis;
-                    use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapter;
+                    use CmsIg\Seal\Engine;
 
                     $redis = new Redis([
                         'host' => '127.0.0.1',
@@ -391,9 +391,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php
 
                     use Loupe\Loupe\LoupeFactory;
-                    use Schranz\Search\SEAL\Adapter\Loupe\LoupeAdapter;
-                    use Schranz\Search\SEAL\Adapter\Loupe\LoupeHelper;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Loupe\LoupeAdapter;
+                    use CmsIg\Seal\Adapter\Loupe\LoupeHelper;
+                    use CmsIg\Seal\Engine;
 
                     $loupeHelper = new LoupeHelper(
                         new LoupeFactory(),
@@ -415,8 +415,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     use Solr\Client;
                     use Solarium\Core\Client\Adapter\Curl;
-                    use Schranz\Search\SEAL\Adapter\Solr\SolrAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Solr\SolrAdapter;
+                    use CmsIg\Seal\Engine;
                     use Symfony\Component\EventDispatcher\EventDispatcher;
 
                     $client = new Client(new Curl(), new EventDispatcher(), [
@@ -447,8 +447,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     use Http\Client\Curl\Client as CurlClient;
                     use Http\Discovery\Psr17FactoryDiscovery;
-                    use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapter;
-                    use Schranz\Search\SEAL\Engine;
+                    use CmsIg\Seal\Adapter\Typesense\TypesenseAdapter;
+                    use CmsIg\Seal\Engine;
                     use Typesense\Client;
 
                     $client = new Client(
@@ -473,7 +473,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
     .. group-tab:: Laravel
 
         When we are using the Laravel integration package we just need to configure our ``Engine``
-        in the ``config/schranz_search.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
+        in the ``config/seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
 
@@ -483,7 +483,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -506,7 +506,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -528,7 +528,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -550,7 +550,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -572,7 +572,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -594,7 +594,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -616,7 +616,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -638,7 +638,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/schranz_search.php
+                    <?php // config/seal.php
 
                     return [
                         'schemas' => [
@@ -657,13 +657,13 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         .. note::
 
             The ``Laravel`` integration provides also `Facades <https://laravel.com/docs/10.x/facades>`__ for the later used default ``Engine``
-            and ``EngineRegistry``. They are provided under the ``Schranz\Search\Integration\Laravel\Facade\``
+            and ``EngineRegistry``. They are provided under the ``CmsIg\Seal\Integration\Laravel\Facade\``
             namespace. See also the `Laravel Integration README <https://github.com/schranz-search/schranz-search/tree/0.1/integrations/laravel>`__.
 
     .. group-tab:: Symfony
 
         When we are using the Symfony Bundle we just need to configure our ``Engine``
-        in the ``config/packages/schranz_search.yaml`` file. The ``Adapter`` is configured
+        in the ``config/packages/seal.yaml`` file. The ``Adapter`` is configured
         via a ``DSN`` like string.
 
         .. tabs::
@@ -674,9 +674,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -691,9 +691,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -707,9 +707,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -723,9 +723,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -739,9 +739,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -755,9 +755,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -771,9 +771,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -787,9 +787,9 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/schranz_search.yaml
+                    # config/packages/seal.yaml
 
-                    schranz_search:
+                    seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -800,7 +800,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
     .. group-tab:: Spiral
 
         When we are using the Spiral integration package we just need to configure our ``Engine``
-        in the ``app/config/schranz_search.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
+        in the ``app/config/seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
 
@@ -810,7 +810,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -833,7 +833,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -855,7 +855,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -877,7 +877,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -899,7 +899,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -921,7 +921,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -943,7 +943,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -965,7 +965,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/schranz_search.php
+                    <?php // app/config/seal.php
 
                     return [
                         'schemas' => [
@@ -1002,7 +1002,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1034,7 +1034,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1065,7 +1065,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1096,7 +1096,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1127,7 +1127,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1157,7 +1157,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1188,7 +1188,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1219,7 +1219,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'schranz_search' => [
+                                'seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1722,10 +1722,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            php artisan schranz:search:index-create
+            php artisan seal:index-create
 
             # create specific index
-            php artisan schranz:search:index-create --index=blog
+            php artisan seal:index-create --index=blog
 
     .. group-tab:: Symfony
 
@@ -1734,10 +1734,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            bin/console schranz:search:index-create
+            bin/console seal:index-create
 
             # create specific index
-            bin/console schranz:search:index-create --index=blog
+            bin/console seal:index-create --index=blog
 
     .. group-tab:: Spiral
 
@@ -1746,10 +1746,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            php app.php schranz:search:index-create
+            php app.php seal:index-create
 
             # create specific index
-            php app.php schranz:search:index-create --index=blog
+            php app.php seal:index-create --index=blog
 
     .. group-tab:: Mezzio
 
@@ -1758,10 +1758,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas schranz:search:index-create
+            vendor/bin/laminas seal:index-create
 
             # create specific index
-            vendor/bin/laminas schranz:search:index-create --index=blog
+            vendor/bin/laminas seal:index-create --index=blog
 
     .. group-tab:: Yii
 
@@ -1770,10 +1770,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            ./yii schranz:search:index-create
+            ./yii seal:index-create
 
             # create specific index
-            ./yii schranz:search:index-create --index=blog
+            ./yii seal:index-create --index=blog
 
 Add or Update Documents
 -----------------------
@@ -1844,7 +1844,7 @@ many exists in the given index.
         public function someMethod()
         {
             $result = $this->engine->createSearchBuilder('blog')
-                ->addFilter(new \Schranz\Search\SEAL\Search\Condition\SearchCondition('first'))
+                ->addFilter(new \CmsIg\Seal\Search\Condition\SearchCondition('first'))
                 ->getResult();
 
             foreach ($result as $document) {
@@ -1876,7 +1876,7 @@ we will filter by the ``tags`` field and get all documents which have the tag ``
         public function someMethod()
         {
             $result = $this->engine->createSearchBuilder('blog')
-                ->addFilter(new \Schranz\Search\SEAL\Search\Condition\EqualCondition('tags', 'UI'));
+                ->addFilter(new \CmsIg\Seal\Search\Condition\EqualCondition('tags', 'UI'));
                 ->getResult();
 
             foreach ($result as $document) {
@@ -1970,25 +1970,25 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     $this->app->singleton(\App\Search\BlogReindexProvider::class, fn () => new \App\Search\BlogReindexProvider());
 
-                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'schranz_search.reindex_provider');
+                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'seal.reindex_provider');
                 }
             }
 
-        After correctly tagging the ``ReindexProvider`` with ``schranz_search.reindex_provider`` the
-        ``schranz:search:reindex`` command can be used to index all documents:
+        After correctly tagging the ``ReindexProvider`` with ``seal.reindex_provider`` the
+        ``seal:reindex`` command can be used to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            php artisan schranz:search:reindex
+            php artisan seal:reindex
 
             # reindex specific index and drop data before
-            php artisan schranz:search:reindex --index=blog --drop
+            php artisan seal:reindex --index=blog --drop
 
     .. group-tab:: Symfony
 
         In Symfony the ``autoconfigure`` feature should already tag the new ``ReindexProvider`` correctly
-        with the ``schranz_search.reindex_provider`` tag. If not you can tag it manually:
+        with the ``seal.reindex_provider`` tag. If not you can tag it manually:
 
         .. code-block:: yaml
 
@@ -1997,17 +1997,17 @@ After that you can use the ``reindex`` to index all documents:
             services:
                 App\Search\BlogReindexProvider:
                     tags:
-                        - { name: schranz_search.reindex_provider }
+                        - { name: seal.reindex_provider }
 
         After correctly tagging the ``ReindexProvider`` use the following command to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            bin/console schranz:search:reindex
+            bin/console seal:reindex
 
             # reindex specific index and drop data before
-            bin/console schranz:search:reindex --index=blog --drop
+            bin/console seal:reindex --index=blog --drop
 
     .. group-tab:: Spiral
 
@@ -2015,7 +2015,7 @@ After that you can use the ``reindex`` to index all documents:
 
         .. code-block:: php
 
-            <?php // app/config/schranz_search.php
+            <?php // app/config/seal.php
 
             return [
                 // ...
@@ -2030,10 +2030,10 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            php app.php schranz:search:reindex
+            php app.php seal:reindex
 
             # reindex specific index and drop data before
-            php app.php schranz:search:reindex --index=blog --drop
+            php app.php seal:reindex --index=blog --drop
 
     .. group-tab:: Mezzio
 
@@ -2049,7 +2049,7 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     return [
                         // ...
-                        'schranz_search' => [
+                        'seal' => [
                             // ...
                             'reindex_providers' => [
                                 \App\Search\BlogReindexProvider::class,
@@ -2077,10 +2077,10 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            vendor/bin/laminas schranz:search:reindex
+            vendor/bin/laminas seal:reindex
 
             # reindex specific index and drop data before
-            vendor/bin/laminas schranz:search:reindex --index=blog --drop
+            vendor/bin/laminas seal:reindex --index=blog --drop
 
     .. group-tab:: Yii
 
@@ -2106,10 +2106,10 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            ./yii schranz:search:reindex
+            ./yii seal:reindex
 
             # reindex specific index and drop data before
-            ./yii schranz:search:reindex --index=blog --drop
+            ./yii seal:reindex --index=blog --drop
 
 Help needed?
 ------------

@@ -9,8 +9,8 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
 
 class SearchElasticsearchHandler implements RequestHandlerInterface
 {

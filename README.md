@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>

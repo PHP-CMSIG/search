@@ -1,11 +1,11 @@
 {
-    "name": "schranz-search/seal-solr-adapter",
-    "description": "An adapter to support apache solr in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-solr-adapter",
+    "description": "An adapter to support apache solr in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "solr",
@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Solr\\": "src"
+            "CmsIg\\Seal\\Adapter\\Solr\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Solr\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Solr\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -29,7 +29,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "solarium/solarium": "^6.3",
         "psr/container": "^1.0 || ^2.0"
     },

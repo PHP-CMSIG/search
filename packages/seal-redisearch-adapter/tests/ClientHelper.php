@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\RediSearch\Tests;
+namespace CmsIg\Seal\Adapter\RediSearch\Tests;
 
 final class ClientHelper
 {

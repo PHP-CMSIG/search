@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Schranz\Search\Integration\Yii\Command\IndexCreateCommand;
-use Schranz\Search\Integration\Yii\Command\IndexDropCommand;
-use Schranz\Search\Integration\Yii\Command\ReindexCommand;
+use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
+use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
 
 return [
     'schranz-search/yii-module' => [
@@ -34,9 +34,9 @@ return [
     ],
     'yiisoft/yii-console' => [
         'commands' => [
-            'schranz:search:index-create' => IndexCreateCommand::class,
-            'schranz:search:index-drop' => IndexDropCommand::class,
-            'schranz:search:reindex' => ReindexCommand::class,
+            'seal:index-create' => IndexCreateCommand::class,
+            'seal:index-drop' => IndexDropCommand::class,
+            'seal:reindex' => ReindexCommand::class,
         ],
     ],
 ];

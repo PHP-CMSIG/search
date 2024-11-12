@@ -133,25 +133,25 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     $this->app->singleton(\App\Search\BlogReindexProvider::class, fn () => new \App\Search\BlogReindexProvider());
 
-                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'schranz_search.reindex_provider');
+                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'seal.reindex_provider');
                 }
             }
 
-        After correctly tagging the ``ReindexProvider`` with ``schranz_search.reindex_provider`` the
-        ``schranz:search:reindex`` command can be used to index all documents:
+        After correctly tagging the ``ReindexProvider`` with ``seal.reindex_provider`` the
+        ``seal:reindex`` command can be used to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            php artisan schranz:search:reindex
+            php artisan seal:reindex
 
             # reindex specific index and drop data before
-            php artisan schranz:search:reindex --index=blog --drop
+            php artisan seal:reindex --index=blog --drop
 
     .. group-tab:: Symfony
 
         In Symfony ``autoconfigure`` feature should already tag the new ``ReindexProvider`` correctly
-        with the ``schranz_search.reindex_provider`` tag. If not you can tag it manually:
+        with the ``seal.reindex_provider`` tag. If not you can tag it manually:
 
         .. code-block:: yaml
 
@@ -160,16 +160,16 @@ After that you can use the ``reindex`` to index all documents:
             services:
                 App\Search\BlogReindexProvider:
                     tags:
-                        - { name: schranz_search.reindex_provider }
+                        - { name: seal.reindex_provider }
 
         After correctly tagging the ``ReindexProvider`` use the following command to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            bin/console schranz:search:reindex
+            bin/console seal:reindex
 
-            bin/console schranz:search:reindex --index=blog --drop
+            bin/console seal:reindex --index=blog --drop
 
     .. group-tab:: Spiral
 
@@ -177,7 +177,7 @@ After that you can use the ``reindex`` to index all documents:
 
         .. code-block:: php
 
-            <?php // app/config/schranz_search.php
+            <?php // app/config/seal.php
 
             return [
                 // ...
@@ -192,9 +192,9 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            php app.php schranz:search:reindex
+            php app.php seal:reindex
 
-            php app.php schranz:search:reindex --index=blog --drop
+            php app.php seal:reindex --index=blog --drop
 
     .. group-tab:: Mezzio
 
@@ -210,7 +210,7 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     return [
                         // ...
-                        'schranz_search' => [
+                        'seal' => [
                             // ...
                             'reindex_providers' => [
                                 \App\Search\BlogReindexProvider::class,
@@ -238,9 +238,9 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            vendor/bin/laminas schranz:search:reindex
+            vendor/bin/laminas seal:reindex
 
-            vendor/bin/laminas schranz:search:reindex --index=blog --drop
+            vendor/bin/laminas seal:reindex --index=blog --drop
 
     .. group-tab:: Yii
 
@@ -266,9 +266,9 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            ./yii schranz:search:reindex
+            ./yii seal:reindex
 
-            ./yii schranz:search:reindex --index=blog --drop
+            ./yii seal:reindex --index=blog --drop
 
 Bulk operations
 ---------------

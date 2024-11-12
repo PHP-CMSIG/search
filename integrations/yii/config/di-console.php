@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -12,11 +12,11 @@ declare(strict_types=1);
  */
 
 use Psr\Container\ContainerInterface;
-use Schranz\Search\Integration\Yii\Command\IndexCreateCommand;
-use Schranz\Search\Integration\Yii\Command\IndexDropCommand;
-use Schranz\Search\Integration\Yii\Command\ReindexCommand;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
+use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 
 /** @var \Yiisoft\Config\Config $config */
 /** @var array{"schranz-search/yii-module": array{reindex_providers: string[]}} $params */

@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) into Mezzio.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -63,7 +63,7 @@ class ConfigProvider
     {
         return [
             // ...
-            'schranz_search' => [
+            'seal' => [
                 'schemas' => [
                     'app' => [
                         'dir' => 'config/schemas',
@@ -93,7 +93,7 @@ class ConfigProvider
     {
         return [
             // ...
-            'schranz_search' => [
+            'seal' => [
                 'schemas' => [
                     'app' => [
                         'dir' => 'config/schemas/app',
@@ -153,7 +153,7 @@ The default engine is available as `Engine`:
 ```php
 class Some {
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineInterface $engine,
+        private readonly \CmsIg\Seal\EngineInterface $engine,
     ) {
     }
 }
@@ -166,7 +166,7 @@ class Some {
     private Engine $engine;
 
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineRegistry $engineRegistry,
+        private readonly \CmsIg\Seal\EngineRegistry $engineRegistry,
     ) {
         $this->engine = $this->engineRegistry->getEngine('algolia');
     }
@@ -182,13 +182,13 @@ The package provides the following commands:
 **Create configured indexes**
 
 ```bash
-vendor/bin/laminas schranz:search:index-create --help
+vendor/bin/laminas seal:index-create --help
 ```
 
 **Drop configured indexes**
 
 ```bash
-vendor/bin/laminas schranz:search:index-drop --help
+vendor/bin/laminas seal:index-drop --help
 ```
 
 ## Authors

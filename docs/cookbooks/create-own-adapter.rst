@@ -43,10 +43,10 @@ The Adapter is the main entry point for the own Adapter and provides access to t
     namespace My\Own\Adapter;
 
     use Some\Third\Party\Client;
-    use Schranz\Search\SEAL\Adapter\AdapterInterface;
-    use Schranz\Search\SEAL\Adapter\IndexerInterface;
-    use Schranz\Search\SEAL\Adapter\SchemaManagerInterface;
-    use Schranz\Search\SEAL\Adapter\SearcherInterface;
+    use CmsIg\Seal\Adapter\AdapterInterface;
+    use CmsIg\Seal\Adapter\IndexerInterface;
+    use CmsIg\Seal\Adapter\SchemaManagerInterface;
+    use CmsIg\Seal\Adapter\SearcherInterface;
 
     final class MyAdapter implements AdapterInterface
     {
@@ -97,10 +97,10 @@ The ``SchemaManager`` is responsible for creating and dropping indexes.
     namespace My\Own\Adapter;
 
     use Some\Third\Party\Client;
-    use Schranz\Search\SEAL\Adapter\SchemaManagerInterface;
-    use Schranz\Search\SEAL\Schema\Index;
-    use Schranz\Search\SEAL\Task\AsyncTask;
-    use Schranz\Search\SEAL\Task\TaskInterface;
+    use CmsIg\Seal\Adapter\SchemaManagerInterface;
+    use CmsIg\Seal\Schema\Index;
+    use CmsIg\Seal\Task\AsyncTask;
+    use CmsIg\Seal\Task\TaskInterface;
 
     final class MySchemaManager implements SchemaManagerInterface
     {
@@ -139,11 +139,11 @@ The ``Indexer`` is responsible for saving and deleting documents.
     namespace My\Own\Adapter;
 
     use Some\Third\Party\Client;
-    use Schranz\Search\SEAL\Adapter\IndexerInterface;
-    use Schranz\Search\SEAL\Marshaller\Marshaller;
-    use Schranz\Search\SEAL\Schema\Index;
-    use Schranz\Search\SEAL\Task\AsyncTask;
-    use Schranz\Search\SEAL\Task\TaskInterface;
+    use CmsIg\Seal\Adapter\IndexerInterface;
+    use CmsIg\Seal\Marshaller\Marshaller;
+    use CmsIg\Seal\Schema\Index;
+    use CmsIg\Seal\Task\AsyncTask;
+    use CmsIg\Seal\Task\TaskInterface;
 
     final class MyIndexer implements IndexerInterface
     {
@@ -184,12 +184,12 @@ The ``Searcher`` is responsible for searching documents.
     namespace My\Own\Adapter;
 
     use Some\Third\Party\Client;
-    use Schranz\Search\SEAL\Adapter\SearcherInterface;
-    use Schranz\Search\SEAL\Marshaller\Marshaller;
-    use Schranz\Search\SEAL\Schema\Index;
-    use Schranz\Search\SEAL\Search\Condition;
-    use Schranz\Search\SEAL\Search\Result;
-    use Schranz\Search\SEAL\Search\Search;
+    use CmsIg\Seal\Adapter\SearcherInterface;
+    use CmsIg\Seal\Marshaller\Marshaller;
+    use CmsIg\Seal\Schema\Index;
+    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Result;
+    use CmsIg\Seal\Search\Search;
 
     final class MySearcher implements SearcherInterface
     {
@@ -226,8 +226,8 @@ integrations into Frameworks Dependency Injection container and constructing the
 
     use Some\Third\Party\Client;
     use Psr\Container\ContainerInterface;
-    use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-    use Schranz\Search\SEAL\Adapter\AdapterInterface;
+    use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+    use CmsIg\Seal\Adapter\AdapterInterface;
 
     /**
      * @experimental
@@ -330,8 +330,8 @@ SchemaManagerTest
     namespace My\Own\Adapter\Tests;
 
     use My\Own\Adapter\MySchemaManager;
-    use Schranz\Search\SEAL\Testing\AbstractSchemaManagerTestCase;
-    use Schranz\Search\SEAL\Testing\TestingHelper;
+    use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
+    use CmsIg\Seal\Testing\TestingHelper;
 
     class MySchemaManagerTest extends AbstractSchemaManagerTestCase
     {
@@ -358,7 +358,7 @@ MyAdapterTest
     namespace My\Own\Adapter\Tests;
 
     use My\Own\Adapter\MyAdapter;
-    use Schranz\Search\SEAL\Testing\AbstractAdapterTestCase;
+    use CmsIg\Seal\Testing\AbstractAdapterTestCase;
 
     class MyAdapterTest extends AbstractAdapterTestCase
     {
@@ -383,7 +383,7 @@ MyIndexerTest
     namespace My\Own\Adapter\Tests;
 
     use My\Own\Adapter\MyAdapter;
-    use Schranz\Search\SEAL\Testing\AbstractIndexerTestCase;
+    use CmsIg\Seal\Testing\AbstractIndexerTestCase;
 
     class MyIndexerTest extends AbstractIndexerTestCase
     {
@@ -408,7 +408,7 @@ MySearcherTest
     namespace My\Own\Adapter\Tests;
 
     use My\Own\Adapter\MyAdapter;
-    use Schranz\Search\SEAL\Testing\AbstractSearcherTestCase;
+    use CmsIg\Seal\Testing\AbstractSearcherTestCase;
 
     class MySearcherTest extends AbstractSearcherTestCase
     {
@@ -503,12 +503,12 @@ Search Engine to Search Engine. A common way is the following example:
     namespace My\Own\Adapter;
 
     use Some\Third\Party\Client;
-    use Schranz\Search\SEAL\Adapter\SearcherInterface;
-    use Schranz\Search\SEAL\Marshaller\Marshaller;
-    use Schranz\Search\SEAL\Schema\Index;
-    use Schranz\Search\SEAL\Search\Condition;
-    use Schranz\Search\SEAL\Search\Result;
-    use Schranz\Search\SEAL\Search\Search;
+    use CmsIg\Seal\Adapter\SearcherInterface;
+    use CmsIg\Seal\Marshaller\Marshaller;
+    use CmsIg\Seal\Schema\Index;
+    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Result;
+    use CmsIg\Seal\Search\Search;
 
     final class MySearcher implements SearcherInterface
     {

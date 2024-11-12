@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,32 +11,32 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Laravel;
+namespace CmsIg\Seal\Integration\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Schranz\Search\Integration\Laravel\Console\IndexCreateCommand;
-use Schranz\Search\Integration\Laravel\Console\IndexDropCommand;
-use Schranz\Search\Integration\Laravel\Console\ReindexCommand;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Loupe\LoupeAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Memory\MemoryAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Opensearch\OpensearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Solr\SolrAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapterFactory;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Schema\Loader\LoaderInterface;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
-use Schranz\Search\SEAL\Schema\Schema;
+use CmsIg\Seal\Integration\Laravel\Console\IndexCreateCommand;
+use CmsIg\Seal\Integration\Laravel\Console\IndexDropCommand;
+use CmsIg\Seal\Integration\Laravel\Console\ReindexCommand;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
+use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
+use CmsIg\Seal\Adapter\Loupe\LoupeAdapterFactory;
+use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapterFactory;
+use CmsIg\Seal\Adapter\Memory\MemoryAdapterFactory;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapterFactory;
+use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Schema\Loader\LoaderInterface;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Schema;
 
 /**
  * @experimental
@@ -49,10 +49,10 @@ final class SearchProvider extends ServiceProvider
     public function register(): void
     {
         $this->publishes([
-            \dirname(__DIR__) . '/config/schranz_search.php' => config_path('schranz_search.php'),
+            \dirname(__DIR__) . '/config/seal.php' => config_path('seal.php'),
         ]);
 
-        $this->mergeConfigFrom(\dirname(__DIR__) . '/config/schranz_search.php', 'schranz_search');
+        $this->mergeConfigFrom(\dirname(__DIR__) . '/config/seal.php', 'seal');
     }
 
     /**
@@ -66,7 +66,7 @@ final class SearchProvider extends ServiceProvider
             ReindexCommand::class,
         ]);
 
-        /** @var array{schranz_search: mixed[]} $globalConfig */
+        /** @var array{seal: mixed[]} $globalConfig */
         $globalConfig = $this->app->get('config');
 
         /**
@@ -76,7 +76,7 @@ final class SearchProvider extends ServiceProvider
          *     schemas: array<string, array{dir: string, engine?: string}>,
          * } $config
          */
-        $config = $globalConfig['schranz_search'];
+        $config = $globalConfig['seal'];
         $indexNamePrefix = $config['index_name_prefix'];
         $engines = $config['engines'];
         $schemas = $config['schemas'];
@@ -90,10 +90,10 @@ final class SearchProvider extends ServiceProvider
         $engineServices = [];
 
         foreach ($engines as $name => $engineConfig) {
-            $adapterServiceId = 'schranz_search.adapter.' . $name;
-            $engineServiceId = 'schranz_search.engine.' . $name;
-            $schemaLoaderServiceId = 'schranz_search.schema_loader.' . $name;
-            $schemaId = 'schranz_search.schema.' . $name;
+            $adapterServiceId = 'seal.adapter.' . $name;
+            $engineServiceId = 'seal.engine.' . $name;
+            $schemaLoaderServiceId = 'seal.schema_loader.' . $name;
+            $schemaId = 'seal.schema.' . $name;
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'];
@@ -101,7 +101,7 @@ final class SearchProvider extends ServiceProvider
 
             $this->app->singleton($adapterServiceId, function ($app) use ($adapterDsn) {
                 /** @var AdapterFactory $factory */
-                $factory = $app['schranz_search.adapter_factory'];
+                $factory = $app['seal.adapter_factory'];
 
                 return $factory->createAdapter($adapterDsn);
             });
@@ -131,7 +131,7 @@ final class SearchProvider extends ServiceProvider
             }
         }
 
-        $this->app->singleton('schranz_search.engine_factory', function ($app) use ($engineServices) {
+        $this->app->singleton('seal.engine_factory', function ($app) use ($engineServices) {
             $engines = []; // TODO use tagged like in adapter factories
             foreach ($engineServices as $name => $engineServiceId) {
                 $engines[$name] = $app->get($engineServiceId);
@@ -140,21 +140,21 @@ final class SearchProvider extends ServiceProvider
             return new EngineRegistry($engines);
         });
 
-        $this->app->alias('schranz_search.engine_factory', EngineRegistry::class);
+        $this->app->alias('seal.engine_factory', EngineRegistry::class);
 
         $this->app->when(ReindexCommand::class)
             ->needs('$reindexProviders')
-            ->giveTagged('schranz_search.reindex_provider');
+            ->giveTagged('seal.reindex_provider');
 
-        $this->app->tagged('schranz_search.reindex_provider');
+        $this->app->tagged('seal.reindex_provider');
     }
 
     private function createAdapterFactories(): void
     {
-        $this->app->singleton('schranz_search.adapter_factory', function ($app) {
+        $this->app->singleton('seal.adapter_factory', function ($app) {
             $factories = [];
             /** @var AdapterFactoryInterface $service */
-            foreach ($app->tagged('schranz_search.adapter_factory') as $service) {
+            foreach ($app->tagged('seal.adapter_factory') as $service) {
                 $factories[$service::getName()] = $service;
             }
 
@@ -162,109 +162,109 @@ final class SearchProvider extends ServiceProvider
         });
 
         if (\class_exists(AlgoliaAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.algolia.adapter_factory', fn ($app) => new AlgoliaAdapterFactory($app));
+            $this->app->singleton('seal.algolia.adapter_factory', fn ($app) => new AlgoliaAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.algolia.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.algolia.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(ElasticsearchAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.elasticsearch.adapter_factory', fn ($app) => new ElasticsearchAdapterFactory($app));
+            $this->app->singleton('seal.elasticsearch.adapter_factory', fn ($app) => new ElasticsearchAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.elasticsearch.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.elasticsearch.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(LoupeAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.loupe.adapter_factory', fn ($app) => new LoupeAdapterFactory($app));
+            $this->app->singleton('seal.loupe.adapter_factory', fn ($app) => new LoupeAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.loupe.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.loupe.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(OpensearchAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.opensearch.adapter_factory', fn ($app) => new OpensearchAdapterFactory($app));
+            $this->app->singleton('seal.opensearch.adapter_factory', fn ($app) => new OpensearchAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.opensearch.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.opensearch.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(MeilisearchAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.meilisearch.adapter_factory', fn ($app) => new MeilisearchAdapterFactory($app));
+            $this->app->singleton('seal.meilisearch.adapter_factory', fn ($app) => new MeilisearchAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.meilisearch.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.meilisearch.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(MemoryAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.memory.adapter_factory', fn () => new MemoryAdapterFactory());
+            $this->app->singleton('seal.memory.adapter_factory', fn () => new MemoryAdapterFactory());
 
             $this->app->tag(
-                'schranz_search.memory.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.memory.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(RediSearchAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.redis.adapter_factory', fn ($app) => new RediSearchAdapterFactory($app));
+            $this->app->singleton('seal.redis.adapter_factory', fn ($app) => new RediSearchAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.redis.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.redis.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(SolrAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.solr.adapter_factory', fn ($app) => new SolrAdapterFactory($app));
+            $this->app->singleton('seal.solr.adapter_factory', fn ($app) => new SolrAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.solr.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.solr.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(TypesenseAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.typesense.adapter_factory', fn ($app) => new TypesenseAdapterFactory($app));
+            $this->app->singleton('seal.typesense.adapter_factory', fn ($app) => new TypesenseAdapterFactory($app));
 
             $this->app->tag(
-                'schranz_search.typesense.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.typesense.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         // ...
 
         if (\class_exists(ReadWriteAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.read_write.adapter_factory', fn ($app) => new ReadWriteAdapterFactory(
+            $this->app->singleton('seal.read_write.adapter_factory', fn ($app) => new ReadWriteAdapterFactory(
                 $app,
-                'schranz_search.adapter.',
+                'seal.adapter.',
             ));
 
             $this->app->tag(
-                'schranz_search.read_write.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.read_write.adapter_factory',
+                'seal.adapter_factory',
             );
         }
 
         if (\class_exists(MultiAdapterFactory::class)) {
-            $this->app->singleton('schranz_search.multi.adapter_factory', fn ($app) => new MultiAdapterFactory(
+            $this->app->singleton('seal.multi.adapter_factory', fn ($app) => new MultiAdapterFactory(
                 $app,
-                'schranz_search.adapter.',
+                'seal.adapter.',
             ));
 
             $this->app->tag(
-                'schranz_search.multi.adapter_factory',
-                'schranz_search.adapter_factory',
+                'seal.multi.adapter_factory',
+                'seal.adapter_factory',
             );
         }
     }

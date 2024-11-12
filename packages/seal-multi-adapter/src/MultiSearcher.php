@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Multi;
+namespace CmsIg\Seal\Adapter\Multi;
 
-use Schranz\Search\SEAL\Adapter\SearcherInterface;
-use Schranz\Search\SEAL\Search\Search;
+use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Search\Search;
 
 /**
  * @internal this class should never be needed to be instanced manually

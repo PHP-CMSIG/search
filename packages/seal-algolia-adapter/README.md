@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 The `AlgoliaAdapter` write the documents into the [Algolia](https://www.algolia.com/de/) SaaS.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -33,8 +33,8 @@ The following code shows how to create an Engine using this Adapter:
 <?php
 
 use Algolia\AlgoliaSearch\SearchClient;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapter;
-use Schranz\Search\SEAL\Engine;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapter;
+use CmsIg\Seal\Engine;
 
 $client = Algolia\AlgoliaSearch\SearchClient::create(
     'YourApplicationID',

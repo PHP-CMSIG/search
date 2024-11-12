@@ -1,11 +1,11 @@
 {
-    "name": "schranz-search/seal-redisearch-adapter",
-    "description": "An adapter to support RediSearch in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-redisearch-adapter",
+    "description": "An adapter to support RediSearch in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "redis",
@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\RediSearch\\": "src"
+            "CmsIg\\Seal\\Adapter\\RediSearch\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\RediSearch\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\RediSearch\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -31,7 +31,7 @@
         "php": "^8.1",
         "ext-redis": "^5 || ^6.0",
         "ext-json": "*",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "psr/container": "^1.0 || ^2.0"
     },
     "require-dev": {

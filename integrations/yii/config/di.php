@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -12,26 +12,26 @@ declare(strict_types=1);
  */
 
 use Psr\Container\ContainerInterface;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Loupe\LoupeAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Memory\MemoryAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Opensearch\OpensearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Solr\SolrAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapterFactory;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Schema\Loader\LoaderInterface;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
-use Schranz\Search\SEAL\Schema\Schema;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
+use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
+use CmsIg\Seal\Adapter\Loupe\LoupeAdapterFactory;
+use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapterFactory;
+use CmsIg\Seal\Adapter\Memory\MemoryAdapterFactory;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapterFactory;
+use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Schema\Loader\LoaderInterface;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Schema;
 
 /** @var \Yiisoft\Config\Config $config */
 /** @var array{"schranz-search/yii-module": mixed[]} $params */
@@ -58,61 +58,61 @@ $diConfig = [];
 $adapterFactories = [];
 
 if (\class_exists(AlgoliaAdapterFactory::class)) {
-    $adapterFactories['schranz_search.algolia.adapter_factory'] = static fn (ContainerInterface $container) => new AlgoliaAdapterFactory($container);
+    $adapterFactories['seal.algolia.adapter_factory'] = static fn (ContainerInterface $container) => new AlgoliaAdapterFactory($container);
 }
 
 if (\class_exists(ElasticsearchAdapterFactory::class)) {
-    $adapterFactories['schranz_search.elasticsearch.adapter_factory'] = static fn (ContainerInterface $container) => new ElasticsearchAdapterFactory($container);
+    $adapterFactories['seal.elasticsearch.adapter_factory'] = static fn (ContainerInterface $container) => new ElasticsearchAdapterFactory($container);
 }
 
 if (\class_exists(LoupeAdapterFactory::class)) {
-    $adapterFactories['schranz_search.loupe.adapter_factory'] = static fn (ContainerInterface $container) => new LoupeAdapterFactory($container);
+    $adapterFactories['seal.loupe.adapter_factory'] = static fn (ContainerInterface $container) => new LoupeAdapterFactory($container);
 }
 
 if (\class_exists(OpensearchAdapterFactory::class)) {
-    $adapterFactories['schranz_search.opensearch.adapter_factory'] = static fn (ContainerInterface $container) => new OpensearchAdapterFactory($container);
+    $adapterFactories['seal.opensearch.adapter_factory'] = static fn (ContainerInterface $container) => new OpensearchAdapterFactory($container);
 }
 
 if (\class_exists(MeilisearchAdapterFactory::class)) {
-    $adapterFactories['schranz_search.meilisearch.adapter_factory'] = static fn (ContainerInterface $container) => new MeilisearchAdapterFactory($container);
+    $adapterFactories['seal.meilisearch.adapter_factory'] = static fn (ContainerInterface $container) => new MeilisearchAdapterFactory($container);
 }
 
 if (\class_exists(MemoryAdapterFactory::class)) {
-    $adapterFactories['schranz_search.memory.adapter_factory'] = static fn (ContainerInterface $container) => new MemoryAdapterFactory();
+    $adapterFactories['seal.memory.adapter_factory'] = static fn (ContainerInterface $container) => new MemoryAdapterFactory();
 }
 
 if (\class_exists(RediSearchAdapterFactory::class)) {
-    $adapterFactories['schranz_search.redis.adapter_factory'] = static fn (ContainerInterface $container) => new RediSearchAdapterFactory($container);
+    $adapterFactories['seal.redis.adapter_factory'] = static fn (ContainerInterface $container) => new RediSearchAdapterFactory($container);
 }
 
 if (\class_exists(SolrAdapterFactory::class)) {
-    $adapterFactories['schranz_search.solr.adapter_factory'] = static fn (ContainerInterface $container) => new SolrAdapterFactory($container);
+    $adapterFactories['seal.solr.adapter_factory'] = static fn (ContainerInterface $container) => new SolrAdapterFactory($container);
 }
 
 if (\class_exists(TypesenseAdapterFactory::class)) {
-    $adapterFactories['schranz_search.typesense.adapter_factory'] = static fn (ContainerInterface $container) => new TypesenseAdapterFactory($container);
+    $adapterFactories['seal.typesense.adapter_factory'] = static fn (ContainerInterface $container) => new TypesenseAdapterFactory($container);
 }
 
 // ...
 
 if (\class_exists(ReadWriteAdapterFactory::class)) {
-    $adapterFactories['schranz_search.read_write.adapter_factory'] = static fn (ContainerInterface $container) => new ReadWriteAdapterFactory(
+    $adapterFactories['seal.read_write.adapter_factory'] = static fn (ContainerInterface $container) => new ReadWriteAdapterFactory(
         $container,
-        'schranz_search.adapter.',
+        'seal.adapter.',
     );
 }
 
 if (\class_exists(MultiAdapterFactory::class)) {
-    $adapterFactories['schranz_search.multi.adapter_factory'] = static fn (ContainerInterface $container) => new MultiAdapterFactory(
+    $adapterFactories['seal.multi.adapter_factory'] = static fn (ContainerInterface $container) => new MultiAdapterFactory(
         $container,
-        'schranz_search.adapter.',
+        'seal.adapter.',
     );
 }
 
 $diConfig = [...$diConfig, ...$adapterFactories];
 $adapterFactoryNames = \array_keys($adapterFactories);
 
-$diConfig['schranz_search.adapter_factory'] = static function (ContainerInterface $container) use ($adapterFactoryNames) {
+$diConfig['seal.adapter_factory'] = static function (ContainerInterface $container) use ($adapterFactoryNames) {
     $factories = [];
     foreach ($adapterFactoryNames as $serviceName) {
         /** @var AdapterFactoryInterface $service */
@@ -124,15 +124,15 @@ $diConfig['schranz_search.adapter_factory'] = static function (ContainerInterfac
     return new AdapterFactory($factories);
 };
 
-$diConfig[AdapterFactory::class] = 'schranz_search.adapter_factory';
+$diConfig[AdapterFactory::class] = 'seal.adapter_factory';
 
 $engineServices = [];
 
 foreach ($engines as $name => $engineConfig) {
-    $adapterServiceId = 'schranz_search.adapter.' . $name;
-    $engineServiceId = 'schranz_search.engine.' . $name;
-    $schemaLoaderServiceId = 'schranz_search.schema_loader.' . $name;
-    $schemaId = 'schranz_search.schema.' . $name;
+    $adapterServiceId = 'seal.adapter.' . $name;
+    $engineServiceId = 'seal.engine.' . $name;
+    $schemaLoaderServiceId = 'seal.schema_loader.' . $name;
+    $schemaId = 'seal.schema.' . $name;
 
     /** @var string $adapterDsn */
     $adapterDsn = $engineConfig['adapter'];
@@ -140,7 +140,7 @@ foreach ($engines as $name => $engineConfig) {
 
     $diConfig[$adapterServiceId] = static function (ContainerInterface $container) use ($adapterDsn) {
         /** @var AdapterFactory $factory */
-        $factory = $container->get('schranz_search.adapter_factory');
+        $factory = $container->get('seal.adapter_factory');
 
         return $factory->createAdapter($adapterDsn);
     };
@@ -171,10 +171,10 @@ foreach ($engines as $name => $engineConfig) {
     }
 }
 
-$diConfig['schranz_search.engine_factory'] = static function (ContainerInterface $container) use ($engineServices) {
+$diConfig['seal.engine_factory'] = static function (ContainerInterface $container) use ($engineServices) {
     $engines = [];
     foreach ($engineServices as $name => $engineServiceId) {
-        /** @var \Schranz\Search\SEAL\EngineInterface $engine */
+        /** @var \CmsIg\Seal\EngineInterface $engine */
         $engine = $container->get($engineServiceId);
 
         $engines[$name] = $engine;
@@ -183,6 +183,6 @@ $diConfig['schranz_search.engine_factory'] = static function (ContainerInterface
     return new EngineRegistry($engines);
 };
 
-$diConfig[EngineRegistry::class] = 'schranz_search.engine_factory';
+$diConfig[EngineRegistry::class] = 'seal.engine_factory';
 
 return $diConfig;

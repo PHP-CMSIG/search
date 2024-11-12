@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\RediSearch\Tests;
+namespace CmsIg\Seal\Adapter\RediSearch\Tests;
 
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchSchemaManager;
-use Schranz\Search\SEAL\Testing\AbstractSchemaManagerTestCase;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchSchemaManager;
+use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
 
 class RediSearchSchemaManagerTest extends AbstractSchemaManagerTestCase
 {

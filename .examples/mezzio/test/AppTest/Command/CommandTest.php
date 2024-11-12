@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace AppTest\Command;
 
 use AppTest\FunctionalTestCase;
-use Schranz\Search\Integration\Mezzio\Command\IndexCreateCommand;
-use Schranz\Search\Integration\Mezzio\Command\IndexDropCommand;
-use Schranz\Search\Integration\Mezzio\Command\ReindexCommand;
+use CmsIg\Seal\Integration\Mezzio\Command\IndexCreateCommand;
+use CmsIg\Seal\Integration\Mezzio\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 

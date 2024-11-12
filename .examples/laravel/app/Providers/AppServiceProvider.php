@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(BlogReindexProvider::class, fn () => new BlogReindexProvider());
 
-        $this->app->tag(BlogReindexProvider::class, 'schranz_search.reindex_provider');
+        $this->app->tag(BlogReindexProvider::class, 'seal.reindex_provider');
     }
 }

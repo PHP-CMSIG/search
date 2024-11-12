@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Memory;
+namespace CmsIg\Seal\Adapter\Memory;
 
-use Schranz\Search\SEAL\Schema\Index;
+use CmsIg\Seal\Schema\Index;
 
 /**
  * @internal this class is not part of the public API and may change or remove without notice

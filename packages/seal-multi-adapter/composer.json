@@ -1,22 +1,22 @@
 {
-    "name": "schranz-search/seal-multi-adapter",
-    "description": "An adapter to support to write into multiple other adapters schranz-search/seal package.",
+    "name": "cmsig/seal-multi-adapter",
+    "description": "An adapter to support to write into multiple other adapters cmsig/seal package.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Multi\\": "src"
+            "CmsIg\\Seal\\Adapter\\Multi\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Multi\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Multi\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "psr/container": "^1.0 || ^2.0"
     },
     "require-dev": {

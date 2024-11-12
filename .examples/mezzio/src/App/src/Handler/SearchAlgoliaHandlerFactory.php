@@ -6,7 +6,7 @@ namespace App\Handler;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineRegistry;
 
 class SearchAlgoliaHandlerFactory
 {

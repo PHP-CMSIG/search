@@ -6,9 +6,9 @@ namespace App\Controller;
 
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
 
 final class SearchController
 {

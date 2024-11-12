@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Algolia\Tests;
+namespace CmsIg\Seal\Adapter\Algolia\Tests;
 
 use Algolia\AlgoliaSearch\Api\SearchClient;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
 
 final class ClientHelper
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\EngineInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\EngineInterface;
 
 class AdapterClassHelper
 {

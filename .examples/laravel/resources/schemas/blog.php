@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
 
 return new Index('blog', [
     'id' => new Field\IdentifierField('id'),
