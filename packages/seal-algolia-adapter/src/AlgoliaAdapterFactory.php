@@ -15,9 +15,9 @@ namespace CmsIg\Seal\Adapter\Algolia;
 
 use Algolia\AlgoliaSearch\Api\SearchClient;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * @experimental

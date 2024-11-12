@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Tests\Schema\Loader;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
 
 #[CoversClass(PhpFileLoader::class)]
 class PhpFileLoaderTest extends TestCase

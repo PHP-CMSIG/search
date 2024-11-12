@@ -11,7 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactory;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
@@ -32,6 +31,7 @@ use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
 use CmsIg\Seal\Schema\Schema;
+use Psr\Container\ContainerInterface;
 
 /** @var \Yiisoft\Config\Config $config */
 /** @var array{"schranz-search/yii-module": mixed[]} $params */

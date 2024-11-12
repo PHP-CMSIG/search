@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Meilisearch;
 
-use Meilisearch\Client;
-use Meilisearch\Exceptions\ApiException;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field\GeoPointField;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\AsyncTask;
 use CmsIg\Seal\Task\TaskInterface;
+use Meilisearch\Client;
+use Meilisearch\Exceptions\ApiException;
 
 final class MeilisearchSchemaManager implements SchemaManagerInterface
 {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Laravel\Console;
 
-use Illuminate\Console\Command;
 use CmsIg\Seal\EngineRegistry;
+use Illuminate\Console\Command;
 
 /**
  * @experimental

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Testing;
 
-use PHPUnit\Framework\TestCase;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
@@ -21,6 +20,7 @@ use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\SearchBuilder;
+use PHPUnit\Framework\TestCase;
 
 abstract class AbstractIndexerTestCase extends TestCase
 {

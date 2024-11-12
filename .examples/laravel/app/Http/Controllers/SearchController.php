@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use CmsIg\Seal\Integration\Laravel\Facade\Engine as EngineFacade;
-use CmsIg\Seal\Integration\Laravel\Facade\EngineRegistry as EngineRegistryFacade;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\Integration\Laravel\Facade\Engine as EngineFacade;
+use CmsIg\Seal\Integration\Laravel\Facade\EngineRegistry as EngineRegistryFacade;
 use Symfony\Component\HttpFoundation\Response;
 
 class SearchController extends Controller

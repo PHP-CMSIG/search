@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Tests\Marshaller;
 
-use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Testing\TestingHelper;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Marshaller::class)]
 class MarshallerTest extends TestCase

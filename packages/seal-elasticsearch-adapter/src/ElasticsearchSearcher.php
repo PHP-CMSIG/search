@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Elasticsearch;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\Exception\ClientResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Field;
@@ -23,6 +20,9 @@ use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
+use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Response\Elasticsearch;
 
 final class ElasticsearchSearcher implements SearcherInterface
 {

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Laravel\Facade;
 
-use Illuminate\Support\Facades\Facade;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry as SealEngineRegistry;
+use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static iterable<string, EngineInterface> getEngines()

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Mezzio\Service;
 
-use Psr\Container\ContainerInterface;
-use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * @internal

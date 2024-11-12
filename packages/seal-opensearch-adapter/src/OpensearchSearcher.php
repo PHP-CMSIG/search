@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch;
 
-use OpenSearch\Client;
-use OpenSearch\Common\Exceptions\Missing404Exception;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Field;
@@ -22,6 +20,8 @@ use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
+use OpenSearch\Client;
+use OpenSearch\Common\Exceptions\Missing404Exception;
 
 final class OpensearchSearcher implements SearcherInterface
 {

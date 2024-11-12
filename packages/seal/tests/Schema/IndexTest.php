@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Tests\Schema;
 
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use CmsIg\Seal\Schema\Field;
-use CmsIg\Seal\Schema\Index;
 
 #[CoversClass(Index::class)]
 class IndexTest extends TestCase

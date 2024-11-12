@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Loupe;
 
-use Loupe\Loupe\LoupeFactory;
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
+use Loupe\Loupe\LoupeFactory;
+use Psr\Container\ContainerInterface;
 
 /**
  * @experimental

@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Spiral\Bootloader;
 
-use CmsIg\Seal\Integration\Spiral\Config\SearchConfig;
-use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
-use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
-use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
 use CmsIg\Seal\Adapter\AdapterFactory;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
@@ -34,6 +30,10 @@ use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Spiral\Config\SearchConfig;
+use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
+use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
+use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Testing;
 
-use PHPUnit\Framework\TestCase;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Schema;
+use PHPUnit\Framework\TestCase;
 
 abstract class AbstractSchemaManagerTestCase extends TestCase
 {

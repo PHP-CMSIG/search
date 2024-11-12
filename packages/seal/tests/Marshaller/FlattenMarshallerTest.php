@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Tests\Marshaller;
 
+use CmsIg\Seal\Marshaller\FlattenMarshaller;
+use CmsIg\Seal\Schema\Field;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use CmsIg\Seal\Marshaller\FlattenMarshaller;
-use CmsIg\Seal\Schema\Field;
 
 #[CoversClass(FlattenMarshaller::class)]
 class FlattenMarshallerTest extends TestCase

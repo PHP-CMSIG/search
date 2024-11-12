@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Loupe;
 
-use Loupe\Loupe\SearchParameters;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\FlattenMarshaller;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
+use Loupe\Loupe\SearchParameters;
 
 final class LoupeSearcher implements SearcherInterface
 {

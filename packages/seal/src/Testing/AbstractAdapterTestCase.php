@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Testing;
 
-use PHPUnit\Framework\TestCase;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
 use CmsIg\Seal\Schema\Schema;
+use PHPUnit\Framework\TestCase;
 
 abstract class AbstractAdapterTestCase extends TestCase
 {

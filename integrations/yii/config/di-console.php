@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Psr\Container\ContainerInterface;
+use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
 use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
-use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use Psr\Container\ContainerInterface;
 
 /** @var \Yiisoft\Config\Config $config */
 /** @var array{"schranz-search/yii-module": array{reindex_providers: string[]}} $params */

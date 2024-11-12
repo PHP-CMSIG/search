@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use CmsIg\Seal\EngineRegistry;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use CmsIg\Seal\EngineRegistry;
 
 class SearchTypesenseHandlerFactory
 {

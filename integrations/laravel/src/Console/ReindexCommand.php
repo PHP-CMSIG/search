@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Laravel\Console;
 
-use Illuminate\Console\Command;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use Illuminate\Console\Command;
 
 /**
  * @experimental

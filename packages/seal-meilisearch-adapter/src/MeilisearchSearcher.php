@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Meilisearch;
 
-use Meilisearch\Client;
-use Meilisearch\Exceptions\ApiException;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
+use Meilisearch\Client;
+use Meilisearch\Exceptions\ApiException;
 
 final class MeilisearchSearcher implements SearcherInterface
 {

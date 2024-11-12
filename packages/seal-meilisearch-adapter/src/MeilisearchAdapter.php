@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Meilisearch;
 
-use Meilisearch\Client;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Adapter\SearcherInterface;
+use Meilisearch\Client;
 
 final class MeilisearchAdapter implements AdapterInterface
 {

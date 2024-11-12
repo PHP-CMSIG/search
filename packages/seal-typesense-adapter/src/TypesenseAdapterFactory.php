@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Typesense;
 
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
 use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
-use CmsIg\Seal\Adapter\AdapterFactoryInterface;
-use CmsIg\Seal\Adapter\AdapterInterface;
 use Typesense\Client;
 
 /**

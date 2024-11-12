@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Multi;
 
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
+use Psr\Container\ContainerInterface;
 
 /**
  * @experimental

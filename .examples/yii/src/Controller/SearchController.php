@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 
 final class SearchController
 {

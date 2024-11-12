@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch;
 
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use Psr\Container\ContainerInterface;
-use CmsIg\Seal\Adapter\AdapterFactoryInterface;
-use CmsIg\Seal\Adapter\AdapterInterface;
 
 /**
  * @experimental

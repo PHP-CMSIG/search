@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Loupe;
 
+use CmsIg\Seal\Schema\Index;
 use Loupe\Loupe\Configuration;
 use Loupe\Loupe\Loupe;
 use Loupe\Loupe\LoupeFactory;
-use CmsIg\Seal\Schema\Index;
 
 /**
  * @experimental

@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use CmsIg\Seal\Integration\Symfony\Command\IndexCreateCommand;
-use CmsIg\Seal\Integration\Symfony\Command\IndexDropCommand;
-use CmsIg\Seal\Integration\Symfony\Command\ReindexCommand;
 use CmsIg\Seal\Adapter\AdapterFactory;
 use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
 use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
@@ -29,6 +26,9 @@ use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapterFactory;
 use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
 use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Symfony\Command\IndexCreateCommand;
+use CmsIg\Seal\Integration\Symfony\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Symfony\Command\ReindexCommand;
 
 /*
  * @internal

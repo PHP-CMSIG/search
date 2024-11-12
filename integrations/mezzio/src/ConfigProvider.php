@@ -13,10 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Mezzio;
 
-use CmsIg\Seal\Integration\Mezzio\Service\CommandAbstractFactory;
-use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
-use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
-use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
 use CmsIg\Seal\Adapter\AdapterFactory;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
@@ -32,6 +28,10 @@ use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
 use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Mezzio\Service\CommandAbstractFactory;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
 use CmsIg\Seal\Schema\Schema;
 
 final class ConfigProvider

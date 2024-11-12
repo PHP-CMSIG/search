@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Mezzio\Service;
 
-use Doctrine\DBAL\Schema\Schema;
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactory;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
@@ -23,6 +21,8 @@ use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use Doctrine\DBAL\Schema\Schema;
+use Psr\Container\ContainerInterface;
 
 /**
  * @internal

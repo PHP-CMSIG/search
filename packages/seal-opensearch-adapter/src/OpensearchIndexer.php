@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch;
 
-use OpenSearch\Client;
 use CmsIg\Seal\Adapter\BulkHelper;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
+use OpenSearch\Client;
 
 final class OpensearchIndexer implements IndexerInterface
 {

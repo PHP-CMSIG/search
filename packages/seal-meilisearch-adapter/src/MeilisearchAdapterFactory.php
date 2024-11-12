@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Meilisearch;
 
-use Meilisearch\Client;
-use Psr\Container\ContainerInterface;
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
+use Meilisearch\Client;
+use Psr\Container\ContainerInterface;
 
 /**
  * @experimental

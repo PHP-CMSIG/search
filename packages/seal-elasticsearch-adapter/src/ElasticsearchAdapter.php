@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Elasticsearch;
 
-use Elastic\Elasticsearch\Client;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Adapter\SearcherInterface;
+use Elastic\Elasticsearch\Client;
 
 final class ElasticsearchAdapter implements AdapterInterface
 {

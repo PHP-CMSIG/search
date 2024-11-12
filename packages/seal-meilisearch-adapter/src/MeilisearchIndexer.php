@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Meilisearch;
 
-use Meilisearch\Client;
 use CmsIg\Seal\Adapter\BulkHelper;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\AsyncTask;
 use CmsIg\Seal\Task\TaskInterface;
+use Meilisearch\Client;
 
 final class MeilisearchIndexer implements IndexerInterface
 {

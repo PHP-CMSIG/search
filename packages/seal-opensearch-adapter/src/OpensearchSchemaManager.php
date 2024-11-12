@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch;
 
-use OpenSearch\Client;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
+use OpenSearch\Client;
 
 final class OpensearchSchemaManager implements SchemaManagerInterface
 {

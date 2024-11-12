@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Elasticsearch\Tests;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchSchemaManager;
 use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
 use CmsIg\Seal\Testing\TestingHelper;
+use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\Response\Elasticsearch;
 
 class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
 {

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Elasticsearch;
 
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\ClientInterface;
 use Psr\Container\ContainerInterface;
-use CmsIg\Seal\Adapter\AdapterFactoryInterface;
-use CmsIg\Seal\Adapter\AdapterInterface;
 
 /**
  * @experimental

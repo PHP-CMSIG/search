@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Elasticsearch;
 
-use Elastic\Elasticsearch\Client;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
+use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\Response\Elasticsearch;
 
 final class ElasticsearchSchemaManager implements SchemaManagerInterface
 {

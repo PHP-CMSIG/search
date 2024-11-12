@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch\Tests;
 
-use OpenSearch\Client;
 use CmsIg\Seal\Adapter\Opensearch\OpensearchSchemaManager;
 use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
 use CmsIg\Seal\Testing\TestingHelper;
+use OpenSearch\Client;
 
 class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
 {
