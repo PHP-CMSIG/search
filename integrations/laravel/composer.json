@@ -69,6 +69,9 @@
         "cmsig/seal-solr-adapter": "^0.6",
         "cmsig/seal-typesense-adapter": "^0.6"
     },
+    "replace": {
+        "schranz-search/laravel-package": "self.version"
+    },
     "conflict": {
         "cmsig/seal-algolia-adapter": "<0.6 || >=0.7",
         "cmsig/seal-elasticsearch-adapter": "<0.6 || >=0.7",
