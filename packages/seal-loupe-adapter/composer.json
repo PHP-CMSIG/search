@@ -1,23 +1,23 @@
 {
-    "name": "schranz-search/seal-loupe-adapter",
-    "description": "An adapter to support loupe in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-loupe-adapter",
+    "description": "An adapter to support loupe in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "loupe"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Loupe\\": "src"
+            "CmsIg\\Seal\\Adapter\\Loupe\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Loupe\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Loupe\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -31,7 +31,7 @@
     },
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "loupe/loupe": "^0.7.2",
         "psr/container": "^1.0 || ^2.0"
     },

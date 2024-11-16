@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Elasticsearch\Tests;
+namespace CmsIg\Seal\Adapter\Elasticsearch\Tests;
 
+use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchSchemaManager;
+use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
+use CmsIg\Seal\Testing\TestingHelper;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Response\Elasticsearch;
-use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchSchemaManager;
-use Schranz\Search\SEAL\Testing\AbstractSchemaManagerTestCase;
-use Schranz\Search\SEAL\Testing\TestingHelper;
 
 class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
 {

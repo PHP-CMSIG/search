@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Solr;
+namespace CmsIg\Seal\Adapter\Solr;
 
-use Schranz\Search\SEAL\Adapter\SearcherInterface;
-use Schranz\Search\SEAL\Marshaller\FlattenMarshaller;
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
-use Schranz\Search\SEAL\Search\Condition;
-use Schranz\Search\SEAL\Search\Result;
-use Schranz\Search\SEAL\Search\Search;
+use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Marshaller\FlattenMarshaller;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Result;
+use CmsIg\Seal\Search\Search;
 use Solarium\Client;
 use Solarium\Core\Query\DocumentInterface;
 
@@ -123,7 +123,7 @@ final class SolrSearcher implements SearcherInterface
             unset($hit['_version_']);
 
             if ('id' !== $index->getIdentifierField()->name) {
-                // Solr currently does not support set another identifier then id: https://github.com/schranz-search/schranz-search/issues/87
+                // Solr currently does not support set another identifier then id: https://github.com/php-cmsig/search/issues/87
                 $id = $hit['id'];
                 unset($hit['id']);
 

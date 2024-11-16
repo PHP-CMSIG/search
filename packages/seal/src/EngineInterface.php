@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL;
+namespace CmsIg\Seal;
 
-use Schranz\Search\SEAL\Exception\DocumentNotFoundException;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
-use Schranz\Search\SEAL\Search\SearchBuilder;
-use Schranz\Search\SEAL\Task\TaskInterface;
+use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Search\SearchBuilder;
+use CmsIg\Seal\Task\TaskInterface;
 
 interface EngineInterface
 {

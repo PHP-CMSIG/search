@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Symfony;
+namespace CmsIg\Seal\Integration\Symfony;
 
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
-use Schranz\Search\SEAL\Schema\Schema;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Schema;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -30,9 +30,9 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 /**
  * @experimental
  */
-final class SearchBundle extends AbstractBundle
+final class SealBundle extends AbstractBundle
 {
-    protected string $extensionAlias = 'schranz_search';
+    protected string $extensionAlias = 'cmsig_seal';
 
     public function configure(DefinitionConfigurator $definition): void
     {
@@ -79,15 +79,15 @@ final class SearchBundle extends AbstractBundle
         }
 
         foreach ($engines as $name => $engineConfig) {
-            $adapterServiceId = 'schranz_search.adapter.' . $name;
-            $engineServiceId = 'schranz_search.engine.' . $name;
-            $schemaLoaderServiceId = 'schranz_search.schema_loader.' . $name;
-            $schemaId = 'schranz_search.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             $definition = $builder->register($adapterServiceId, AdapterInterface::class)
-                ->setFactory([new Reference('schranz_search.adapter_factory'), 'createAdapter'])
+                ->setFactory([new Reference('cmsig_seal.adapter_factory'), 'createAdapter'])
                 ->setArguments([$engineConfig['adapter']])
-                ->addTag('schranz_search.adapter', ['name' => $name]);
+                ->addTag('cmsig_seal.adapter', ['name' => $name]);
 
             if (\class_exists(ReadWriteAdapterFactory::class) || \class_exists(MultiAdapterFactory::class)) {
                 // the read-write and multi adapter require access all other adapters so they need to be public
@@ -107,7 +107,7 @@ final class SearchBundle extends AbstractBundle
                     new Reference($adapterServiceId),
                     new Reference($schemaId),
                 ])
-                ->addTag('schranz_search.engine', ['name' => $name]);
+                ->addTag('cmsig_seal.engine', ['name' => $name]);
 
             if ('default' === $name || (!isset($engines['default']) && !$builder->has(EngineInterface::class))) {
                 $builder->setAlias(EngineInterface::class, $engineServiceId);
@@ -128,7 +128,7 @@ final class SearchBundle extends AbstractBundle
         }
 
         $builder->registerForAutoconfiguration(ReindexProviderInterface::class)
-            ->addTag('schranz_search.reindex_provider');
+            ->addTag('cmsig_seal.reindex_provider');
 
         $container->import(\dirname(__DIR__) . '/config/services.php');
     }

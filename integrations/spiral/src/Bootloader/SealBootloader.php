@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,33 +11,33 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Spiral\Bootloader;
+namespace CmsIg\Seal\Integration\Spiral\Bootloader;
 
-use Schranz\Search\Integration\Spiral\Config\SearchConfig;
-use Schranz\Search\Integration\Spiral\Console\IndexCreateCommand;
-use Schranz\Search\Integration\Spiral\Console\IndexDropCommand;
-use Schranz\Search\Integration\Spiral\Console\ReindexCommand;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Loupe\LoupeAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Memory\MemoryAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Opensearch\OpensearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Solr\SolrAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapterFactory;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
-use Schranz\Search\SEAL\Schema\Loader\LoaderInterface;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
-use Schranz\Search\SEAL\Schema\Schema;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
+use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
+use CmsIg\Seal\Adapter\Loupe\LoupeAdapterFactory;
+use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapterFactory;
+use CmsIg\Seal\Adapter\Memory\MemoryAdapterFactory;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapterFactory;
+use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Spiral\Config\SealConfig;
+use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
+use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
+use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Schema\Loader\LoaderInterface;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Schema;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Boot\DirectoriesInterface;
 use Spiral\Boot\EnvironmentInterface;
@@ -48,7 +48,7 @@ use Spiral\Core\Container;
 /**
  * @experimental
  */
-final class SearchBootloader extends Bootloader
+final class SealBootloader extends Bootloader
 {
     private const ADAPTER_FACTORIES = [
         AlgoliaAdapterFactory::class,
@@ -63,7 +63,7 @@ final class SearchBootloader extends Bootloader
     ];
 
     /**
-     * @param ConfiguratorInterface<SearchConfig> $config
+     * @param ConfiguratorInterface<SealConfig> $config
      */
     public function __construct(
         private readonly ConfiguratorInterface $config,
@@ -80,7 +80,7 @@ final class SearchBootloader extends Bootloader
         $console->addCommand(ReindexCommand::class);
 
         $this->config->setDefaults(
-            SearchConfig::CONFIG,
+            SealConfig::CONFIG,
             [
                 'index_name_prefix' => $environment->get('SEAL_SEARCH_PREFIX', ''),
                 'schemas' => [
@@ -93,7 +93,7 @@ final class SearchBootloader extends Bootloader
         );
     }
 
-    public function boot(Container $container, SearchConfig $config): void
+    public function boot(Container $container, SealConfig $config): void
     {
         $this->createAdapterFactories($container);
 
@@ -106,10 +106,10 @@ final class SearchBootloader extends Bootloader
 
         $engineServices = [];
         foreach ($engines as $name => $engineConfig) {
-            $adapterServiceId = 'schranz_search.adapter.' . $name;
-            $engineServiceId = 'schranz_search.engine.' . $name;
-            $schemaLoaderServiceId = 'schranz_search.schema_loader.' . $name;
-            $schemaId = 'schranz_search.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'] ?? throw new \RuntimeException(\sprintf(
@@ -213,7 +213,7 @@ final class SearchBootloader extends Bootloader
 
         // ...
 
-        $prefix = 'schranz_search.adapter.';
+        $prefix = 'cmsig_seal.adapter.';
 
         $wrapperAdapters = [
             ReadWriteAdapterFactory::class,

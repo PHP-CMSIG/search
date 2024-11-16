@@ -1,22 +1,22 @@
 {
-    "name": "schranz-search/seal-read-write-adapter",
-    "description": "An adapter to support to split read and write operations for the schranz-search/seal package.",
+    "name": "cmsig/seal-read-write-adapter",
+    "description": "An adapter to support to split read and write operations for the cmsig/seal package.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\ReadWrite\\": "src"
+            "CmsIg\\Seal\\Adapter\\ReadWrite\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\ReadWrite\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\ReadWrite\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "psr/container": "^1.0 || ^2.0"
     },
     "require-dev": {

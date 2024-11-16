@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -38,10 +38,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | engines
+    | Engines
     |--------------------------------------------------------------------------
     |
-    | Directory where the latte templates can be found.
+    | Define different engines for the indexes.
     */
 
     'engines' => [

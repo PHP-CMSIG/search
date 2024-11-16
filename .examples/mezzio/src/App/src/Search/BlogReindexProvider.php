@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Search;
 
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 
 class BlogReindexProvider implements ReindexProviderInterface
 {

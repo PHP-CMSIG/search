@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -9,10 +9,10 @@
 <br />
 <br />
 
-Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) into Mezzio.
+Integration of the CMS-IG — Search Engine Abstraction Layer (SEAL) into Mezzio.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) int
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/mezzio-module
+composer require cmsig/seal-mezzio-module
 ```
 
 Also install one of the listed adapters.
@@ -31,20 +31,20 @@ Also install one of the listed adapters.
 
 The following adapters are available:
 
- - [MemoryAdapter](../../packages/seal-memory-adapter): `schranz-search/seal-memory-adapter`
- - [ElasticsearchAdapter](../../packages/seal-elasticsearch-adapter): `schranz-search/seal-elasticsearch-adapter`
- - [OpensearchAdapter](../../packages/seal-opensearch-adapter): `schranz-search/seal-opensearch-adapter`
- - [MeilisearchAdapter](../../packages/seal-meilisearch-adapter): `schranz-search/seal-meilisearch-adapter`
- - [AlgoliaAdapter](../../packages/seal-algolia-adapter): `schranz-search/seal-algolia-adapter`
- - [SolrAdapter](../../packages/seal-solr-adapter): `schranz-search/seal-solr-adapter`
- - [RediSearchAdapter](../../packages/seal-redisearch-adapter): `schranz-search/seal-redisearch-adapter`
- - [TypesenseAdapter](../../packages/seal-typesense-adapter): `schranz-search/seal-typesense-adapter`
+ - [MemoryAdapter](../../packages/seal-memory-adapter): `cmsig/seal-memory-adapter`
+ - [ElasticsearchAdapter](../../packages/seal-elasticsearch-adapter): `cmsig/seal-elasticsearch-adapter`
+ - [OpensearchAdapter](../../packages/seal-opensearch-adapter): `cmsig/seal-opensearch-adapter`
+ - [MeilisearchAdapter](../../packages/seal-meilisearch-adapter): `cmsig/seal-meilisearch-adapter`
+ - [AlgoliaAdapter](../../packages/seal-algolia-adapter): `cmsig/seal-algolia-adapter`
+ - [SolrAdapter](../../packages/seal-solr-adapter): `cmsig/seal-solr-adapter`
+ - [RediSearchAdapter](../../packages/seal-redisearch-adapter): `cmsig/seal-redisearch-adapter`
+ - [TypesenseAdapter](../../packages/seal-typesense-adapter): `cmsig/seal-typesense-adapter`
  - ... more coming soon
 
 Additional Wrapper adapters:
 
- - [ReadWriteAdapter](../../packages/seal-read-write-adapter)
- - [MultiAdapter](../../packages/seal-multi-adapter)
+ - [ReadWriteAdapter](../../packages/seal-read-write-adapter): `cmsig/seal-read-write-adapter`
+ - [MultiAdapter](../../packages/seal-multi-adapter): `cmsig/seal-multi-adapter`
 
 Creating your own adapter? Add the [`seal-php-adapter`](https://github.com/topics/seal-php-adapter) Topic to your Github Repository.
 
@@ -63,7 +63,7 @@ class ConfigProvider
     {
         return [
             // ...
-            'schranz_search' => [
+            'cmsig_seal' => [
                 'schemas' => [
                     'app' => [
                         'dir' => 'config/schemas',
@@ -93,7 +93,7 @@ class ConfigProvider
     {
         return [
             // ...
-            'schranz_search' => [
+            'cmsig_seal' => [
                 'schemas' => [
                     'app' => [
                         'dir' => 'config/schemas/app',
@@ -153,7 +153,7 @@ The default engine is available as `Engine`:
 ```php
 class Some {
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineInterface $engine,
+        private readonly \CmsIg\Seal\EngineInterface $engine,
     ) {
     }
 }
@@ -166,7 +166,7 @@ class Some {
     private Engine $engine;
 
     public function __construct(
-        private readonly \Schranz\Search\SEAL\EngineRegistry $engineRegistry,
+        private readonly \CmsIg\Seal\EngineRegistry $engineRegistry,
     ) {
         $this->engine = $this->engineRegistry->getEngine('algolia');
     }
@@ -182,16 +182,22 @@ The package provides the following commands:
 **Create configured indexes**
 
 ```bash
-vendor/bin/laminas schranz:search:index-create --help
+vendor/bin/laminas cmsig:seal:index-create --help
 ```
 
 **Drop configured indexes**
 
 ```bash
-vendor/bin/laminas schranz:search:index-drop --help
+vendor/bin/laminas cmsig:seal:index-drop --help
+```
+
+**Reindex indexes**
+
+```bash
+vendor/bin/laminas cmsig:seal:reindex --help
 ```
 
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

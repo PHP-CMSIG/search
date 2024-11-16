@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Mezzio\Service;
+namespace CmsIg\Seal\Integration\Mezzio\Service;
 
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Psr\Container\ContainerInterface;
-use Schranz\Search\Integration\Mezzio\Command\ReindexCommand;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
 
 /**
  * @internal
@@ -35,10 +35,10 @@ final class CommandAbstractFactory
         $arguments = [$container->get(EngineRegistry::class)];
 
         if (ReindexCommand::class === $className) {
-            /** @var array{schranz_search: array{reindex_providers: string[]}} $config */
+            /** @var array{cmsig_seal: array{reindex_providers: string[]}} $config */
             $config = $container->get('config');
 
-            $reindexProviderNames = $config['schranz_search']['reindex_providers'];
+            $reindexProviderNames = $config['cmsig_seal']['reindex_providers'];
             $reindexProviders = [];
             foreach ($reindexProviderNames as $reindexProviderName) {
                 $reindexProvider = $container->get($reindexProviderName);

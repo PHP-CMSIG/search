@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 The `RediSearchAdapter` write the documents into a [RediSearch](https://redis.io/docs/stack/search/) server instance. The Redis Server requires to run with the RedisSearch and JSON module.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ The `RediSearchAdapter` write the documents into a [RediSearch](https://redis.io
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/seal schranz-search/seal-redisearch-adapter
+composer require cmsig/seal cmsig/seal-redisearch-adapter
 ```
 
 ## Usage.
@@ -33,8 +33,8 @@ The following code shows how to create an Engine using this Adapter:
 <?php
 
 use Redis;
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapter;
-use Schranz\Search\SEAL\Engine;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapter;
+use CmsIg\Seal\Engine;
 
 $redis = new Redis([
     'host' => '127.0.0.1',
@@ -56,10 +56,10 @@ redis://supersecure@127.0.0.1:6379
 redis://phpredis:phpredis@127.0.0.1:6379
 ```
 
-The `ext-redis` and `ext-json` PHP extension is required for this adapter.  
+The `ext-redis` and `ext-json` PHP extension is required for this adapter.
 The `Redisearch` and `RedisJson` module is required for the Redis Server.
 
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Testing;
+namespace CmsIg\Seal\Testing;
 
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Adapter\IndexerInterface;
+use CmsIg\Seal\Adapter\SchemaManagerInterface;
+use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Schema\Schema;
+use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\SearchBuilder;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Adapter\IndexerInterface;
-use Schranz\Search\SEAL\Adapter\SchemaManagerInterface;
-use Schranz\Search\SEAL\Adapter\SearcherInterface;
-use Schranz\Search\SEAL\Schema\Schema;
-use Schranz\Search\SEAL\Search\Condition;
-use Schranz\Search\SEAL\Search\SearchBuilder;
 
 abstract class AbstractSearcherTestCase extends TestCase
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,28 +11,28 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Mezzio;
+namespace CmsIg\Seal\Integration\Mezzio;
 
-use Schranz\Search\Integration\Mezzio\Service\CommandAbstractFactory;
-use Schranz\Search\Integration\Mezzio\Service\SealContainer;
-use Schranz\Search\Integration\Mezzio\Service\SealContainerFactory;
-use Schranz\Search\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\Algolia\AlgoliaAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Loupe\LoupeAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Memory\MemoryAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Opensearch\OpensearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Adapter\RediSearch\RediSearchAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Solr\SolrAdapterFactory;
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapterFactory;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Schema\Schema;
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\Algolia\AlgoliaAdapterFactory;
+use CmsIg\Seal\Adapter\Elasticsearch\ElasticsearchAdapterFactory;
+use CmsIg\Seal\Adapter\Loupe\LoupeAdapterFactory;
+use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapterFactory;
+use CmsIg\Seal\Adapter\Memory\MemoryAdapterFactory;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Adapter\RediSearch\RediSearchAdapterFactory;
+use CmsIg\Seal\Adapter\Solr\SolrAdapterFactory;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Integration\Mezzio\Service\CommandAbstractFactory;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
+use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
+use CmsIg\Seal\Schema\Schema;
 
 final class ConfigProvider
 {
@@ -44,7 +44,7 @@ final class ConfigProvider
         return [
             'laminas-cli' => $this->getCliConfig(),
             'dependencies' => $this->getDependencies(),
-            'schranz_search' => [
+            'cmsig_seal' => [
                 'adapter_factories' => $this->getAdapterFactories(), // we are going over a config as there are no tagged services in mezzio
                 'index_name_prefix' => '',
                 'schemas' => [],
@@ -63,9 +63,9 @@ final class ConfigProvider
     {
         return [
             'commands' => [
-                'schranz:search:index-create' => Command\IndexCreateCommand::class,
-                'schranz:search:index-drop' => Command\IndexDropCommand::class,
-                'schranz:search:reindex' => Command\ReindexCommand::class,
+                'cmsig:seal:index-create' => Command\IndexCreateCommand::class,
+                'cmsig:seal:index-drop' => Command\IndexDropCommand::class,
+                'cmsig:seal:reindex' => Command\ReindexCommand::class,
             ],
         ];
     }

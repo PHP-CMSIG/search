@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 The `TypesenseAdapter` write the documents into a [Typesense](https://github.com/typesense/typesense) server instance.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ The `TypesenseAdapter` write the documents into a [Typesense](https://github.com
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/seal schranz-search/seal-typesense-adapter
+composer require cmsig/seal cmsig/seal-typesense-adapter
 ```
 
 ## Usage.
@@ -34,8 +34,8 @@ The following code shows how to create an Engine using this Adapter:
 
 use Http\Client\Curl\Client as CurlClient;
 use Http\Discovery\Psr17FactoryDiscovery;
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapter;
-use Schranz\Search\SEAL\Engine;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapter;
+use CmsIg\Seal\Engine;
 use Typesense\Client;
 
 $client = new Client(
@@ -67,4 +67,4 @@ typesense://S3CR3T@127.0.0.1:8108
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

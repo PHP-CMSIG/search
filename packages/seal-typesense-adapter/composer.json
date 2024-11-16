@@ -1,23 +1,23 @@
 {
-    "name": "schranz-search/seal-typesense-adapter",
-    "description": "An adapter to support typesense in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-typesense-adapter",
+    "description": "An adapter to support typesense in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "typesense"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Typesense\\": "src"
+            "CmsIg\\Seal\\Adapter\\Typesense\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Typesense\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Typesense\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "typesense/typesense-php": "^4.8.1",
         "symfony/http-client": "^5.4 || ^6.0 || ^7.0",
         "psr/container": "^1.0 || ^2.0"

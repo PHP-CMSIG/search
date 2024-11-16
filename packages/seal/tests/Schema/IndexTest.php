@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Tests\Schema;
+namespace CmsIg\Seal\Tests\Schema;
 
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
 
 #[CoversClass(Index::class)]
 class IndexTest extends TestCase

@@ -1,5 +1,5 @@
 {
-    "name": "schranz-search/seal",
+    "name": "cmsig/seal",
     "description": "Search Engine Abstraction Layer",
     "type": "library",
     "license": "MIT",
@@ -8,7 +8,8 @@
         "search",
         "search-client",
         "search-abstraction",
-        "schranz-search",
+        "cmsig",
+        "seal",
         "elasticsearch",
         "opensearch",
         "meilisearch",
@@ -19,12 +20,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\": "src"
+            "CmsIg\\Seal\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Tests\\": "tests"
+            "CmsIg\\Seal\\Tests\\": "tests"
         }
     },
     "authors": [

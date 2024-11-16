@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Schema\Field;
+namespace CmsIg\Seal\Schema\Field;
 
 /**
  * Type to store any PHP int value.
@@ -35,7 +35,7 @@ final class IntegerField extends AbstractField
         array $options = [],
     ) {
         if ($searchable) { // @phpstan-ignore-line
-            throw new \InvalidArgumentException('Searchability for IntegerField is not yet implemented: https://github.com/schranz-search/schranz-search/issues/97');
+            throw new \InvalidArgumentException('Searchability for IntegerField is not yet implemented: https://github.com/php-cmsig/search/issues/97');
         }
 
         parent::__construct(

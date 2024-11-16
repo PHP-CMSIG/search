@@ -4,8 +4,102 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ea3375979ac9cb075cdc45566d4d3eb",
+    "content-hash": "d201f2c100d28f6a5a9de59c87f91078",
     "packages": [
+        {
+            "name": "cmsig/seal",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal",
+                "reference": "65e8ff1785e5c47d02a13c068ff45d31c05935d3"
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "Search Engine Abstraction Layer",
+            "keywords": [
+                "abstraction",
+                "algolia",
+                "cmsig",
+                "elasticsearch",
+                "meilisearch",
+                "opensearch",
+                "redisearch",
+                "seal",
+                "search",
+                "search-abstraction",
+                "search-client",
+                "solr",
+                "typesense"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
         {
             "name": "psr/container",
             "version": "dev-master",
@@ -165,110 +259,17 @@
             "time": "2024-09-11T13:17:53+00:00"
         },
         {
-            "name": "schranz-search/seal",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal",
-                "reference": "1935848e43146d1ebf37c7c5975bf7b2346c7d6b"
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "Search Engine Abstraction Layer",
-            "keywords": [
-                "abstraction",
-                "algolia",
-                "elasticsearch",
-                "meilisearch",
-                "opensearch",
-                "redisearch",
-                "schranz-search",
-                "search",
-                "search-abstraction",
-                "search-client",
-                "solr",
-                "typesense"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "symfony/console",
             "version": "6.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f793dd5a7d9ae9923e35d0503d08ba734cec1d79"
+                "reference": "f1fc6f47283e27336e7cebb9e8946c8de7bff9bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/f793dd5a7d9ae9923e35d0503d08ba734cec1d79",
-                "reference": "f793dd5a7d9ae9923e35d0503d08ba734cec1d79",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f1fc6f47283e27336e7cebb9e8946c8de7bff9bd",
+                "reference": "f1fc6f47283e27336e7cebb9e8946c8de7bff9bd",
                 "shasum": ""
             },
             "require": {
@@ -349,7 +350,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-09T08:40:40+00:00"
+            "time": "2024-11-06T14:19:14+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -908,12 +909,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "205580699b4d3e11f7b679faf2c0f57ffca6981c"
+                "reference": "446e0d146f991dde3e73f45f2c97a9faad773c82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/205580699b4d3e11f7b679faf2c0f57ffca6981c",
-                "reference": "205580699b4d3e11f7b679faf2c0f57ffca6981c",
+                "url": "https://api.github.com/repos/symfony/string/zipball/446e0d146f991dde3e73f45f2c97a9faad773c82",
+                "reference": "446e0d146f991dde3e73f45f2c97a9faad773c82",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +988,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-23T06:56:12+00:00"
+            "time": "2024-11-13T13:31:26+00:00"
         },
         {
             "name": "yiisoft/definitions",
@@ -1275,16 +1276,16 @@
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.8.0",
+            "version": "4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "9aea95b33f10858762b5dc5d2e1fae245080c5e8"
+                "reference": "0555dac70bbcf4028d38708bc3a1f7fc9025397f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/9aea95b33f10858762b5dc5d2e1fae245080c5e8",
-                "reference": "9aea95b33f10858762b5dc5d2e1fae245080c5e8",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/0555dac70bbcf4028d38708bc3a1f7fc9025397f",
+                "reference": "0555dac70bbcf4028d38708bc3a1f7fc9025397f",
                 "shasum": ""
             },
             "require": {
@@ -1336,9 +1337,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.8.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.9.1"
             },
-            "time": "2024-10-30T14:28:58+00:00"
+            "time": "2024-11-15T17:45:06+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -1406,6 +1407,1002 @@
                 }
             ],
             "time": "2024-10-07T20:24:34+00:00"
+        },
+        {
+            "name": "cmsig/seal-algolia-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-algolia-adapter",
+                "reference": "ba35c75e21bd11b75955a9fa4e768e12fc1630bf"
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": "^4.4",
+                "cmsig/seal": "^0.6",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Algolia\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Algolia\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support algolia in cmsig/seal search abstraction.",
+            "keywords": [
+                "algolia",
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-elasticsearch-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-elasticsearch-adapter",
+                "reference": "a6ffe8da480ce2a935489c7bf7df11a78b522e0c"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "elasticsearch/elasticsearch": "^8.5.3",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^2.0",
+                "php-cs-fixer/shim": "^3.51",
+                "php-http/curl-client": "^2.0",
+                "php-http/message": "^1.0",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Elasticsearch\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Elasticsearch\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support elasticsearch in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "elasticsearch",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-loupe-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-loupe-adapter",
+                "reference": "d783be53a6a41e5d6f587be48127bab61121b3b6"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "loupe/loupe": "^0.7.2",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "conflict": {
+                "doctrine/dbal": "<3.6.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Loupe\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Loupe\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support loupe in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "loupe",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-meilisearch-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-meilisearch-adapter",
+                "reference": "8b2e2b44065a24ef850efec3e2be5829248ae4e6"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "meilisearch/meilisearch-php": "^1.2",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.5",
+                "http-interop/http-factory-guzzle": "^1.0",
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Meilisearch\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Meilisearch\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support meilisearch in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "meilisearch",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-memory-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-memory-adapter",
+                "reference": "f60e4a6c42a98640034789db9ee09347f9cc6580"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Memory\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Memory\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support to write into memory for cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-multi-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-multi-adapter",
+                "reference": "5461452681fece1b89cc7ab9662699d2570a8df1"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Multi\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Multi\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support to write into multiple other adapters cmsig/seal package.",
+            "keywords": [
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-opensearch-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-opensearch-adapter",
+                "reference": "d680d39cf873f0d82a99d7d67ad979222a17beb7"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "opensearch-project/opensearch-php": "^2.0",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^2.0",
+                "php-cs-fixer/shim": "^3.51",
+                "php-http/curl-client": "^2.0",
+                "php-http/message": "^1.0",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Opensearch\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Opensearch\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support opensearch in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "opensearch",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-read-write-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-read-write-adapter",
+                "reference": "e9a18f15f5877a34b4ca476ac414a4bb11e41463"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\ReadWrite\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\ReadWrite\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support to split read and write operations for the cmsig/seal package.",
+            "keywords": [
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-redisearch-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-redisearch-adapter",
+                "reference": "39cb0f3ef6f534ed4e2071b6f16cc646ddeec839"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "ext-json": "*",
+                "ext-redis": "^5 || ^6.0",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\RediSearch\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\RediSearch\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support RediSearch in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "redis",
+                "redisearch",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-solr-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-solr-adapter",
+                "reference": "81fc94ee50b546952483c239649f660814e5a6c2"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0",
+                "solarium/solarium": "^6.3"
+            },
+            "conflict": {
+                "solarium/solarium": "6.x-dev"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Solr\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Solr\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support apache solr in cmsig/seal search abstraction.",
+            "keywords": [
+                "apache-solr",
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client",
+                "solr"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "cmsig/seal-typesense-adapter",
+            "version": "0.6.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./../../packages/seal-typesense-adapter",
+                "reference": "e2cc1062554955ae940f2b2d9ec059dd682aaece"
+            },
+            "require": {
+                "cmsig/seal": "^0.6",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0",
+                "symfony/http-client": "^5.4 || ^6.0 || ^7.0",
+                "typesense/typesense-php": "^4.8.1"
+            },
+            "conflict": {
+                "monolog/monolog": "<2.0"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "php-http/curl-client": "^2.0",
+                "php-http/discovery": "^1.14",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Typesense\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Typesense\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support typesense in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "seal",
+                "seal-adapter",
+                "search-client",
+                "typesense"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "doctrine/cache",
@@ -1507,12 +2504,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "19a5a350a81e56802ae13a225c350d5cada9655a"
+                "reference": "e6986fece692c26064700a589416b9747e4801ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/19a5a350a81e56802ae13a225c350d5cada9655a",
-                "reference": "19a5a350a81e56802ae13a225c350d5cada9655a",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e6986fece692c26064700a589416b9747e4801ec",
+                "reference": "e6986fece692c26064700a589416b9747e4801ec",
                 "shasum": ""
             },
             "require": {
@@ -1596,7 +2593,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.9.x"
+                "source": "https://github.com/doctrine/dbal/tree/3.10.x"
             },
             "funding": [
                 {
@@ -1612,7 +2609,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T12:55:56+00:00"
+            "time": "2024-11-15T15:01:13+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -2664,12 +3661,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "11075bc016c8dda37386a213ec0ec939d5b48d9d"
+                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/11075bc016c8dda37386a213ec0ec939d5b48d9d",
-                "reference": "11075bc016c8dda37386a213ec0ec939d5b48d9d",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/32e515fdc02cdafbe4593e30a9350d486b125b67",
+                "reference": "32e515fdc02cdafbe4593e30a9350d486b125b67",
                 "shasum": ""
             },
             "require": {
@@ -2689,12 +3686,14 @@
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
-                "phpstan/phpstan": "^1.9",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.4",
-                "phpunit/phpunit": "^10.5.17",
+                "php-console/php-console": "^3.1.8",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpunit/phpunit": "^10.5.17 || ^11.0.7",
                 "predis/predis": "^1.1 || ^2",
-                "ruflin/elastica": "^7",
+                "rollbar/rollbar": "^4.0",
+                "ruflin/elastica": "^7 || ^8",
                 "symfony/mailer": "^5.4 || ^6",
                 "symfony/mime": "^5.4 || ^6"
             },
@@ -2746,7 +3745,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/main"
+                "source": "https://github.com/Seldaek/monolog/tree/3.8.0"
             },
             "funding": [
                 {
@@ -2758,7 +3757,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T20:44:10+00:00"
+            "time": "2024-11-12T13:57:08+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2766,12 +3765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c"
+                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c",
-                "reference": "3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/123267b2c49fbf30d78a7b2d333f6be754b94845",
+                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845",
                 "shasum": ""
             },
             "require": {
@@ -2811,7 +3810,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.0"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.1"
             },
             "funding": [
                 {
@@ -2819,7 +3818,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-12T14:39:25+00:00"
+            "time": "2024-11-08T17:47:46+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -3020,12 +4019,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/api.git",
-                "reference": "542064815d38a6df55af7957cd6f1d7d967c99c6"
+                "reference": "04c85a1e41a3d59fa9bdc801a5de1df6624b95ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/542064815d38a6df55af7957cd6f1d7d967c99c6",
-                "reference": "542064815d38a6df55af7957cd6f1d7d967c99c6",
+                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/04c85a1e41a3d59fa9bdc801a5de1df6624b95ed",
+                "reference": "04c85a1e41a3d59fa9bdc801a5de1df6624b95ed",
                 "shasum": ""
             },
             "require": {
@@ -3083,7 +4082,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2024-10-15T22:42:37+00:00"
+            "time": "2024-11-16T04:32:30+00:00"
         },
         {
             "name": "open-telemetry/context",
@@ -3769,12 +4768,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0"
+                "reference": "5e3a364ad64c9199837eca3b8068d5d69e4a1cf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0",
-                "reference": "8fbcf5b1484e8a4b6c8186fcca69aaa81972b0c0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5e3a364ad64c9199837eca3b8068d5d69e4a1cf9",
+                "reference": "5e3a364ad64c9199837eca3b8068d5d69e4a1cf9",
                 "shasum": ""
             },
             "require": {
@@ -3819,7 +4818,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-30T19:20:23+00:00"
+            "time": "2024-11-16T11:01:15+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -3827,12 +4826,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "146d9c32a7596ade35e9426ad748ee3b0e3c2566"
+                "reference": "11d4235fbc6313ecbf93708606edfd3222e44949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/146d9c32a7596ade35e9426ad748ee3b0e3c2566",
-                "reference": "146d9c32a7596ade35e9426ad748ee3b0e3c2566",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/11d4235fbc6313ecbf93708606edfd3222e44949",
+                "reference": "11d4235fbc6313ecbf93708606edfd3222e44949",
                 "shasum": ""
             },
             "require": {
@@ -3848,7 +4847,6 @@
                 "phpstan/phpstan-strict-rules": "^1.5.1",
                 "phpunit/phpunit": "^9.5"
             },
-            "default-branch": true,
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -3872,7 +4870,7 @@
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
                 "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.4.x"
             },
-            "time": "2024-09-04T20:52:46+00:00"
+            "time": "2024-11-12T12:43:59+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4203,12 +5201,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39"
+                "reference": "476c6c8e6fcc6107b578fdc6c899d4a183b5bf33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/72bb868cf80c167b7b76e431d1185400051e5a39",
-                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/476c6c8e6fcc6107b578fdc6c899d4a183b5bf33",
+                "reference": "476c6c8e6fcc6107b578fdc6c899d4a183b5bf33",
                 "shasum": ""
             },
             "require": {
@@ -4218,7 +5216,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.12.0",
+                "myclabs/deep-copy": "^1.12.1",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.1",
@@ -4296,7 +5294,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-31T05:51:29+00:00"
+            "time": "2024-11-16T08:11:02+00:00"
         },
         {
             "name": "psr/cache",
@@ -4683,16 +5681,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "1.2.8",
+            "version": "1.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240"
+                "reference": "40f9cf38c05296bd32f444121336a521a293fa61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/05755bf43617449c08ee8e50fb840c85ad3b1240",
-                "reference": "05755bf43617449c08ee8e50fb840c85ad3b1240",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/40f9cf38c05296bd32f444121336a521a293fa61",
+                "reference": "40f9cf38c05296bd32f444121336a521a293fa61",
                 "shasum": ""
             },
             "require": {
@@ -4730,7 +5728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.8"
+                "source": "https://github.com/rectorphp/rector/tree/1.2.10"
             },
             "funding": [
                 {
@@ -4738,1003 +5736,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-18T11:54:27+00:00"
-        },
-        {
-            "name": "schranz-search/seal-algolia-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-algolia-adapter",
-                "reference": "961cb7535c63df83d7ea71bfeadadba5ddad8005"
-            },
-            "require": {
-                "algolia/algoliasearch-client-php": "^4.4",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Algolia\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Algolia\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support algolia in schranz-search/seal search abstraction.",
-            "keywords": [
-                "algolia",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-elasticsearch-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-elasticsearch-adapter",
-                "reference": "9bd8470837d9f39063b835560ed1b7d1a39ce5a8"
-            },
-            "require": {
-                "elasticsearch/elasticsearch": "^8.5.3",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "guzzlehttp/psr7": "^2.0",
-                "php-cs-fixer/shim": "^3.51",
-                "php-http/curl-client": "^2.0",
-                "php-http/message": "^1.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Elasticsearch\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Elasticsearch\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support elasticsearch in schranz-search/seal search abstraction.",
-            "keywords": [
-                "elasticsearch",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-loupe-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-loupe-adapter",
-                "reference": "3a67847c26cf5d448086088112be5e483dd8c035"
-            },
-            "require": {
-                "loupe/loupe": "^0.7.2",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "conflict": {
-                "doctrine/dbal": "<3.6.0"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Loupe\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Loupe\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support loupe in schranz-search/seal search abstraction.",
-            "keywords": [
-                "loupe",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-meilisearch-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-meilisearch-adapter",
-                "reference": "7fcae45713a2f1f9d63cb5c7325e5a50b8896083"
-            },
-            "require": {
-                "meilisearch/meilisearch-php": "^1.2",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "^7.5",
-                "http-interop/http-factory-guzzle": "^1.0",
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Meilisearch\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Meilisearch\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support meilisearch in schranz-search/seal search abstraction.",
-            "keywords": [
-                "meilisearch",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-memory-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-memory-adapter",
-                "reference": "30dfc30ad12b0e83017d9e8c73001602fae5094d"
-            },
-            "require": {
-                "php": "^8.1",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Memory\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Memory\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support to write into memory for schranz-search/seal search abstraction.",
-            "keywords": [
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-multi-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-multi-adapter",
-                "reference": "c254e5835a5e437579153a997871aa8a658d97c7"
-            },
-            "require": {
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Multi\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Multi\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support to write into multiple other adapters schranz-search/seal package.",
-            "keywords": [
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-opensearch-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-opensearch-adapter",
-                "reference": "ed65db4c6af4ed48f357a32a4713718b91ac7eca"
-            },
-            "require": {
-                "opensearch-project/opensearch-php": "^2.0",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "guzzlehttp/psr7": "^2.0",
-                "php-cs-fixer/shim": "^3.51",
-                "php-http/curl-client": "^2.0",
-                "php-http/message": "^1.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Opensearch\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Opensearch\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support opensearch in schranz-search/seal search abstraction.",
-            "keywords": [
-                "opensearch",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-read-write-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-read-write-adapter",
-                "reference": "5433f21127e60f781955f7d2929ef531b44a6298"
-            },
-            "require": {
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\ReadWrite\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\ReadWrite\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support to split read and write operations for the schranz-search/seal package.",
-            "keywords": [
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-redisearch-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-redisearch-adapter",
-                "reference": "0942cb047e6cd4d3442b72d0ec81cdf89ff7a90d"
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-redis": "^5 || ^6.0",
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\RediSearch\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\RediSearch\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support RediSearch in schranz-search/seal search abstraction.",
-            "keywords": [
-                "redis",
-                "redisearch",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-solr-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-solr-adapter",
-                "reference": "06eba751e48f9792038fc1d1c92e895787d48c52"
-            },
-            "require": {
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6",
-                "solarium/solarium": "^6.3"
-            },
-            "conflict": {
-                "solarium/solarium": "6.x-dev"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0",
-                "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Solr\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Solr\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support apache solr in schranz-search/seal search abstraction.",
-            "keywords": [
-                "apache-solr",
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client",
-                "solr"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "schranz-search/seal-typesense-adapter",
-            "version": "0.6.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../../packages/seal-typesense-adapter",
-                "reference": "0215eee09eff776104507a60080b11c6471bfc64"
-            },
-            "require": {
-                "php": "^8.1",
-                "psr/container": "^1.0 || ^2.0",
-                "schranz-search/seal": "^0.6",
-                "symfony/http-client": "^5.4 || ^6.0 || ^7.0",
-                "typesense/typesense-php": "^4.8.1"
-            },
-            "conflict": {
-                "monolog/monolog": "<2.0"
-            },
-            "require-dev": {
-                "php-cs-fixer/shim": "^3.51",
-                "php-http/curl-client": "^2.0",
-                "php-http/discovery": "^1.14",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Typesense\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Schranz\\Search\\SEAL\\Adapter\\Typesense\\Tests\\": "tests"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Schranz",
-                    "email": "alexander@sulu.io"
-                }
-            ],
-            "description": "An adapter to support typesense in schranz-search/seal search abstraction.",
-            "keywords": [
-                "schranz-search",
-                "schranz-search-adapter",
-                "seal-adapter",
-                "search-client",
-                "typesense"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "time": "2024-11-08T13:59:10+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -6733,19 +6735,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "1ca3cfeaa4a26997bef2c66698825ad472bf96bf"
+                "reference": "1840b9de9c3f27ad82e7312d87226dabff814036"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/1ca3cfeaa4a26997bef2c66698825ad472bf96bf",
-                "reference": "1ca3cfeaa4a26997bef2c66698825ad472bf96bf",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/1840b9de9c3f27ad82e7312d87226dabff814036",
+                "reference": "1840b9de9c3f27ad82e7312d87226dabff814036",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
                 "psr/log": "^1|^2|^3",
                 "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/http-client-contracts": "^3.4.1",
+                "symfony/http-client-contracts": "~3.4.3|^3.5.1",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "conflict": {
@@ -6820,7 +6822,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-30T22:17:09+00:00"
+            "time": "2024-11-14T21:27:14+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -6828,12 +6830,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client-contracts.git",
-                "reference": "075fadd18649068440dae4667a0ab98293535235"
+                "reference": "e34b200cdbcfe17b1047838bd68e74f045a797eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/075fadd18649068440dae4667a0ab98293535235",
-                "reference": "075fadd18649068440dae4667a0ab98293535235",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/e34b200cdbcfe17b1047838bd68e74f045a797eb",
+                "reference": "e34b200cdbcfe17b1047838bd68e74f045a797eb",
                 "shasum": ""
             },
             "require": {
@@ -6899,7 +6901,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-26T08:57:56+00:00"
+            "time": "2024-11-13T18:58:46+00:00"
         },
         {
             "name": "symfony/options-resolver",

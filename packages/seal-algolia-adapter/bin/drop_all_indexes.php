@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -12,7 +12,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-// https://github.com/schranz-search/schranz-search/issues/82
+// https://github.com/php-cmsig/search/issues/82
 
 /** @internal */
 require_once \dirname(__DIR__) . '/vendor/autoload.php';
@@ -33,12 +33,12 @@ $_ENV['ALGOLIA_DSN'] = $algoliaDsn;
 
 $return = 0;
 
-$client = \Schranz\Search\SEAL\Adapter\Algolia\Tests\ClientHelper::getClient();
+$client = \CmsIg\Seal\Adapter\Algolia\Tests\ClientHelper::getClient();
 $retryIndexes = $client->listIndices()['items'];
 $retryCounter = 0;
 
 while (\count($retryIndexes) > 0) {
-    $client = \Schranz\Search\SEAL\Adapter\Algolia\Tests\ClientHelper::getClient();
+    $client = \CmsIg\Seal\Adapter\Algolia\Tests\ClientHelper::getClient();
     $currentIndexes = $retryIndexes;
     $retryIndexes = [];
     foreach ($currentIndexes as $key => $value) {

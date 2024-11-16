@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Symfony\Command;
+namespace CmsIg\Seal\Integration\Symfony\Command;
 
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineRegistry;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,7 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @experimental
  */
-#[AsCommand(name: 'schranz:search:index-create', description: 'Create configured search indexes.')]
+#[AsCommand(name: 'cmsig:seal:index-create', description: 'Create configured search indexes.')]
 final class IndexCreateCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)

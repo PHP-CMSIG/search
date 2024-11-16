@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Tests\Schema\Loader;
+namespace CmsIg\Seal\Tests\Schema\Loader;
 
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
 
 #[CoversClass(PhpFileLoader::class)]
 class PhpFileLoaderTest extends TestCase

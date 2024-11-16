@@ -33,7 +33,7 @@ value.
     Currently, you can use some kind of normalizer like `symfony/serializer <https://symfony.com/doc/current/components/serializer.html>`__
     to convert an object to an array and back to an object at current state a Document Mapper or ODM package does
     not yet exist. If provided in future it will be part of an own package which make usage of SEAL.
-    Example like doctrine/orm using doctrine/dbal. See `ODM issue <https://github.com/schranz-search/schranz-search/issues/81>`__.
+    Example like doctrine/orm using doctrine/dbal. See `ODM issue <https://github.com/php-cmsig/search/issues/81>`__.
 
 Delete document
 ---------------
@@ -133,25 +133,25 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     $this->app->singleton(\App\Search\BlogReindexProvider::class, fn () => new \App\Search\BlogReindexProvider());
 
-                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'schranz_search.reindex_provider');
+                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'cmsig_seal.reindex_provider');
                 }
             }
 
-        After correctly tagging the ``ReindexProvider`` with ``schranz_search.reindex_provider`` the
-        ``schranz:search:reindex`` command can be used to index all documents:
+        After correctly tagging the ``ReindexProvider`` with ``seal.reindex_provider`` the
+        ``cmsig:seal:reindex`` command can be used to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            php artisan schranz:search:reindex
+            php artisan cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            php artisan schranz:search:reindex --index=blog --drop
+            php artisan cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Symfony
 
         In Symfony ``autoconfigure`` feature should already tag the new ``ReindexProvider`` correctly
-        with the ``schranz_search.reindex_provider`` tag. If not you can tag it manually:
+        with the ``seal.reindex_provider`` tag. If not you can tag it manually:
 
         .. code-block:: yaml
 
@@ -160,16 +160,16 @@ After that you can use the ``reindex`` to index all documents:
             services:
                 App\Search\BlogReindexProvider:
                     tags:
-                        - { name: schranz_search.reindex_provider }
+                        - { name: cmsig_seal.reindex_provider }
 
         After correctly tagging the ``ReindexProvider`` use the following command to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            bin/console schranz:search:reindex
+            bin/console cmsig:seal:reindex
 
-            bin/console schranz:search:reindex --index=blog --drop
+            bin/console cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Spiral
 
@@ -177,7 +177,7 @@ After that you can use the ``reindex`` to index all documents:
 
         .. code-block:: php
 
-            <?php // app/config/schranz_search.php
+            <?php // app/config/cmsig_seal.php
 
             return [
                 // ...
@@ -192,9 +192,9 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            php app.php schranz:search:reindex
+            php app.php cmsig:seal:reindex
 
-            php app.php schranz:search:reindex --index=blog --drop
+            php app.php cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Mezzio
 
@@ -210,7 +210,7 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     return [
                         // ...
-                        'schranz_search' => [
+                        'cmsig_seal' => [
                             // ...
                             'reindex_providers' => [
                                 \App\Search\BlogReindexProvider::class,
@@ -238,9 +238,9 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            vendor/bin/laminas schranz:search:reindex
+            vendor/bin/laminas cmsig:seal:reindex
 
-            vendor/bin/laminas schranz:search:reindex --index=blog --drop
+            vendor/bin/laminas cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Yii
 
@@ -252,7 +252,7 @@ After that you can use the ``reindex`` to index all documents:
 
             return [
                 // ...
-                'schranz-search/yii-module' => [
+                'cmsig/seal-yii-module' => [
                     // ...
 
                     'reindex_providers' => [
@@ -266,15 +266,15 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            ./yii schranz:search:reindex
+            ./yii cmsig:seal:reindex
 
-            ./yii schranz:search:reindex --index=blog --drop
+            ./yii cmsig:seal:reindex --index=blog --drop
 
 Bulk operations
 ---------------
 
 Currently no bulk operations are implemented. Add your opinion to the
-`Bulk issue <https://github.com/schranz-search/schranz-search/issues/24>`_
+`Bulk issue <https://github.com/php-cmsig/search/issues/24>`_
 on Github.
 
 Next Steps

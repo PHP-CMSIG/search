@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Elasticsearch;
+namespace CmsIg\Seal\Adapter\Elasticsearch;
 
+use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Marshaller\Marshaller;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Result;
+use CmsIg\Seal\Search\Search;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
-use Schranz\Search\SEAL\Adapter\SearcherInterface;
-use Schranz\Search\SEAL\Marshaller\Marshaller;
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
-use Schranz\Search\SEAL\Search\Condition;
-use Schranz\Search\SEAL\Search\Result;
-use Schranz\Search\SEAL\Search\Search;
 
 final class ElasticsearchSearcher implements SearcherInterface
 {

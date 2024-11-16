@@ -61,9 +61,9 @@ jobs:
             - name: Check symlinks
               working-directory: ${{ inputs.directory }}
               run: |
-                  ls -lah vendor/schranz-search || true
+                  ls -lah vendor/cmsig || true
                   check_directory() {
-                      directory="vendor/schranz-search"
+                      directory="vendor/cmsig"
         
                       # Check if the directory exists
                       if [ -d "$directory" ]; then

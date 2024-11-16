@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Spiral\Console;
+namespace CmsIg\Seal\Integration\Spiral\Console;
 
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Spiral\Console\Attribute\AsCommand;
 use Spiral\Console\Attribute\Option;
 use Spiral\Console\Command;
@@ -23,7 +23,10 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * @experimental
  */
-#[AsCommand(name: 'schranz:search:reindex', description: 'Reindex configured search indexes.')]
+#[AsCommand(
+    name: 'cmsig:seal:reindex',
+    description: 'Reindex configured search indexes.',
+)]
 final class ReindexCommand extends Command
 {
     #[Option(name: 'engine', mode: InputOption::VALUE_REQUIRED, description: 'The name of the engine')]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Testing;
+namespace CmsIg\Seal\Testing;
 
+use CmsIg\Seal\Adapter\AdapterInterface;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Adapter\AdapterInterface;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\Exception\DocumentNotFoundException;
-use Schranz\Search\SEAL\Schema\Schema;
 
 abstract class AbstractAdapterTestCase extends TestCase
 {

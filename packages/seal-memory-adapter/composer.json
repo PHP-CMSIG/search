@@ -1,22 +1,22 @@
 {
-    "name": "schranz-search/seal-memory-adapter",
-    "description": "An adapter to support to write into memory for schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-memory-adapter",
+    "description": "An adapter to support to write into memory for cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Memory\\": "src"
+            "CmsIg\\Seal\\Adapter\\Memory\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Memory\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Memory\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6"
+        "cmsig/seal": "^0.6"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.51",

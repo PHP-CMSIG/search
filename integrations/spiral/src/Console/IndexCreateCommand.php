@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Spiral\Console;
+namespace CmsIg\Seal\Integration\Spiral\Console;
 
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineRegistry;
 use Spiral\Console\Attribute\AsCommand;
 use Spiral\Console\Attribute\Option;
 use Spiral\Console\Command;
@@ -23,7 +23,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @experimental
  */
 #[AsCommand(
-    name: 'schranz:search:index-create',
+    name: 'cmsig:seal:index-create',
     description: 'Create configured search indexes.',
 )]
 final class IndexCreateCommand extends Command

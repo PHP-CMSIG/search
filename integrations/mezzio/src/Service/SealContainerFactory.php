@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Mezzio\Service;
+namespace CmsIg\Seal\Integration\Mezzio\Service;
 
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\AdapterFactoryInterface;
+use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
+use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader;
 use Doctrine\DBAL\Schema\Schema;
 use Psr\Container\ContainerInterface;
-use Schranz\Search\SEAL\Adapter\AdapterFactory;
-use Schranz\Search\SEAL\Adapter\AdapterFactoryInterface;
-use Schranz\Search\SEAL\Adapter\Multi\MultiAdapterFactory;
-use Schranz\Search\SEAL\Adapter\ReadWrite\ReadWriteAdapterFactory;
-use Schranz\Search\SEAL\Engine;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Schema\Loader\PhpFileLoader;
 
 /**
  * @internal
@@ -31,7 +31,7 @@ final class SealContainerFactory
 {
     public function __invoke(ContainerInterface $container): SealContainer
     {
-        /** @var array{schranz_search: mixed[]} $config */
+        /** @var array{cmsig_seal: mixed[]} $config */
         $config = $container->get('config');
 
         /**
@@ -48,7 +48,7 @@ final class SealContainerFactory
          *     reindex_providers: string[],
          * } $config
          */
-        $config = $config['schranz_search'];
+        $config = $config['cmsig_seal'];
 
         $indexNamePrefix = $config['index_name_prefix'];
         $adapterFactoriesConfig = $config['adapter_factories'];
@@ -68,7 +68,7 @@ final class SealContainerFactory
             ) {
                 $adapterFactories[$name] = new $adapterFactoryClass(
                     $sealContainer,
-                    'schranz_search.adapter.',
+                    'cmsig_seal.adapter.',
                 );
 
                 continue;
@@ -83,10 +83,10 @@ final class SealContainerFactory
 
         $engineServices = [];
         foreach ($config['engines'] as $name => $engineConfig) {
-            $adapterServiceId = 'schranz_search.adapter.' . $name;
-            $engineServiceId = 'schranz_search.engine.' . $name;
-            $schemaLoaderServiceId = 'schranz_search.schema_loader.' . $name;
-            $schemaId = 'schranz_search.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'];

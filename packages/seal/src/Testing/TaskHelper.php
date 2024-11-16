@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Testing;
+namespace CmsIg\Seal\Testing;
 
-use Schranz\Search\SEAL\Task\MultiTask;
-use Schranz\Search\SEAL\Task\TaskInterface;
+use CmsIg\Seal\Task\MultiTask;
+use CmsIg\Seal\Task\TaskInterface;
 
 /**
  * @interal

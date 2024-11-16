@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Tests\Marshaller;
+namespace CmsIg\Seal\Tests\Marshaller;
 
+use CmsIg\Seal\Marshaller\FlattenMarshaller;
+use CmsIg\Seal\Schema\Field;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Schranz\Search\SEAL\Marshaller\FlattenMarshaller;
-use Schranz\Search\SEAL\Schema\Field;
 
 #[CoversClass(FlattenMarshaller::class)]
 class FlattenMarshallerTest extends TestCase

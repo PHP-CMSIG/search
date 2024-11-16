@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,8 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
 
 return new Index('blog', [
     'id' => new Field\IdentifierField('id'),

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Laravel\Console;
+namespace CmsIg\Seal\Integration\Laravel\Console;
 
+use CmsIg\Seal\EngineRegistry;
 use Illuminate\Console\Command;
-use Schranz\Search\SEAL\EngineRegistry;
 
 /**
  * @experimental
@@ -26,7 +26,7 @@ final class IndexCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'schranz:search:index-create {--engine= : The name of the engine} {--index= : The name of the index}';
+    protected $signature = 'cmsig:seal:index-create {--engine= : The name of the engine} {--index= : The name of the index}';
 
     /**
      * The console command description.

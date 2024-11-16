@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Opensearch;
+namespace CmsIg\Seal\Adapter\Opensearch;
 
+use CmsIg\Seal\Adapter\SchemaManagerInterface;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Task\SyncTask;
+use CmsIg\Seal\Task\TaskInterface;
 use OpenSearch\Client;
-use Schranz\Search\SEAL\Adapter\SchemaManagerInterface;
-use Schranz\Search\SEAL\Schema\Field;
-use Schranz\Search\SEAL\Schema\Index;
-use Schranz\Search\SEAL\Task\SyncTask;
-use Schranz\Search\SEAL\Task\TaskInterface;
 
 final class OpensearchSchemaManager implements SchemaManagerInterface
 {
@@ -81,39 +81,39 @@ final class OpensearchSchemaManager implements SchemaManagerInterface
             match (true) {
                 $field instanceof Field\IdentifierField => $properties[$name] = [
                     'type' => 'keyword',
-                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                     'doc_values' => $field->filterable,
                 ],
                 $field instanceof Field\TextField => $properties[$name] = \array_replace([
                     'type' => 'text',
-                    'index' => $field->searchable || $field->filterable, // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                 ], ($field->filterable || $field->sortable) ? [
                     'fields' => [
                         'raw' => [
                             'type' => 'keyword',
-                            'index' => $field->searchable || $field->filterable, // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                            'index' => $field->searchable || $field->filterable, // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                             'doc_values' => $field->filterable,
                         ],
                     ],
                 ] : []),
                 $field instanceof Field\BooleanField => $properties[$name] = [
                     'type' => 'boolean',
-                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                     'doc_values' => $field->filterable,
                 ],
                 $field instanceof Field\DateTimeField => $properties[$name] = [
                     'type' => 'date',
-                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                     'doc_values' => $field->filterable,
                 ],
                 $field instanceof Field\IntegerField => $properties[$name] = [
                     'type' => 'integer',
-                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                     'doc_values' => $field->filterable,
                 ],
                 $field instanceof Field\FloatField => $properties[$name] = [
                     'type' => 'float',
-                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/schranz-search/schranz-search/issues/65
+                    'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
                     'doc_values' => $field->filterable,
                 ],
                 $field instanceof Field\GeoPointField => $properties[$name] = [

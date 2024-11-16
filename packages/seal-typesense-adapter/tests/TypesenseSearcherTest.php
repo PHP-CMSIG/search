@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Typesense\Tests;
+namespace CmsIg\Seal\Adapter\Typesense\Tests;
 
-use Schranz\Search\SEAL\Adapter\Typesense\TypesenseAdapter;
-use Schranz\Search\SEAL\Testing\AbstractSearcherTestCase;
+use CmsIg\Seal\Adapter\Typesense\TypesenseAdapter;
+use CmsIg\Seal\Testing\AbstractSearcherTestCase;
 
 class TypesenseSearcherTest extends AbstractSearcherTestCase
 {

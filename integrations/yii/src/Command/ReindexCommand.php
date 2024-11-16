@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Yii\Command;
+namespace CmsIg\Seal\Integration\Yii\Command;
 
-use Schranz\Search\SEAL\EngineRegistry;
-use Schranz\Search\SEAL\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -33,7 +33,7 @@ final class ReindexCommand extends Command
         private readonly EngineRegistry $engineRegistry,
         private readonly iterable $reindexProviders,
     ) {
-        parent::__construct();
+        parent::__construct('cmsig:seal:reindex');
     }
 
     protected function configure(): void

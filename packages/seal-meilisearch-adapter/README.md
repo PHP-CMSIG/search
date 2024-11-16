@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Schranz Search Logo with a Seal on it with a magnifying glass" src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
+    <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
@@ -12,7 +12,7 @@
 The `MeilisearchAdapter` write the documents into a [Meilisearch](https://github.com/meilisearch/meilisearch) server instance.
 
 > **Note**:
-> This is part of the `schranz-search/schranz-search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ The `MeilisearchAdapter` write the documents into a [Meilisearch](https://github
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/seal schranz-search/seal-meilisearch-adapter
+composer require cmsig/seal cmsig/seal-meilisearch-adapter
 ```
 
 ## Usage.
@@ -33,8 +33,8 @@ The following code shows how to create an Engine using this Adapter:
 <?php
 
 use Meilisearch\Client;
-use Schranz\Search\SEAL\Adapter\Meilisearch\MeilisearchAdapter;
-use Schranz\Search\SEAL\Engine;
+use CmsIg\Seal\Adapter\Meilisearch\MeilisearchAdapter;
+use CmsIg\Seal\Engine;
 
 $client = new Client('http://127.0.0.1:7700');
 
@@ -54,4 +54,4 @@ meilisearch://apiKey@127.0.0.1:7700
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

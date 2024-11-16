@@ -1,23 +1,23 @@
 {
-    "name": "schranz-search/seal-algolia-adapter",
-    "description": "An adapter to support algolia in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-algolia-adapter",
+    "description": "An adapter to support algolia in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "algolia"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Algolia\\": "src"
+            "CmsIg\\Seal\\Adapter\\Algolia\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Algolia\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Algolia\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "algolia/algoliasearch-client-php": "^4.4",
         "psr/container": "^1.0 || ^2.0"
     },

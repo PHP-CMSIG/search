@@ -3,87 +3,87 @@
         {
             "name": "SEAL",
             "directory": "packages/seal",
-            "target": "git@github.com:schranz-search/seal.git"
+            "target": "git@github.com:php-cmsig/seal.git"
         },
         {
             "name": "SEALElasticsearchAdapter",
             "directory": "packages/seal-elasticsearch-adapter",
-            "target": "git@github.com:schranz-search/seal-elasticsearch-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-elasticsearch-adapter.git"
         },
         {
             "name": "SEALOpensearchAdapter",
             "directory": "packages/seal-opensearch-adapter",
-            "target": "git@github.com:schranz-search/seal-opensearch-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-opensearch-adapter.git"
         },
         {
             "name": "SEALSolrAdapter",
             "directory": "packages/seal-solr-adapter",
-            "target": "git@github.com:schranz-search/seal-solr-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-solr-adapter.git"
         },
         {
             "name": "SEALRediSearchAdapter",
             "directory": "packages/seal-redisearch-adapter",
-            "target": "git@github.com:schranz-search/seal-redisearch-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-redisearch-adapter.git"
         },
         {
             "name": "SEALLoupeAdapter",
             "directory": "packages/seal-loupe-adapter",
-            "target": "git@github.com:schranz-search/seal-loupe-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-loupe-adapter.git"
         },
         {
             "name": "SEALMeilisearchAdapter",
             "directory": "packages/seal-meilisearch-adapter",
-            "target": "git@github.com:schranz-search/seal-meilisearch-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-meilisearch-adapter.git"
         },
         {
             "name": "SEALTypesenseAdapter",
             "directory": "packages/seal-typesense-adapter",
-            "target": "git@github.com:schranz-search/seal-typesense-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-typesense-adapter.git"
         },
         {
             "name": "SEALAlgoliaAdapter",
             "directory": "packages/seal-algolia-adapter",
-            "target": "git@github.com:schranz-search/seal-algolia-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-algolia-adapter.git"
         },
         {
             "name": "SEALMemoryAdapter",
             "directory": "packages/seal-memory-adapter",
-            "target": "git@github.com:schranz-search/seal-memory-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-memory-adapter.git"
         },
         {
             "name": "SEALReadWriteAdapter",
             "directory": "packages/seal-read-write-adapter",
-            "target": "git@github.com:schranz-search/seal-read-write-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-read-write-adapter.git"
         },
         {
             "name": "SEALMultiAdapter",
             "directory": "packages/seal-multi-adapter",
-            "target": "git@github.com:schranz-search/seal-multi-adapter.git"
+            "target": "git@github.com:php-cmsig/seal-multi-adapter.git"
         },
         {
             "name": "SEALSymfonyIntegration",
             "directory": "integrations/symfony",
-            "target": "git@github.com:schranz-search/symfony-bundle.git"
+            "target": "git@github.com:php-cmsig/seal-symfony-bundle.git"
         },
         {
             "name": "SEALSpiralIntegration",
             "directory": "integrations/spiral",
-            "target": "git@github.com:schranz-search/spiral-bridge.git"
+            "target": "git@github.com:php-cmsig/seal-spiral-bridge.git"
         },
         {
             "name": "SEALLaravelIntegration",
             "directory": "integrations/laravel",
-            "target": "git@github.com:schranz-search/laravel-package.git"
+            "target": "git@github.com:php-cmsig/seal-laravel-package.git"
         },
         {
             "name": "SEALMezzioIntegration",
             "directory": "integrations/mezzio",
-            "target": "git@github.com:schranz-search/mezzio-module.git"
+            "target": "git@github.com:php-cmsig/seal-mezzio-module.git"
         },
         {
             "name": "SEALYiiIntegration",
             "directory": "integrations/yii",
-            "target": "git@github.com:schranz-search/yii-module.git"
+            "target": "git@github.com:php-cmsig/seal-yii-module.git"
         }
     ]
 }

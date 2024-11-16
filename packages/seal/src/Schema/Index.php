@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Schema;
+namespace CmsIg\Seal\Schema;
 
-use Schranz\Search\SEAL\Schema\Exception\FieldByPathNotFoundException;
-use Schranz\Search\SEAL\Schema\Field\AbstractField;
-use Schranz\Search\SEAL\Schema\Field\GeoPointField;
-use Schranz\Search\SEAL\Schema\Field\IdentifierField;
-use Schranz\Search\SEAL\Schema\Field\ObjectField;
-use Schranz\Search\SEAL\Schema\Field\TypedField;
+use CmsIg\Seal\Schema\Exception\FieldByPathNotFoundException;
+use CmsIg\Seal\Schema\Field\AbstractField;
+use CmsIg\Seal\Schema\Field\GeoPointField;
+use CmsIg\Seal\Schema\Field\IdentifierField;
+use CmsIg\Seal\Schema\Field\ObjectField;
+use CmsIg\Seal\Schema\Field\TypedField;
 
 /**
  * @readonly
@@ -124,7 +124,7 @@ final class Index
 
         foreach ($fields as $name => $field) {
             \assert(
-                (string) $name === $field->name, // this may change in future, see https://github.com/schranz-search/schranz-search/issues/200
+                (string) $name === $field->name, // this may change in future, see https://github.com/php-cmsig/search/issues/200
                 \sprintf(
                     'A field named "%s" does not match key "%s" in index "%s", this is at current state required and may change in future.',
                     $field->name,

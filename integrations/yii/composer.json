@@ -1,6 +1,6 @@
 {
-    "name": "schranz-search/yii-module",
-    "description": "An integration of schranz-search search abstraction via a Module into the Yii Framework.",
+    "name": "cmsig/seal-yii-module",
+    "description": "An integration of CMS-IG SEAL search abstraction into Yii Framework.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -10,7 +10,8 @@
         "search",
         "search-client",
         "search-abstraction",
-        "schranz-search",
+        "cmsig",
+        "seal",
         "elasticsearch",
         "opensearch",
         "meilisearch",
@@ -27,15 +28,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\Integration\\Yii\\": "src"
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "CmsIg\\Seal\\Integration\\Yii\\": "src"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\Integration\\Yii\\Tests\\": "tests"
+            "CmsIg\\Seal\\Integration\\Yii\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -46,7 +44,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "yiisoft/di": "^1.0",
         "yiisoft/yii-console": "^2.0",
         "symfony/console": "^6.1"
@@ -58,30 +56,30 @@
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^1.0",
-        "schranz-search/seal-algolia-adapter": "^0.6",
-        "schranz-search/seal-elasticsearch-adapter": "^0.6",
-        "schranz-search/seal-loupe-adapter": "^0.6",
-        "schranz-search/seal-meilisearch-adapter": "^0.6",
-        "schranz-search/seal-memory-adapter": "^0.6",
-        "schranz-search/seal-multi-adapter": "^0.6",
-        "schranz-search/seal-opensearch-adapter": "^0.6",
-        "schranz-search/seal-read-write-adapter": "^0.6",
-        "schranz-search/seal-redisearch-adapter": "^0.6",
-        "schranz-search/seal-solr-adapter": "^0.6",
-        "schranz-search/seal-typesense-adapter": "^0.6"
+        "cmsig/seal-algolia-adapter": "^0.6",
+        "cmsig/seal-elasticsearch-adapter": "^0.6",
+        "cmsig/seal-loupe-adapter": "^0.6",
+        "cmsig/seal-meilisearch-adapter": "^0.6",
+        "cmsig/seal-memory-adapter": "^0.6",
+        "cmsig/seal-multi-adapter": "^0.6",
+        "cmsig/seal-opensearch-adapter": "^0.6",
+        "cmsig/seal-read-write-adapter": "^0.6",
+        "cmsig/seal-redisearch-adapter": "^0.6",
+        "cmsig/seal-solr-adapter": "^0.6",
+        "cmsig/seal-typesense-adapter": "^0.6"
     },
     "conflict": {
-        "schranz-search/seal-algolia-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-elasticsearch-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-loupe-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-meilisearch-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-memory-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-multi-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-opensearch-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-read-write-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-redisearch-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-solr-adapter": "<0.6 || >=0.7",
-        "schranz-search/seal-typesense-adapter": "<0.6 || >=0.7"
+        "cmsig/seal-algolia-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-elasticsearch-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-loupe-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-meilisearch-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-memory-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-multi-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-opensearch-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-read-write-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-redisearch-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-solr-adapter": "<0.6 || >=0.7",
+        "cmsig/seal-typesense-adapter": "<0.6 || >=0.7"
     },
     "scripts": {
         "test": [

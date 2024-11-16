@@ -1,23 +1,23 @@
 {
-    "name": "schranz-search/seal-opensearch-adapter",
-    "description": "An adapter to support opensearch in schranz-search/seal search abstraction.",
+    "name": "cmsig/seal-opensearch-adapter",
+    "description": "An adapter to support opensearch in cmsig/seal search abstraction.",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "schranz-search",
-        "schranz-search-adapter",
+        "cmsig",
+        "seal",
         "seal-adapter",
         "search-client",
         "opensearch"
     ],
     "autoload": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Opensearch\\": "src"
+            "CmsIg\\Seal\\Adapter\\Opensearch\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Schranz\\Search\\SEAL\\Adapter\\Opensearch\\Tests\\": "tests"
+            "CmsIg\\Seal\\Adapter\\Opensearch\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "schranz-search/seal": "^0.6",
+        "cmsig/seal": "^0.6",
         "opensearch-project/opensearch-php": "^2.0",
         "psr/container": "^1.0 || ^2.0"
     },

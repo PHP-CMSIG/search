@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Yii\Command;
+namespace CmsIg\Seal\Integration\Yii\Command;
 
-use Schranz\Search\SEAL\EngineRegistry;
+use CmsIg\Seal\EngineRegistry;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +28,7 @@ final class IndexDropCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)
     {
-        parent::__construct('schranz:search:index-drop');
+        parent::__construct('cmsig:seal:index-drop');
     }
 
     protected function configure(): void

@@ -38,8 +38,8 @@ via ``sortable``, ``multiple``, ``filterable`` and ``searchable`` flags:
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'title' => new Field\TextField('title', sortable: true),
@@ -94,8 +94,8 @@ The following field definition will show us how to define our ``Identifier`` fie
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'id' => new Field\IdentifierField('id'),
@@ -131,8 +131,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'rating' => new Field\FloatField('rating', sortable: true, filterable: true),
@@ -177,8 +177,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'commentCount' => new Field\IntegerField('commentCount', sortable: true, filterable: true),
@@ -223,8 +223,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'isSpecial' => new Field\BooleanField('isSpecial', sortable: true, filterable: true),
@@ -269,8 +269,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'published' => new Field\DateTime('isSpecial', sortable: true, filterable: true),
@@ -331,8 +331,8 @@ via ``multiple`` flags.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'header' => new Field\ObjectField('header', [
@@ -427,8 +427,8 @@ via ``multiple`` and define different types for it.
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'header' => new Field\TypedField('header', 'type', [
@@ -492,10 +492,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            php artisan schranz:search:index-create
+            php artisan cmsig:seal:index-create
 
             # create specific index
-            php artisan schranz:search:index-create --index=blog
+            php artisan cmsig:seal:index-create --index=blog
 
     .. group-tab:: Symfony
 
@@ -504,10 +504,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            bin/console schranz:search:index-create
+            bin/console cmsig:seal:index-create
 
             # create specific index
-            bin/console schranz:search:index-create --index=blog
+            bin/console cmsig:seal:index-create --index=blog
 
     .. group-tab:: Spiral
 
@@ -516,10 +516,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            php app.php schranz:search:index-create
+            php app.php cmsig:seal:index-create
 
             # create specific index
-            php app.php schranz:search:index-create --index=blog
+            php app.php cmsig:seal:index-create --index=blog
 
     .. group-tab:: Mezzio
 
@@ -528,10 +528,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas schranz:search:index-create
+            vendor/bin/laminas cmsig:seal:index-create
 
             # create specific index
-            vendor/bin/laminas schranz:search:index-create --index=blog
+            vendor/bin/laminas cmsig:seal:index-create --index=blog
 
     .. group-tab:: Yii
 
@@ -540,10 +540,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            ./yii schranz:search:index-create
+            ./yii cmsig:seal:index-create
 
             # create specific index
-            ./yii schranz:search:index-create --index=blog
+            ./yii cmsig:seal:index-create --index=blog
 
 To drop a ``Schema`` or an ``Index`` you can use the following:
 
@@ -571,10 +571,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            php artisan schranz:search:index-drop
+            php artisan cmsig:seal:index-drop
 
             # create specific index
-            php artisan schranz:search:index-drop --index=blog
+            php artisan cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Symfony
 
@@ -583,10 +583,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            bin/console schranz:search:index-drop
+            bin/console cmsig:seal:index-drop
 
             # create specific index
-            bin/console schranz:search:index-drop --index=blog
+            bin/console cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Spiral
 
@@ -595,10 +595,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            php app.php schranz:search:index-drop
+            php app.php cmsig:seal:index-drop
 
             # create specific index
-            php app.php schranz:search:index-drop --index=blog
+            php app.php cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Mezzio
 
@@ -607,10 +607,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas schranz:search:index-drop
+            vendor/bin/laminas cmsig:seal:index-drop
 
             # create specific index
-            vendor/bin/laminas schranz:search:index-drop --index=blog
+            vendor/bin/laminas cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Yii
 
@@ -619,10 +619,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            ./yii schranz:search:index-drop
+            ./yii cmsig:seal:index-drop
 
             # create specific index
-            ./yii schranz:search:index-drop --index=blog
+            ./yii cmsig:seal:index-drop --index=blog
 
 ----------
 
@@ -710,10 +710,10 @@ Can be saved in an ``Index`` via the following ``Index`` and ``Field`` definitio
 .. code-block:: php
 
     <?php
-    
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
-    
+
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
+
     $index = new Index('blog', [
         'uuid' => new Field\IdentifierField('uuid'),
         'title' => new Field\TextField('title'),
@@ -763,8 +763,8 @@ look like this:
 
     <?php
 
-    use Schranz\Search\SEAL\Schema\Field;
-    use Schranz\Search\SEAL\Schema\Index;
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
         'uuid' => new Field\IdentifierField('uuid'),

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\SEAL\Adapter\Solr\Tests;
+namespace CmsIg\Seal\Adapter\Solr\Tests;
 
-use Schranz\Search\SEAL\Adapter\Solr\SolrSchemaManager;
-use Schranz\Search\SEAL\Testing\AbstractSchemaManagerTestCase;
+use CmsIg\Seal\Adapter\Solr\SolrSchemaManager;
+use CmsIg\Seal\Testing\AbstractSchemaManagerTestCase;
 
 class SolrSchemaManagerTest extends AbstractSchemaManagerTestCase
 {

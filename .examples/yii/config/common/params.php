@@ -37,7 +37,7 @@ return [
         ],
     ],
 
-    'schranz-search/yii-module' => [
+    'cmsig/seal-yii-module' => [
         'index_name_prefix' => \getenv('TEST_INDEX_PREFIX') ?: $_ENV['TEST_INDEX_PREFIX'] ?? '',
         'schemas' => [
             'algolia' => [

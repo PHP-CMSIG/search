@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Spiral\Config;
+namespace CmsIg\Seal\Integration\Spiral\Config;
 
 use Spiral\Core\InjectableConfig;
 
 /**
  * @experimental
  */
-final class SearchConfig extends InjectableConfig
+final class SealConfig extends InjectableConfig
 {
-    public const CONFIG = 'schranz_search';
+    public const CONFIG = 'cmsig_seal';
 
     /**
      * @var array{

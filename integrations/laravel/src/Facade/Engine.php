@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Schranz Search package.
+ * This file is part of the CMS-IG SEAL project.
  *
  * (c) Alexander Schranz <alexander@sulu.io>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Schranz\Search\Integration\Laravel\Facade;
+namespace CmsIg\Seal\Integration\Laravel\Facade;
 
+use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\Search\SearchBuilder;
 use Illuminate\Support\Facades\Facade;
-use Schranz\Search\SEAL\EngineInterface;
-use Schranz\Search\SEAL\Search\SearchBuilder;
 
 /**
  * @method static void saveDocument(string $index, array $document)
@@ -29,7 +29,7 @@ use Schranz\Search\SEAL\Search\SearchBuilder;
  * @method static void dropSchema()
  * @method static void reindex(iterable $reindexProviders, string|null $index = null, bool $dropIndex = false, callable $progressCallback = null)
  *
- * @see \Schranz\Search\SEAL\EngineInterface
+ * @see \CmsIg\Seal\EngineInterface
  */
 class Engine extends Facade
 {
