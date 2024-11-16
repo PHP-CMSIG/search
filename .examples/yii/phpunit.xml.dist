@@ -13,6 +13,8 @@
          resolveDependencies="true">
     <php>
         <ini name="error_reporting" value="-1"/>
+        <env name="ALGOLIA_DSN" value="algolia://"/>
+        <env name="TEST_INDEX_PREFIX" value="local_" />
     </php>
 
     <testsuites>

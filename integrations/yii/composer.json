@@ -1,6 +1,6 @@
 {
     "name": "cmsig/seal-yii-module",
-    "description": "An integration of schranz-search search abstraction via a Module into the Yii Framework.",
+    "description": "An integration of CMS-IG SEAL search abstraction into Yii Framework.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -29,10 +29,7 @@
     "autoload": {
         "psr-4": {
             "CmsIg\\Seal\\Integration\\Yii\\": "src"
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

@@ -166,40 +166,40 @@
     "react/promise": {
         "version": "v2.0.0"
     },
-    "schranz-search/seal": {
+    "cmsig/seal": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-algolia-adapter": {
+    "cmsig/seal-algolia-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-elasticsearch-adapter": {
+    "cmsig/seal-elasticsearch-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-meilisearch-adapter": {
+    "cmsig/seal-meilisearch-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-memory-adapter": {
+    "cmsig/seal-memory-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-multi-adapter": {
+    "cmsig/seal-multi-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-opensearch-adapter": {
+    "cmsig/seal-opensearch-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-read-write-adapter": {
+    "cmsig/seal-read-write-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-redisearch-adapter": {
+    "cmsig/seal-redisearch-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-solr-adapter": {
+    "cmsig/seal-solr-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/seal-typesense-adapter": {
+    "cmsig/seal-typesense-adapter": {
         "version": "0.1.x-dev"
     },
-    "schranz-search/symfony-bundle": {
+    "cmsig/seal-symfony-bundle": {
         "version": "0.2",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",

@@ -404,4 +404,4 @@ to manage Indexes, add and remove Documents and how to search and filter the res
 now be ready to start using the abstraction for your different kind of needs.
 
 Missing something? Let us know by creating an issue
-on our `Github Repository <https://github.com/schranz-search/schranz-search>`_.
+on our `Github Repository <https://github.com/php-cmsig/search>`_.

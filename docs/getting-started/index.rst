@@ -20,7 +20,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal
+            composer require cmsig/seal
 
     .. group-tab:: Laravel
 
@@ -28,7 +28,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-             composer require schranz-search/laravel-package
+             composer require cmsig/seal-laravel-package
 
     .. group-tab:: Symfony
 
@@ -36,7 +36,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-             composer require schranz-search/symfony-bundle
+             composer require cmsig/seal-symfony-bundle
 
     .. group-tab:: Spiral
 
@@ -44,7 +44,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-             composer require schranz-search/spiral-bridge
+             composer require cmsig/seal-spiral-bridge
 
     .. group-tab:: Mezzio
 
@@ -52,7 +52,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-             composer require schranz-search/mezzio-module
+             composer require cmsig/seal-mezzio-module
 
     .. group-tab:: Yii
 
@@ -60,7 +60,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-             composer require schranz-search/yii-module
+             composer require cmsig/seal-yii-module
 
 | The project provides adapters to different search engines, atleast one is required.
 | Choose the one which fits your needs best:
@@ -73,7 +73,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-meilisearch-adapter
+            composer require cmsig/seal-meilisearch-adapter
 
     .. group-tab:: Algolia
 
@@ -81,7 +81,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-algolia-adapter
+            composer require cmsig/seal-algolia-adapter
 
     .. group-tab:: Elasticsearch
 
@@ -89,7 +89,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-elasticsearch-adapter
+            composer require cmsig/seal-elasticsearch-adapter
 
     .. group-tab:: Opensearch
 
@@ -97,7 +97,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-opensearch-adapter
+            composer require cmsig/seal-opensearch-adapter
 
     .. group-tab:: Redisearch
 
@@ -105,7 +105,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-redisearch-adapter
+            composer require cmsig/seal-redisearch-adapter
 
     .. group-tab:: Loupe
 
@@ -113,7 +113,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-loupe-adapter
+            composer require cmsig/seal-loupe-adapter
 
     .. group-tab:: Solr
 
@@ -121,7 +121,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-solr-adapter
+            composer require cmsig/seal-solr-adapter
 
     .. group-tab:: Typesense
 
@@ -129,7 +129,7 @@ integration of the package or the ``Standalone`` version.
 
         .. code-block:: bash
 
-            composer require schranz-search/seal-typesense-adapter
+            composer require cmsig/seal-typesense-adapter
 
 Configure Schema
 ----------------
@@ -473,7 +473,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
     .. group-tab:: Laravel
 
         When we are using the Laravel integration package we just need to configure our ``Engine``
-        in the ``config/seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
+        in the ``config/cmsig_seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
 
@@ -483,7 +483,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -506,7 +506,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -528,7 +528,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -550,7 +550,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -572,7 +572,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -594,7 +594,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -616,7 +616,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -638,7 +638,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // config/seal.php
+                    <?php // config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -658,7 +658,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
             The ``Laravel`` integration provides also `Facades <https://laravel.com/docs/10.x/facades>`__ for the later used default ``Engine``
             and ``EngineRegistry``. They are provided under the ``CmsIg\Seal\Integration\Laravel\Facade\``
-            namespace. See also the `Laravel Integration README <https://github.com/schranz-search/schranz-search/tree/0.1/integrations/laravel>`__.
+            namespace. See also the `Laravel Integration README <https://github.com/php-cmsig/search/tree/0.1/integrations/laravel>`__.
 
     .. group-tab:: Symfony
 
@@ -676,7 +676,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -693,7 +693,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -709,7 +709,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -725,7 +725,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -741,7 +741,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -757,7 +757,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -773,7 +773,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -789,7 +789,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     # config/packages/seal.yaml
 
-                    seal:
+                    cmsig_seal:
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -800,7 +800,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
     .. group-tab:: Spiral
 
         When we are using the Spiral integration package we just need to configure our ``Engine``
-        in the ``app/config/seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
+        in the ``app/config/cmsig_seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
 
@@ -810,7 +810,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -833,7 +833,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -855,7 +855,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -877,7 +877,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -899,7 +899,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -921,7 +921,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -943,7 +943,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -965,7 +965,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: php
 
-                    <?php // app/config/seal.php
+                    <?php // app/config/cmsig_seal.php
 
                     return [
                         'schemas' => [
@@ -1002,7 +1002,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cms_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1034,7 +1034,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1065,7 +1065,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1096,7 +1096,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1127,7 +1127,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1157,7 +1157,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1188,7 +1188,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1219,7 +1219,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         {
                             return [
                                 // ...
-                                'seal' => [
+                                'cmsig_seal' => [
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1253,7 +1253,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1279,7 +1279,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1304,7 +1304,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1329,7 +1329,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1354,7 +1354,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1379,7 +1379,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1404,7 +1404,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1429,7 +1429,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                     return [
                         // ...
-                        'schranz-search/yii-module' => [
+                        'cmsig/seal-yii-module' => [
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1722,10 +1722,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            php artisan seal:index-create
+            php artisan cmsig:seal:index-create
 
             # create specific index
-            php artisan seal:index-create --index=blog
+            php artisan cmsig:seal:index-create --index=blog
 
     .. group-tab:: Symfony
 
@@ -1734,10 +1734,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            bin/console seal:index-create
+            bin/console cmsig:seal:index-create
 
             # create specific index
-            bin/console seal:index-create --index=blog
+            bin/console cmsig:seal:index-create --index=blog
 
     .. group-tab:: Spiral
 
@@ -1746,10 +1746,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            php app.php seal:index-create
+            php app.php cmsig:seal:index-create
 
             # create specific index
-            php app.php seal:index-create --index=blog
+            php app.php cmsig:seal:index-create --index=blog
 
     .. group-tab:: Mezzio
 
@@ -1758,10 +1758,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas seal:index-create
+            vendor/bin/laminas cmsig:seal:index-create
 
             # create specific index
-            vendor/bin/laminas seal:index-create --index=blog
+            vendor/bin/laminas cmsig:seal:index-create --index=blog
 
     .. group-tab:: Yii
 
@@ -1770,10 +1770,10 @@ Before you can use the search engine you need to create the indexes.
         .. code-block:: bash
 
             # create all indexes
-            ./yii seal:index-create
+            ./yii cmsig:seal:index-create
 
             # create specific index
-            ./yii seal:index-create --index=blog
+            ./yii cmsig:seal:index-create --index=blog
 
 Add or Update Documents
 -----------------------
@@ -1970,20 +1970,20 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     $this->app->singleton(\App\Search\BlogReindexProvider::class, fn () => new \App\Search\BlogReindexProvider());
 
-                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'seal.reindex_provider');
+                    $this->app->tag(\App\Search\BlogReindexProvider::class, 'cmsig_seal.reindex_provider');
                 }
             }
 
         After correctly tagging the ``ReindexProvider`` with ``seal.reindex_provider`` the
-        ``seal:reindex`` command can be used to index all documents:
+        ``cmsig:seal:reindex`` command can be used to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            php artisan seal:reindex
+            php artisan cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            php artisan seal:reindex --index=blog --drop
+            php artisan cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Symfony
 
@@ -1997,17 +1997,17 @@ After that you can use the ``reindex`` to index all documents:
             services:
                 App\Search\BlogReindexProvider:
                     tags:
-                        - { name: seal.reindex_provider }
+                        - { name: cmsig_seal.reindex_provider }
 
         After correctly tagging the ``ReindexProvider`` use the following command to index all documents:
 
         .. code-block:: bash
 
             # reindex all indexes
-            bin/console seal:reindex
+            bin/console cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            bin/console seal:reindex --index=blog --drop
+            bin/console cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Spiral
 
@@ -2015,7 +2015,7 @@ After that you can use the ``reindex`` to index all documents:
 
         .. code-block:: php
 
-            <?php // app/config/seal.php
+            <?php // app/config/cmsig_seal.php
 
             return [
                 // ...
@@ -2030,10 +2030,10 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            php app.php seal:reindex
+            php app.php cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            php app.php seal:reindex --index=blog --drop
+            php app.php cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Mezzio
 
@@ -2049,7 +2049,7 @@ After that you can use the ``reindex`` to index all documents:
                 {
                     return [
                         // ...
-                        'seal' => [
+                        'cmsig_seal' => [
                             // ...
                             'reindex_providers' => [
                                 \App\Search\BlogReindexProvider::class,
@@ -2077,10 +2077,10 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            vendor/bin/laminas seal:reindex
+            vendor/bin/laminas cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            vendor/bin/laminas seal:reindex --index=blog --drop
+            vendor/bin/laminas cmsig:seal:reindex --index=blog --drop
 
     .. group-tab:: Yii
 
@@ -2092,7 +2092,7 @@ After that you can use the ``reindex`` to index all documents:
 
             return [
                 // ...
-                'schranz-search/yii-module' => [
+                'cmsig/seal-yii-module' => [
                     // ...
 
                     'reindex_providers' => [
@@ -2106,16 +2106,16 @@ After that you can use the ``reindex`` to index all documents:
         .. code-block:: bash
 
             # reindex all indexes
-            ./yii seal:reindex
+            ./yii cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            ./yii seal:reindex --index=blog --drop
+            ./yii cmsig:seal:reindex --index=blog --drop
 
 Help needed?
 ------------
 
 If you need any help or run into any error feel free to use the
-`Github Discussions <https://github.com/schranz-search/schranz-search/discussions/categories/q-a>`_
+`Github Discussions <https://github.com/php-cmsig/search/discussions/categories/q-a>`_
 of the main repository to ask any questions. Or check there if
 somebody already solved the same problem.
 

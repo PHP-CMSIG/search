@@ -200,12 +200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "bb23c9df4aafa9485d50d8691eaa1c6606eea2e2"
+                "reference": "e6986fece692c26064700a589416b9747e4801ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/bb23c9df4aafa9485d50d8691eaa1c6606eea2e2",
-                "reference": "bb23c9df4aafa9485d50d8691eaa1c6606eea2e2",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e6986fece692c26064700a589416b9747e4801ec",
+                "reference": "e6986fece692c26064700a589416b9747e4801ec",
                 "shasum": ""
             },
             "require": {
@@ -305,7 +305,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-04T19:34:16+00:00"
+            "time": "2024-11-15T15:01:13+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1892,12 +1892,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d0e7aca43fdcc2c03505e2b76711ba6eb2d34ca3"
+                "reference": "5e3a364ad64c9199837eca3b8068d5d69e4a1cf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d0e7aca43fdcc2c03505e2b76711ba6eb2d34ca3",
-                "reference": "d0e7aca43fdcc2c03505e2b76711ba6eb2d34ca3",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5e3a364ad64c9199837eca3b8068d5d69e4a1cf9",
+                "reference": "5e3a364ad64c9199837eca3b8068d5d69e4a1cf9",
                 "shasum": ""
             },
             "require": {
@@ -1942,7 +1942,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-12T17:40:27+00:00"
+            "time": "2024-11-16T11:01:15+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2325,12 +2325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39"
+                "reference": "476c6c8e6fcc6107b578fdc6c899d4a183b5bf33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/72bb868cf80c167b7b76e431d1185400051e5a39",
-                "reference": "72bb868cf80c167b7b76e431d1185400051e5a39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/476c6c8e6fcc6107b578fdc6c899d4a183b5bf33",
+                "reference": "476c6c8e6fcc6107b578fdc6c899d4a183b5bf33",
                 "shasum": ""
             },
             "require": {
@@ -2340,7 +2340,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.12.0",
+                "myclabs/deep-copy": "^1.12.1",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.1",
@@ -2418,7 +2418,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-31T05:51:29+00:00"
+            "time": "2024-11-16T08:11:02+00:00"
         },
         {
             "name": "rector/rector",

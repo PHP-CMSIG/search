@@ -9,10 +9,10 @@
 <br />
 <br />
 
-Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) into Spiral.
+Integration of the CMS-IG — Search Engine Abstraction Layer (SEAL) into Spiral.
 
 > **Note**:
-> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ Integration of the Schranz Search — Search Engine Abstraction Layer (SEAL) int
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/spiral-bridge
+composer require cmsig/seal-spiral-bridge
 ```
 
 Also install one of the listed adapters.
@@ -31,20 +31,20 @@ Also install one of the listed adapters.
 
 The following adapters are available:
 
- - [MemoryAdapter](../../packages/seal-memory-adapter): `schranz-search/seal-memory-adapter`
- - [ElasticsearchAdapter](../../packages/seal-elasticsearch-adapter): `schranz-search/seal-elasticsearch-adapter`
- - [OpensearchAdapter](../../packages/seal-opensearch-adapter): `schranz-search/seal-opensearch-adapter`
- - [MeilisearchAdapter](../../packages/seal-meilisearch-adapter): `schranz-search/seal-meilisearch-adapter`
- - [AlgoliaAdapter](../../packages/seal-algolia-adapter): `schranz-search/seal-algolia-adapter`
- - [SolrAdapter](../../packages/seal-solr-adapter): `schranz-search/seal-solr-adapter`
- - [RediSearchAdapter](../../packages/seal-redisearch-adapter): `schranz-search/seal-redisearch-adapter`
- - [TypesenseAdapter](../../packages/seal-typesense-adapter): `schranz-search/seal-typesense-adapter`
+ - [MemoryAdapter](../../packages/seal-memory-adapter): `cmsig/seal-memory-adapter`
+ - [ElasticsearchAdapter](../../packages/seal-elasticsearch-adapter): `cmsig/seal-elasticsearch-adapter`
+ - [OpensearchAdapter](../../packages/seal-opensearch-adapter): `cmsig/seal-opensearch-adapter`
+ - [MeilisearchAdapter](../../packages/seal-meilisearch-adapter): `cmsig/seal-meilisearch-adapter`
+ - [AlgoliaAdapter](../../packages/seal-algolia-adapter): `cmsig/seal-algolia-adapter`
+ - [SolrAdapter](../../packages/seal-solr-adapter): `cmsig/seal-solr-adapter`
+ - [RediSearchAdapter](../../packages/seal-redisearch-adapter): `cmsig/seal-redisearch-adapter`
+ - [TypesenseAdapter](../../packages/seal-typesense-adapter): `cmsig/seal-typesense-adapter`
  - ... more coming soon
 
 Additional Wrapper adapters:
 
- - [ReadWriteAdapter](../../packages/seal-read-write-adapter)
- - [MultiAdapter](../../packages/seal-multi-adapter)
+ - [ReadWriteAdapter](../../packages/seal-read-write-adapter): `cmsig/seal-read-write-adapter`
+ - [MultiAdapter](../../packages/seal-multi-adapter): `cmsig/seal-multi-adapter`
 
 Creating your own adapter? Add the [`seal-php-adapter`](https://github.com/topics/seal-php-adapter) Topic to your Github Repository.
 
@@ -55,7 +55,7 @@ The following code shows how to configure the package:
 ```php
 <?php
 
-// app/config/seal.php
+// app/config/cmsig_seal.php
 
 return [
     'schemas' => [
@@ -76,7 +76,7 @@ A more complex configuration can be here found:
 ```php
 <?php
 
-// app/config/seal.php
+// app/config/cmsig_seal.php
 
 return [
     'schemas' => [
@@ -164,16 +164,22 @@ The package provides the following commands:
 **Create configured indexes**
 
 ```bash
-php app.php seal:index-create --help
+php app.php cmsig:seal:index-create --help
 ```
 
 **Drop configured indexes**
 
 ```bash
-php app.php seal:index-drop --help
+php app.php cmsig:seal:index-drop --help
+```
+
+**Reindex indexes**
+
+```bash
+php app.php cmsig:seal:reindex --help
 ```
 
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

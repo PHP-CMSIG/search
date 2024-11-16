@@ -1,6 +1,6 @@
 {
     "name": "cmsig/seal-laravel-package",
-    "description": "An integration of schranz-search search abstraction into Laravel Framework.",
+    "description": "An integration of CMS-IG SEAL search abstraction into Laravel Framework.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -30,10 +30,7 @@
     "autoload": {
         "psr-4": {
             "CmsIg\\Seal\\Integration\\Laravel\\": "src"
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -126,7 +123,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "CmsIg\\Seal\\Integration\\Laravel\\SearchProvider"
+                "CmsIg\\Seal\\Integration\\Laravel\\SealProvider"
             ]
         }
     }

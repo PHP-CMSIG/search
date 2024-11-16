@@ -492,10 +492,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            php artisan seal:index-create
+            php artisan cmsig:seal:index-create
 
             # create specific index
-            php artisan seal:index-create --index=blog
+            php artisan cmsig:seal:index-create --index=blog
 
     .. group-tab:: Symfony
 
@@ -504,10 +504,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            bin/console seal:index-create
+            bin/console cmsig:seal:index-create
 
             # create specific index
-            bin/console seal:index-create --index=blog
+            bin/console cmsig:seal:index-create --index=blog
 
     .. group-tab:: Spiral
 
@@ -516,10 +516,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            php app.php seal:index-create
+            php app.php cmsig:seal:index-create
 
             # create specific index
-            php app.php seal:index-create --index=blog
+            php app.php cmsig:seal:index-create --index=blog
 
     .. group-tab:: Mezzio
 
@@ -528,10 +528,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas seal:index-create
+            vendor/bin/laminas cmsig:seal:index-create
 
             # create specific index
-            vendor/bin/laminas seal:index-create --index=blog
+            vendor/bin/laminas cmsig:seal:index-create --index=blog
 
     .. group-tab:: Yii
 
@@ -540,10 +540,10 @@ integration the ``Indexes`` over the following way:
         .. code-block:: bash
 
             # create all indexes
-            ./yii seal:index-create
+            ./yii cmsig:seal:index-create
 
             # create specific index
-            ./yii seal:index-create --index=blog
+            ./yii cmsig:seal:index-create --index=blog
 
 To drop a ``Schema`` or an ``Index`` you can use the following:
 
@@ -571,10 +571,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            php artisan seal:index-drop
+            php artisan cmsig:seal:index-drop
 
             # create specific index
-            php artisan seal:index-drop --index=blog
+            php artisan cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Symfony
 
@@ -583,10 +583,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            bin/console seal:index-drop
+            bin/console cmsig:seal:index-drop
 
             # create specific index
-            bin/console seal:index-drop --index=blog
+            bin/console cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Spiral
 
@@ -595,10 +595,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            php app.php seal:index-drop
+            php app.php cmsig:seal:index-drop
 
             # create specific index
-            php app.php seal:index-drop --index=blog
+            php app.php cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Mezzio
 
@@ -607,10 +607,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            vendor/bin/laminas seal:index-drop
+            vendor/bin/laminas cmsig:seal:index-drop
 
             # create specific index
-            vendor/bin/laminas seal:index-drop --index=blog
+            vendor/bin/laminas cmsig:seal:index-drop --index=blog
 
     .. group-tab:: Yii
 
@@ -619,10 +619,10 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
         .. code-block:: bash
 
             # create all indexes
-            ./yii seal:index-drop
+            ./yii cmsig:seal:index-drop
 
             # create specific index
-            ./yii seal:index-drop --index=blog
+            ./yii cmsig:seal:index-drop --index=blog
 
 ----------
 

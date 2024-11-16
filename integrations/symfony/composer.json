@@ -1,6 +1,6 @@
 {
     "name": "cmsig/seal-symfony-bundle",
-    "description": "An integration of schranz-search search abstraction via a Bundle into the Symfony Framework.",
+    "description": "An integration of CMS-IG SEAL search abstraction into Symfony Framework.",
     "type": "symfony-bundle",
     "license": "MIT",
     "keywords": [
@@ -29,10 +29,7 @@
     "autoload": {
         "psr-4": {
             "CmsIg\\Seal\\Integration\\Symfony\\": "src"
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

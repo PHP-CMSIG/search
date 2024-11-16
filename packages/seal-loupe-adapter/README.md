@@ -12,7 +12,7 @@
 The `LoupeAdapter` write the documents into a [Loupe](https://github.com/loupe-php/loupe) SQLite instance.
 
 > **Note**:
-> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ The `LoupeAdapter` write the documents into a [Loupe](https://github.com/loupe-p
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/seal schranz-search/seal-loupe-adapter
+composer require cmsig/seal cmsig/seal-loupe-adapter
 ```
 
 ## Usage.
@@ -55,4 +55,4 @@ loupe://
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

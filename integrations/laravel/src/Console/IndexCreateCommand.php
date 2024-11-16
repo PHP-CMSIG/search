@@ -26,7 +26,7 @@ final class IndexCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'seal:index-create {--engine= : The name of the engine} {--index= : The name of the index}';
+    protected $signature = 'cmsig:seal:index-create {--engine= : The name of the engine} {--index= : The name of the index}';
 
     /**
      * The console command description.

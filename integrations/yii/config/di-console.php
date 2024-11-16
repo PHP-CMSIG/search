@@ -19,8 +19,8 @@ use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Psr\Container\ContainerInterface;
 
 /** @var \Yiisoft\Config\Config $config */
-/** @var array{"schranz-search/yii-module": array{reindex_providers: string[]}} $params */
-$reindexProviderNames = $params['schranz-search/yii-module']['reindex_providers'];
+/** @var array{"cmsig/seal-yii-module": array{reindex_providers: string[]}} $params */
+$reindexProviderNames = $params['cmsig/seal-yii-module']['reindex_providers'];
 
 $diConfig[IndexCreateCommand::class] = static function (ContainerInterface $container) {
     /** @var EngineRegistry $engineRegistry */

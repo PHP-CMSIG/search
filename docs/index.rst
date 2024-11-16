@@ -81,22 +81,22 @@ Packages
 
 Full list of packages provided by the SEAL project:
 
-- ``schranz-search/seal`` - The core package of the SEAL project.
-- ``schranz-search/seal-algolia-adapter`` - Adapter for the Algolia search engine.
-- ``schranz-search/seal-elasticsearch-adapter`` - Adapter for the Elasticsearch search engine.
-- ``schranz-search/seal-opensearch-adapter`` - Adapter for the Opensearch search engine.
-- ``schranz-search/seal-meilisearch-adapter`` - Adapter for the Meilisearch search engine.
-- ``schranz-search/seal-redisearch-adapter`` - Adapter for the Redisearch search engine.
-- ``schranz-search/seal-loupe-adapter`` - Adapter for the Loupe search engine.
-- ``schranz-search/seal-solr-adapter`` - Adapter for the Solr search engine.
-- ``schranz-search/seal-typesense-adapter`` - Adapter for the Typesense search engine.
-- ``schranz-search/seal-read-write-adapter`` - Adapter to split read and write operations.
-- ``schranz-search/seal-multi-adapter`` - Adapter to write into multiple search engines.
-- ``schranz-search/laravel-package`` - Integrates SEAL into the Laravel framework.
-- ``schranz-search/symfony-bundle`` - Integrates SEAL into the Symfony framework.
-- ``schranz-search/spiral-bridge`` - Integrates SEAL into the Spiral framework.
-- ``schranz-search/mezzio-module`` - Integrates SEAL into the Mezzio framework.
-- ``schranz-search/yii-module`` - Integrates SEAL into the Yii framework.
+- ``cmsig/seal`` - The core package of the SEAL project.
+- ``cmsig/seal-algolia-adapter`` - Adapter for the Algolia search engine.
+- ``cmsig/seal-elasticsearch-adapter`` - Adapter for the Elasticsearch search engine.
+- ``cmsig/seal-opensearch-adapter`` - Adapter for the Opensearch search engine.
+- ``cmsig/seal-meilisearch-adapter`` - Adapter for the Meilisearch search engine.
+- ``cmsig/seal-redisearch-adapter`` - Adapter for the Redisearch search engine.
+- ``cmsig/seal-loupe-adapter`` - Adapter for the Loupe search engine.
+- ``cmsig/seal-solr-adapter`` - Adapter for the Solr search engine.
+- ``cmsig/seal-typesense-adapter`` - Adapter for the Typesense search engine.
+- ``cmsig/seal-read-write-adapter`` - Adapter to split read and write operations.
+- ``cmsig/seal-multi-adapter`` - Adapter to write into multiple search engines.
+- ``cmsig/seal-laravel-package`` - Integrates SEAL into the Laravel framework.
+- ``cmsig/seal-symfony-bundle`` - Integrates SEAL into the Symfony framework.
+- ``cmsig/seal-spiral-bridge`` - Integrates SEAL into the Spiral framework.
+- ``cmsig/seal-mezzio-module`` - Integrates SEAL into the Mezzio framework.
+- ``cmsig/seal-yii-module`` - Integrates SEAL into the Yii framework.
 
 Have also a look at the following tags:
 

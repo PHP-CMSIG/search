@@ -12,7 +12,7 @@
 The `SolrAdapter` write the documents into a [Apache Solr](https://github.com/apache/solr) server instance. The Apache Solr server is running in the [`cloud mode`](https://solr.apache.org/guide/solr/latest/getting-started/tutorial-solrcloud.html) as we require to use collections for indexes.
 
 > **Note**:
-> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -22,7 +22,7 @@ The `SolrAdapter` write the documents into a [Apache Solr](https://github.com/ap
 Use [composer](https://getcomposer.org/) for install the package:
 
 ```bash
-composer require schranz-search/seal schranz-search/seal-solr-adapter
+composer require cmsig/seal cmsig/seal-solr-adapter
 ```
 
 ## Usage.
@@ -67,4 +67,4 @@ solr://solr:SolrRocks@127.0.0.1:8983
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

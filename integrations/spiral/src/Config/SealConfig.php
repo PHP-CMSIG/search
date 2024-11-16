@@ -18,9 +18,9 @@ use Spiral\Core\InjectableConfig;
 /**
  * @experimental
  */
-final class SearchConfig extends InjectableConfig
+final class SealConfig extends InjectableConfig
 {
-    public const CONFIG = 'seal';
+    public const CONFIG = 'cmsig_seal';
 
     /**
      * @var array{

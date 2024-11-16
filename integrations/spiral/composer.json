@@ -1,6 +1,6 @@
 {
     "name": "cmsig/seal-spiral-bridge",
-    "description": "An integration of schranz-search search abstraction into Spiral Framework.",
+    "description": "An integration of CMS-IG SEAL search abstraction into Spiral Framework.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -29,10 +29,7 @@
     "autoload": {
         "psr-4": {
             "CmsIg\\Seal\\Integration\\Spiral\\": "src"
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

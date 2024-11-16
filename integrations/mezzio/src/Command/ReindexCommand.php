@@ -33,7 +33,7 @@ final class ReindexCommand extends Command
         private readonly EngineRegistry $engineRegistry,
         private readonly iterable $reindexProviders,
     ) {
-        parent::__construct();
+        parent::__construct('cmsig:seal:reindex');
     }
 
     protected function configure(): void

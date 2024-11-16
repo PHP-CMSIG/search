@@ -23,7 +23,10 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * @experimental
  */
-#[AsCommand(name: 'seal:reindex', description: 'Reindex configured search indexes.')]
+#[AsCommand(
+    name: 'cmsig:seal:reindex',
+    description: 'Reindex configured search indexes.',
+)]
 final class ReindexCommand extends Command
 {
     #[Option(name: 'engine', mode: InputOption::VALUE_REQUIRED, description: 'The name of the engine')]

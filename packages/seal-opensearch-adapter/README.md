@@ -12,7 +12,7 @@
 The `OpensearchAdapter` write the documents into an [Opensearch](https://github.com/opensearch-project/OpenSearch) server instance.
 
 > **Note**:
-> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/schranz-search/schranz-search).
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
@@ -47,4 +47,4 @@ opensearch://127.0.0.1:9200
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

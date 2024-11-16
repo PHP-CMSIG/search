@@ -1,4 +1,4 @@
-seal:
+cmsig_seal:
     index_name_prefix: '%env(TEST_INDEX_PREFIX)%'
     schemas:
         algolia:

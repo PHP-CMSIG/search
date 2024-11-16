@@ -27,7 +27,7 @@ final class ReindexCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'seal:reindex {--engine= : The name of the engine} {--index= : The name of the index} {--drop : Drop the index before reindexing} {--bulk-size= : The bulk size for reindexing, defaults to 100.}';
+    protected $signature = 'cmsig:seal:reindex {--engine= : The name of the engine} {--index= : The name of the index} {--drop : Drop the index before reindexing} {--bulk-size= : The bulk size for reindexing, defaults to 100.}';
 
     /**
      * The console command description.

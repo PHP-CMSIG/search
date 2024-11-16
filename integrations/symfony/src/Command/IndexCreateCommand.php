@@ -24,7 +24,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @experimental
  */
-#[AsCommand(name: 'seal:index-create', description: 'Create configured search indexes.')]
+#[AsCommand(name: 'cmsig:seal:index-create', description: 'Create configured search indexes.')]
 final class IndexCreateCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)

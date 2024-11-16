@@ -12,7 +12,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-// https://github.com/schranz-search/schranz-search/issues/82
+// https://github.com/php-cmsig/search/issues/82
 
 /** @internal */
 require_once \dirname(__DIR__) . '/vendor/autoload.php';

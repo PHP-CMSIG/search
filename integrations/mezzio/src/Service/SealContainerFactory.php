@@ -31,7 +31,7 @@ final class SealContainerFactory
 {
     public function __invoke(ContainerInterface $container): SealContainer
     {
-        /** @var array{seal: mixed[]} $config */
+        /** @var array{cmsig_seal: mixed[]} $config */
         $config = $container->get('config');
 
         /**
@@ -48,7 +48,7 @@ final class SealContainerFactory
          *     reindex_providers: string[],
          * } $config
          */
-        $config = $config['seal'];
+        $config = $config['cmsig_seal'];
 
         $indexNamePrefix = $config['index_name_prefix'];
         $adapterFactoriesConfig = $config['adapter_factories'];
@@ -68,7 +68,7 @@ final class SealContainerFactory
             ) {
                 $adapterFactories[$name] = new $adapterFactoryClass(
                     $sealContainer,
-                    'seal.adapter.',
+                    'cmsig_seal.adapter.',
                 );
 
                 continue;
@@ -83,10 +83,10 @@ final class SealContainerFactory
 
         $engineServices = [];
         foreach ($config['engines'] as $name => $engineConfig) {
-            $adapterServiceId = 'seal.adapter.' . $name;
-            $engineServiceId = 'seal.engine.' . $name;
-            $schemaLoaderServiceId = 'seal.schema_loader.' . $name;
-            $schemaId = 'seal.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'];

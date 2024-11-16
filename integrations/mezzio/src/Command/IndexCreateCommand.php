@@ -27,7 +27,7 @@ final class IndexCreateCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)
     {
-        parent::__construct('seal:index-create');
+        parent::__construct('cmsig:seal:index-create');
     }
 
     protected function configure(): void

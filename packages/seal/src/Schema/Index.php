@@ -124,7 +124,7 @@ final class Index
 
         foreach ($fields as $name => $field) {
             \assert(
-                (string) $name === $field->name, // this may change in future, see https://github.com/schranz-search/schranz-search/issues/200
+                (string) $name === $field->name, // this may change in future, see https://github.com/php-cmsig/search/issues/200
                 \sprintf(
                     'A field named "%s" does not match key "%s" in index "%s", this is at current state required and may change in future.',
                     $field->name,

@@ -67,7 +67,7 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         if (\count($search->sortBys) > 1) {
-            throw new \RuntimeException('Algolia Adapter does not yet support search multiple indexes: https://github.com/schranz-search/schranz-search/issues/41');
+            throw new \RuntimeException('Algolia Adapter does not yet support search multiple indexes: https://github.com/php-cmsig/search/issues/41');
         }
 
         $indexName = $search->index->name;

@@ -10,16 +10,16 @@ List of Search Engines
 
 Here we collect different search engines which are around and could be interesting:
 
-- `Elasticsearch <#elasticsearch>`__ - ``schranz-search/seal-elasticsearch-adapter``
-- `Opensearch <#opensearch>`__ - ``schranz-search/seal-opensearch-adapter``
-- `Meilisearch <#meilisearch>`__ - ``schranz-search/seal-meilisearch-adapter``
-- `Algolia <#algolia>`__ - ``schranz-search/seal-algolia-adapter``
-- `Solr <#solr>`__ - ``schranz-search/seal-solr-adapter``
-- `RediSearch <#redisearch>`__ - ``schranz-search/seal-redisearch-adapter``
-- `Typesense <#typesense>`__ - ``schranz-search/seal-typesense-adapter``
-- `Loupe <#loupe>`__ - ``schranz-search/seal-loupe-adapter``
-- `Zinc Labs <#zinc-labs>`__ (work in progress `#79 <https://github.com/schranz-search/schranz-search/pull/79>`__)
-- `Manticore Search <#manticore-search>`__ (work in progress `#103 <https://github.com/schranz-search/schranz-search/pull/103>`__)
+- `Elasticsearch <#elasticsearch>`__ - ``cmsig/seal-elasticsearch-adapter``
+- `Opensearch <#opensearch>`__ - ``cmsig/seal-opensearch-adapter``
+- `Meilisearch <#meilisearch>`__ - ``cmsig/seal-meilisearch-adapter``
+- `Algolia <#algolia>`__ - ``cmsig/seal-algolia-adapter``
+- `Solr <#solr>`__ - ``cmsig/seal-solr-adapter``
+- `RediSearch <#redisearch>`__ - ``cmsig/seal-redisearch-adapter``
+- `Typesense <#typesense>`__ - ``cmsig/seal-typesense-adapter``
+- `Loupe <#loupe>`__ - ``cmsig/seal-loupe-adapter``
+- `Zinc Labs <#zinc-labs>`__ (work in progress `#79 <https://github.com/php-cmsig/search/pull/79>`__)
+- `Manticore Search <#manticore-search>`__ (work in progress `#103 <https://github.com/php-cmsig/search/pull/103>`__)
 - `ZendSearch <#zendsearch>`__
 - `Kailua Labs <#kailua-labs>`__
 - `TnTSearch <#tntsearch>`__
@@ -86,7 +86,7 @@ Widely used search based on Java.
 - Server: `Elasticsearch Server <https://github.com/elastic/elasticsearch>`__
 - PHP Client: `Elasticsearch PHP <https://github.com/elastic/elasticsearch-php>`__
 
-Implementation: `schranz-search/seal-elasticsearch-adapter <https://github.com/schranz-search/seal-elasticsearch-adapter>`__
+Implementation: `cmsig/seal-elasticsearch-adapter <https://github.com/php-cmsig/seal-elasticsearch-adapter>`__
 
 Opensearch
 ~~~~~~~~~~
@@ -96,7 +96,7 @@ Fork of Elasticsearch also written in Java.
 - Server: `Opensearch Server <https://github.com/opensearch-project/OpenSearch>`__
 - PHP Client: `Opensearch PHP <https://github.com/opensearch-project/opensearch-php>`__
 
-Implementation: `schranz-search/seal-opensearch-adapter <https://github.com/schranz-search/seal-opensearch-adapter>`__
+Implementation: `cmsig/seal-opensearch-adapter <https://github.com/php-cmsig/seal-opensearch-adapter>`__
 
 Meilisearch
 ~~~~~~~~~~~
@@ -106,7 +106,7 @@ A search engine written in Rust:
 - Server: `MeiliSearch Server <https://github.com/meilisearch/meilisearch>`__
 - PHP Client: `MeiliSearch PHP <https://github.com/meilisearch/meilisearch-php>`__
 
-Implementation: `schranz-search/seal-meilisearch-adapter <https://github.com/schranz-search/seal-meilisearch-adapter>`__
+Implementation: `cmsig/seal-meilisearch-adapter <https://github.com/php-cmsig/seal-meilisearch-adapter>`__
 
 Algolia
 ~~~~~~~
@@ -116,7 +116,7 @@ Is a search as SaaS provided via Rest APIs and SDKs:
 - Server: No server only Saas `https://www.algolia.com/ <https://www.algolia.com/>`__
 - PHP Client: `Algolia PHP <https://github.com/algolia/algoliasearch-client-php>`__
 
-Implementation: `schranz-search/seal-algolia-adapter <https://github.com/schranz-search/seal-algolia-adapter>`__
+Implementation: `cmsig/seal-algolia-adapter <https://github.com/php-cmsig/seal-algolia-adapter>`__
 
 Solr
 ~~~~
@@ -126,7 +126,7 @@ A search engine under the Apache Project based on Lucene written in Java:
 - Server: `Solr Server <https://github.com/apache/solr>`__
 - PHP Client: `Solarium PHP <https://github.com/solariumphp/solarium>`__ seems to be a well maintained Client
 
-Implementation: `schranz-search/seal-solr-adapter <https://github.com/schranz-search/seal-solr-adapter>`__
+Implementation: `cmsig/seal-solr-adapter <https://github.com/php-cmsig/seal-solr-adapter>`__
 
 RediSearch
 ~~~~~~~~~~
@@ -136,7 +136,7 @@ A search out of the house of the redis labs.
 - Server: `RediSearch Server <https://github.com/RediSearch/RediSearch>`__
 - PHP Client: `Unofficial RediSearch PHP <https://github.com/MacFJA/php-redisearch>`__
 
-Implementation: `schranz-search/seal-redisearch-adapter <https://github.com/schranz-search/seal-redisearch-adapter>`__
+Implementation: `cmsig/seal-redisearch-adapter <https://github.com/php-cmsig/seal-redisearch-adapter>`__
 
 Typesense
 ~~~~~~~~~
@@ -146,7 +146,7 @@ Describes itself as a alternative to Algolia and Elasticsearch written in C++.
 - Server: `Typesense Server <https://github.com/typesense/typesense>`__
 - PHP Client: `Typesense PHP <https://github.com/typesense/typesense-php>`__
 
-Implementation: `schranz-search/seal-typesense-adapter <https://github.com/schranz-search/seal-typesense-adapter>`__
+Implementation: `cmsig/seal-typesense-adapter <https://github.com/php-cmsig/seal-typesense-adapter>`__
 
 Loupe
 ~~~~~
@@ -163,7 +163,7 @@ Zinc search describes itself as a lightweight alternative to Elasticsearch writt
 - Server: `Zinclabs Server <https://github.com/zinclabs/zinc>`__
 - PHP Client: No PHP SDK currently: `https://github.com/zinclabs/zinc/issues/12 <https://github.com/zinclabs/zinc/issues/12>`__
 
-Implementation: work in progress `#79 <https://github.com/schranz-search/schranz-search/pull/79>`__
+Implementation: work in progress `#79 <https://github.com/php-cmsig/search/pull/79>`__
 
 Manticore Search
 ~~~~~~~~~~~~~~~~
@@ -174,7 +174,7 @@ Good alternative for Elasticsearch.
 - Server: `Manticore Search Server <https://github.com/manticoresoftware/manticoresearch>`__
 - PHP Client: `Manticore Search PHP Client <https://github.com/manticoresoftware/manticoresearch-php>`__
 
-Implementation: work in progress `#103 <https://github.com/schranz-search/schranz-search/pull/103>`__
+Implementation: work in progress `#103 <https://github.com/php-cmsig/search/pull/103>`__
 
 ZendSearch
 ~~~~~~~~~~

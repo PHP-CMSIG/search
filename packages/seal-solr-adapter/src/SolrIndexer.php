@@ -47,7 +47,7 @@ final class SolrIndexer implements IndexerInterface
         $identifier = $document[$identifierField->name] ?? null;
 
         $marshalledDocument = $this->marshaller->marshall($index->fields, $document);
-        $marshalledDocument['id'] = (string) $identifier; // Solr currently does not support set another identifier then id: https://github.com/schranz-search/schranz-search/issues/87
+        $marshalledDocument['id'] = (string) $identifier; // Solr currently does not support set another identifier then id: https://github.com/php-cmsig/search/issues/87
 
         $update = $this->client->createUpdate();
         $indexDocument = $update->createDocument($marshalledDocument);
@@ -98,7 +98,7 @@ final class SolrIndexer implements IndexerInterface
                 $identifier = $document[$identifierField->name] ?? null;
 
                 $marshalledDocument = $this->marshaller->marshall($index->fields, $document);
-                $marshalledDocument['id'] = (string) $identifier; // Solr currently does not support set another identifier then id: https://github.com/schranz-search/schranz-search/issues/87
+                $marshalledDocument['id'] = (string) $identifier; // Solr currently does not support set another identifier then id: https://github.com/php-cmsig/search/issues/87
 
                 $marshalledBulkSaveDocuments[] = $update->createDocument($marshalledDocument);
             }

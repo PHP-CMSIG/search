@@ -61,10 +61,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | engines
+    | Engines
     |--------------------------------------------------------------------------
     |
-    | Directory where the latte templates can be found.
+    | Define different engines for the indexes.
     */
 
     'engines' => [

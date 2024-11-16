@@ -16,7 +16,7 @@ use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
 use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
 
 return [
-    'schranz-search/yii-module' => [
+    'cmsig/seal-yii-module' => [
         'index_name_prefix' => '',
         'schemas' => [
             'app' => [
@@ -34,9 +34,9 @@ return [
     ],
     'yiisoft/yii-console' => [
         'commands' => [
-            'seal:index-create' => IndexCreateCommand::class,
-            'seal:index-drop' => IndexDropCommand::class,
-            'seal:reindex' => ReindexCommand::class,
+            'cmsig:seal:index-create' => IndexCreateCommand::class,
+            'cmsig:seal:index-drop' => IndexDropCommand::class,
+            'cmsig:seal:reindex' => ReindexCommand::class,
         ],
     ],
 ];

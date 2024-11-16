@@ -30,9 +30,9 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 /**
  * @experimental
  */
-final class SearchBundle extends AbstractBundle
+final class SealBundle extends AbstractBundle
 {
-    protected string $extensionAlias = 'seal';
+    protected string $extensionAlias = 'cmsig_seal';
 
     public function configure(DefinitionConfigurator $definition): void
     {
@@ -79,15 +79,15 @@ final class SearchBundle extends AbstractBundle
         }
 
         foreach ($engines as $name => $engineConfig) {
-            $adapterServiceId = 'seal.adapter.' . $name;
-            $engineServiceId = 'seal.engine.' . $name;
-            $schemaLoaderServiceId = 'seal.schema_loader.' . $name;
-            $schemaId = 'seal.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             $definition = $builder->register($adapterServiceId, AdapterInterface::class)
-                ->setFactory([new Reference('seal.adapter_factory'), 'createAdapter'])
+                ->setFactory([new Reference('cmsig_seal.adapter_factory'), 'createAdapter'])
                 ->setArguments([$engineConfig['adapter']])
-                ->addTag('seal.adapter', ['name' => $name]);
+                ->addTag('cmsig_seal.adapter', ['name' => $name]);
 
             if (\class_exists(ReadWriteAdapterFactory::class) || \class_exists(MultiAdapterFactory::class)) {
                 // the read-write and multi adapter require access all other adapters so they need to be public
@@ -107,7 +107,7 @@ final class SearchBundle extends AbstractBundle
                     new Reference($adapterServiceId),
                     new Reference($schemaId),
                 ])
-                ->addTag('seal.engine', ['name' => $name]);
+                ->addTag('cmsig_seal.engine', ['name' => $name]);
 
             if ('default' === $name || (!isset($engines['default']) && !$builder->has(EngineInterface::class))) {
                 $builder->setAlias(EngineInterface::class, $engineServiceId);
@@ -128,7 +128,7 @@ final class SearchBundle extends AbstractBundle
         }
 
         $builder->registerForAutoconfiguration(ReindexProviderInterface::class)
-            ->addTag('seal.reindex_provider');
+            ->addTag('cmsig_seal.reindex_provider');
 
         $container->import(\dirname(__DIR__) . '/config/services.php');
     }

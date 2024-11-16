@@ -25,7 +25,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @experimental
  */
-#[AsCommand(name: 'seal:reindex', description: 'Reindex configured search indexes.')]
+#[AsCommand(name: 'cmsig:seal:reindex', description: 'Reindex configured search indexes.')]
 final class ReindexCommand extends Command
 {
     /**

@@ -26,7 +26,7 @@ final class IndexDropCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'seal:index-drop {--engine= : The name of the engine} {--index= : The name of the index} {--force : Force to drop the indexes}';
+    protected $signature = 'cmsig:seal:index-drop {--engine= : The name of the engine} {--index= : The name of the index} {--force : Force to drop the indexes}';
 
     /**
      * The console command description.

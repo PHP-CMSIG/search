@@ -35,10 +35,10 @@ final class CommandAbstractFactory
         $arguments = [$container->get(EngineRegistry::class)];
 
         if (ReindexCommand::class === $className) {
-            /** @var array{seal: array{reindex_providers: string[]}} $config */
+            /** @var array{cmsig_seal: array{reindex_providers: string[]}} $config */
             $config = $container->get('config');
 
-            $reindexProviderNames = $config['seal']['reindex_providers'];
+            $reindexProviderNames = $config['cmsig_seal']['reindex_providers'];
             $reindexProviders = [];
             foreach ($reindexProviderNames as $reindexProviderName) {
                 $reindexProvider = $container->get($reindexProviderName);

@@ -30,7 +30,7 @@ use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
-use CmsIg\Seal\Integration\Spiral\Config\SearchConfig;
+use CmsIg\Seal\Integration\Spiral\Config\SealConfig;
 use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
 use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
 use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
@@ -48,7 +48,7 @@ use Spiral\Core\Container;
 /**
  * @experimental
  */
-final class SearchBootloader extends Bootloader
+final class SealBootloader extends Bootloader
 {
     private const ADAPTER_FACTORIES = [
         AlgoliaAdapterFactory::class,
@@ -63,7 +63,7 @@ final class SearchBootloader extends Bootloader
     ];
 
     /**
-     * @param ConfiguratorInterface<SearchConfig> $config
+     * @param ConfiguratorInterface<SealConfig> $config
      */
     public function __construct(
         private readonly ConfiguratorInterface $config,
@@ -80,7 +80,7 @@ final class SearchBootloader extends Bootloader
         $console->addCommand(ReindexCommand::class);
 
         $this->config->setDefaults(
-            SearchConfig::CONFIG,
+            SealConfig::CONFIG,
             [
                 'index_name_prefix' => $environment->get('SEAL_SEARCH_PREFIX', ''),
                 'schemas' => [
@@ -93,7 +93,7 @@ final class SearchBootloader extends Bootloader
         );
     }
 
-    public function boot(Container $container, SearchConfig $config): void
+    public function boot(Container $container, SealConfig $config): void
     {
         $this->createAdapterFactories($container);
 
@@ -106,10 +106,10 @@ final class SearchBootloader extends Bootloader
 
         $engineServices = [];
         foreach ($engines as $name => $engineConfig) {
-            $adapterServiceId = 'seal.adapter.' . $name;
-            $engineServiceId = 'seal.engine.' . $name;
-            $schemaLoaderServiceId = 'seal.schema_loader.' . $name;
-            $schemaId = 'seal.schema.' . $name;
+            $adapterServiceId = 'cmsig_seal.adapter.' . $name;
+            $engineServiceId = 'cmsig_seal.engine.' . $name;
+            $schemaLoaderServiceId = 'cmsig_seal.schema_loader.' . $name;
+            $schemaId = 'cmsig_seal.schema.' . $name;
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'] ?? throw new \RuntimeException(\sprintf(
@@ -213,7 +213,7 @@ final class SearchBootloader extends Bootloader
 
         // ...
 
-        $prefix = 'seal.adapter.';
+        $prefix = 'cmsig_seal.adapter.';
 
         $wrapperAdapters = [
             ReadWriteAdapterFactory::class,

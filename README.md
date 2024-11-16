@@ -9,7 +9,7 @@
 <div align="center">
 
 <strong>Monorepository</strong> for **SEAL** a **S**earch **E**ngine **A**bstraction **L**ayer with support to different search engines<br/>
-<a href="https://schranz-search.github.io/schranz-search/">Documentation</a> | [Packages](#-packages)
+<a href="https://php-cmsig.github.io/search/">Documentation</a> | [Packages](#-packages)
 
 Elasticsearch | Opensearch | Meilisearch | Algolia | Loupe | Solr | Redisearch | Typesense <br/>
 **PHP** | Symfony | Laravel | Spiral | Mezzio | Yii
@@ -76,38 +76,38 @@ This way it is easy to switch between different search engine software and servi
 
 ## 📖 Installation and Documentation
 
-The documentation is available at [https://schranz-search.github.io/schranz-search/](https://schranz-search.github.io/schranz-search/).
+The documentation is available at [https://php-cmsig.github.io/search/](https://php-cmsig.github.io/search/).
 It is the recommended and best way to start using the library, it will step-by-step guide you through all the features
 of the library.
 
-- [Introduction](https://schranz-search.github.io/schranz-search/index.html)
-- [Getting Started](https://schranz-search.github.io/schranz-search/getting-started/index.html)
-- [Schema](https://schranz-search.github.io/schranz-search/schema/index.html)
-- [Index Operations](https://schranz-search.github.io/schranz-search/indexing/index.html)
-- [Search & Filters](https://schranz-search.github.io/schranz-search/search-and-filters/index.html)
-- [Cookbooks](https://schranz-search.github.io/schranz-search/cookbooks/index.html)
-- [Research](https://schranz-search.github.io/schranz-search/research/index.html)
+- [Introduction](https://php-cmsig.github.io/search/index.html)
+- [Getting Started](https://php-cmsig.github.io/search/getting-started/index.html)
+- [Schema](https://php-cmsig.github.io/search/schema/index.html)
+- [Index Operations](https://php-cmsig.github.io/search/indexing/index.html)
+- [Search & Filters](https://php-cmsig.github.io/search/search-and-filters/index.html)
+- [Cookbooks](https://php-cmsig.github.io/search/cookbooks/index.html)
+- [Research](https://php-cmsig.github.io/search/research/index.html)
 
 ## 📦 Packages
 
 Full list of packages provided by the SEAL project:
 
-- [`schranz-search/seal`](packages/seal/README.md) - The core package of the SEAL project.
-- [`schranz-search/seal-algolia-adapter`](packages/seal-algolia-adapter/README.md) - Adapter for the Algolia search engine.
-- [`schranz-search/seal-elasticsearch-adapter`](packages/seal-elasticsearch-adapter/README.md) - Adapter for the Elasticsearch search engine.
-- [`schranz-search/seal-opensearch-adapter`](packages/seal-opensearch-adapter/README.md) - Adapter for the Opensearch search engine.
-- [`schranz-search/seal-meilisearch-adapter`](packages/seal-meilisearch-adapter/README.md) - Adapter for the Meilisearch search engine.
-- [`schranz-search/seal-loupe-adapter`](packages/seal-loupe-adapter/README.md) - Adapter for the Loupe search engine.
-- [`schranz-search/seal-redisearch-adapter`](packages/seal-redisearch-adapter/README.md) - Adapter for the Redisearch search engine.
-- [`schranz-search/seal-solr-adapter`](packages/seal-solr-adapter/README.md) - Adapter for the Solr search engine.
-- [`schranz-search/seal-typesense-adapter`](packages/seal-typesense-adapter/README.md) - Adapter for the Typesense search engine.
-- [`schranz-search/seal-read-write-adapter`](packages/seal-read-write-adapter/README.md) - Adapter to split read and write operations.
-- [`schranz-search/seal-multi-adapter`](packages/seal-multi-adapter/README.md) - Adapter to write into multiple search engines.
-- [`schranz-search/laravel-package`](integrations/laravel/README.md) - Integrates SEAL into the Laravel framework.
-- [`schranz-search/symfony-bundle`](integrations/symfony/README.md) - Integrates SEAL into the Symfony framework.
-- [`schranz-search/spiral-bridge`](integrations/spiral/README.md) - Integrates SEAL into the Spiral framework.
-- [`schranz-search/mezzio-module`](integrations/mezzio/README.md) - Integrates SEAL into the Mezzio framework.
-- [`schranz-search/yii-module`](integrations/yii/README.md) - Integrates SEAL into the Yii framework.
+- [`cmsig/seal`](packages/seal/README.md) - The core package of the SEAL project.
+- [`cmsig/seal-algolia-adapter`](packages/seal-algolia-adapter/README.md) - Adapter for the Algolia search engine.
+- [`cmsig/seal-elasticsearch-adapter`](packages/seal-elasticsearch-adapter/README.md) - Adapter for the Elasticsearch search engine.
+- [`cmsig/seal-opensearch-adapter`](packages/seal-opensearch-adapter/README.md) - Adapter for the Opensearch search engine.
+- [`cmsig/seal-meilisearch-adapter`](packages/seal-meilisearch-adapter/README.md) - Adapter for the Meilisearch search engine.
+- [`cmsig/seal-loupe-adapter`](packages/seal-loupe-adapter/README.md) - Adapter for the Loupe search engine.
+- [`cmsig/seal-redisearch-adapter`](packages/seal-redisearch-adapter/README.md) - Adapter for the Redisearch search engine.
+- [`cmsig/seal-solr-adapter`](packages/seal-solr-adapter/README.md) - Adapter for the Solr search engine.
+- [`cmsig/seal-typesense-adapter`](packages/seal-typesense-adapter/README.md) - Adapter for the Typesense search engine.
+- [`cmsig/seal-read-write-adapter`](packages/seal-read-write-adapter/README.md) - Adapter to split read and write operations.
+- [`cmsig/seal-multi-adapter`](packages/seal-multi-adapter/README.md) - Adapter to write into multiple search engines.
+- [`cmsig/seal-laravel-package`](integrations/laravel/README.md) - Integrates SEAL into the Laravel framework.
+- [`cmsig/seal-symfony-bundle`](integrations/symfony/README.md) - Integrates SEAL into the Symfony framework.
+- [`cmsig/seal-spiral-bridge`](integrations/spiral/README.md) - Integrates SEAL into the Spiral framework.
+- [`cmsig/seal-mezzio-module`](integrations/mezzio/README.md) - Integrates SEAL into the Mezzio framework.
+- [`cmsig/seal-yii-module`](integrations/yii/README.md) - Integrates SEAL into the Yii framework.
 
 Have also a look at the following tags:
 
@@ -125,4 +125,4 @@ Following projects in the past target similar problem:
 ## 📩 Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
-- [The Community Contributors](https://github.com/schranz-search/schranz-search/graphs/contributors)
+- [The Community Contributors](https://github.com/php-cmsig/search/graphs/contributors)

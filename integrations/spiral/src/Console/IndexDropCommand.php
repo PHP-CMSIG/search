@@ -24,7 +24,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @experimental
  */
 #[AsCommand(
-    name: 'seal:index-drop',
+    name: 'cmsig:seal:index-drop',
     description: 'Drop configured search indexes.',
 )]
 final class IndexDropCommand extends Command

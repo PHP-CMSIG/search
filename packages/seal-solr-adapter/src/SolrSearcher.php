@@ -123,7 +123,7 @@ final class SolrSearcher implements SearcherInterface
             unset($hit['_version_']);
 
             if ('id' !== $index->getIdentifierField()->name) {
-                // Solr currently does not support set another identifier then id: https://github.com/schranz-search/schranz-search/issues/87
+                // Solr currently does not support set another identifier then id: https://github.com/php-cmsig/search/issues/87
                 $id = $hit['id'];
                 unset($hit['id']);
 

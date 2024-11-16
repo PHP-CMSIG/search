@@ -15,23 +15,9 @@ final class CommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('seal:index-create');
+        $command = $application->find('cmsig:seal:index-create');
         $commandTester = new CommandTester($command);
         $commandTester->execute([]);
-
-        $commandTester->assertCommandIsSuccessful();
-    }
-
-    public function testDrop(): void
-    {
-        $kernel = self::bootKernel();
-        $application = new Application($kernel);
-
-        $command = $application->find('seal:index-drop');
-        $commandTester = new CommandTester($command);
-        $commandTester->execute([
-            '--force' => true,
-        ]);
 
         $commandTester->assertCommandIsSuccessful();
     }
@@ -41,7 +27,7 @@ final class CommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $command = $application->find('seal:reindex');
+        $command = $application->find('cmsig:seal:reindex');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             '--drop' => true,
@@ -49,5 +35,19 @@ final class CommandTest extends KernelTestCase
 
         $commandTester->assertCommandIsSuccessful();
         $this->assertStringContainsString('3/3', $commandTester->getDisplay());
+    }
+
+    public function testDrop(): void
+    {
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $command = $application->find('cmsig:seal:index-drop');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([
+            '--force' => true,
+        ]);
+
+        $commandTester->assertCommandIsSuccessful();
     }
 }

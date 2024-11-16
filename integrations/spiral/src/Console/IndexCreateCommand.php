@@ -23,7 +23,7 @@ use Symfony\Component\Console\Input\InputOption;
  * @experimental
  */
 #[AsCommand(
-    name: 'seal:index-create',
+    name: 'cmsig:seal:index-create',
     description: 'Create configured search indexes.',
 )]
 final class IndexCreateCommand extends Command

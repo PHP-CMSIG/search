@@ -25,7 +25,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @experimental
  */
-#[AsCommand(name: 'seal:index-drop', description: 'Drop configured search indexes.')]
+#[AsCommand(name: 'cmsig:seal:index-drop', description: 'Drop configured search indexes.')]
 final class IndexDropCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)

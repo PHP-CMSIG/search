@@ -27,7 +27,7 @@ final class IndexDropCommand extends Command
 {
     public function __construct(private readonly EngineRegistry $engineRegistry)
     {
-        parent::__construct('seal:index-drop');
+        parent::__construct('cmsig:seal:index-drop');
     }
 
     protected function configure(): void

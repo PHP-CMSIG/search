@@ -44,7 +44,7 @@ final class ConfigProvider
         return [
             'laminas-cli' => $this->getCliConfig(),
             'dependencies' => $this->getDependencies(),
-            'seal' => [
+            'cmsig_seal' => [
                 'adapter_factories' => $this->getAdapterFactories(), // we are going over a config as there are no tagged services in mezzio
                 'index_name_prefix' => '',
                 'schemas' => [],
@@ -63,9 +63,9 @@ final class ConfigProvider
     {
         return [
             'commands' => [
-                'seal:index-create' => Command\IndexCreateCommand::class,
-                'seal:index-drop' => Command\IndexDropCommand::class,
-                'seal:reindex' => Command\ReindexCommand::class,
+                'cmsig:seal:index-create' => Command\IndexCreateCommand::class,
+                'cmsig:seal:index-drop' => Command\IndexDropCommand::class,
+                'cmsig:seal:reindex' => Command\ReindexCommand::class,
             ],
         ];
     }

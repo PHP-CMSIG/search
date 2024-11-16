@@ -41,7 +41,7 @@ final class GeoPointField extends AbstractField
         array $options = [],
     ) {
         if ($searchable) { // @phpstan-ignore-line
-            throw new \InvalidArgumentException('Searchability for GeoPointField is not yet implemented: https://github.com/schranz-search/schranz-search/issues/97');
+            throw new \InvalidArgumentException('Searchability for GeoPointField is not yet implemented: https://github.com/php-cmsig/search/issues/97');
         }
 
         parent::__construct(

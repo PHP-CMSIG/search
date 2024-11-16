@@ -38,24 +38,24 @@ return static function (ContainerConfigurator $container) {
     // Commands                                                           //
     // -------------------------------------------------------------------//
     $container->services()
-        ->set('seal.index_create_command', IndexCreateCommand::class)
+        ->set('cmsig_seal.index_create_command', IndexCreateCommand::class)
         ->args([
-            service('seal.engine_registry'),
+            service('cmsig_seal.engine_registry'),
         ])
         ->tag('console.command');
 
     $container->services()
-        ->set('seal.index_drop_command', IndexDropCommand::class)
+        ->set('cmsig_seal.index_drop_command', IndexDropCommand::class)
         ->args([
-            service('seal.engine_registry'),
+            service('cmsig_seal.engine_registry'),
         ])
         ->tag('console.command');
 
     $container->services()
-        ->set('seal.reindex_command', ReindexCommand::class)
+        ->set('cmsig_seal.reindex_command', ReindexCommand::class)
         ->args([
-            service('seal.engine_registry'),
-            tagged_iterator('seal.reindex_provider'),
+            service('cmsig_seal.engine_registry'),
+            tagged_iterator('cmsig_seal.reindex_provider'),
         ])
         ->tag('console.command');
 
@@ -63,119 +63,119 @@ return static function (ContainerConfigurator $container) {
     // Services                                                           //
     // -------------------------------------------------------------------//
     $container->services()
-        ->set('seal.engine_registry', EngineRegistry::class)
+        ->set('cmsig_seal.engine_registry', EngineRegistry::class)
         ->args([
-            tagged_iterator('seal.engine', 'name'),
+            tagged_iterator('cmsig_seal.engine', 'name'),
         ])
-        ->alias(EngineRegistry::class, 'seal.engine_registry');
+        ->alias(EngineRegistry::class, 'cmsig_seal.engine_registry');
 
     $container->services()
-        ->set('seal.adapter_factory', AdapterFactory::class)
+        ->set('cmsig_seal.adapter_factory', AdapterFactory::class)
             ->args([
-                tagged_iterator('seal.adapter_factory', null, 'getName'),
+                tagged_iterator('cmsig_seal.adapter_factory', null, 'getName'),
             ])
-        ->alias(AdapterFactory::class, 'seal.adapter_factory');
+        ->alias(AdapterFactory::class, 'cmsig_seal.adapter_factory');
 
     if (\class_exists(AlgoliaAdapterFactory::class)) {
         $container->services()
-            ->set('seal.algolia.adapter_factory', AlgoliaAdapterFactory::class)
+            ->set('cmsig_seal.algolia.adapter_factory', AlgoliaAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => AlgoliaAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => AlgoliaAdapterFactory::getName()]);
     }
 
     if (\class_exists(ElasticsearchAdapterFactory::class)) {
         $container->services()
-            ->set('seal.elasticsearch.adapter_factory', ElasticsearchAdapterFactory::class)
+            ->set('cmsig_seal.elasticsearch.adapter_factory', ElasticsearchAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => ElasticsearchAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => ElasticsearchAdapterFactory::getName()]);
     }
 
     if (\class_exists(LoupeAdapterFactory::class)) {
         $container->services()
-            ->set('seal.loupe.adapter_factory', LoupeAdapterFactory::class)
+            ->set('cmsig_seal.loupe.adapter_factory', LoupeAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => LoupeAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => LoupeAdapterFactory::getName()]);
     }
 
     if (\class_exists(OpensearchAdapterFactory::class)) {
         $container->services()
-            ->set('seal.opensearch.adapter_factory', OpensearchAdapterFactory::class)
+            ->set('cmsig_seal.opensearch.adapter_factory', OpensearchAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => OpensearchAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => OpensearchAdapterFactory::getName()]);
     }
 
     if (\class_exists(MeilisearchAdapterFactory::class)) {
         $container->services()
-            ->set('seal.meilisearch.adapter_factory', MeilisearchAdapterFactory::class)
+            ->set('cmsig_seal.meilisearch.adapter_factory', MeilisearchAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => MeilisearchAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => MeilisearchAdapterFactory::getName()]);
     }
 
     if (\class_exists(MemoryAdapterFactory::class)) {
         $container->services()
-            ->set('seal.memory.adapter_factory', MemoryAdapterFactory::class)
+            ->set('cmsig_seal.memory.adapter_factory', MemoryAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => MemoryAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => MemoryAdapterFactory::getName()]);
     }
 
     if (\class_exists(RediSearchAdapterFactory::class)) {
         $container->services()
-            ->set('seal.redis.adapter_factory', RediSearchAdapterFactory::class)
+            ->set('cmsig_seal.redis.adapter_factory', RediSearchAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => RediSearchAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => RediSearchAdapterFactory::getName()]);
     }
 
     if (\class_exists(SolrAdapterFactory::class)) {
         $container->services()
-            ->set('seal.solr.adapter_factory', SolrAdapterFactory::class)
+            ->set('cmsig_seal.solr.adapter_factory', SolrAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => SolrAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => SolrAdapterFactory::getName()]);
     }
 
     if (\class_exists(TypesenseAdapterFactory::class)) {
         $container->services()
-            ->set('seal.typesense.adapter_factory', TypesenseAdapterFactory::class)
+            ->set('cmsig_seal.typesense.adapter_factory', TypesenseAdapterFactory::class)
             ->args([
                 service('service_container'),
             ])
-            ->tag('seal.adapter_factory', ['name' => TypesenseAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => TypesenseAdapterFactory::getName()]);
     }
 
     // ...
 
     if (\class_exists(ReadWriteAdapterFactory::class)) {
         $container->services()
-            ->set('seal.read_write.adapter_factory', ReadWriteAdapterFactory::class)
+            ->set('cmsig_seal.read_write.adapter_factory', ReadWriteAdapterFactory::class)
             ->args([
                 service('service_container'),
-                'seal.adapter.',
+                'cmsig_seal.adapter.',
             ])
-            ->tag('seal.adapter_factory', ['name' => ReadWriteAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => ReadWriteAdapterFactory::getName()]);
     }
 
     if (\class_exists(MultiAdapterFactory::class)) {
         $container->services()
-            ->set('seal.multi.adapter_factory', MultiAdapterFactory::class)
+            ->set('cmsig_seal.multi.adapter_factory', MultiAdapterFactory::class)
             ->args([
                 service('service_container'),
-                'seal.adapter.',
+                'cmsig_seal.adapter.',
             ])
-            ->tag('seal.adapter_factory', ['name' => MultiAdapterFactory::getName()]);
+            ->tag('cmsig_seal.adapter_factory', ['name' => MultiAdapterFactory::getName()]);
     }
 };

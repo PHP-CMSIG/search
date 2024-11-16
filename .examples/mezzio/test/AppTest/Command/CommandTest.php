@@ -26,21 +26,6 @@ final class CommandTest extends FunctionalTestCase
         $this->assertStringContainsString('Search indexes created.', $output->fetch());
     }
 
-    public function testDrop(): void
-    {
-        /** @var IndexDropCommand $command */
-        $command = $this->container->get(IndexDropCommand::class);
-
-        $input = new ArrayInput([
-            '--force' => true,
-        ]);
-        $output = new BufferedOutput();
-
-        $this->assertSame(0, $command->run($input, $output));
-
-        $this->assertStringContainsString('Search indexes dropped.', $output->fetch());
-    }
-
     public function testReindex(): void
     {
         /** @var IndexDropCommand $command */
@@ -57,5 +42,20 @@ final class CommandTest extends FunctionalTestCase
 
         $this->assertStringContainsString('3/3', $outputText);
         $this->assertStringContainsString('Search indexes reindexed.', $outputText);
+    }
+
+    public function testDrop(): void
+    {
+        /** @var IndexDropCommand $command */
+        $command = $this->container->get(IndexDropCommand::class);
+
+        $input = new ArrayInput([
+            '--force' => true,
+        ]);
+        $output = new BufferedOutput();
+
+        $this->assertSame(0, $command->run($input, $output));
+
+        $this->assertStringContainsString('Search indexes dropped.', $output->fetch());
     }
 }
