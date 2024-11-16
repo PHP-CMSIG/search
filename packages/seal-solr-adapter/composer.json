@@ -45,6 +45,9 @@
     "conflict": {
         "solarium/solarium": "6.x-dev"
     },
+    "replace": {
+        "schranz-search/seal-solr-adapter": "self.version"
+    },
     "scripts": {
         "test": [
             "Composer\\Config::disableProcessTimeout",

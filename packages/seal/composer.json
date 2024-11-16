@@ -45,6 +45,9 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^1.0"
     },
+    "replace": {
+        "schranz-search/seal": "self.version"
+    },
     "scripts": {
         "test": [
             "Composer\\Config::disableProcessTimeout",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a26495ead8832aed4aec3fcbdf1d4ea",
+    "content-hash": "cdc8a3a23b345b1edf2fc884b4b88617",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -12,10 +12,13 @@
             "dist": {
                 "type": "path",
                 "url": "./../seal",
-                "reference": "65e8ff1785e5c47d02a13c068ff45d31c05935d3"
+                "reference": "16c36c2aeb74a061fd60b0eabd37411121b51bc8"
             },
             "require": {
                 "php": "^8.1"
+            },
+            "replace": {
+                "schranz-search/seal": "self.version"
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
