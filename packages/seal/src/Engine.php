@@ -15,6 +15,7 @@ namespace CmsIg\Seal;
 
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\PartialReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition\IdentifierCondition;
@@ -138,6 +139,7 @@ final class Engine implements EngineInterface
         bool $dropIndex = false,
         int $bulkSize = 100,
         callable|null $progressCallback = null,
+        PartialReindexConfig|null $partialReindexConfig = null,
     ): void {
         /** @var array<string, ReindexProviderInterface[]> $reindexProvidersPerIndex */
         $reindexProvidersPerIndex = [];
@@ -165,12 +167,12 @@ final class Engine implements EngineInterface
             foreach ($reindexProviders as $reindexProvider) {
                 $this->bulk(
                     $index,
-                    (function () use ($index, $reindexProvider, $bulkSize, $progressCallback) {
+                    (function () use ($index, $reindexProvider, $bulkSize, $progressCallback, $partialReindexConfig) {
                         $count = 0;
                         $total = $reindexProvider->total();
 
                         $lastCount = -1;
-                        foreach ($reindexProvider->provide() as $document) {
+                        foreach ($reindexProvider->provide($partialReindexConfig) as $document) {
                             ++$count;
 
                             yield $document;
