@@ -338,16 +338,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.8.1",
+            "version": "0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "8a9aae9bc46cc470483e82631024567d528664d2"
+                "reference": "0dda416780062040b870b7c38e579aad4d139197"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/8a9aae9bc46cc470483e82631024567d528664d2",
-                "reference": "8a9aae9bc46cc470483e82631024567d528664d2",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/0dda416780062040b870b7c38e579aad4d139197",
+                "reference": "0dda416780062040b870b7c38e579aad4d139197",
                 "shasum": ""
             },
             "require": {
@@ -389,7 +389,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.8.1"
+                "source": "https://github.com/loupe-php/loupe/tree/0.8.2"
             },
             "funding": [
                 {
@@ -397,7 +397,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-26T09:16:14+00:00"
+            "time": "2024-11-29T09:59:06+00:00"
         },
         {
             "name": "mjaschen/phpgeo",
@@ -1703,12 +1703,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "970117e7efeaafc9351796473f6fa75295f71914"
+                "reference": "b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/970117e7efeaafc9351796473f6fa75295f71914",
-                "reference": "970117e7efeaafc9351796473f6fa75295f71914",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0",
+                "reference": "b5ae1b88f471d3fd4ba1aa0046234b5ca3776dd0",
                 "shasum": ""
             },
             "require": {
@@ -1753,7 +1753,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-25T16:21:52+00:00"
+            "time": "2024-11-28T22:13:23+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2136,12 +2136,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c4ccbf6978839f4113e9ecf6c9ad645429cb4301"
+                "reference": "79099b4b0b7b9050f5ea1da13e2a96d77b1069f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c4ccbf6978839f4113e9ecf6c9ad645429cb4301",
-                "reference": "c4ccbf6978839f4113e9ecf6c9ad645429cb4301",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/79099b4b0b7b9050f5ea1da13e2a96d77b1069f2",
+                "reference": "79099b4b0b7b9050f5ea1da13e2a96d77b1069f2",
                 "shasum": ""
             },
             "require": {
@@ -2229,7 +2229,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-26T13:36:09+00:00"
+            "time": "2024-11-29T10:11:55+00:00"
         },
         {
             "name": "rector/rector",
