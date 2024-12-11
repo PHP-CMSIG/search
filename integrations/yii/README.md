@@ -1,3 +1,8 @@
+> **Note**:
+> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
+
+---
+
 <div align="center">
     <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
@@ -10,9 +15,6 @@
 <br />
 
 Integration of the CMS-IG — Search Engine Abstraction Layer (SEAL) into Yii.
-
-> **Note**:
-> This is part of the `cmsig/search` project create issues in the [main repository](https://github.com/php-cmsig/search).
 
 > **Note**:
 > This project is heavily under development and any feedback is greatly appreciated.
