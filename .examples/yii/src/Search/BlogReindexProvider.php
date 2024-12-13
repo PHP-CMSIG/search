@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Search;
 
-use CmsIg\Seal\Reindex\PartialReindexConfig;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 
 class BlogReindexProvider implements ReindexProviderInterface
@@ -14,7 +14,7 @@ class BlogReindexProvider implements ReindexProviderInterface
         return 3;
     }
 
-    public function provide(PartialReindexConfig|null $partialReindexConfig = null): \Generator
+    public function provide(ReindexConfig $reindexConfig): \Generator
     {
         yield [
             'id' => 1,
