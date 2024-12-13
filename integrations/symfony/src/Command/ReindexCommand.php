@@ -63,7 +63,7 @@ final class ReindexCommand extends Command
 
         $partialReindexConfig = PartialReindexConfig::createConditional(
             $input->getOption('datetime-boundary') ? new \DateTimeImmutable($input->getOption('datetime-boundary')) : null,
-            $input->getOption('identifiers') ? PartialReindexConfig::createGeneratorFromArray(\explode(',', (string) $input->getOption('identifiers'))) : null,
+            $input->getOption('identifiers') ? \explode(',', (string) $input->getOption('identifiers')) : null,
         );
 
         foreach ($this->engineRegistry->getEngines() as $name => $engine) {

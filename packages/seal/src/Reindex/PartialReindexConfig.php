@@ -15,44 +15,26 @@ namespace CmsIg\Seal\Reindex;
 
 final class PartialReindexConfig
 {
-    public function __construct(private \DateTimeInterface|\Closure $dateTimeBoundary, private \Generator|\Closure $identifiers)
+    public function __construct(private readonly \DateTimeInterface|null $dateTimeBoundary = null, private readonly array $identifiers = [])
     {
     }
 
-    public function getDateTimeBoundary(): \DateTimeInterface
+    public function getDateTimeBoundary(): \DateTimeInterface|null
     {
-        $this->resolveIfClosure($this->dateTimeBoundary);
-
         return $this->dateTimeBoundary;
     }
 
-    public function getIdentifiers(): \Generator
+    public function getIdentifiers(): array
     {
-        $this->resolveIfClosure($this->identifiers);
-
         return $this->identifiers;
     }
 
-    public static function createConditional(\DateTimeInterface|\Closure|null $dateTimeBoundary, \Generator|\Closure|null $identifiers): self|null
+    public static function createConditional(\DateTimeInterface|null $dateTimeBoundary, array|null $identifiers): self|null
     {
-        if (null === $dateTimeBoundary && null === $identifiers) {
+        if (!$dateTimeBoundary instanceof \DateTimeInterface && null === $identifiers) {
             return null;
         }
 
         return new self($dateTimeBoundary, $identifiers);
-    }
-
-    public static function createGeneratorFromArray(array $array): \Generator
-    {
-        foreach ($array as $value) {
-            yield $value;
-        }
-    }
-
-    private function resolveIfClosure(mixed &$property): void
-    {
-        if ($property instanceof \Closure) {
-            $property = $property($this);
-        }
     }
 }
