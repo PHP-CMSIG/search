@@ -54,13 +54,23 @@ final class ReindexCommand extends Command
         $ui = new SymfonyStyle($input, $output);
         /** @var string|null $engineName */
         $engineName = $input->getOption('engine');
+        /** @var string|null $indexName */
+        $indexName = $input->getOption('index');
+        /** @var bool $drop */
+        $drop = $input->getOption('drop');
+        /** @var int $bulkSize */
+        $bulkSize = $input->getOption('bulk-size');
+        /** @var \DateTimeImmutable|null $dateTimeBoundary */
+        $dateTimeBoundary = $input->getOption('datetime-boundary') ? new \DateTimeImmutable((string) $input->getOption('datetime-boundary')) : null; // @phpstan-ignore-line
+        /** @var array<string> $identifiers */
+        $identifiers = \explode(',', (string) $input->getOption('identifiers')); // @phpstan-ignore-line
 
         $reindexConfig = ReindexConfig::create()
-            ->withIndex($input->getOption('index'))
-            ->withBulkSize((int) $input->getOption('bulk-size'))
-            ->withDropIndex((bool) $input->getOption('drop'))
-            ->withDateTimeBoundary($input->getOption('datetime-boundary') ? new \DateTimeImmutable($input->getOption('datetime-boundary')) : null)
-            ->withIdentifiers(\explode(',', (string) $input->getOption('identifiers')));
+            ->withIndex($indexName)
+            ->withBulkSize($bulkSize)
+            ->withDropIndex($drop)
+            ->withDateTimeBoundary($dateTimeBoundary)
+            ->withIdentifiers($identifiers);
 
         foreach ($this->engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {
