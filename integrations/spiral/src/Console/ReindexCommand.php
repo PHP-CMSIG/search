@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Spiral\Console;
 
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Spiral\Console\Attribute\AsCommand;
 use Spiral\Console\Attribute\Option;
@@ -53,6 +54,11 @@ final class ReindexCommand extends Command
     public function __invoke(
         EngineRegistry $engineRegistry,
     ): int {
+        $reindexConfig = ReindexConfig::create()
+            ->withIndex($this->indexName)
+            ->withBulkSize($this->bulkSize)
+            ->withDropIndex($this->drop);
+
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($this->engineName && $this->engineName !== $name) {
                 continue;
@@ -64,9 +70,7 @@ final class ReindexCommand extends Command
 
             $engine->reindex(
                 $this->reindexProviders,
-                $this->indexName,
-                $this->drop,
-                $this->bulkSize,
+                $reindexConfig,
                 function (string $index, int $count, int|null $total) use ($progressBar) {
                     if (null !== $total) {
                         $progressBar->setMaxSteps($total);
