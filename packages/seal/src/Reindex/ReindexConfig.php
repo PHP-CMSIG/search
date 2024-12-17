@@ -19,6 +19,10 @@ final class ReindexConfig
     private bool $dropIndex = false;
     private int $bulkSize = 100;
     private \DateTimeInterface|null $dateTimeBoundary = null;
+
+    /**
+     * @var array<string>
+     */
     private array $identifiers = [];
 
     public function getIndex(): string|null
@@ -41,6 +45,9 @@ final class ReindexConfig
         return $this->dateTimeBoundary;
     }
 
+    /**
+     * @return array<string>
+     */
     public function getIdentifiers(): array
     {
         return $this->identifiers;
@@ -54,6 +61,9 @@ final class ReindexConfig
         return $clone;
     }
 
+    /**
+     * @param array<string> $identifiers
+     */
     public function withIdentifiers(array $identifiers): self
     {
         $clone = clone $this;
