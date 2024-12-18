@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Laravel\Console;
 
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Illuminate\Console\Command;
 
@@ -60,6 +61,11 @@ final class ReindexCommand extends Command
         /** @var int $bulkSize */
         $bulkSize = ((int) $this->option('bulk-size')) ?: 100;
 
+        $reindexConfig = ReindexConfig::create()
+            ->withIndex($indexName)
+            ->withBulkSize($bulkSize)
+            ->withDropIndex($drop);
+
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {
                 continue;
@@ -71,9 +77,7 @@ final class ReindexCommand extends Command
 
             $engine->reindex(
                 $this->reindexProviders,
-                $indexName,
-                $drop,
-                $bulkSize,
+                $reindexConfig,
                 function (string $index, int $count, int|null $total) use ($progressBar) {
                     if (null !== $total) {
                         $progressBar->setMaxSteps($total);

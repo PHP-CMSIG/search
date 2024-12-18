@@ -15,6 +15,7 @@ namespace CmsIg\Seal;
 
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition\IdentifierCondition;
@@ -134,9 +135,7 @@ final class Engine implements EngineInterface
 
     public function reindex(
         iterable $reindexProviders,
-        string|null $index = null,
-        bool $dropIndex = false,
-        int $bulkSize = 100,
+        ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
     ): void {
         /** @var array<string, ReindexProviderInterface[]> $reindexProvidersPerIndex */
@@ -146,13 +145,13 @@ final class Engine implements EngineInterface
                 continue;
             }
 
-            if ($reindexProvider::getIndex() === $index || null === $index) {
+            if ($reindexProvider::getIndex() === $reindexConfig->getIndex() || null === $reindexConfig->getIndex()) {
                 $reindexProvidersPerIndex[$reindexProvider::getIndex()][] = $reindexProvider;
             }
         }
 
         foreach ($reindexProvidersPerIndex as $index => $reindexProviders) {
-            if ($dropIndex && $this->existIndex($index)) {
+            if ($reindexConfig->shouldDropIndex() && $this->existIndex($index)) {
                 $task = $this->dropIndex($index, ['return_slow_promise_result' => true]);
                 $task->wait();
                 $task = $this->createIndex($index, ['return_slow_promise_result' => true]);
@@ -165,18 +164,18 @@ final class Engine implements EngineInterface
             foreach ($reindexProviders as $reindexProvider) {
                 $this->bulk(
                     $index,
-                    (function () use ($index, $reindexProvider, $bulkSize, $progressCallback) {
+                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback) {
                         $count = 0;
                         $total = $reindexProvider->total();
 
                         $lastCount = -1;
-                        foreach ($reindexProvider->provide() as $document) {
+                        foreach ($reindexProvider->provide($reindexConfig) as $document) {
                             ++$count;
 
                             yield $document;
 
                             if (null !== $progressCallback
-                                && 0 === ($count % $bulkSize)
+                                && 0 === ($count % $reindexConfig->getBulkSize())
                             ) {
                                 $lastCount = $count;
                                 $progressCallback($index, $count, $total);
@@ -190,7 +189,7 @@ final class Engine implements EngineInterface
                         }
                     })(),
                     [],
-                    $bulkSize,
+                    $reindexConfig->getBulkSize(),
                 );
             }
         }

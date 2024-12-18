@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal;
 
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Task\TaskInterface;
@@ -92,9 +93,7 @@ interface EngineInterface
      */
     public function reindex(
         iterable $reindexProviders,
-        string|null $index = null,
-        bool $dropIndex = false,
-        int $bulkSize = 100,
+        ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
     ): void;
 }

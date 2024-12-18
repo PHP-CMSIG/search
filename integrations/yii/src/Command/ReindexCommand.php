@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Yii\Command;
 
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,6 +58,11 @@ final class ReindexCommand extends Command
         /** @var int $bulkSize */
         $bulkSize = ((int) $input->getOption('bulk-size')) ?: 100; // @phpstan-ignore-line
 
+        $reindexConfig = ReindexConfig::create()
+            ->withIndex($indexName)
+            ->withBulkSize($bulkSize)
+            ->withDropIndex($drop);
+
         foreach ($this->engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {
                 continue;
@@ -68,9 +74,7 @@ final class ReindexCommand extends Command
 
             $engine->reindex(
                 $this->reindexProviders,
-                $indexName,
-                $drop,
-                $bulkSize,
+                $reindexConfig,
                 function (string $index, int $count, int|null $total) use ($progressBar) {
                     if (null !== $total) {
                         $progressBar->setMaxSteps($total);

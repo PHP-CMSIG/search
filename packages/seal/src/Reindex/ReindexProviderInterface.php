@@ -25,7 +25,7 @@ interface ReindexProviderInterface
      *
      * @return \Generator<array<string, mixed>>
      */
-    public function provide(): \Generator;
+    public function provide(ReindexConfig $reindexConfig): \Generator;
 
     /**
      * The name of the index for which the documents are for.
