@@ -63,7 +63,7 @@ final class ReindexCommand extends Command
         /** @var \DateTimeImmutable|null $dateTimeBoundary */
         $dateTimeBoundary = $this->datetimeBoundary ? new \DateTimeImmutable((string) $this->datetimeBoundary) : null; // @phpstan-ignore-line
         /** @var array<string> $identifiers */
-        $identifiers = array_filter(\explode(',', (string) $this->identifiers)); // @phpstan-ignore-line
+        $identifiers = \array_filter(\explode(',', (string) $this->identifiers)); // @phpstan-ignore-line
 
         $reindexConfig = ReindexConfig::create()
             ->withIndex($this->indexName)
