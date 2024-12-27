@@ -28,7 +28,7 @@ final class ReindexCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cmsig:seal:reindex {--engine= : The name of the engine} {--index= : The name of the index} {--drop : Drop the index before reindexing} {--bulk-size= : The bulk size for reindexing, defaults to 100.}';
+    protected $signature = 'cmsig:seal:reindex {--engine= : The name of the engine} {--index= : The name of the index} {--drop : Drop the index before reindexing} {--bulk-size= : The bulk size for reindexing, defaults to 100.} {--datetime-boundary= : Do a partial update and limit to only documents that have been changed since a given datetime object.} {--identifiers= : Do a partial update and limit to only a comma-separated list of identifiers.}';
 
     /**
      * The console command description.
@@ -60,11 +60,17 @@ final class ReindexCommand extends Command
         $drop = $this->option('drop');
         /** @var int $bulkSize */
         $bulkSize = ((int) $this->option('bulk-size')) ?: 100;
+        /** @var \DateTimeImmutable|null $dateTimeBoundary */
+        $dateTimeBoundary = $this->option('datetime-boundary') ? new \DateTimeImmutable((string) $this->option('datetime-boundary')) : null; // @phpstan-ignore-line
+        /** @var array<string> $identifiers */
+        $identifiers = \array_filter(\explode(',', (string) $this->option('identifiers'))); // @phpstan-ignore-line
 
         $reindexConfig = ReindexConfig::create()
             ->withIndex($indexName)
             ->withBulkSize($bulkSize)
-            ->withDropIndex($drop);
+            ->withDropIndex($drop)
+            ->withDateTimeBoundary($dateTimeBoundary)
+            ->withIdentifiers($identifiers);
 
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {

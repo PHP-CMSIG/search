@@ -44,6 +44,8 @@ final class ReindexCommand extends Command
         $this->addOption('index', null, InputOption::VALUE_REQUIRED, 'The name of the index to create the schema for.');
         $this->addOption('drop', null, InputOption::VALUE_NONE, 'Drop the index before reindexing.');
         $this->addOption('bulk-size', null, InputOption::VALUE_REQUIRED, 'The bulk size for reindexing, defaults to 100.');
+        $this->addOption('datetime-boundary', null, InputOption::VALUE_REQUIRED, 'Do a partial update and limit to only documents that have been changed since a given datetime object.');
+        $this->addOption('identifiers', null, InputOption::VALUE_REQUIRED, 'Do a partial update and limit to only a comma-separated list of identifiers.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -57,11 +59,17 @@ final class ReindexCommand extends Command
         $drop = $input->getOption('drop');
         /** @var int $bulkSize */
         $bulkSize = ((int) $input->getOption('bulk-size')) ?: 100; // @phpstan-ignore-line
+        /** @var \DateTimeImmutable|null $dateTimeBoundary */
+        $dateTimeBoundary = $input->getOption('datetime-boundary') ? new \DateTimeImmutable((string) $input->getOption('datetime-boundary')) : null; // @phpstan-ignore-line
+        /** @var array<string> $identifiers */
+        $identifiers = \array_filter(\explode(',', (string) $input->getOption('identifiers'))); // @phpstan-ignore-line
 
         $reindexConfig = ReindexConfig::create()
             ->withIndex($indexName)
             ->withBulkSize($bulkSize)
-            ->withDropIndex($drop);
+            ->withDropIndex($drop)
+            ->withDateTimeBoundary($dateTimeBoundary)
+            ->withIdentifiers($identifiers);
 
         foreach ($this->engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {

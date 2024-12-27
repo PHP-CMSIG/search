@@ -42,6 +42,12 @@ final class ReindexCommand extends Command
     #[Option(name: 'bulk-size', description: 'The bulk size for reindexing, defaults to 100.')]
     private int $bulkSize = 100;
 
+    #[Option(name: 'datetime-boundary', description: 'Do a partial update and limit to only documents that have been changed since a given datetime object.')]
+    private string|null $datetimeBoundary = null;
+
+    #[Option(name: 'identifiers', description: 'Do a partial update and limit to only a comma-separated list of identifiers.')]
+    private string|null $identifiers = null;
+
     /**
      * @param iterable<ReindexProviderInterface> $reindexProviders
      */
@@ -54,10 +60,17 @@ final class ReindexCommand extends Command
     public function __invoke(
         EngineRegistry $engineRegistry,
     ): int {
+        /** @var \DateTimeImmutable|null $dateTimeBoundary */
+        $dateTimeBoundary = $this->datetimeBoundary ? new \DateTimeImmutable((string) $this->datetimeBoundary) : null; // @phpstan-ignore-line
+        /** @var array<string> $identifiers */
+        $identifiers = \array_filter(\explode(',', (string) $this->identifiers)); // @phpstan-ignore-line
+
         $reindexConfig = ReindexConfig::create()
             ->withIndex($this->indexName)
             ->withBulkSize($this->bulkSize)
-            ->withDropIndex($this->drop);
+            ->withDropIndex($this->drop)
+            ->withDateTimeBoundary($dateTimeBoundary)
+            ->withIdentifiers($identifiers);
 
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($this->engineName && $this->engineName !== $name) {
