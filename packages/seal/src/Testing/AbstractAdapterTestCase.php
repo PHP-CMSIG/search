@@ -78,7 +78,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         $documents = TestingHelper::createSimpleFixtures();
         $document = $documents[0];
 
-        $task = $engine->saveDocument($indexName, $document);
+        $engine->saveDocument($indexName, $document);
     }
 
     public function testIndexNotFoundDelete(): void
@@ -91,10 +91,10 @@ abstract class AbstractAdapterTestCase extends TestCase
         $documents = TestingHelper::createSimpleFixtures();
         $document = $documents[0];
 
-        $task = $engine->deleteDocument($indexName, $document['id']);
+        $engine->deleteDocument($indexName, $document['id']);
     }
 
-    public function testIndexNotFoundBulk(): void
+    public function testIndexNotFoundBulkSave(): void
     {
         $this->expectException(IndexNotFoundException::class);
 
@@ -104,7 +104,20 @@ abstract class AbstractAdapterTestCase extends TestCase
         $documents = TestingHelper::createSimpleFixtures();
         $document = $documents[0];
 
-        $task = $engine->bulk($indexName, [$document], [$document['id']], 100);
+        $engine->bulk($indexName, [$document], []);
+    }
+
+    public function testIndexNotFoundBulkDelete(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+
+        $documents = TestingHelper::createSimpleFixtures();
+        $document = $documents[0];
+
+        $engine->bulk($indexName, [], [$document['id']]);
     }
 
     public function testIndexNotFoundSearch(): void
@@ -116,6 +129,18 @@ abstract class AbstractAdapterTestCase extends TestCase
 
         $engine->createSearchBuilder($indexName)
             ->getResult();
+    }
+
+    public function testIndexNotFoundDocument(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+        $documents = TestingHelper::createSimpleFixtures();
+        $document = $documents[0];
+
+        $engine->getDocument($indexName, $document['id']);
     }
 
     public function testSchema(): void
