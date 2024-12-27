@@ -31,9 +31,6 @@ jobs:
                       dependency-versions: 'highest'
 
         steps:
-            - name: Wait for 5 seconds
-              run: sleep 5
-
             - name: Output infos
               run: |
                   echo "${{ github.event.pull_request.merge_commit_sha }}"
@@ -42,7 +39,7 @@ jobs:
             - name: Checkout project
               uses: actions/checkout@v4
               with:
-                  ref: "${{ github.event.pull_request.merge_commit_sha }}"
+                  ref: "${{ github.event.pull_request.head.sha }}"
 
             - name: Git infos
               run: |

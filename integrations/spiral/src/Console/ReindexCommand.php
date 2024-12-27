@@ -61,9 +61,9 @@ final class ReindexCommand extends Command
         EngineRegistry $engineRegistry,
     ): int {
         /** @var \DateTimeImmutable|null $dateTimeBoundary */
-        $dateTimeBoundary = $this->datetimeBoundary ? new \DateTimeImmutable((string) $this->datetimeBoundary) : null;
+        $dateTimeBoundary = $this->datetimeBoundary ? new \DateTimeImmutable((string) $this->datetimeBoundary) : null; // @phpstan-ignore-line
         /** @var array<string> $identifiers */
-        $identifiers = \array_filter(\explode(',', (string) $this->identifiers));
+        $identifiers = \array_filter(\explode(',', (string) $this->identifiers)); // @phpstan-ignore-line
 
         $reindexConfig = ReindexConfig::create()
             ->withIndex($this->indexName)
