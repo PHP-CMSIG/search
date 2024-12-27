@@ -65,8 +65,11 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
             return 3;
         }
 
-        public function provide(): \Generator
+        public function provide(ReindexConfig $reindexConfig): \Generator
         {
+            // use `$reindexConfig->getIdentifiers()` or `$reindexConfig->getDateTimeBoundary()`
+            //     to support partial reindexing
+
             yield [
                 'id' => 1,
                 'title' => 'Title 1',
@@ -110,10 +113,35 @@ After that you can use the ``reindex`` to index all documents:
             ];
 
             // reindex all indexes
+            $reindexConfig = \CmsIg\Seal\Reindex\ReindexConfig::create();
+
             $engine->reindex($reindexProviders);
 
             // reindex specific index and drop data before
-            $engine->reindex($reindexProviders, 'blog', dropIndex: true);
+            $reindexConfig = \CmsIg\Seal\Reindex\ReindexConfig::create()
+                ->withIndex('blog')
+                ->withBulkSize(100)
+                ->withDropIndex(true);
+
+            $engine->reindex($reindexProviders, $reindexConfig);
+
+            // reindex specific index since specific date
+            $reindexConfig = \CmsIg\Seal\Reindex\ReindexConfig::create()
+                ->withIndex('blog')
+                ->withBulkSize(100)
+                ->withDropIndex(true)
+                ->withDateTimeBoundary('-1 day');
+
+            $engine->reindex($reindexProviders, $reindexConfig);
+
+            // reindex specific identifiers
+            $reindexConfig = \CmsIg\Seal\Reindex\ReindexConfig::create()
+                ->withIndex('blog')
+                ->withBulkSize(100)
+                ->withDropIndex(true)
+                ->withIdentifiers([1, 2, 3]);
+
+            $engine->reindex($reindexProviders, $reindexConfig);
 
     .. group-tab:: Laravel
 
@@ -146,7 +174,13 @@ After that you can use the ``reindex`` to index all documents:
             php artisan cmsig:seal:reindex
 
             # reindex specific index and drop data before
-            php artisan cmsig:seal:reindex --index=blog --drop
+            php artisan cmsig:seal:reindex --index=blog --drop --bulk-size=100
+
+            # reindex specific index since specific date
+            php artisan cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
+
+            # reindex specific identifiers
+            php artisan cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Symfony
 
@@ -169,7 +203,14 @@ After that you can use the ``reindex`` to index all documents:
             # reindex all indexes
             bin/console cmsig:seal:reindex
 
-            bin/console cmsig:seal:reindex --index=blog --drop
+            # reindex specific index and drop data before
+            bin/console cmsig:seal:reindex --index=blog --drop --bulk-size=100
+
+            # reindex specific index since specific date
+            bin/console artisan cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
+
+            # reindex specific identifiers
+            bin/console artisan cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Spiral
 
@@ -194,7 +235,14 @@ After that you can use the ``reindex`` to index all documents:
             # reindex all indexes
             php app.php cmsig:seal:reindex
 
-            php app.php cmsig:seal:reindex --index=blog --drop
+            # reindex specific index and drop data before
+            php app.php cmsig:seal:reindex --index=blog --drop --bulk-size=100
+
+            # reindex specific index since specific date
+            php app.php cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
+
+            # reindex specific identifiers
+            php app.php cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Mezzio
 
@@ -240,7 +288,14 @@ After that you can use the ``reindex`` to index all documents:
             # reindex all indexes
             vendor/bin/laminas cmsig:seal:reindex
 
-            vendor/bin/laminas cmsig:seal:reindex --index=blog --drop
+            # reindex specific index and drop data before
+            vendor/bin/laminas cmsig:seal:reindex --index=blog --drop --bulk-size=100
+
+            # reindex specific index since specific date
+            vendor/bin/laminas cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
+
+            # reindex specific identifiers
+            vendor/bin/laminas cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Yii
 
@@ -268,7 +323,14 @@ After that you can use the ``reindex`` to index all documents:
             # reindex all indexes
             ./yii cmsig:seal:reindex
 
-            ./yii cmsig:seal:reindex --index=blog --drop
+            # reindex specific index and drop data before
+            ./yii cmsig:seal:reindex --index=blog --drop --bulk-size=100
+
+            # reindex specific index since specific date
+            ./yii cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
+
+            # reindex specific identifiers
+            ./yii cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
 Bulk operations
 ---------------
