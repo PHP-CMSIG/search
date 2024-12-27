@@ -16,6 +16,7 @@ namespace CmsIg\Seal\Adapter\Elasticsearch;
 use CmsIg\Seal\Adapter\BulkHelper;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
+use CmsIg\Seal\Schema\Exception\IndexNotFoundException;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
@@ -47,14 +48,22 @@ final class ElasticsearchIndexer implements IndexerInterface
 
         $document = $this->marshaller->marshall($index->fields, $document);
 
-        /** @var Elasticsearch $response */
-        $response = $this->client->index([
-            'index' => $index->name,
-            'id' => (string) $identifier,
-            'body' => $document,
-            // TODO refresh should be refactored with async tasks
-            'refresh' => $options['return_slow_promise_result'] ?? false, // update document immediately, so it is available in the `/_search` api directly
-        ]);
+        try {
+            /** @var Elasticsearch $response */
+            $response = $this->client->index([
+                'index' => $index->name,
+                'id' => (string) $identifier,
+                'body' => $document,
+                // TODO refresh should be refactored with async tasks
+                'refresh' => $options['return_slow_promise_result'] ?? false, // update document immediately, so it is available in the `/_search` api directly
+            ]);
+        } catch (ClientResponseException $e) {
+            if (404 !== $e->getResponse()->getStatusCode()) {
+                throw $e;
+            }
+
+            throw new IndexNotFoundException($index->name, $e);
+        }
 
         if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
             throw new \RuntimeException('Unexpected error while indexing document with identifier "' . $identifier . '".');
@@ -85,6 +94,8 @@ final class ElasticsearchIndexer implements IndexerInterface
             if (404 !== $e->getResponse()->getStatusCode()) {
                 throw $e;
             }
+
+            throw new IndexNotFoundException($index->name, $e);
         }
 
         if (!($options['return_slow_promise_result'] ?? false)) {
@@ -117,10 +128,37 @@ final class ElasticsearchIndexer implements IndexerInterface
                 $params['body'][] = $document;
             }
 
-            /** @var Elasticsearch $response */
-            $response = $this->client->bulk($params);
+            try {
+                /** @var Elasticsearch $response */
+                $response = $this->client->bulk($params);
+            } catch (ClientResponseException $e) {
+                $response = $e->getResponse();
+
+                if (404 === $response->getStatusCode()
+                    && \str_contains($response->getBody()->__toString(), '"index_not_found_exception"')
+                ) {
+                    throw new IndexNotFoundException($index->name, $e);
+                }
+
+                throw $e;
+            }
 
             if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
+                throw new \RuntimeException('Unexpected error while bulk indexing documents for index "' . $index->name . '".');
+            }
+
+            $responseData = $response->asArray();
+
+            if ($responseData['errors'] ?? false) {
+                $errorType = $responseData['items'][0]['index']['error']['type']
+                    ?? null;
+                if ('index_not_found_exception' === $errorType) {
+                    throw new IndexNotFoundException(
+                        $index->name,
+                        new \RuntimeException($response->asString()),
+                    );
+                }
+
                 throw new \RuntimeException('Unexpected error while bulk indexing documents for index "' . $index->name . '".');
             }
 
@@ -138,11 +176,38 @@ final class ElasticsearchIndexer implements IndexerInterface
                 ];
             }
 
-            /** @var Elasticsearch $response */
-            $response = $this->client->bulk($params);
+            try {
+                /** @var Elasticsearch $response */
+                $response = $this->client->bulk($params);
+            } catch (ClientResponseException $e) {
+                $response = $e->getResponse();
+
+                if (404 === $response->getStatusCode()
+                    && \str_contains($response->getBody()->__toString(), '"index_not_found_exception"')
+                ) {
+                    throw new IndexNotFoundException($index->name, $e);
+                }
+
+                throw $e;
+            }
 
             if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
                 throw new \RuntimeException('Unexpected error while bulk deleting documents for index "' . $index->name . '".');
+            }
+
+            $responseData = $response->asArray();
+
+            if ($responseData['errors'] ?? false) {
+                $errorType = $responseData['items'][0]['delete']['error']['type']
+                    ?? null;
+                if ('index_not_found_exception' === $errorType) {
+                    throw new IndexNotFoundException(
+                        $index->name,
+                        new \RuntimeException($response->asString()),
+                    );
+                }
+
+                throw new \RuntimeException('Unexpected error while bulk indexing documents for index "' . $index->name . '".');
             }
 
             $batchIndexingResponses[] = $response;

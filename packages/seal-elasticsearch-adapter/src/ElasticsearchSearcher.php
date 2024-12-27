@@ -15,6 +15,7 @@ namespace CmsIg\Seal\Adapter\Elasticsearch;
 
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
+use CmsIg\Seal\Schema\Exception\IndexNotFoundException;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
@@ -59,8 +60,11 @@ final class ElasticsearchSearcher implements SearcherInterface
                 $searchResult = $response->asArray();
             } catch (ClientResponseException $e) {
                 $response = $e->getResponse();
-                if (404 !== $response->getStatusCode()) {
-                    throw $e;
+
+                if (404 === $response->getStatusCode()
+                    && \str_contains($response->getBody()->__toString(), '"index_not_found_exception"')
+                ) {
+                    throw new IndexNotFoundException($search->index->name, $e);
                 }
 
                 return new Result(
@@ -99,11 +103,23 @@ final class ElasticsearchSearcher implements SearcherInterface
             $body['size'] = $search->limit;
         }
 
-        /** @var Elasticsearch $response */
-        $response = $this->client->search([
-            'index' => $search->index->name,
-            'body' => $body,
-        ]);
+        try {
+            /** @var Elasticsearch $response */
+            $response = $this->client->search([
+                'index' => $search->index->name,
+                'body' => $body,
+            ]);
+        } catch (ClientResponseException $e) {
+            $response = $e->getResponse();
+
+            if (404 === $response->getStatusCode()
+                && \str_contains($response->getBody()->__toString(), '"index_not_found_exception"')
+            ) {
+                throw new IndexNotFoundException($search->index->name, $e);
+            }
+
+            throw $e;
+        }
 
         /**
          * @var array{
