@@ -1511,6 +1511,7 @@ search engine.
                   discovery.type: single-node
                   xpack.security.enabled: 'false'
                   cluster.routing.allocation.disk.threshold_enabled: 'false'
+                  action.auto_create_index: 'false'
                 ports:
                   - "9200:9200"
                 healthcheck:
@@ -1547,6 +1548,7 @@ search engine.
                 environment:
                   discovery.type: single-node
                   cluster.routing.allocation.disk.threshold_enabled: 'false'
+                  action.auto_create_index: 'false'
                   DISABLE_SECURITY_PLUGIN: true
                 ports:
                   - "9200:9200"
