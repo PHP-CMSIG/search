@@ -17,6 +17,7 @@ use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Schema\Exception\IndexNotFoundException;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -65,6 +66,45 @@ abstract class AbstractAdapterTestCase extends TestCase
         $task->wait();
 
         $this->assertFalse($engine->existIndex($indexName));
+    }
+
+    public function testIndexNotFoundSave(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+
+        $documents = TestingHelper::createSimpleFixtures();
+        $document = $documents[0];
+
+        $task = $engine->saveDocument($indexName, $document, ['return_slow_promise_result' => true]);
+        $task->wait();
+    }
+
+    public function testIndexNotFoundDelete(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+
+        $documents = TestingHelper::createSimpleFixtures();
+        $document = $documents[0];
+
+        $task = $engine->deleteDocument($indexName, $document['id'], ['return_slow_promise_result' => true]);
+        $task->wait();
+    }
+
+    public function testIndexNotFoundSearch(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+
+        $engine->createSearchBuilder($indexName)
+            ->getResult();
     }
 
     public function testSchema(): void
