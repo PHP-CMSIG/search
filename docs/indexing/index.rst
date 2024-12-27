@@ -134,7 +134,7 @@ After that you can use the ``reindex`` to index all documents:
 
             $engine->reindex($reindexProviders, $reindexConfig);
 
-            // reindex specific identifier
+            // reindex specific identifiers
             $reindexConfig = \CmsIg\Seal\Reindex\ReindexConfig::create()
                 ->withIndex('blog')
                 ->withBulkSize(100)
@@ -179,7 +179,7 @@ After that you can use the ``reindex`` to index all documents:
             # reindex specific index since specific date
             php artisan cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
 
-            # reindex specific identifier
+            # reindex specific identifiers
             php artisan cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Symfony
@@ -209,7 +209,7 @@ After that you can use the ``reindex`` to index all documents:
             # reindex specific index since specific date
             bin/console artisan cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
 
-            # reindex specific identifier
+            # reindex specific identifiers
             bin/console artisan cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Spiral
@@ -241,7 +241,7 @@ After that you can use the ``reindex`` to index all documents:
             # reindex specific index since specific date
             php app.php cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
 
-            # reindex specific identifier
+            # reindex specific identifiers
             php app.php cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Mezzio
@@ -294,7 +294,7 @@ After that you can use the ``reindex`` to index all documents:
             # reindex specific index since specific date
             vendor/bin/laminas cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
 
-            # reindex specific identifier
+            # reindex specific identifiers
             vendor/bin/laminas cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
     .. group-tab:: Yii
@@ -329,7 +329,7 @@ After that you can use the ``reindex`` to index all documents:
             # reindex specific index since specific date
             ./yii cmsig:seal:reindex --index=blog --drop --datetime-boundary="-1 day"
 
-            # reindex specific identifier
+            # reindex specific identifiers
             ./yii cmsig:seal:reindex --index=blog --identifiers="1,2,3"
 
 Bulk operations
