@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Loupe;
 
+use CmsIg\Seal\Schema\Exception\IndexNotFoundException;
 use CmsIg\Seal\Schema\Index;
 use Loupe\Loupe\Configuration;
 use Loupe\Loupe\Loupe;
@@ -75,6 +76,8 @@ final class LoupeHelper
             }
 
             \rmdir($indexDirectory);
+
+            unset($this->loupe[$index->name]);
         }
     }
 
@@ -112,7 +115,10 @@ final class LoupeHelper
             $configurationFile = $this->getConfigurationFile($index);
 
             if (!\file_exists($configurationFile)) {
-                throw new \LogicException('Configuration need to exist before creating Loupe instance.');
+                throw new IndexNotFoundException(
+                    $index->name,
+                    new \LogicException('Configuration need to exist before creating Loupe instance.'),
+                );
             }
 
             /** @var string $configurationContent */
