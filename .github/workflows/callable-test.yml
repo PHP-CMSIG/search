@@ -27,14 +27,27 @@ jobs:
                     - php-version: '8.3'
                       dependency-versions: 'highest'
 
+                    - php-version: '8.4'
+                      dependency-versions: 'highest'
+
         steps:
             - name: Wait for 5 seconds
               run: sleep 5
+
+            - name: Output infos
+              run: |
+                  echo "${{ github.event.pull_request.merge_commit_sha }}"
+                  echo "${{ github.event.pull_request.head.sha }}"
 
             - name: Checkout project
               uses: actions/checkout@v4
               with:
                   ref: "${{ github.event.pull_request.merge_commit_sha }}"
+
+            - name: Git infos
+              run: |
+                  git rev-parse HEAD
+                  git branch --show-current
 
             - name: Start Docker services
               if: ${{ inputs.docker }}
