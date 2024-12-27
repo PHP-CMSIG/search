@@ -78,8 +78,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         $documents = TestingHelper::createSimpleFixtures();
         $document = $documents[0];
 
-        $task = $engine->saveDocument($indexName, $document, ['return_slow_promise_result' => true]);
-        $task->wait();
+        $task = $engine->saveDocument($indexName, $document);
     }
 
     public function testIndexNotFoundDelete(): void
@@ -92,8 +91,20 @@ abstract class AbstractAdapterTestCase extends TestCase
         $documents = TestingHelper::createSimpleFixtures();
         $document = $documents[0];
 
-        $task = $engine->deleteDocument($indexName, $document['id'], ['return_slow_promise_result' => true]);
-        $task->wait();
+        $task = $engine->deleteDocument($indexName, $document['id']);
+    }
+
+    public function testIndexNotFoundBulk(): void
+    {
+        $this->expectException(IndexNotFoundException::class);
+
+        $engine = self::getEngine();
+        $indexName = TestingHelper::INDEX_SIMPLE;
+
+        $documents = TestingHelper::createSimpleFixtures();
+        $document = $documents[0];
+
+        $task = $engine->bulk($indexName, [$document], [$document['id']], 100);
     }
 
     public function testIndexNotFoundSearch(): void
