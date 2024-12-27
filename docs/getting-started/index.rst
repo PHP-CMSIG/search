@@ -1908,8 +1908,11 @@ First you need to create a ``ReindexProvider`` providing all your documents.
             return 2;
         }
 
-        public function provide(): \Generator
+        public function provide(ReindexConfig $reindexConfig): \Generator
         {
+            // use `$reindexConfig->getIdentifiers()` or `$reindexConfig->getDateTimeBoundary()`
+            //     to support partial reindexing
+
             yield [
                 'id' => 1,
                 'title' => 'Title 1',
