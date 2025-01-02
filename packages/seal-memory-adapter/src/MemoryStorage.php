@@ -36,7 +36,7 @@ final class MemoryStorage
     public static function getDocuments(Index $index): array
     {
         if (!\array_key_exists($index->name, self::$indexes)) {
-            throw new \RuntimeException('Index "' . $index->name . '" does not exist.');
+            self::createIndex($index);
         }
 
         return self::$documents[$index->name];
@@ -50,7 +50,7 @@ final class MemoryStorage
     public static function save(Index $index, array $document): array
     {
         if (!\array_key_exists($index->name, self::$indexes)) {
-            throw new \RuntimeException('Index "' . $index->name . '" does not exist.');
+            self::createIndex($index);
         }
 
         $identifierField = $index->getIdentifierField();
@@ -66,7 +66,7 @@ final class MemoryStorage
     public static function delete(Index $index, string $identifier): void
     {
         if (!\array_key_exists($index->name, self::$indexes)) {
-            throw new \RuntimeException('Index "' . $index->name . '" does not exist.');
+            self::createIndex($index);
         }
 
         unset(self::$documents[$index->name][$identifier]);

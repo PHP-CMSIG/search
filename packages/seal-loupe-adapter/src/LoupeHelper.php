@@ -80,15 +80,7 @@ final class LoupeHelper
 
     public function createIndex(Index $index): void
     {
-        $indexDirectory = $this->getIndexDirectory($index);
-        if (!\file_exists($indexDirectory)) {
-            \mkdir($indexDirectory, recursive: true);
-        }
-
-        // dumping the configuration allows us to search and index without knowing the configuration
-        // this way when a similar class like this would be part of loupe only the createIndex method
-        // would require then to know the configuration
-        $configuration = $this->createConfiguration($index);
+        $configuration = $this->createAndDumpConfiguration($index);
         \file_put_contents($this->getConfigurationFile($index), \serialize($configuration));
         $this->loupe[$index->name] = $this->createLoupe($index, $configuration);
     }
@@ -112,14 +104,14 @@ final class LoupeHelper
             $configurationFile = $this->getConfigurationFile($index);
 
             if (!\file_exists($configurationFile)) {
-                throw new \LogicException('Configuration need to exist before creating Loupe instance.');
+                $configuration = $this->createAndDumpConfiguration($index);
+            } else {
+                /** @var string $configurationContent */
+                $configurationContent = \file_get_contents($configurationFile);
+
+                /** @var Configuration $configuration */
+                $configuration = \unserialize($configurationContent);
             }
-
-            /** @var string $configurationContent */
-            $configurationContent = \file_get_contents($configurationFile);
-
-            /** @var Configuration $configuration */
-            $configuration = \unserialize($configurationContent);
         }
 
         if ('' === $this->directory) {
@@ -127,6 +119,22 @@ final class LoupeHelper
         }
 
         return $this->loupeFactory->create($this->getIndexDirectory($index), $configuration);
+    }
+
+    private function createAndDumpConfiguration(Index $index): Configuration
+    {
+        $indexDirectory = $this->getIndexDirectory($index);
+        if (!\file_exists($indexDirectory)) {
+            \mkdir($indexDirectory, recursive: true);
+        }
+
+        // dumping the configuration allows us to search and index without knowing the configuration
+        // this way when a similar class like this would be part of loupe only the createIndex method
+        // would require then to know the configuration
+        $configuration = $this->createConfiguration($index);
+        \file_put_contents($this->getConfigurationFile($index), \serialize($configuration));
+
+        return $configuration;
     }
 
     private function createConfiguration(Index $index): Configuration
