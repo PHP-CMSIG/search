@@ -78,7 +78,7 @@ final class LoupeHelper
         }
     }
 
-    public function createIndex(Index $index): void
+    public function createIndex(Index $index): Configuration
     {
         $indexDirectory = $this->getIndexDirectory($index);
         if (!\file_exists($indexDirectory)) {
@@ -91,6 +91,8 @@ final class LoupeHelper
         $configuration = $this->createConfiguration($index);
         \file_put_contents($this->getConfigurationFile($index), \serialize($configuration));
         $this->loupe[$index->name] = $this->createLoupe($index, $configuration);
+
+        return $configuration;
     }
 
     public function reset(): void
@@ -111,15 +113,15 @@ final class LoupeHelper
         if (!$configuration instanceof Configuration) {
             $configurationFile = $this->getConfigurationFile($index);
 
-            if (!\file_exists($configurationFile)) {
-                throw new \LogicException('Configuration need to exist before creating Loupe instance.');
+            if (\file_exists($configurationFile)) {
+                /** @var string $configurationContent */
+                $configurationContent = \file_get_contents($configurationFile);
+
+                /** @var Configuration $configuration */
+                $configuration = \unserialize($configurationContent);
+            } else {
+                $configuration = $this->createIndex($index);
             }
-
-            /** @var string $configurationContent */
-            $configurationContent = \file_get_contents($configurationFile);
-
-            /** @var Configuration $configuration */
-            $configuration = \unserialize($configurationContent);
         }
 
         if ('' === $this->directory) {
