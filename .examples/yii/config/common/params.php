@@ -20,6 +20,10 @@ return [
         'aliases' => require __DIR__ . '/aliases.php',
     ],
 
+    'yiisoft/yii-debug' => [
+        'enabled' => true,
+    ],
+
     'yiisoft/translator' => [
         'locale' => 'en',
         'fallbackLocale' => 'en',
