@@ -465,7 +465,7 @@ via ``multiple`` and define different types for it.
 Create and Drop a Schema
 ------------------------
 
-After you have defined your ``Schema`` with one or multple ``Indexes`` you need to create based on your used
+After you have defined your ``Schema`` with one or multiple ``Indexes`` you need to create based on your used
 integration the ``Indexes`` over the following way:
 
 .. tabs::
@@ -646,13 +646,13 @@ A whole complex example ``Index`` with different types of ``Fields`` for documen
         'blocks' => [
             [
                 'type' => 'text',
-                'title' => 'Titel',
+                'title' => 'Title',
                 'description' => '<p>Description</p>',
                 'media' => [3, 4],
             ],
             [
                 'type' => 'text',
-                'title' => 'Titel 2',
+                'title' => 'Title 2',
             ],
             [
                 'type' => 'embed',
@@ -661,7 +661,7 @@ A whole complex example ``Index`` with different types of ``Fields`` for documen
             ],
             [
                 'type' => 'text',
-                'title' => 'Titel 4',
+                'title' => 'Title 4',
                 'description' => '<p>Description 4</p>',
                 'media' => [3, 4],
             ],

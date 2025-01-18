@@ -337,7 +337,7 @@ Bulk operations
 
 Currently no bulk operations are implemented. Add your opinion to the
 `Bulk issue <https://github.com/php-cmsig/search/issues/24>`_
-on Github.
+on GitHub.
 
 Next Steps
 ----------

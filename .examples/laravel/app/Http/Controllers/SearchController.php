@@ -73,7 +73,7 @@ class SearchController extends Controller
                     </ul>
 
                     <div>
-                        <strong>Registred Engines</strong>: $engineNames
+                        <strong>Registered Engines</strong>: $engineNames
                     </div>
 
                     <div>

@@ -81,7 +81,7 @@ final class SearchController
                     </ul>
 
                     <div>
-                        <strong>Registred Engines</strong>: $engineNames
+                        <strong>Registered Engines</strong>: $engineNames
                     </div>
                 </body>
             </html>

@@ -3,7 +3,7 @@ Cookbooks
 
 This section contain a collection of recipes for other tasks.
 
-Let us know via the issue tracker on our `Github Repository <https://github.com/php-cmsig/search>`_.
+Let us know via the issue tracker on our `GitHub Repository <https://github.com/php-cmsig/search>`_.
 if you have a recipe you would like to see here.
 
 This can go over creating a basic search page in your favorite framework,

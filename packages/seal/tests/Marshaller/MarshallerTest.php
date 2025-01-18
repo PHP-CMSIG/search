@@ -83,17 +83,17 @@ class MarshallerTest extends TestCase
                 'text' => [
                     [
                         '_originalIndex' => 0,
-                        'title' => 'Titel',
+                        'title' => 'Title',
                         'description' => '<p>Description</p>',
                         'media' => [3, 4],
                     ],
                     [
                         '_originalIndex' => 1,
-                        'title' => 'Titel 2',
+                        'title' => 'Title 2',
                     ],
                     [
                         '_originalIndex' => 3,
-                        'title' => 'Titel 4',
+                        'title' => 'Title 4',
                         'description' => '<p>Description 4</p>',
                         'media' => [3, 4],
                     ],

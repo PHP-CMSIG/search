@@ -48,7 +48,7 @@ Additional Wrapper adapters:
  - [ReadWriteAdapter](../../packages/seal-read-write-adapter): `cmsig/seal-read-write-adapter`
  - [MultiAdapter](../../packages/seal-multi-adapter): `cmsig/seal-multi-adapter`
 
-Creating your own adapter? Add the [`seal-php-adapter`](https://github.com/topics/seal-php-adapter) Topic to your Github Repository.
+Creating your own adapter? Add the [`seal-php-adapter`](https://github.com/topics/seal-php-adapter) Topic to your GitHub Repository.
 
 ## Usage
 

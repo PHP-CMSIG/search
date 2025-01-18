@@ -51,7 +51,7 @@ class SealContainer implements ContainerInterface
 
     /**
      * We need a setter for the services, because the AdapterFactories requiries the container but
-     * need to have possibility to access other dynamicly created adapters inside the Read-Write
+     * need to have possibility to access other dynamically created adapters inside the Read-Write
      * and Multi adapter factories.
      *
      * @param class-string|string $id

@@ -344,7 +344,7 @@ final class Marshaller
 
             $separator = $this->geoPointFieldConfig['separator'] ?? false;
             if ($separator) {
-                \assert(\is_string($value), 'Expected to have a string value for a seperated geo point field.');
+                \assert(\is_string($value), 'Expected to have a string value for a separated geo point field.');
                 $value = \explode($separator, $value);
             }
 

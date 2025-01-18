@@ -129,13 +129,13 @@ final class TestingHelper
                 'blocks' => [
                     [
                         'type' => 'text',
-                        'title' => 'Titel',
+                        'title' => 'Title',
                         'description' => '<p>Description</p>',
                         'media' => [3, 4],
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 2',
+                        'title' => 'Title 2',
                     ],
                     [
                         'type' => 'embed',
@@ -144,7 +144,7 @@ final class TestingHelper
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 4',
+                        'title' => 'Title 4',
                         'description' => '<p>Description 4</p>',
                         'media' => [3, 4],
                     ],
