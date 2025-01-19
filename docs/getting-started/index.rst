@@ -2118,7 +2118,7 @@ Help needed?
 ------------
 
 If you need any help or run into any error feel free to use the
-`Github Discussions <https://github.com/php-cmsig/search/discussions/categories/q-a>`_
+`GitHub Discussions <https://github.com/php-cmsig/search/discussions/categories/q-a>`_
 of the main repository to ask any questions. Or check there if
 somebody already solved the same problem.
 

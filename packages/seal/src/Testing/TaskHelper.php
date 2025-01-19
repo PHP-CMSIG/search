@@ -17,7 +17,7 @@ use CmsIg\Seal\Task\MultiTask;
 use CmsIg\Seal\Task\TaskInterface;
 
 /**
- * @interal
+ * @internal
  */
 final class TaskHelper
 {

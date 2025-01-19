@@ -16,7 +16,7 @@ namespace CmsIg\Seal\Search\Condition;
 class GeoBoundingBoxCondition
 {
     /**
-     * The order may first be unusally, but it is the same as in common JS libraries like.
+     * The order may first be unusually, but it is the same as in common JS libraries like.
      *
      * @see https://docs.mapbox.com/help/glossary/bounding-box/
      * @see https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBounds

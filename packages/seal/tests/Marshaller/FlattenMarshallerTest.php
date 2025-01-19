@@ -74,13 +74,13 @@ class FlattenMarshallerTest extends TestCase
                 'blocks' => [
                     [
                         'type' => 'text',
-                        'title' => 'Titel',
+                        'title' => 'Title',
                         'description' => '<p>Description</p>',
                         'media' => [3, 4],
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 2',
+                        'title' => 'Title 2',
                         'description' => null,
                     ],
                     [
@@ -90,7 +90,7 @@ class FlattenMarshallerTest extends TestCase
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 4',
+                        'title' => 'Title 4',
                         'description' => '<p>Description 4</p>',
                         'media' => [3, 4],
                     ],
@@ -124,7 +124,7 @@ class FlattenMarshallerTest extends TestCase
                 'title' => 'New Blog',
                 'header.image.media' => 1,
                 'article' => '<article><h2>New Subtitle</h2><p>A html field with some content</p></article>',
-                'blocks.text.title' => ['Titel', 'Titel 2', 'Titel 4'],
+                'blocks.text.title' => ['Title', 'Title 2', 'Title 4'],
                 'blocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.media' => [3, 4, 3, 4],
                 'blocks.embed.title' => ['Video'],
@@ -304,19 +304,19 @@ class FlattenMarshallerTest extends TestCase
                 'blocks' => [
                     [
                         'type' => 'text',
-                        'title' => 'Titel',
+                        'title' => 'Title',
                         'description' => '<p>Description</p>',
                         'media' => [3, 4],
                         'secondaryBlocks' => [
                             [
                                 'type' => 'text',
-                                'title' => 'Titel',
+                                'title' => 'Title',
                                 'description' => '<p>Description</p>',
                                 'media' => [3, 4],
                             ],
                             [
                                 'type' => 'text',
-                                'title' => 'Titel 2',
+                                'title' => 'Title 2',
                                 'description' => null,
                             ],
                             [
@@ -326,7 +326,7 @@ class FlattenMarshallerTest extends TestCase
                             ],
                             [
                                 'type' => 'text',
-                                'title' => 'Titel 4',
+                                'title' => 'Title 4',
                                 'description' => '<p>Description 4</p>',
                                 'media' => [3, 4],
                             ],
@@ -334,7 +334,7 @@ class FlattenMarshallerTest extends TestCase
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 2',
+                        'title' => 'Title 2',
                         'description' => null,
                     ],
                     [
@@ -344,19 +344,19 @@ class FlattenMarshallerTest extends TestCase
                     ],
                     [
                         'type' => 'text',
-                        'title' => 'Titel 4',
+                        'title' => 'Title 4',
                         'description' => '<p>Description 4</p>',
                         'media' => [3, 4],
                         'secondaryBlocks' => [
                             [
                                 'type' => 'text',
-                                'title' => 'Titel',
+                                'title' => 'Title',
                                 'description' => '<p>Description</p>',
                                 'media' => [3, 4],
                             ],
                             [
                                 'type' => 'text',
-                                'title' => 'Titel 2',
+                                'title' => 'Title 2',
                                 'description' => null,
                             ],
                             [
@@ -366,7 +366,7 @@ class FlattenMarshallerTest extends TestCase
                             ],
                             [
                                 'type' => 'text',
-                                'title' => 'Titel 4',
+                                'title' => 'Title 4',
                                 'description' => '<p>Description 4</p>',
                                 'media' => [3, 4],
                             ],
@@ -376,10 +376,10 @@ class FlattenMarshallerTest extends TestCase
             ],
             [
                 'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
-                'blocks.text.title' => ['Titel', 'Titel 2', 'Titel 4'],
+                'blocks.text.title' => ['Title', 'Title 2', 'Title 4'],
                 'blocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.media' => [3, 4, 3, 4],
-                'blocks.text.secondaryBlocks.text.title' => ['Titel', 'Titel 2', 'Titel 4', 'Titel', 'Titel 2', 'Titel 4'],
+                'blocks.text.secondaryBlocks.text.title' => ['Title', 'Title 2', 'Title 4', 'Title', 'Title 2', 'Title 4'],
                 'blocks.text.secondaryBlocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>', '<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.secondaryBlocks.text.media' => [3, 4, 3, 4, 3, 4, 3, 4],
                 'blocks.text.secondaryBlocks.embed.title' => ['Video', 'Video'],
@@ -419,46 +419,46 @@ class FlattenMarshallerTest extends TestCase
                 'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
                 'blocks' => [
                     [
-                        'title' => 'Titel',
+                        'title' => 'Title',
                         'description' => '<p>Description</p>',
                         'media' => [3, 4],
                         'secondaryBlocks' => [
                             [
-                                'title' => 'Titel',
+                                'title' => 'Title',
                                 'description' => '<p>Description</p>',
                                 'media' => [3, 4],
                             ],
                             [
-                                'title' => 'Titel 2',
+                                'title' => 'Title 2',
                                 'description' => null,
                             ],
                             [
-                                'title' => 'Titel 4',
+                                'title' => 'Title 4',
                                 'description' => '<p>Description 4</p>',
                                 'media' => [3, 4],
                             ],
                         ],
                     ],
                     [
-                        'title' => 'Titel 2',
+                        'title' => 'Title 2',
                         'description' => null,
                     ],
                     [
-                        'title' => 'Titel 4',
+                        'title' => 'Title 4',
                         'description' => '<p>Description 4</p>',
                         'media' => [3, 4],
                         'secondaryBlocks' => [
                             [
-                                'title' => 'Titel',
+                                'title' => 'Title',
                                 'description' => '<p>Description</p>',
                                 'media' => [3, 4],
                             ],
                             [
-                                'title' => 'Titel 2',
+                                'title' => 'Title 2',
                                 'description' => null,
                             ],
                             [
-                                'title' => 'Titel 4',
+                                'title' => 'Title 4',
                                 'description' => '<p>Description 4</p>',
                                 'media' => [3, 4],
                             ],
@@ -468,10 +468,10 @@ class FlattenMarshallerTest extends TestCase
             ],
             [
                 'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
-                'blocks.title' => ['Titel', 'Titel 2', 'Titel 4'],
+                'blocks.title' => ['Title', 'Title 2', 'Title 4'],
                 'blocks.description' => ['<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.media' => [3, 4, 3, 4],
-                'blocks.secondaryBlocks.title' => ['Titel', 'Titel 2', 'Titel 4', 'Titel', 'Titel 2', 'Titel 4'],
+                'blocks.secondaryBlocks.title' => ['Title', 'Title 2', 'Title 4', 'Title', 'Title 2', 'Title 4'],
                 'blocks.secondaryBlocks.description' => ['<p>Description</p>', null, '<p>Description 4</p>', '<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.secondaryBlocks.media' => [3, 4, 3, 4, 3, 4, 3, 4],
             ],

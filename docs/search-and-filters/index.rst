@@ -213,7 +213,7 @@ The field is required to be marked as ``filterable`` in the index configuration.
 .. note::
 
     The ``GeoBoundingBoxCondition`` is currently not supported by ``Redisearch`` adapter.
-    See `this Github Issue <https://github.com/RediSearch/RediSearch/issues/680>`__ for more information.
+    See `this GitHub Issue <https://github.com/RediSearch/RediSearch/issues/680>`__ for more information.
 
 OrCondition
 ~~~~~~~~~~~
@@ -264,7 +264,7 @@ The fields are required to be marked as ``filterable`` in the index configuratio
 .. note::
 
     If the ``Algolia`` Adapter is used not all kind of combination with ``OrCondition`` are possible.
-    See `this Github Issue <https://github.com/algolia/algoliasearch-client-php/issues/385>`__ for more information.
+    See `this GitHub Issue <https://github.com/algolia/algoliasearch-client-php/issues/385>`__ for more information.
 
 Filter on Objects and Typed Fields
 ----------------------------------
@@ -404,4 +404,4 @@ to manage Indexes, add and remove Documents and how to search and filter the res
 now be ready to start using the abstraction for your different kind of needs.
 
 Missing something? Let us know by creating an issue
-on our `Github Repository <https://github.com/php-cmsig/search>`_.
+on our `GitHub Repository <https://github.com/php-cmsig/search>`_.

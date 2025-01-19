@@ -54,7 +54,7 @@ The application template has the following structure:
 ```
 config/             Configuration files.
 docs/               Documentation.
-public/             Files publically accessible from the Internet.
+public/             Files publicly accessible from the Internet.
     assets/         Published assets.
     index.php       Entry script.
 resources/          Application resources.

@@ -203,7 +203,7 @@ Sonic
 Describe itself as lightweight & schema-less search backend, an alternative to Elasticsearch that runs on a few MBs of RAM.
 
 - Server: `Sonic Server <https://github.com/valeriansaliou/sonic>`__
-- PHP Client: `Unoffical PHP Sonic <https://github.com/php-sonic/php-sonic>`_ looks outdated and not well maintained
+- PHP Client: `Unofficial PHP Sonic <https://github.com/php-sonic/php-sonic>`_ looks outdated and not well maintained
 
 Vespa
 ~~~~~
