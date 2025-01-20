@@ -3203,16 +3203,16 @@
         },
         {
             "name": "spiral/framework",
-            "version": "3.14.9",
+            "version": "3.14.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiral/framework.git",
-                "reference": "be072e6392589d875b400ecad017fa61b2ca4c0f"
+                "reference": "6677c1ad17517468cda27647446e0a69d41b1053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiral/framework/zipball/be072e6392589d875b400ecad017fa61b2ca4c0f",
-                "reference": "be072e6392589d875b400ecad017fa61b2ca4c0f",
+                "url": "https://api.github.com/repos/spiral/framework/zipball/6677c1ad17517468cda27647446e0a69d41b1053",
+                "reference": "6677c1ad17517468cda27647446e0a69d41b1053",
                 "shasum": ""
             },
             "require": {
@@ -3421,7 +3421,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-07T13:03:32+00:00"
+            "time": "2025-01-22T15:07:32+00:00"
         },
         {
             "name": "spiral/goridge",
@@ -6480,16 +6480,16 @@
         },
         {
             "name": "yiisoft/strings",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/strings.git",
-                "reference": "ff519d31e1c2518f42554fb5410e31bbb74b8108"
+                "reference": "5063d70af8b59907261c66a57349ef2c20f5cf2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/strings/zipball/ff519d31e1c2518f42554fb5410e31bbb74b8108",
-                "reference": "ff519d31e1c2518f42554fb5410e31bbb74b8108",
+                "url": "https://api.github.com/repos/yiisoft/strings/zipball/5063d70af8b59907261c66a57349ef2c20f5cf2e",
+                "reference": "5063d70af8b59907261c66a57349ef2c20f5cf2e",
                 "shasum": ""
             },
             "require": {
@@ -6499,10 +6499,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.3",
+                "rector/rector": "^2.0.3",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.8"
+                "vimeo/psalm": "^4.30|^5.25"
             },
             "type": "library",
             "autoload": {
@@ -6524,37 +6524,37 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
-                "issues": "https://github.com/yiisoft/strings/issues",
+                "irc": "ircs://irc.libera.chat:6697/yii",
+                "issues": "https://github.com/yiisoft/strings/issues?state=open",
                 "source": "https://github.com/yiisoft/strings",
                 "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
-                    "url": "https://github.com/yiisoft",
+                    "url": "https://github.com/sponsors/yiisoft",
                     "type": "github"
                 },
                 {
                     "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "type": "opencollective"
                 }
             ],
-            "time": "2023-12-22T07:29:39+00:00"
+            "time": "2025-01-19T13:44:53+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.12.0",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30"
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/8b9d2b82e197ccfda56878f776631f33e42edd30",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/ddc6ab3710c5527d0637cf991601ac7979197d94",
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94",
                 "shasum": ""
             },
             "require": {
@@ -6606,9 +6606,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.12.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.13.0"
             },
-            "time": "2025-01-07T14:48:08+00:00"
+            "time": "2025-01-22T12:32:40+00:00"
         },
         {
             "name": "amphp/amp",
@@ -6772,16 +6772,16 @@
         },
         {
             "name": "buggregator/trap",
-            "version": "1.12.0",
+            "version": "1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/buggregator/trap.git",
-                "reference": "1e3809c2ac66b22b21fb900d2f3b85c33d9fa51e"
+                "reference": "500e7ac1313d35bf0a00540f230f134a8fd0ec91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/buggregator/trap/zipball/1e3809c2ac66b22b21fb900d2f3b85c33d9fa51e",
-                "reference": "1e3809c2ac66b22b21fb900d2f3b85c33d9fa51e",
+                "url": "https://api.github.com/repos/buggregator/trap/zipball/500e7ac1313d35bf0a00540f230f134a8fd0ec91",
+                "reference": "500e7ac1313d35bf0a00540f230f134a8fd0ec91",
                 "shasum": ""
             },
             "require": {
@@ -6847,6 +6847,7 @@
             "description": "A simple and powerful tool for debugging PHP applications.",
             "homepage": "https://buggregator.dev/",
             "keywords": [
+                "Fibers",
                 "WebSockets",
                 "binary dump",
                 "cli",
@@ -6854,6 +6855,7 @@
                 "debug",
                 "dev",
                 "dump",
+                "dumper",
                 "helper",
                 "sentry",
                 "server",
@@ -6861,23 +6863,19 @@
             ],
             "support": {
                 "issues": "https://github.com/buggregator/trap/issues",
-                "source": "https://github.com/buggregator/trap/tree/1.12.0"
+                "source": "https://github.com/buggregator/trap/tree/1.13.3"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/buggregator",
-                    "type": "github"
-                },
-                {
-                    "url": "https://patreon.com/butschster",
-                    "type": "patreon"
+                    "url": "https://boosty.to/roxblnfk",
+                    "type": "boosty"
                 },
                 {
                     "url": "https://patreon.com/roxblnfk",
                     "type": "patreon"
                 }
             ],
-            "time": "2025-01-15T10:32:14+00:00"
+            "time": "2025-01-23T20:32:15+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -10652,16 +10650,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.15",
+            "version": "1.12.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1"
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c91d4e8bc056f46cf653656e6f71004b254574d1",
-                "reference": "c91d4e8bc056f46cf653656e6f71004b254574d1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e0bb5cb78545aae631220735aa706eac633a6be9",
+                "reference": "e0bb5cb78545aae631220735aa706eac633a6be9",
                 "shasum": ""
             },
             "require": {
@@ -10706,7 +10704,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-05T16:40:22+00:00"
+            "time": "2025-01-21T14:50:05+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
