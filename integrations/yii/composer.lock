@@ -1198,16 +1198,16 @@
         },
         {
             "name": "yiisoft/yii-console",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-console.git",
-                "reference": "7942fc70df59965bb1b33ac4671c915a145d2dcf"
+                "reference": "c2829fa6e1ac2f0f3e5d1e55b2650f9ec0e30f93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-console/zipball/7942fc70df59965bb1b33ac4671c915a145d2dcf",
-                "reference": "7942fc70df59965bb1b33ac4671c915a145d2dcf",
+                "url": "https://api.github.com/repos/yiisoft/yii-console/zipball/c2829fa6e1ac2f0f3e5d1e55b2650f9ec0e30f93",
+                "reference": "c2829fa6e1ac2f0f3e5d1e55b2650f9ec0e30f93",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1222,7 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^3.8|^4.4",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^1.0.0",
+                "rector/rector": "^2.0.7",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "vimeo/psalm": "^4.30|^5.20",
                 "yiisoft/config": "^1.3",
@@ -1259,7 +1259,7 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/yii-console/issues?state=open",
                 "source": "https://github.com/yiisoft/yii-console",
                 "wiki": "https://www.yiiframework.com/wiki/"
@@ -1274,22 +1274,22 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-02-17T13:10:12+00:00"
+            "time": "2025-01-23T14:38:56+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.12.0",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30"
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/8b9d2b82e197ccfda56878f776631f33e42edd30",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/ddc6ab3710c5527d0637cf991601ac7979197d94",
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94",
                 "shasum": ""
             },
             "require": {
@@ -1341,9 +1341,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.12.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.13.0"
             },
-            "time": "2025-01-07T14:48:08+00:00"
+            "time": "2025-01-22T12:32:40+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2444,12 +2444,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9"
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
                 "shasum": ""
             },
             "require": {
@@ -2542,7 +2542,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-16T08:48:14+00:00"
+            "time": "2025-01-22T14:21:38+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -4608,12 +4608,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9"
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d2e193c79458c935ce91ccb72a9ee6ee67724cee",
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee",
                 "shasum": ""
             },
             "require": {
@@ -4658,7 +4658,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T13:51:12+00:00"
+            "time": "2025-01-22T12:37:55+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -5041,12 +5041,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8"
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
                 "shasum": ""
             },
             "require": {
@@ -5134,7 +5134,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-15T08:45:30+00:00"
+            "time": "2025-01-22T12:27:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -7121,12 +7121,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4"
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/8e7138531d7a7c1917088b10cc4148cf5f34aca4",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/5fbfc829a31080bc572aa559dce19ea9bdc3a971",
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971",
                 "shasum": ""
             },
             "require": {
@@ -7185,7 +7185,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-10T14:48:57+00:00"
+            "time": "2025-01-19T13:07:55+00:00"
         },
         {
             "name": "theseer/tokenizer",

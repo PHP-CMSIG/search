@@ -342,12 +342,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5afed8962999f2fd1db14e5c06194acb0cb3e95a"
+                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5afed8962999f2fd1db14e5c06194acb0cb3e95a",
-                "reference": "5afed8962999f2fd1db14e5c06194acb0cb3e95a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
+                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-12T16:25:25+00:00"
+            "time": "2025-01-20T13:23:14+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -436,12 +436,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "477d61da59e935b8a2f47dc72e240af7f08b531d"
+                "reference": "bd9b43e8fbece27f9b7a33cd38a6c2e729d05e0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/477d61da59e935b8a2f47dc72e240af7f08b531d",
-                "reference": "477d61da59e935b8a2f47dc72e240af7f08b531d",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/bd9b43e8fbece27f9b7a33cd38a6c2e729d05e0e",
+                "reference": "bd9b43e8fbece27f9b7a33cd38a6c2e729d05e0e",
                 "shasum": ""
             },
             "require": {
@@ -508,7 +508,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-17T11:48:14+00:00"
+            "time": "2025-01-19T13:07:55+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1645,12 +1645,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f83ffadb3c72f40305d5ae2b7a95b4dcad1a4a2c"
+                "reference": "9b59e65b4b07c04d4a33f209ec9347352ca7b0e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f83ffadb3c72f40305d5ae2b7a95b4dcad1a4a2c",
-                "reference": "f83ffadb3c72f40305d5ae2b7a95b4dcad1a4a2c",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9b59e65b4b07c04d4a33f209ec9347352ca7b0e7",
+                "reference": "9b59e65b4b07c04d4a33f209ec9347352ca7b0e7",
                 "shasum": ""
             },
             "require": {
@@ -1721,7 +1721,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-17T11:48:14+00:00"
+            "time": "2025-01-19T13:07:55+00:00"
         },
         {
             "name": "symfony/var-exporter",
@@ -1803,16 +1803,16 @@
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.12.0",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30"
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/8b9d2b82e197ccfda56878f776631f33e42edd30",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/ddc6ab3710c5527d0637cf991601ac7979197d94",
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94",
                 "shasum": ""
             },
             "require": {
@@ -1864,9 +1864,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.12.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.13.0"
             },
-            "time": "2025-01-07T14:48:08+00:00"
+            "time": "2025-01-22T12:32:40+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2967,12 +2967,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9"
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
                 "shasum": ""
             },
             "require": {
@@ -3065,7 +3065,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-16T08:48:14+00:00"
+            "time": "2025-01-22T14:21:38+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -5131,12 +5131,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9"
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d2e193c79458c935ce91ccb72a9ee6ee67724cee",
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee",
                 "shasum": ""
             },
             "require": {
@@ -5181,7 +5181,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T13:51:12+00:00"
+            "time": "2025-01-22T12:37:55+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -5564,12 +5564,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8"
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
                 "shasum": ""
             },
             "require": {
@@ -5657,7 +5657,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-15T08:45:30+00:00"
+            "time": "2025-01-22T12:27:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -7644,12 +7644,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4"
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/8e7138531d7a7c1917088b10cc4148cf5f34aca4",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/5fbfc829a31080bc572aa559dce19ea9bdc3a971",
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971",
                 "shasum": ""
             },
             "require": {
@@ -7708,7 +7708,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-10T14:48:57+00:00"
+            "time": "2025-01-19T13:07:55+00:00"
         },
         {
             "name": "theseer/tokenizer",

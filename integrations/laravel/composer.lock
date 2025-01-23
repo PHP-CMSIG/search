@@ -269,12 +269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
-                "reference": "3d5d67a07c73259aafba0514b4e34fbbc3965aa1"
+                "reference": "ed6dd9b36ff18a57a951bd5946f1c3a534f900cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/bus/zipball/3d5d67a07c73259aafba0514b4e34fbbc3965aa1",
-                "reference": "3d5d67a07c73259aafba0514b4e34fbbc3965aa1",
+                "url": "https://api.github.com/repos/illuminate/bus/zipball/ed6dd9b36ff18a57a951bd5946f1c3a534f900cb",
+                "reference": "ed6dd9b36ff18a57a951bd5946f1c3a534f900cb",
                 "shasum": ""
             },
             "require": {
@@ -314,7 +314,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-17T22:56:39+00:00"
+            "time": "2025-01-22T21:19:28+00:00"
         },
         {
             "name": "illuminate/collections",
@@ -322,12 +322,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "9100b083eeb85d38d78fc1de28f7326596ab2eda"
+                "reference": "7ad26e6f53da716901f9a2b95cad0cadce09a8b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/9100b083eeb85d38d78fc1de28f7326596ab2eda",
-                "reference": "9100b083eeb85d38d78fc1de28f7326596ab2eda",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/7ad26e6f53da716901f9a2b95cad0cadce09a8b0",
+                "reference": "7ad26e6f53da716901f9a2b95cad0cadce09a8b0",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +370,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-12-18T14:14:45+00:00"
+            "time": "2025-01-21T16:13:55+00:00"
         },
         {
             "name": "illuminate/conditionable",
@@ -424,12 +424,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
-                "reference": "5b48267fbe7a7f117963ff534681a94f75ade0b1"
+                "reference": "272913586851fe5e36f9e7835821e07bb0b2bbf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/console/zipball/5b48267fbe7a7f117963ff534681a94f75ade0b1",
-                "reference": "5b48267fbe7a7f117963ff534681a94f75ade0b1",
+                "url": "https://api.github.com/repos/illuminate/console/zipball/272913586851fe5e36f9e7835821e07bb0b2bbf0",
+                "reference": "272913586851fe5e36f9e7835821e07bb0b2bbf0",
                 "shasum": ""
             },
             "require": {
@@ -482,7 +482,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-13T17:38:21+00:00"
+            "time": "2025-01-23T14:00:23+00:00"
         },
         {
             "name": "illuminate/container",
@@ -805,12 +805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "82fbdd256e855eb4ec94a4a865a8b15ae4eb5b2d"
+                "reference": "f63af42cfacf8ac3fcf3df49b06de66ff3b22ee0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/82fbdd256e855eb4ec94a4a865a8b15ae4eb5b2d",
-                "reference": "82fbdd256e855eb4ec94a4a865a8b15ae4eb5b2d",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/f63af42cfacf8ac3fcf3df49b06de66ff3b22ee0",
+                "reference": "f63af42cfacf8ac3fcf3df49b06de66ff3b22ee0",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-01-15T19:27:44+00:00"
+            "time": "2025-01-22T21:19:28+00:00"
         },
         {
             "name": "illuminate/view",
@@ -882,12 +882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
-                "reference": "24f011946fbe2159f56ea61399ec779784d0c027"
+                "reference": "9f9bed5b55b1b888a6149860b4b26b20ca4435bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/view/zipball/24f011946fbe2159f56ea61399ec779784d0c027",
-                "reference": "24f011946fbe2159f56ea61399ec779784d0c027",
+                "url": "https://api.github.com/repos/illuminate/view/zipball/9f9bed5b55b1b888a6149860b4b26b20ca4435bf",
+                "reference": "9f9bed5b55b1b888a6149860b4b26b20ca4435bf",
                 "shasum": ""
             },
             "require": {
@@ -928,7 +928,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-12-26T21:39:36+00:00"
+            "time": "2025-01-22T21:19:28+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1419,12 +1419,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5afed8962999f2fd1db14e5c06194acb0cb3e95a"
+                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5afed8962999f2fd1db14e5c06194acb0cb3e95a",
-                "reference": "5afed8962999f2fd1db14e5c06194acb0cb3e95a",
+                "url": "https://api.github.com/repos/symfony/console/zipball/164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
+                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
                 "shasum": ""
             },
             "require": {
@@ -1505,7 +1505,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-12T16:25:25+00:00"
+            "time": "2025-01-20T13:23:14+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2523,16 +2523,16 @@
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.12.0",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30"
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/8b9d2b82e197ccfda56878f776631f33e42edd30",
-                "reference": "8b9d2b82e197ccfda56878f776631f33e42edd30",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/ddc6ab3710c5527d0637cf991601ac7979197d94",
+                "reference": "ddc6ab3710c5527d0637cf991601ac7979197d94",
                 "shasum": ""
             },
             "require": {
@@ -2584,9 +2584,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.12.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.13.0"
             },
-            "time": "2025-01-07T14:48:08+00:00"
+            "time": "2025-01-22T12:32:40+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -3687,12 +3687,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9"
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
-                "reference": "02523d041616bd5b8e86fb3aa2c1fa086f72b4d9",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
+                "reference": "5eeeb3319b55e8a325eea71c5f0a82d4c105ecc5",
                 "shasum": ""
             },
             "require": {
@@ -3785,7 +3785,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-16T08:48:14+00:00"
+            "time": "2025-01-22T14:21:38+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -5851,12 +5851,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9"
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
-                "reference": "24cdeac0dae3c5c4ac61d8d77a4144e3fed05cf9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d2e193c79458c935ce91ccb72a9ee6ee67724cee",
+                "reference": "d2e193c79458c935ce91ccb72a9ee6ee67724cee",
                 "shasum": ""
             },
             "require": {
@@ -5901,7 +5901,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-18T13:51:12+00:00"
+            "time": "2025-01-22T12:37:55+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -6284,12 +6284,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8"
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
-                "reference": "3fe56f69c661806d3e4679ae5d7bdfd83bc4a8f8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
                 "shasum": ""
             },
             "require": {
@@ -6377,7 +6377,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-15T08:45:30+00:00"
+            "time": "2025-01-22T12:27:30+00:00"
         },
         {
             "name": "psr/cache",
@@ -8493,12 +8493,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4"
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/8e7138531d7a7c1917088b10cc4148cf5f34aca4",
-                "reference": "8e7138531d7a7c1917088b10cc4148cf5f34aca4",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/5fbfc829a31080bc572aa559dce19ea9bdc3a971",
+                "reference": "5fbfc829a31080bc572aa559dce19ea9bdc3a971",
                 "shasum": ""
             },
             "require": {
@@ -8557,7 +8557,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-10T14:48:57+00:00"
+            "time": "2025-01-19T13:07:55+00:00"
         },
         {
             "name": "theseer/tokenizer",
