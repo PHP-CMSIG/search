@@ -1,0 +1,906 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Research" href="../research/index.html" /><link rel="prev" title="Cookbooks" href="index.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.ico"/><!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
+        <title>Create own Adapter - SEAL Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">SEAL Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-brand" href="../index.html">
+        <a href="../index.html" class="sidebar-logo-container">
+            <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+        </a>
+
+        
+        <span class="sidebar-logo-creator centered">
+            <span>Logo created by</span> <a target="_blank" href="https://cargocollective.com/meinewilma">Meine Wilma</a>
+        </span>
+
+        
+            <span class="sidebar-brand-text">
+                <span class="sidebar-brand-text-before">SEAL</span>
+                <span class="sidebar-brand-text-after">Search Engine Abstraction Layer</span>
+            </span></div><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schema/index.html">Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../indexing/index.html">Index Operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../search-and-filters/index.html">Search &amp; Filter Conditions</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Cookbooks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Create own Adapter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../research/index.html">Research</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="create-own-adapter">
+<h1>Create own Adapter<a class="headerlink" href="#create-own-adapter" title="Permalink to this heading">#</a></h1>
+<p>In this part of the documentation describes how to create an own adapter.
+Before you start with it let us know via an <a class="reference external" href="https://github.com/php-cmsig/search">issue</a>
+if it maybe an Adapter which make sense to add to the SEAL core and we can work together to get it in it.</p>
+<section id="install-dependencies">
+<h2>Install dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this heading">#</a></h2>
+<p>To create your own Adapter you need atleast the SEAL composer package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>composer<span class="w"> </span>require<span class="w"> </span>cmsig/seal
+</pre></div>
+</div>
+<p>The project already ships a test suite based on PHPUnit to use it you need to install PHPUnit:</p>
+<blockquote>
+<div><p>composer require phpunit/phpunit:”^9.6”</p>
+</div></blockquote>
+</section>
+<section id="create-basic-classes">
+<h2>Create Basic Classes<a class="headerlink" href="#create-basic-classes" title="Permalink to this heading">#</a></h2>
+<p>An own Adapter depends on the following classes which are responsible for all different operations:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Adapter</span></code></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code> (create and drop indexes)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Indexer</span></code> (save and delete documents)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Searcher</span></code> (search documents)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AdapterFactory</span></code></p></li>
+</ul>
+<section id="create-adapter">
+<h3>Create Adapter<a class="headerlink" href="#create-adapter" title="Permalink to this heading">#</a></h3>
+<p>The Adapter is the main entry point for the own Adapter and provides access to the <code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code>, <code class="docutils literal notranslate"><span class="pre">Indexer</span></code> and <code class="docutils literal notranslate"><span class="pre">Searcher</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\AdapterInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\IndexerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\SchemaManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\SearcherInterface</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MyAdapter</span> <span class="k">implements</span> <span class="nx">AdapterInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">SchemaManagerInterface</span> <span class="nv">$schemaManager</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">IndexerInterface</span> <span class="nv">$indexer</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">SearcherInterface</span> <span class="nv">$searcher</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="nx">Client</span> <span class="nv">$client</span><span class="p">,</span>
+        <span class="o">?</span><span class="nx">SchemaManagerInterface</span> <span class="nv">$schemaManager</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span>
+        <span class="o">?</span><span class="nx">IndexerInterface</span> <span class="nv">$indexer</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span>
+        <span class="o">?</span><span class="nx">SearcherInterface</span> <span class="nv">$searcher</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">schemaManager</span> <span class="o">=</span> <span class="nv">$schemaManager</span> <span class="o">??</span> <span class="k">new</span> <span class="nx">MySchemaManager</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">indexer</span> <span class="o">=</span> <span class="nv">$indexer</span> <span class="o">??</span> <span class="k">new</span> <span class="nx">MyIndexer</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">searcher</span> <span class="o">=</span> <span class="nv">$searcher</span> <span class="o">??</span> <span class="k">new</span> <span class="nx">MySearcher</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSchemaManager</span><span class="p">()</span><span class="o">:</span> <span class="nx">SchemaManagerInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">schemaManager</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getIndexer</span><span class="p">()</span><span class="o">:</span> <span class="nx">IndexerInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">indexer</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSearcher</span><span class="p">()</span><span class="o">:</span> <span class="nx">SearcherInterface</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">searcher</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="create-schemamanager">
+<h3>Create SchemaManager<a class="headerlink" href="#create-schemamanager" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code> is responsible for creating and dropping indexes.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\SchemaManagerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Schema\Index</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Task\AsyncTask</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Task\TaskInterface</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MySchemaManager</span> <span class="k">implements</span> <span class="nx">SchemaManagerInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Client</span> <span class="nv">$client</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">existIndex</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">)</span><span class="o">:</span> <span class="nx">bool</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">dropIndex</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="o">?</span><span class="nx">TaskInterface</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createIndex</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="o">?</span><span class="nx">TaskInterface</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="create-indexer">
+<h3>Create Indexer<a class="headerlink" href="#create-indexer" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Indexer</span></code> is responsible for saving and deleting documents.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\IndexerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Marshaller\Marshaller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Schema\Index</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Task\AsyncTask</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Task\TaskInterface</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MyIndexer</span> <span class="k">implements</span> <span class="nx">IndexerInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Marshaller</span> <span class="nv">$marshaller</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Client</span> <span class="nv">$client</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marshaller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Marshaller</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">save</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$document</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="o">?</span><span class="nx">TaskInterface</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">delete</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">,</span> <span class="nx">string</span> <span class="nv">$identifier</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span><span class="o">:</span> <span class="o">?</span><span class="nx">TaskInterface</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Marshaller</span></code> is responsible for converting the document into an easier Format to index documents.
+There exists 2 <code class="docutils literal notranslate"><span class="pre">Marshaller``the</span> <span class="pre">``Marshaller</span></code> which keeps nested objects and the <code class="docutils literal notranslate"><span class="pre">FlattenMarshaller</span></code>
+which flatten nested objects to the root by using <code class="docutils literal notranslate"><span class="pre">.</span></code> as divider.</p>
+</section>
+<section id="create-searcher">
+<h3>Create Searcher<a class="headerlink" href="#create-searcher" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> is responsible for searching documents.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\SearcherInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Marshaller\Marshaller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Schema\Index</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Condition</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Result</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Search</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MySearcher</span> <span class="k">implements</span> <span class="nx">SearcherInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Marshaller</span> <span class="nv">$marshaller</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Client</span> <span class="nv">$client</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marshaller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Marshaller</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nx">Search</span> <span class="nv">$search</span><span class="p">)</span><span class="o">:</span> <span class="nx">Result</span>
+    <span class="p">{</span>
+        <span class="c1">// TODO we will tackle this later</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> requires the same Marshaller as the <code class="docutils literal notranslate"><span class="pre">Indexer</span></code> to convert the document back to the original format.</p>
+</section>
+<section id="create-adapterfactory">
+<h3>Create AdapterFactory<a class="headerlink" href="#create-adapterfactory" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">AdapterFactory</span></code> is responsible for creating the <code class="docutils literal notranslate"><span class="pre">Adapter</span></code> mostly used by
+integrations into Frameworks Dependency Injection container and constructing the
+<code class="docutils literal notranslate"><span class="pre">Adapter</span></code> via a DSN string.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\AdapterFactoryInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\AdapterInterface</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @experimental</span>
+<span class="sd"> */</span>
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MyAdapterFactory</span> <span class="k">implements</span> <span class="nx">AdapterFactoryInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="k">private</span> <span class="nx">readonly</span> <span class="o">?</span><span class="nx">ContainerInterface</span> <span class="nv">$container</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createAdapter</span><span class="p">(</span><span class="k">array</span> <span class="nv">$dsn</span><span class="p">)</span><span class="o">:</span> <span class="nx">AdapterInterface</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createClient</span><span class="p">(</span><span class="nv">$dsn</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">MyAdapter</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @internal</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param array{</span>
+<span class="sd">     *     host: string,</span>
+<span class="sd">     *     port?: int,</span>
+<span class="sd">     *     user?: string,</span>
+<span class="sd">     *     pass?: string,</span>
+<span class="sd">     * } $dsn</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">createClient</span><span class="p">(</span><span class="k">array</span> <span class="nv">$dsn</span><span class="p">)</span><span class="o">:</span> <span class="nx">SearchClient</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="o">===</span> <span class="nv">$dsn</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">?-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">Client</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+
+            <span class="k">return</span> <span class="nv">$client</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">(</span>
+            <span class="nv">$dsn</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;:&#39;</span> <span class="o">.</span> <span class="p">(</span><span class="nv">$dsn</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="mi">9200</span><span class="p">),</span><span class="o">+</span>
+            <span class="nv">$dsn</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="nv">$pass</span> <span class="o">=</span> <span class="nv">$dsn</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$client</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getName</span><span class="p">()</span><span class="o">:</span> <span class="nx">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;my&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-tests">
+<h2>Creating Tests<a class="headerlink" href="#creating-tests" title="Permalink to this heading">#</a></h2>
+<p>The easiest way to create an own Adapter is following TDD (Test Driven Development) and use the shipped TestSuite.</p>
+<p>For this we will create the following new files:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/MySchemaManagerTest.php</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/MyAdapterTest.php</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/MyIndexerTest.php</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/MySearcherTest.php</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>For most adapters they require a Third Party client to make constructing of that Client
+easier we will create a <code class="docutils literal notranslate"><span class="pre">ClientHelper</span></code> class in our new test suite.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">ClientHelper</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="o">?</span><span class="nx">Client</span> <span class="nv">$client</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getClient</span><span class="p">()</span><span class="o">:</span> <span class="nx">Client</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">self</span><span class="o">::</span><span class="nv">$client</span> <span class="nx">instanceof</span> <span class="nx">Client</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">self</span><span class="o">::</span><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">(</span><span class="nv">$_ENV</span><span class="p">[</span><span class="s1">&#39;MY_OWN_HOST&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;127.0.0.1:7700&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$client</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="schemamanagertest">
+<h3>SchemaManagerTest<a class="headerlink" href="#schemamanagertest" title="Permalink to this heading">#</a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">My\Own\Adapter\MySchemaManager</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Testing\AbstractSchemaManagerTestCase</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Testing\TestingHelper</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MySchemaManagerTest</span> <span class="k">extends</span> <span class="nx">AbstractSchemaManagerTestCase</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="nx">Client</span> <span class="nv">$client</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$client</span> <span class="o">=</span> <span class="nx">ClientHelper</span><span class="o">::</span><span class="na">getClient</span><span class="p">();</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$schemaManager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySchemaManager</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="nv">$client</span><span class="p">);</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUpBeforeClass</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="myadaptertest">
+<h3>MyAdapterTest<a class="headerlink" href="#myadaptertest" title="Permalink to this heading">#</a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">My\Own\Adapter\MyAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Testing\AbstractAdapterTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyAdapterTest</span> <span class="k">extends</span> <span class="nx">AbstractAdapterTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nx">ClientHelper</span><span class="o">::</span><span class="na">getClient</span><span class="p">();</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyAdapter</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUpBeforeClass</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="myindexertest">
+<h3>MyIndexerTest<a class="headerlink" href="#myindexertest" title="Permalink to this heading">#</a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">My\Own\Adapter\MyAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Testing\AbstractIndexerTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MyIndexerTest</span> <span class="k">extends</span> <span class="nx">AbstractIndexerTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nx">ClientHelper</span><span class="o">::</span><span class="na">getClient</span><span class="p">();</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyAdapter</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUpBeforeClass</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="mysearchertest">
+<h3>MySearcherTest<a class="headerlink" href="#mysearchertest" title="Permalink to this heading">#</a></h3>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter\Tests</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">My\Own\Adapter\MyAdapter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Testing\AbstractSearcherTestCase</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MySearcherTest</span> <span class="k">extends</span> <span class="nx">AbstractSearcherTestCase</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nx">ClientHelper</span><span class="o">::</span><span class="na">getClient</span><span class="p">();</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyAdapter</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+
+        <span class="k">parent</span><span class="o">::</span><span class="na">setUpBeforeClass</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @doesNotPerformAssertions</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testFindMultipleIndexes</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">markTestSkipped</span><span class="p">(</span><span class="s1">&#39;Not supported by MyOwnSearchEngine: https://github.com/.../.../issues/28&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="implementing-logic">
+<h2>Implementing Logic<a class="headerlink" href="#implementing-logic" title="Permalink to this heading">#</a></h2>
+<p>Now we can begin to implement the logic for our own Adapter.</p>
+<section id="implementing-schemamanager">
+<h3>Implementing SchemaManager<a class="headerlink" href="#implementing-schemamanager" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code> is the required way to start to implement as all other Services
+depending on it that it works.</p>
+<p>The SchemaManager is responsible for create and drop indexes and configure the Index
+fields correctly based on their type and defined options. How this can be achieved
+is different from Search Engine to Search Engine.</p>
+<p>Read the <a class="reference internal" href="../schema/index.html"><span class="doc">Schema</span></a> documentation to get an overview of the different field types which exists.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">vendor/bin/phpunit --filter=&quot;SchemaManagerTest&quot;</span>
+</pre></div>
+</div>
+<p>Now you can step by step implementing the SchemaManager methods.</p>
+<p>Examples for different <code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code> can be found in the official Repository:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-algolia-adapter/src/AlgoliaSchemaManager.php">AlgoliaSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-elasticsearch-adapter/src/ElasticsearchSchemaManager.php">ElasticsearchSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-opensearch-adapter/src/OpensearchSchemaManager.php">OpensearchSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-meilisearch-adapter/src/MeilisearchSchemaManager.php">MeilisearchSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-loupe-adapter/src/LoupeSchemaManager.php">LoupeSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-redisearch-adapter/src/RediSearchSchemaManager.php">RediSearchSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-solr-adapter/src/SolrSchemaManager.php">SolrSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-typesense-adapter/src/TypesenseSchemaManager.php">TypesenseSchemaManager</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-memory-adapter/src/MemorySchemaManager.php">MemorySchemaManager</a></p></li>
+</ul>
+</section>
+<section id="implementing-the-indexer">
+<h3>Implementing the Indexer<a class="headerlink" href="#implementing-the-indexer" title="Permalink to this heading">#</a></h3>
+<p>After the <code class="docutils literal notranslate"><span class="pre">SchemaManager</span></code> works like expected we will continue with the <code class="docutils literal notranslate"><span class="pre">Indexer</span></code>.
+This is responsible to save and delete documents from the Search Engine. How this can be achieved
+is different from Search Engine to Search Engine.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">IndexerTest</span></code> requires a basic <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> implementation to work. See next <code class="docutils literal notranslate"><span class="pre">Implementing</span> <span class="pre">the</span> <span class="pre">Searcher</span></code> section.</p>
+</div>
+<p>Examples for different <code class="docutils literal notranslate"><span class="pre">Indexer</span></code> can be found in the official Repository:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-algolia-adapter/src/AlgoliaIndexer.php">AlgoliaIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-elasticsearch-adapter/src/ElasticsearchIndexer.php">ElasticsearchIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-opensearch-adapter/src/OpensearchIndexer.php">OpensearchIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-meilisearch-adapter/src/MeilisearchIndexer.php">MeilisearchIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-loupe-adapter/src/LoupeIndexer.php">LoupeIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-redisearch-adapter/src/RediSearchIndexer.php">RediSearchIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-solr-adapter/src/SolrIndexer.php">SolrIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-typesense-adapter/src/TypesenseIndexer.php">TypesenseIndexer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-memory-adapter/src/MemorySchemaManager.php">MemoryIndexer</a></p></li>
+</ul>
+</section>
+<section id="implementing-the-searcher">
+<h3>Implementing the Searcher<a class="headerlink" href="#implementing-the-searcher" title="Permalink to this heading">#</a></h3>
+<p>A Basic <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> implementation is required that we can test the <code class="docutils literal notranslate"><span class="pre">Indexer</span></code> as we need
+a way to load a document by its identifier. How this can be achieved is different from
+Search Engine to Search Engine. A common way is the following example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="nx">My\Own\Adapter</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Some\Third\Party\Client</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Adapter\SearcherInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Marshaller\Marshaller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Schema\Index</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Condition</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Result</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">CmsIg\Seal\Search\Search</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">class</span> <span class="nc">MySearcher</span> <span class="k">implements</span> <span class="nx">SearcherInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Marshaller</span> <span class="nv">$marshaller</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span>
+        <span class="k">private</span> <span class="nx">readonly</span> <span class="nx">Client</span> <span class="nv">$client</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marshaller</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Marshaller</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nx">Search</span> <span class="nv">$search</span><span class="p">)</span><span class="o">:</span> <span class="nx">Result</span>
+    <span class="p">{</span>
+        <span class="c1">// optimized single document query</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="mi">1</span> <span class="o">===</span> <span class="nx">\count</span><span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">filters</span><span class="p">)</span>
+            <span class="o">&amp;&amp;</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">filters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nx">instanceof</span> <span class="nx">Condition\IdentifierCondition</span>
+            <span class="o">&amp;&amp;</span> <span class="mi">0</span> <span class="o">===</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">offset</span>
+            <span class="o">&amp;&amp;</span> <span class="mi">1</span> <span class="o">===</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">limit</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$singleDocumentIndexName</span> <span class="o">=</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">index</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+            <span class="nv">$singleDocumentIdentifier</span> <span class="o">=</span> <span class="nv">$search</span><span class="o">-&gt;</span><span class="na">filters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">identifier</span><span class="p">;</span>
+
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">(</span><span class="nv">$singleDocumentIndexName</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getDocument</span><span class="p">(</span><span class="nv">$singleDocumentIdentifier</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">ApiException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="mi">404</span> <span class="o">!==</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">httpStatus</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="nv">$e</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="k">return</span> <span class="k">new</span> <span class="nx">Result</span><span class="p">(</span>
+                    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hitsToDocuments</span><span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">,</span> <span class="p">[]),</span>
+                    <span class="mi">0</span><span class="p">,</span>
+                <span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Result</span><span class="p">(</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hitsToDocuments</span><span class="p">(</span><span class="nv">$search</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">,</span> <span class="p">[</span><span class="nv">$data</span><span class="p">]),</span>
+                <span class="mi">1</span><span class="p">,</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// TODO</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @param Index $index</span>
+<span class="sd">     * @param iterable&lt;array&lt;string, mixed&gt;&gt; $hits</span>
+<span class="sd">     *</span>
+<span class="sd">     * @return \Generator&lt;int, array&lt;string, mixed&gt;&gt;</span>
+<span class="sd">     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="nf">hitsToDocuments</span><span class="p">(</span><span class="nx">Index</span> <span class="nv">$index</span><span class="p">,</span> <span class="nx">iterable</span> <span class="nv">$hits</span><span class="p">)</span><span class="o">:</span> <span class="nx">\Generator</span>
+    <span class="p">{</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$hits</span> <span class="k">as</span> <span class="nv">$hit</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">yield</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marshaller</span><span class="o">-&gt;</span><span class="na">unmarshall</span><span class="p">(</span><span class="nv">$index</span><span class="o">-&gt;</span><span class="na">fields</span><span class="p">,</span> <span class="nv">$hit</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">vendor/bin/phpunit --filter=&quot;IndexerTest&quot;</span>
+</pre></div>
+</div>
+<p>If that works like expected we can continue with the <code class="docutils literal notranslate"><span class="pre">SearcherTest</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">vendor/bin/phpunit --filter=&quot;SearcherTest&quot;</span>
+</pre></div>
+</div>
+<p>This is the most difficult part to implement all different conditions. How this can be achieved
+is different from Search Engine to Search Engine.</p>
+<p>Read the <a class="reference internal" href="../search-and-filters/index.html"><span class="doc">Search &amp; Filter Conditions</span></a> documentation to get an overview of the different searches and filters which exists.</p>
+<p>Examples for different <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> can be found in the official Repository:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-algolia-adapter/src/AlgoliaSearcher.php">AlgoliaSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-elasticsearch-adapter/src/ElasticsearchSearcher.php">ElasticsearchSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-opensearch-adapter/src/OpensearchSearcher.php">OpensearchSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-meilisearch-adapter/src/MeilisearchSearcher.php">MeilisearchSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-loupe-adapter/src/LoupeSearcher.php">LoupeSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-redisearch-adapter/src/RediSearchSearcher.php">RediSearchSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-solr-adapter/src/SolrSearcher.php">SolrSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-typesense-adapter/src/TypesenseSearcher.php">TypesenseSearcher</a></p></li>
+<li><p><a class="reference external" href="https://github.com/php-cmsig/search/blob/0.1/packages/seal-memory-adapter/src/MemorySchemaManager.php">MemorySearcher</a></p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>If all tests are green you can be sure that your implementation works like expected.
+You can publish your own adapter also as a composer package if you want to make it public available.</p>
+<p>Tag the packagist package with <a class="reference external" href="https://packagist.org/search/?tags=seal-adapter">seal-adapter</a>
+and your use the GitHub Topic <a class="reference external" href="https://github.com/topics/seal-php-adapter">seal-php-adapter</a>.</p>
+<p>This way also other can easily find your own created adapter.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+    
+        <div class="related-pages">
+          <a class="next-page" href="../research/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Research</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Cookbooks</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Alexander Schranz
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+
+    
+        <div style="padding-bottom: 32px;">
+            <div style="margin-left: auto; font-size: 12px;">
+                Created with support in the austrian alps at <a href="https://github.com/sulu/sulu"><b>Sulu CMS</b></a>.
+            </div>
+
+            <br>
+
+            <div>
+                <a class="muted-link" target="_blank" href="https://github.com/schranz-search/schranz-search/edit/0.6/docs/cookbooks/create-own-adapter.rst" style="font-size: 12px; display: inline-flex; gap: 8px; align-items: center;">
+                    Edit on GitHub
+
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" style="width: 16px;">
+                        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Create own Adapter</a><ul>
+<li><a class="reference internal" href="#install-dependencies">Install dependencies</a></li>
+<li><a class="reference internal" href="#create-basic-classes">Create Basic Classes</a><ul>
+<li><a class="reference internal" href="#create-adapter">Create Adapter</a></li>
+<li><a class="reference internal" href="#create-schemamanager">Create SchemaManager</a></li>
+<li><a class="reference internal" href="#create-indexer">Create Indexer</a></li>
+<li><a class="reference internal" href="#create-searcher">Create Searcher</a></li>
+<li><a class="reference internal" href="#create-adapterfactory">Create AdapterFactory</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-tests">Creating Tests</a><ul>
+<li><a class="reference internal" href="#schemamanagertest">SchemaManagerTest</a></li>
+<li><a class="reference internal" href="#myadaptertest">MyAdapterTest</a></li>
+<li><a class="reference internal" href="#myindexertest">MyIndexerTest</a></li>
+<li><a class="reference internal" href="#mysearchertest">MySearcherTest</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementing-logic">Implementing Logic</a><ul>
+<li><a class="reference internal" href="#implementing-schemamanager">Implementing SchemaManager</a></li>
+<li><a class="reference internal" href="#implementing-the-indexer">Implementing the Indexer</a></li>
+<li><a class="reference internal" href="#implementing-the-searcher">Implementing the Searcher</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

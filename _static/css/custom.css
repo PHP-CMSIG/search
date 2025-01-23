@@ -1,0 +1,109 @@
+html {
+    scroll-behavior: auto;
+}
+
+body[data-theme="dark"] .sphinx-tabs-panel {
+    background: none !important;
+    border: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    body[data-theme="auto"] .sphinx-tabs-panel {
+        background: none !important;
+        border: none !important;
+    }
+}
+
+.sphinx-tabs {
+    margin-top: 2rem;
+}
+
+.sphinx-tabs-panel {
+    background: none !important;
+    border: none !important;
+    padding: 1rem 0;
+}
+
+.sphinx-tabs-tab {
+    padding: 0.25rem 0.75rem;
+}
+
+[role="tablist"] {
+    display: flex;
+    overflow: auto;
+    padding: 1px;
+}
+
+[role="tablist"] > * {
+    white-space: nowrap;
+}
+
+[name="TG91cGU="][role=tab] {
+    position: relative;
+}
+
+[name="TG91cGU="][role="tab"]::after {
+    content: 'New';
+    font-weight: bold;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    font-size: 0.5em;
+    line-height: 1;
+    background: #fc0;
+    color: black;
+    padding: 1px;
+    border-radius: 3px;
+}
+
+article table.align-default {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+article table th {
+    text-align: left;
+}
+
+.sidebar-drawer {
+    max-width: 15em;
+}
+
+.image-reference {
+    display: block;
+}
+
+.image-reference > img {
+    display: block;
+    margin: 0 auto;
+}
+
+.sidebar-logo {
+    max-width: 80px;
+}
+
+.sidebar-brand-text {
+    font-size: 0;
+    display: block;
+    font-weight: 500;
+    padding-top: 12px;
+}
+
+.sidebar-logo-creator {
+    font-size: 10px;
+
+    > a {
+        font-size: 1em !important;
+    }
+}
+
+.sidebar-brand-text-before {
+    font-size: 20px;
+}
+
+.sidebar-brand-text-after {
+    display: block;
+    content: "Search Engine Abstraction Layer";
+    padding-top: 6px;
+    font-size: 12px;
+}
