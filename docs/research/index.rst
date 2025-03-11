@@ -75,6 +75,11 @@ Optimization links:
 - `https://symfony.com/blog/migrating-symfony-com-search-engine-to-meilisearch <https://symfony.com/blog/migrating-symfony-com-search-engine-to-meilisearch>`__
 - `https://thetizzo.com/2024/02/13/scaling-elasticsearch-for-fun-and-profit <https://thetizzo.com/2024/02/13/scaling-elasticsearch-for-fun-and-profit>`__
 
+Interesting articles:
+---------------------
+
+- `https://www.wix.engineering/post/the-art-of-secure-search-how-wix-mastered-pii-data-in-vespa-search-engine <https://www.wix.engineering/post/the-art-of-secure-search-how-wix-mastered-pii-data-in-vespa-search-engine>`__
+
 Descriptions of Search Engines
 ------------------------------
 
