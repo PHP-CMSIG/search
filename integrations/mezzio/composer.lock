@@ -1481,11 +1481,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "b007020e3716d43f4e05732970e2a3295b177bef"
+                "reference": "83c3ec276069d4b985022ab62371ff5b2067e01d"
             },
             "require": {
                 "cmsig/seal": "^0.7",
-                "loupe/loupe": "^0.8 || ^0.9",
+                "loupe/loupe": "^0.8 || ^0.9 || ^0.10",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -3162,16 +3162,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.9.5",
+            "version": "0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "1c65e9fff40da2247c951711166ef143bb2093df"
+                "reference": "0c47688ed4c139262446b083bfd9181b427d65e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/1c65e9fff40da2247c951711166ef143bb2093df",
-                "reference": "1c65e9fff40da2247c951711166ef143bb2093df",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/0c47688ed4c139262446b083bfd9181b427d65e7",
+                "reference": "0c47688ed4c139262446b083bfd9181b427d65e7",
                 "shasum": ""
             },
             "require": {
@@ -3179,16 +3179,16 @@
                 "doctrine/lexer": "^2.0 || ^3.0",
                 "ext-intl": "*",
                 "ext-mbstring": "*",
-                "mjaschen/phpgeo": "^4.2",
-                "nitotm/efficient-language-detector": "^2.0",
+                "mjaschen/phpgeo": "^5.0 || ^6.0",
+                "nitotm/efficient-language-detector": "^3.0",
                 "php": "^8.1",
                 "psr/log": "^2.0 || ^3.0",
                 "toflar/state-set-index": "^3.0",
                 "wamania/php-stemmer": "^3.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^10.5",
                 "symfony/filesystem": "^6.2",
                 "symfony/finder": "^6.2",
                 "symfony/var-dumper": "^6.2",
@@ -3213,7 +3213,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.9.5"
+                "source": "https://github.com/loupe-php/loupe/tree/0.10.0"
             },
             "funding": [
                 {
@@ -3221,7 +3221,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-11T12:46:40+00:00"
+            "time": "2025-03-13T08:48:07+00:00"
         },
         {
             "name": "meilisearch/meilisearch-php",
@@ -3292,25 +3292,25 @@
         },
         {
             "name": "mjaschen/phpgeo",
-            "version": "4.2.1",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mjaschen/phpgeo.git",
-                "reference": "5e16834f9433c7780cda7e16aa279814f98ca697"
+                "reference": "71074ce618dbaa4f048c8ee6b4e0c2d0e51a0931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mjaschen/phpgeo/zipball/5e16834f9433c7780cda7e16aa279814f98ca697",
-                "reference": "5e16834f9433c7780cda7e16aa279814f98ca697",
+                "url": "https://api.github.com/repos/mjaschen/phpgeo/zipball/71074ce618dbaa4f048c8ee6b4e0c2d0e51a0931",
+                "reference": "71074ce618dbaa4f048c8ee6b4e0c2d0e51a0931",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0"
+                "php": "^8.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.6",
-                "vimeo/psalm": "^4.13"
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.0",
+                "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
             "autoload": {
@@ -3359,7 +3359,7 @@
                 "docs": "https://phpgeo.marcusjaschen.de/Installation.html",
                 "email": "mjaschen@gmail.com",
                 "issues": "https://github.com/mjaschen/phpgeo/issues",
-                "source": "https://github.com/mjaschen/phpgeo/tree/4.2.1"
+                "source": "https://github.com/mjaschen/phpgeo/tree/6.0.0"
             },
             "funding": [
                 {
@@ -3371,7 +3371,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-03T08:01:10+00:00"
+            "time": "2025-01-12T09:09:15+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3598,27 +3598,21 @@
         },
         {
             "name": "nitotm/efficient-language-detector",
-            "version": "v2.x-dev",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nitotm/efficient-language-detector.git",
-                "reference": "7c69b13a6b8774a663b6612afc4c2188587fa33a"
+                "reference": "f7f999d8bfd7e4aaf3fb1cf4ba8ca91ea9bbddab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nitotm/efficient-language-detector/zipball/7c69b13a6b8774a663b6612afc4c2188587fa33a",
-                "reference": "7c69b13a6b8774a663b6612afc4c2188587fa33a",
+                "url": "https://api.github.com/repos/nitotm/efficient-language-detector/zipball/f7f999d8bfd7e4aaf3fb1cf4ba8ca91ea9bbddab",
+                "reference": "f7f999d8bfd7e4aaf3fb1cf4ba8ca91ea9bbddab",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "phpmd/phpmd": "^2.13",
-                "squizlabs/php_codesniffer": "3.*",
-                "vimeo/psalm": "^5.12"
             },
             "type": "library",
             "autoload": {
@@ -3642,15 +3636,17 @@
                 "detection",
                 "detector",
                 "language",
+                "language classification",
                 "language detection",
                 "language detector",
-                "language identification"
+                "language identification",
+                "language recognition"
             ],
             "support": {
                 "issues": "https://github.com/nitotm/efficient-language-detector/issues",
-                "source": "https://github.com/nitotm/efficient-language-detector/tree/v2.1.2"
+                "source": "https://github.com/nitotm/efficient-language-detector/tree/v3.0.0"
             },
-            "time": "2024-09-10T12:52:25+00:00"
+            "time": "2024-10-10T17:53:50+00:00"
         },
         {
             "name": "nyholm/psr7",
