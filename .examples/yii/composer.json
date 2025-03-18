@@ -121,7 +121,6 @@
         "symfony/dom-crawler": "^6.2 || ^7.1",
         "yiisoft/yii-debug-api": "^3.0@dev",
         "yiisoft/yii-debug-viewer": "^3.0@dev",
-        "yiisoft/yii-gii": "dev-master",
         "yiisoft/yii-testing": "dev-master"
     },
     "conflict": {
