@@ -30,6 +30,6 @@ final class MeilisearchStatistics implements StatisticsInterface
 
     public function getStatistics(Index $index): Statistics
     {
-        return new Statistics($this->client->stats()[$index->name]['numberOfDocuments']);
+        return new Statistics($this->client->stats()['indexes'][$index->name]['numberOfDocuments']);
     }
 }
