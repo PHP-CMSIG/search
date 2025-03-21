@@ -79,13 +79,13 @@ final class Result extends \IteratorIterator
                 // The first chunk only ever has to be prepended
                 if (0 === $i) {
                     $result[] = $trim($chunk, $numberOfContextChars, true)->toString();
-                    // The last chunk only ever has to be appended
+                // The last chunk only ever has to be appended
                 } elseif ($i === \count($chunks) - 1) {
                     $result[] = $trim($chunk, $numberOfContextChars, false)->toString();
-                    // An in-between chunk has to be left untouched, if it is shorter or equal the desired context length
+                // An in-between chunk has to be left untouched, if it is shorter or equal the desired context length
                 } elseif ($chunk->length() <= $numberOfContextChars) {
                     $result[] = $chunk->toString();
-                    // Otherwise we have to prepend and append
+                // Otherwise we have to prepend and append
                 } else {
                     $pre = $trim($chunk, $numberOfContextChars, true);
                     $post = $trim($chunk, $numberOfContextChars, false);
@@ -103,6 +103,6 @@ final class Result extends \IteratorIterator
             }
         }
 
-        return implode('', $result);
+        return \implode('', $result);
     }
 }
