@@ -17,6 +17,7 @@ use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Adapter\StatisticsInterface;
 
 final class LoupeAdapter implements AdapterInterface
 {
@@ -26,15 +27,19 @@ final class LoupeAdapter implements AdapterInterface
 
     private readonly SearcherInterface $searcher;
 
+    private readonly StatisticsInterface $statistics;
+
     public function __construct(
         LoupeHelper $loupeHelper,
         SchemaManagerInterface|null $schemaManager = null,
         IndexerInterface|null $indexer = null,
         SearcherInterface|null $searcher = null,
+        StatisticsInterface|null $statistics = null,
     ) {
         $this->schemaManager = $schemaManager ?? new LoupeSchemaManager($loupeHelper);
         $this->indexer = $indexer ?? new LoupeIndexer($loupeHelper);
         $this->searcher = $searcher ?? new LoupeSearcher($loupeHelper);
+        $this->statistics = $statistics ?? new LoupeStatistics($loupeHelper);
     }
 
     public function getSchemaManager(): SchemaManagerInterface
@@ -50,5 +55,10 @@ final class LoupeAdapter implements AdapterInterface
     public function getSearcher(): SearcherInterface
     {
         return $this->searcher;
+    }
+
+    public function getStatistics(): StatisticsInterface
+    {
+        return $this->statistics;
     }
 }

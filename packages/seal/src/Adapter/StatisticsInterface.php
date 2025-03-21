@@ -13,13 +13,10 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter;
 
-interface AdapterInterface
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Statistics\Statistics;
+
+interface StatisticsInterface
 {
-    public function getSchemaManager(): SchemaManagerInterface;
-
-    public function getIndexer(): IndexerInterface;
-
-    public function getSearcher(): SearcherInterface;
-
-    public function getStatistics(): StatisticsInterface;
+    public function getStatistics(Index $index): Statistics;
 }

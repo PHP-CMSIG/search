@@ -20,6 +20,7 @@ use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition\IdentifierCondition;
 use CmsIg\Seal\Search\SearchBuilder;
+use CmsIg\Seal\Statistics\Statistics;
 use CmsIg\Seal\Task\MultiTask;
 use CmsIg\Seal\Task\TaskInterface;
 
@@ -79,6 +80,11 @@ final class Engine implements EngineInterface
         }
 
         return $document;
+    }
+
+    public function getStatistics(string $index): Statistics
+    {
+        return $this->adapter->getStatistics()->getStatistics($this->schema->indexes[$index]);
     }
 
     public function createSearchBuilder(string $index): SearchBuilder

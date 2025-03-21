@@ -17,6 +17,7 @@ use CmsIg\Seal\Exception\DocumentNotFoundException;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Search\SearchBuilder;
+use CmsIg\Seal\Statistics\Statistics;
 use CmsIg\Seal\Task\TaskInterface;
 
 interface EngineInterface
@@ -51,6 +52,8 @@ interface EngineInterface
      * @return array<string, mixed>
      */
     public function getDocument(string $index, string $identifier): array;
+
+    public function getStatistics(string $index): Statistics;
 
     public function createSearchBuilder(string $index): SearchBuilder;
 
