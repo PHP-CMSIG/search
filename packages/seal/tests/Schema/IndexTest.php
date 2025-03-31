@@ -103,6 +103,23 @@ class IndexTest extends TestCase
         ]);
     }
 
+    public function testGetObjectFieldByPath(): void
+    {
+        $index = new Index('test', [
+            'uuid' => new Field\IdentifierField('uuid'),
+            'title_underline' => new Field\TextField('title_underline'),
+            'descriptionCamelCase' => new Field\TextField('descriptionCamelCase'),
+            'number01' => new Field\TextField('number01'),
+            'object' => new Field\ObjectField('object', [
+                'name' => new Field\TextField('name'),
+            ]),
+        ]);
+
+        $field = $index->getFieldByPath('object.name');
+        $this->assertInstanceOf(Field\TextField::class, $field);
+        $this->assertSame('name', $field->name);
+    }
+
     /**
      * @return \Generator<array{
      *     0: string,

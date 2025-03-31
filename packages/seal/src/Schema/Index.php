@@ -90,6 +90,7 @@ final class Index
                 $fields = $field->types[\current($pathParts)];
             } elseif ($field instanceof ObjectField) {
                 $fields = $field->fields;
+                \next($pathParts);
             } elseif ($field instanceof AbstractField) {
                 return $field;
             } else {
