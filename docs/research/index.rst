@@ -359,3 +359,13 @@ Paradedb
 A search and analytics engine ontop of Postgres, with own Postgres extensions written in Rust:
 
 - Server: `Paradedb Server <https://github.com/paradedb/paradedb>`__
+
+Similar Projects
+----------------
+
+Following projects in the past target similar problem:
+
+- `https://github.com/nresni/Ariadne <https://github.com/nresni/Ariadne>`__  (Solr, Elasticsearch, Zendsearch: outdated 12 years ago)
+- `https://github.com/massiveart/MassiveSearchBundle <https://github.com/massiveart/MassiveSearchBundle>`__ (ZendSearch, Elasticsearch)
+- `https://github.com/laravel/scout <https://github.com/laravel/scout>`__  (Algolia, Meilisearch, Typesense)
+- `https://github.com/Mezcalito/ux-search/ <https://github.com/Mezcalito/ux-search/>`__  (Doctrine, Meilisearch)
