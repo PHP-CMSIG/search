@@ -30,7 +30,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @experimental
  */
-final class CmsigSealExtension extends Extension
+final class SealExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -108,5 +108,10 @@ final class CmsigSealExtension extends Extension
 
         $container->registerForAutoconfiguration(ReindexProviderInterface::class)
             ->addTag('cmsig_seal.reindex_provider');
+    }
+
+    public function getAlias(): string
+    {
+        return 'cmsig_seal';
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Integration\Symfony;
 
-use CmsIg\Seal\Integration\Symfony\DependencyInjection\CmsigSealExtension;
+use CmsIg\Seal\Integration\Symfony\DependencyInjection\SealExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
@@ -23,8 +23,10 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
  */
 final class SealBundle extends AbstractBundle
 {
+    protected string $extensionAlias = 'cmsig_seal';
+
     public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $builder->registerExtension(new CmsigSealExtension());
+        $builder->registerExtension(new SealExtension());
     }
 }
