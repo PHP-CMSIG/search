@@ -30,7 +30,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @experimental
  */
-final class SealExtension extends Extension
+final class CmsigSealExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
