@@ -67,6 +67,11 @@ UI/UX related links:
 
 - `https://design4users.com/design-search-in-user-interfaces/ <https://design4users.com/design-search-in-user-interfaces/>`__
 
+Communities:
+------------
+
+- `https://opensourceconnections.com/slack <https://opensourceconnections.com/slack>`__ A community around Search and AI build by `Charlie Hull <https://x.com/flaxsearch>`__ alias "thesearchjuggler"
+
 Optimization links:
 -------------------
 
