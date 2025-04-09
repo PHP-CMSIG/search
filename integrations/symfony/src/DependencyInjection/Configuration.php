@@ -23,7 +23,7 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('cmsig_seal');
+        $treeBuilder = new TreeBuilder('seal');
         $rootNode = $treeBuilder->getRootNode();
 
         // @phpstan-ignore-next-line

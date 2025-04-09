@@ -19,11 +19,12 @@ use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
-use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PhpFileLoader as SealPhpFileLoader;
 use CmsIg\Seal\Schema\Schema;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -33,7 +34,7 @@ final class SealExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new \Symfony\Component\DependencyInjection\Loader\PhpFileLoader($container, new FileLocator(\dirname(__DIR__) . '/../config'));
+        $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__) . '/../config'));
         $loader->load('services.php');
 
         $configuration = new Configuration();
@@ -74,7 +75,7 @@ final class SealExtension extends Extension
 
             $dirs = $engineSchemaDirs[$name] ?? [];
 
-            $container->register($schemaLoaderServiceId, PhpFileLoader::class)
+            $container->register($schemaLoaderServiceId, SealPhpFileLoader::class)
                 ->setArguments([$dirs, $indexNamePrefix]);
 
             $container->register($schemaId, Schema::class)
