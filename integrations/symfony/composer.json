@@ -91,6 +91,7 @@
             "vendor/bin/phpunit"
         ],
         "phpstan": "@php vendor/bin/phpstan analyze",
+        "phpstan-baseline": "@php vendor/bin/phpstan analyze --generate-baseline=phpstan-baseline.neon",
         "lint-rector": "@php vendor/bin/rector process --dry-run",
         "lint-php-cs": "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run",
         "lint": [
