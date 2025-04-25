@@ -84,6 +84,7 @@ Interesting articles:
 ---------------------
 
 - `https://www.wix.engineering/post/the-art-of-secure-search-how-wix-mastered-pii-data-in-vespa-search-engine <https://www.wix.engineering/post/the-art-of-secure-search-how-wix-mastered-pii-data-in-vespa-search-engine>`__
+- `https://discord.com/blog/how-discord-indexes-trillions-of-messages <https://discord.com/blog/how-discord-indexes-trillions-of-messages>`__
 
 Descriptions of Search Engines
 ------------------------------
