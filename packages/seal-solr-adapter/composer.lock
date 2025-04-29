@@ -105,16 +105,16 @@
         },
         {
             "name": "halaxa/json-machine",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/halaxa/json-machine.git",
-                "reference": "c889fdff2d5a51affae0033464ff24b0ae936b72"
+                "reference": "69574a7b44ffa9364a4b1cf7600a1ce5b63d9822"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/halaxa/json-machine/zipball/c889fdff2d5a51affae0033464ff24b0ae936b72",
-                "reference": "c889fdff2d5a51affae0033464ff24b0ae936b72",
+                "url": "https://api.github.com/repos/halaxa/json-machine/zipball/69574a7b44ffa9364a4b1cf7600a1ce5b63d9822",
+                "reference": "69574a7b44ffa9364a4b1cf7600a1ce5b63d9822",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
             "description": "Efficient, easy-to-use and fast JSON pull parser",
             "support": {
                 "issues": "https://github.com/halaxa/json-machine/issues",
-                "source": "https://github.com/halaxa/json-machine/tree/1.2.0"
+                "source": "https://github.com/halaxa/json-machine/tree/1.2.1"
             },
             "funding": [
                 {
@@ -163,7 +163,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-11-24T12:48:58+00:00"
+            "time": "2025-04-25T09:06:52+00:00"
         },
         {
             "name": "psr/container",
@@ -821,16 +821,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.72.0",
+            "version": "v3.75.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "f5131b7a7d0103919a1b478a2763bd76c98e472e"
+                "reference": "eea219a577085bd13ff0cb644a422c20798316c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f5131b7a7d0103919a1b478a2763bd76c98e472e",
-                "reference": "f5131b7a7d0103919a1b478a2763bd76c98e472e",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/eea219a577085bd13ff0cb644a422c20798316c7",
+                "reference": "eea219a577085bd13ff0cb644a422c20798316c7",
                 "shasum": ""
             },
             "require": {
@@ -867,9 +867,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.72.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.75.0"
             },
-            "time": "2025-03-13T11:26:00+00:00"
+            "time": "2025-03-31T18:45:02+00:00"
         },
         {
             "name": "phpstan/extension-installer",
@@ -877,12 +877,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "c243505d48dcce6fcf4118cb5b65ad17a3b06391"
+                "reference": "cc273a539c9facb0f9e4e68e92d010da8bb0273b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/c243505d48dcce6fcf4118cb5b65ad17a3b06391",
-                "reference": "c243505d48dcce6fcf4118cb5b65ad17a3b06391",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/cc273a539c9facb0f9e4e68e92d010da8bb0273b",
+                "reference": "cc273a539c9facb0f9e4e68e92d010da8bb0273b",
                 "shasum": ""
             },
             "require": {
@@ -918,7 +918,7 @@
                 "issues": "https://github.com/phpstan/extension-installer/issues",
                 "source": "https://github.com/phpstan/extension-installer/tree/1.4.x"
             },
-            "time": "2025-01-28T09:27:10+00:00"
+            "time": "2025-04-15T15:32:25+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -926,12 +926,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9cd58b5d4b4c82a18ae289937dd85ce9d5478641"
+                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9cd58b5d4b4c82a18ae289937dd85ce9d5478641",
-                "reference": "9cd58b5d4b4c82a18ae289937dd85ce9d5478641",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e310849a19e02b8bfcbb63147f495d8f872dd96f",
+                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f",
                 "shasum": ""
             },
             "require": {
@@ -976,7 +976,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-09T12:17:34+00:00"
+            "time": "2025-04-27T12:20:45+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1359,12 +1359,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "967af31b165693b7810e3e89f607c3b620af8f58"
+                "reference": "d6a81fadd53008028e71e8f0a85d074a943962b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/967af31b165693b7810e3e89f607c3b620af8f58",
-                "reference": "967af31b165693b7810e3e89f607c3b620af8f58",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d6a81fadd53008028e71e8f0a85d074a943962b3",
+                "reference": "d6a81fadd53008028e71e8f0a85d074a943962b3",
                 "shasum": ""
             },
             "require": {
@@ -1448,11 +1448,19 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/phpunit/phpunit",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-17T14:33:25+00:00"
+            "time": "2025-04-26T10:14:00+00:00"
         },
         {
             "name": "rector/rector",
@@ -2442,12 +2450,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "045a5ba703c87b7b42abb397c1ba4cbd9deffea4"
+                "reference": "497f73ac996a598c92409b44ac43b6690c4f666d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/045a5ba703c87b7b42abb397c1ba4cbd9deffea4",
-                "reference": "045a5ba703c87b7b42abb397c1ba4cbd9deffea4",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/497f73ac996a598c92409b44ac43b6690c4f666d",
+                "reference": "497f73ac996a598c92409b44ac43b6690c4f666d",
                 "shasum": ""
             },
             "require": {
@@ -2514,7 +2522,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-05T10:15:41+00:00"
+            "time": "2025-04-22T09:11:45+00:00"
         },
         {
             "name": "theseer/tokenizer",

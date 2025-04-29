@@ -5,6 +5,52 @@
     "clue/stream-filter": {
         "version": "v1.3.0"
     },
+    "cmsig/seal": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-algolia-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-elasticsearch-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-meilisearch-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-memory-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-multi-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-opensearch-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-read-write-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-redisearch-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-solr-adapter": {
+        "version": "0.1.x-dev"
+    },
+    "cmsig/seal-symfony-bundle": {
+        "version": "0.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.2",
+            "ref": "dadad590775bc3badb33f606f15b724dadab0423"
+        },
+        "files": [
+            "config/packages/schranz_search.yaml",
+            "config/schemas/.gitignore"
+        ]
+    },
+    "cmsig/seal-typesense-adapter": {
+        "version": "0.1.x-dev"
+    },
     "doctrine/inflector": {
         "version": "2.0.2"
     },
@@ -19,12 +65,6 @@
     },
     "ezimuel/ringphp": {
         "version": "1.1.2"
-    },
-    "guzzlehttp/guzzle": {
-        "version": "7.2.0"
-    },
-    "guzzlehttp/promises": {
-        "version": "1.4.0"
     },
     "guzzlehttp/psr7": {
         "version": "1.7.0"
@@ -165,52 +205,6 @@
     },
     "react/promise": {
         "version": "v2.0.0"
-    },
-    "cmsig/seal": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-algolia-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-elasticsearch-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-meilisearch-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-memory-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-multi-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-opensearch-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-read-write-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-redisearch-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-solr-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-typesense-adapter": {
-        "version": "0.1.x-dev"
-    },
-    "cmsig/seal-symfony-bundle": {
-        "version": "0.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.2",
-            "ref": "dadad590775bc3badb33f606f15b724dadab0423"
-        },
-        "files": [
-            "config/packages/schranz_search.yaml",
-            "config/schemas/.gitignore"
-        ]
     },
     "sebastian/cli-parser": {
         "version": "2.0.0"

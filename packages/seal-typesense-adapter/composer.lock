@@ -176,12 +176,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "467e764fb6ebf5c931ba3edffda938ff755cad19"
+                "reference": "2e97231b969e0ffdeff03329b808945b4ba55e38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/467e764fb6ebf5c931ba3edffda938ff755cad19",
-                "reference": "467e764fb6ebf5c931ba3edffda938ff755cad19",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/2e97231b969e0ffdeff03329b808945b4ba55e38",
+                "reference": "2e97231b969e0ffdeff03329b808945b4ba55e38",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-16T13:04:36+00:00"
+            "time": "2025-04-03T11:44:45+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -1025,12 +1025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "ccb6fd8426879f4199e44280268bb2e25fd0be5a"
+                "reference": "622e6b4838ffd5c38dc95816d5ff84d054387d8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/ccb6fd8426879f4199e44280268bb2e25fd0be5a",
-                "reference": "ccb6fd8426879f4199e44280268bb2e25fd0be5a",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/622e6b4838ffd5c38dc95816d5ff84d054387d8b",
+                "reference": "622e6b4838ffd5c38dc95816d5ff84d054387d8b",
                 "shasum": ""
             },
             "require": {
@@ -1112,7 +1112,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-17T19:44:19+00:00"
+            "time": "2025-04-27T13:18:59+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -1199,12 +1199,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "90d6605f1a349e2bf1a8c69c977a5a0063fedee7"
+                "reference": "afb9a8038025e5dbc657378bfab9198d75f10fca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/90d6605f1a349e2bf1a8c69c977a5a0063fedee7",
-                "reference": "90d6605f1a349e2bf1a8c69c977a5a0063fedee7",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/afb9a8038025e5dbc657378bfab9198d75f10fca",
+                "reference": "afb9a8038025e5dbc657378bfab9198d75f10fca",
                 "shasum": ""
             },
             "require": {
@@ -1258,7 +1258,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-05T10:15:41+00:00"
+            "time": "2025-04-04T13:12:05+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -1738,16 +1738,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.72.0",
+            "version": "v3.75.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "f5131b7a7d0103919a1b478a2763bd76c98e472e"
+                "reference": "eea219a577085bd13ff0cb644a422c20798316c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/f5131b7a7d0103919a1b478a2763bd76c98e472e",
-                "reference": "f5131b7a7d0103919a1b478a2763bd76c98e472e",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/eea219a577085bd13ff0cb644a422c20798316c7",
+                "reference": "eea219a577085bd13ff0cb644a422c20798316c7",
                 "shasum": ""
             },
             "require": {
@@ -1784,9 +1784,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.72.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.75.0"
             },
-            "time": "2025-03-13T11:26:00+00:00"
+            "time": "2025-03-31T18:45:02+00:00"
         },
         {
             "name": "php-http/curl-client",
@@ -1860,12 +1860,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "c243505d48dcce6fcf4118cb5b65ad17a3b06391"
+                "reference": "cc273a539c9facb0f9e4e68e92d010da8bb0273b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/c243505d48dcce6fcf4118cb5b65ad17a3b06391",
-                "reference": "c243505d48dcce6fcf4118cb5b65ad17a3b06391",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/cc273a539c9facb0f9e4e68e92d010da8bb0273b",
+                "reference": "cc273a539c9facb0f9e4e68e92d010da8bb0273b",
                 "shasum": ""
             },
             "require": {
@@ -1901,7 +1901,7 @@
                 "issues": "https://github.com/phpstan/extension-installer/issues",
                 "source": "https://github.com/phpstan/extension-installer/tree/1.4.x"
             },
-            "time": "2025-01-28T09:27:10+00:00"
+            "time": "2025-04-15T15:32:25+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1909,12 +1909,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "9cd58b5d4b4c82a18ae289937dd85ce9d5478641"
+                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9cd58b5d4b4c82a18ae289937dd85ce9d5478641",
-                "reference": "9cd58b5d4b4c82a18ae289937dd85ce9d5478641",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e310849a19e02b8bfcbb63147f495d8f872dd96f",
+                "reference": "e310849a19e02b8bfcbb63147f495d8f872dd96f",
                 "shasum": ""
             },
             "require": {
@@ -1959,7 +1959,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-09T12:17:34+00:00"
+            "time": "2025-04-27T12:20:45+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2342,12 +2342,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "967af31b165693b7810e3e89f607c3b620af8f58"
+                "reference": "d6a81fadd53008028e71e8f0a85d074a943962b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/967af31b165693b7810e3e89f607c3b620af8f58",
-                "reference": "967af31b165693b7810e3e89f607c3b620af8f58",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d6a81fadd53008028e71e8f0a85d074a943962b3",
+                "reference": "d6a81fadd53008028e71e8f0a85d074a943962b3",
                 "shasum": ""
             },
             "require": {
@@ -2431,11 +2431,19 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://liberapay.com/sebastianbergmann",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
+                    "type": "thanks_dev"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/phpunit/phpunit",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-17T14:33:25+00:00"
+            "time": "2025-04-26T10:14:00+00:00"
         },
         {
             "name": "rector/rector",
