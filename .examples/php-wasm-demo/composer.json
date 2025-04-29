@@ -1,0 +1,11 @@
+{
+    "name": "cms-ig/php-wasm-demo",
+    "description": "Demo with PHP Wasm",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "cmsig/seal": "^0.7",
+        "cmsig/seal-loupe-adapter": "^0.7"
+    }
+}
