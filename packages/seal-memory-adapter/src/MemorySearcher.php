@@ -81,13 +81,13 @@ final class MemorySearcher implements SearcherInterface
                     }
 
                     $highlightFieldContent = \str_replace(
-                        $search->highlightPostTag . $search->highlightPostTag,
+                        $search->highlightPostTag . $search->highlightPreTag,
                         '',
                         $highlightFieldContent,
                     );
 
                     $highlightFieldContent = \str_replace(
-                        $search->highlightPostTag . ' ' . $search->highlightPostTag,
+                        $search->highlightPostTag . ' ' . $search->highlightPreTag,
                         ' ',
                         $highlightFieldContent,
                     );
@@ -98,6 +98,10 @@ final class MemorySearcher implements SearcherInterface
                         \is_array($document['_formatted']),
                         'Document with key "_formatted" expected to be array.',
                     );
+
+                    if (!\str_contains($highlightFieldContent, $search->highlightPreTag)) {
+                        $highlightFieldContent = 'null';
+                    }
 
                     $document['_formatted'][$highlightField] = \json_decode($highlightFieldContent, true, 512, \JSON_THROW_ON_ERROR);
                 }

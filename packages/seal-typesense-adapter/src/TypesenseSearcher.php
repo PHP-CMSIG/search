@@ -134,13 +134,16 @@ final class TypesenseSearcher implements SearcherInterface
                 'Document with key "_formatted" expected to be array.',
             );
 
-            foreach ($highlightFields as $highlightField) {
-                \assert(
-                    isset($hit['highlight'][$highlightField]['snippet']),
-                    'Expected highlight field to be set.',
-                );
+            $hit['highlight'] ??= [];
 
-                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField]['snippet'];
+            \assert(
+                \is_array($hit['highlight']),
+                'Hit with key "highlight" expected to be array.',
+            );
+
+            foreach ($highlightFields as $highlightField) {
+                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField]['snippet']
+                    ?? null;
             }
 
             yield $document;

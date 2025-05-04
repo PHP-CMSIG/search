@@ -55,13 +55,13 @@ final class MeilisearchSearcher implements SearcherInterface
                 }
 
                 return new Result(
-                    $this->hitsToDocuments($search->index, [], []),
+                    $this->hitsToDocuments($search->index, [], [], $search->highlightPreTag),
                     0,
                 );
             }
 
             return new Result(
-                $this->hitsToDocuments($search->index, [$data], []),
+                $this->hitsToDocuments($search->index, [$data], [], $search->highlightPreTag),
                 1,
             );
         }
@@ -97,7 +97,7 @@ final class MeilisearchSearcher implements SearcherInterface
         $data = $searchIndex->search($query, $searchParams)->toArray();
 
         return new Result(
-            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields),
+            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['totalHits'] ?? $data['estimatedTotalHits'] ?? null,
         );
     }
@@ -108,7 +108,7 @@ final class MeilisearchSearcher implements SearcherInterface
      *
      * @return \Generator<int, array<string, mixed>>
      */
-    private function hitsToDocuments(Index $index, iterable $hits, array $highlightFields): \Generator
+    private function hitsToDocuments(Index $index, iterable $hits, array $highlightFields, string $highlightPreTag): \Generator
     {
         foreach ($hits as $hit) {
             $document = $this->marshaller->unmarshall($index->fields, $hit);
@@ -134,7 +134,15 @@ final class MeilisearchSearcher implements SearcherInterface
                     'Expected highlight field to be set.',
                 );
 
-                $document['_formatted'][$highlightField] = $hit['_formatted'][$highlightField];
+                $value = $hit['_formatted'][$highlightField];
+
+                if (!\is_string($value)
+                    || !\str_contains($value, $highlightPreTag)
+                ) {
+                    $value = null;
+                }
+
+                $document['_formatted'][$highlightField] = $value;
             }
 
             yield $document;

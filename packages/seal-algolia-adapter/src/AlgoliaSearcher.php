@@ -55,13 +55,13 @@ final class AlgoliaSearcher implements SearcherInterface
                 );
             } catch (NotFoundException) {
                 return new Result(
-                    $this->hitsToDocuments($search->index, [], []),
+                    $this->hitsToDocuments($search->index, [], [], $search->highlightPreTag),
                     0,
                 );
             }
 
             return new Result(
-                $this->hitsToDocuments($search->index, [$data], []),
+                $this->hitsToDocuments($search->index, [$data], [], $search->highlightPreTag),
                 1,
             );
         }
@@ -117,7 +117,7 @@ final class AlgoliaSearcher implements SearcherInterface
         \assert(isset($data['nbHits']) && \is_int($data['nbHits']), 'The "nbHits" value is expected to be returned by algolia client.');
 
         return new Result(
-            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields),
+            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['nbHits'] ?? null, // @phpstan-ignore-line
         );
     }
@@ -128,7 +128,7 @@ final class AlgoliaSearcher implements SearcherInterface
      *
      * @return \Generator<int, array<string, mixed>>
      */
-    private function hitsToDocuments(Index $index, iterable $hits, array $highlightFields): \Generator
+    private function hitsToDocuments(Index $index, iterable $hits, array $highlightFields, string $highlightPreTag): \Generator
     {
         foreach ($hits as $hit) {
             // remove Algolia Metadata
@@ -159,7 +159,15 @@ final class AlgoliaSearcher implements SearcherInterface
                     'Expected highlight field to be set.',
                 );
 
-                $document['_formatted'][$highlightField] = $hit['_highlightResult'][$highlightField]['value'];
+                $value = $hit['_highlightResult'][$highlightField]['value'];
+
+                if (!\is_string($value)
+                    || !\str_contains($value, $highlightPreTag)
+                ) {
+                    $value = null;
+                }
+
+                $document['_formatted'][$highlightField] = $value;
             }
 
             yield $document;

@@ -60,13 +60,13 @@ final class SolrSearcher implements SearcherInterface
 
             if (!$result->getNumFound()) {
                 return new Result(
-                    $this->hitsToDocuments($search->index, []),
+                    $this->hitsToDocuments($search->index, [], null, $search->highlightFields),
                     0,
                 );
             }
 
             return new Result(
-                $this->hitsToDocuments($search->index, [$result->getDocument()]),
+                $this->hitsToDocuments($search->index, [$result->getDocument()], null, $search->highlightFields),
                 1,
             );
         }
@@ -112,17 +112,18 @@ final class SolrSearcher implements SearcherInterface
         $result = $this->client->select($query);
 
         return new Result(
-            $this->hitsToDocuments($search->index, $result->getDocuments(), $result->getHighlighting()),
+            $this->hitsToDocuments($search->index, $result->getDocuments(), $result->getHighlighting(), $search->highlightFields),
             (int) $result->getNumFound(),
         );
     }
 
     /**
      * @param iterable<DocumentInterface> $hits
+     * @param array<string> $highlightFields
      *
      * @return \Generator<int, array<string, mixed>>
      */
-    private function hitsToDocuments(Index $index, iterable $hits, Highlighting|null $highlighting = null): \Generator
+    private function hitsToDocuments(Index $index, iterable $hits, Highlighting|null $highlighting, array $highlightFields): \Generator
     {
         foreach ($hits as $hit) {
             /** @var array<string, mixed> $hit */
@@ -163,6 +164,10 @@ final class SolrSearcher implements SearcherInterface
                     }
 
                     $document['_formatted'][$key] = $value;
+                }
+
+                foreach ($highlightFields as $highlightField) {
+                    $document['_formatted'][$highlightField] ??= null;
                 }
             }
 

@@ -149,7 +149,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFilter(new Condition\SearchCondition('Blog'));
-        $search->highlight(['title'], '<mark>', '</mark>');
+        $search->highlight(['title', 'article'], '<mark>', '</mark>');
 
         $expectedDocumentA = $documents[0];
         $expectedDocumentA['_formatted']['title'] = \str_replace(
@@ -157,12 +157,14 @@ abstract class AbstractSearcherTestCase extends TestCase
             '<mark>Blog</mark>',
             $expectedDocumentA['title'] ?? '',
         );
+        $expectedDocumentA['_formatted']['article'] = null; // normalize the highlight behaviour none matches returned as null for every engine
         $expectedDocumentB = $documents[1];
         $expectedDocumentB['_formatted']['title'] = \str_replace(
             'Blog',
             '<mark>Blog</mark>',
             $expectedDocumentB['title'] ?? '',
         );
+        $expectedDocumentB['_formatted']['article'] = null; // normalize the highlight behaviour none matches returned as null for every engine
 
         $expectedDocumentsVariantA = [
             $expectedDocumentA,
@@ -174,6 +176,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         ];
 
         $loadedDocuments = [...$search->getResult()];
+
         $this->assertCount(2, $loadedDocuments);
 
         $this->assertTrue(

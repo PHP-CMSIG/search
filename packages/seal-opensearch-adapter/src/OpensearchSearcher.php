@@ -139,16 +139,16 @@ final class OpensearchSearcher implements SearcherInterface
                 'Document with key "_formatted" expected to be array.',
             );
 
-            foreach ($highlightFields as $highlightField) {
-                \assert(
-                    isset($hit['highlight'])
-                    && \is_array($hit['highlight'])
-                    && isset($hit['highlight'][$highlightField])
-                    && \is_array($hit['highlight'][$highlightField]),
-                    'Expected highlight field to be set.',
-                );
+            $hit['highlight'] ??= [];
 
-                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField][0] ?? null;
+            \assert(
+                \is_array($hit['highlight']),
+                'Hit with key "highlight" expected to be array.',
+            );
+
+            foreach ($highlightFields as $highlightField) {
+                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField][0]
+                    ?? null;
             }
 
             yield $document;
