@@ -421,12 +421,12 @@ The abstraction can also be used to highlight the search term in the result.
     The ``Highlighting`` is currently not supported by ``RediSearch`` adapter.
     See `this GitHub Issue <https://github.com/PHP-CMSIG/search/issues/491>`__ for more information.
 
-On a search results page, you may only need a shortened version of the highlighted text.
-To achieve this, you can install the `loupe/context-cropper <https://github.com/loupe-php/context-cropper>`__
+If your adapter does not support highlighting or you want to crop the context around a highlighted
+text, you may install the `loupe/matcher <https://github.com/loupe-php/matcher>`__
 package via Composer.
 
-The ``loupe/context-cropper`` package is a lightweight string manipulation library specifically designed for
-this purpose. It is independent of Loupe Search usage — with minimal dependencies.
+The ``loupe/matcher`` package is a lightweight string manipulation library specifically designed for
+this purpose. It is independent of Loupe Search usage — with zero dependencies.
 
 --------------
 
