@@ -413,8 +413,14 @@ The abstraction can also be used to highlight the search term in the result.
         ->getResult();
 
     foreach ($result as $document) {
-        $titleWithHighlight = $document['_formatted']['title'] ?? '';
+        $titleWithHighlight = $document['_formatted']['title']
+            ?? $document['title']
+            ?? '';
     }
+
+If the highlight is applied to multiple fields, only the fields that had a match are returned inside ``_formatted``.
+Fields without a match are returned as ``null``. You might want to use the null coalescing operator (``??``)
+to fall back to the original field, as shown above.
 
 .. note::
 
