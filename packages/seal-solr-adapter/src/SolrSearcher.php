@@ -99,7 +99,7 @@ final class SolrSearcher implements SearcherInterface
         }
 
         foreach ($search->sortBys as $field => $direction) {
-            $query->addSort($field, $direction);
+            $query->addSort($this->getFilterField($search->index, $field), $direction);
         }
 
         if ([] !== $search->highlightFields) {
