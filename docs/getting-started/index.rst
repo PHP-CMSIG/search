@@ -605,7 +605,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                         'engines' => [
                             'default' => [
-                                'adapter' => 'loupe://var/indexes',
+                                'adapter' => 'loupe://storage/indexes',
                             ],
                         ],
                     ];
@@ -663,7 +663,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
     .. group-tab:: Symfony
 
         When we are using the Symfony Bundle we just need to configure our ``Engine``
-        in the ``config/packages/seal.yaml`` file. The ``Adapter`` is configured
+        in the ``config/packages/cmsig_seal.yaml`` file. The ``Adapter`` is configured
         via a ``DSN`` like string.
 
         .. tabs::
@@ -674,7 +674,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -691,7 +691,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -707,7 +707,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -723,7 +723,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -739,7 +739,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -755,7 +755,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -763,7 +763,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                                 dir: '%kernel.project_dir%/config/schemas'
                         engines:
                             default:
-                                adapter: 'loupe://var/indexes'
+                                adapter: 'loupe://%kernel.project_dir%/var/indexes'
 
             .. group-tab:: Solr
 
@@ -771,7 +771,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -787,7 +787,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                 .. code-block:: yaml
 
-                    # config/packages/seal.yaml
+                    # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
                         schemas:
@@ -932,7 +932,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                         'engines' => [
                             'default' => [
-                                'adapter' => 'loupe://var/indexes',
+                                'adapter' => 'loupe://runtime/var/indexes',
                             ],
                         ],
                     ];
@@ -1166,7 +1166,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                                     'engines' => [
                                         'default' => [
-                                            'adapter' => 'loupe://var/indexes',
+                                            'adapter' => 'loupe://data/indexes',
                                         ],
                                     ],
                                 ],
@@ -1388,7 +1388,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
                             'engines' => [
                                 'default' => [
-                                    'adapter' => 'loupe://var/indexes',
+                                    'adapter' => 'loupe://runtime/indexes',
                                 ],
                             ],
                         ],
