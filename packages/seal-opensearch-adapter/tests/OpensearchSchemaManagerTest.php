@@ -179,6 +179,11 @@ class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
             ],
             'title' => [
                 'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword',
+                    ],
+                ],
             ],
             'uuid' => [
                 'type' => 'keyword',

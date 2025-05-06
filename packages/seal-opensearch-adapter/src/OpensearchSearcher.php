@@ -73,7 +73,7 @@ final class OpensearchSearcher implements SearcherInterface
 
         $sort = [];
         foreach ($search->sortBys as $field => $direction) {
-            $sort[] = [$field => $direction];
+            $sort[] = [$this->getFilterField($search->index, $field) => $direction];
         }
 
         $body = [

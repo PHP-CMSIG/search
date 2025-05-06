@@ -140,10 +140,15 @@ final class MemorySearcher implements SearcherInterface
                 $terms = \explode(' ', $filter->query);
                 $searchTerms = \array_unique([...$searchTerms, ...$terms]);
 
+                $hasSomeMatch = false;
                 foreach ($terms as $term) {
-                    if (!\str_contains($text, $term)) {
-                        continue 2;
+                    if (\str_contains($text, $term)) {
+                        $hasSomeMatch = true;
                     }
+                }
+
+                if (!$hasSomeMatch) {
+                    continue;
                 }
             } elseif ($filter instanceof Condition\EqualCondition) {
                 if (\str_contains($filter->field, '.')) {

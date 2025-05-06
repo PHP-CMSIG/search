@@ -33,7 +33,7 @@ final class TestingHelper
 
         $complexFields = [
             'uuid' => new Field\IdentifierField('uuid'),
-            'title' => new Field\TextField('title'),
+            'title' => new Field\TextField('title', sortable: true),
             'header' => new Field\TypedField('header', 'type', [
                 'image' => [
                     'media' => new Field\IntegerField('media'),

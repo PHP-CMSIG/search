@@ -1083,6 +1083,84 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
+    public function testSortByTextFieldAsc(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(new Condition\NotEqualCondition('uuid', '97cd3e94-c17f-4c11-a22b-d9da2e5318cd'));
+        $search->addSortBy('title', 'asc');
+
+        $loadedDocuments = [...$search->getResult()];
+        $this->assertCount(3, $loadedDocuments);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+
+        $beforeTitle = null;
+        foreach ($loadedDocuments as $loadedDocument) {
+            $title = $loadedDocument['title'] ?? '';
+            $this->assertSame(-1, $beforeTitle <=> $title);
+            $beforeTitle = $title;
+        }
+    }
+
+    public function testSortByTextFieldDesc(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(new Condition\NotEqualCondition('uuid', '97cd3e94-c17f-4c11-a22b-d9da2e5318cd'));
+        $search->addSortBy('title', 'desc');
+
+        $loadedDocuments = [...$search->getResult()];
+        $this->assertCount(3, $loadedDocuments);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+
+        $beforeTitle = null;
+        foreach ($loadedDocuments as $loadedDocument) {
+            $title = $loadedDocument['title'] ?? '';
+            $this->assertSame(null === $beforeTitle ? -1 : 1, $beforeTitle <=> $title);
+            $beforeTitle = $title;
+        }
+    }
+
     public function testSearchingWithNestedAndOrConditions(): void
     {
         $expectedDocumentIds = [];
