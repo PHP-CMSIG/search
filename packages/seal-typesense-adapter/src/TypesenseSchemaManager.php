@@ -96,6 +96,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                 $field instanceof Field\IdentifierField => $fields[] = [
                     'name' => $name,
                     'type' => 'string',
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
@@ -103,6 +104,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'string[]' : 'string',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable,
                     'facet' => $field->filterable,
                 ],
@@ -110,6 +112,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'bool[]' : 'bool',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
@@ -117,6 +120,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'int64[]' : 'int64',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
@@ -124,6 +128,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'int64[]' : 'int64',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
@@ -131,6 +136,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'float[]' : 'float',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
@@ -138,6 +144,7 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => $field->multiple ? 'geopoint[]' : 'geopoint',
                     'optional' => true,
+                    'sort' => $field->sortable,
                     'index' => $field->searchable || $field->filterable, // @phpstan-ignore-line
                     'facet' => $field->filterable,
                 ],
