@@ -17,6 +17,7 @@ use Algolia\AlgoliaSearch\Api\SearchClient;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
+use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
@@ -201,12 +202,12 @@ final class AlgoliaSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ':' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filters[] = $filter->field . ':' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotEqualCondition => $filters[] = 'NOT ' . $filter->field . ':' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = $filter->field . ' > ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $filter->field . ' >= ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanCondition => $filters[] = $filter->field . ' < ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $filter->field . ' <= ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\EqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\NotEqualCondition => $filters[] = 'NOT ' . $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' > ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' >= ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\LessThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' < ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' <= ' . $this->escapeFilterValue($filter->value),
                 $filter instanceof Condition\GeoDistanceCondition => $geoFilters = [
                     'aroundLatLng' => \sprintf(
                         '%s, %s',
@@ -229,5 +230,16 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    private function getFilterField(Index $index, string $name): string
+    {
+        $field = $index->getFieldByPath($name);
+
+        if ($field instanceof Field\IdentifierField) {
+            return 'objectID';
+        }
+
+        return $name;
     }
 }
