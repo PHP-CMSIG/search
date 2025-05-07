@@ -24,7 +24,11 @@ final class ClientHelper
 
             self::$client = new \Redis();
             self::$client->pconnect($host, (int) $port);
-            self::$client->auth($_ENV['REDIS_PASSWORD'] ?? 'supersecure');
+
+            $redisPassword = $_ENV['REDIS_PASSWORD'] ?? null;
+            if ($redisPassword) {
+                self::$client->auth($redisPassword);
+            }
         }
 
         return self::$client;

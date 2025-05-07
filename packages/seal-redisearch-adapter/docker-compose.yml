@@ -1,13 +1,19 @@
 services:
   redis:
-    image: redis/redis-stack:7.4.0-v1
+    image: redis:8
     ports:
-      - 6379:6379 # redis server
-      - 8001:8001 # redis insight
-    environment:
-      REDIS_ARGS: --requirepass supersecure
+      - 6379:6379
+    command: >
+      --requirepass supersecure
     volumes:
-        - redisearch-data:/data
+     - redisearch-data:/data
+
+  redisinsight: # optional for debug and visualize redis data
+    image: redis/redisinsight:latest
+    ports:
+      - 5540:5540 # redis insight: to connect use "redis://default:supersecure@redis:6379"
+    depends_on:
+      - "redis"
 
 volumes:
   redisearch-data:
