@@ -136,9 +136,9 @@ final class Index
             );
 
             \assert(
-                1 === \preg_match('/^([a-z]|[A-Z])\w+$/', $field->name),
+                1 === \preg_match('/^([a-z]|[A-Z])\w+$/', $field->name), // see https://regex101.com/r/xR9G6D/1
                 \sprintf(
-                    'A field named "%s" uses unsupported character in index "%s", supported characters are "a-z", "A-Z", "0-9" and "_".',
+                    'The field name format for field "%s" in index "%s" is unsupported , supported characters are "a-z", "A-Z", "0-9" and "_" and the name must start with a letter.',
                     $field->name,
                     $this->name,
                 ),
