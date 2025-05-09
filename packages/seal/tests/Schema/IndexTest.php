@@ -81,7 +81,7 @@ class IndexTest extends TestCase
     public function testFalseRootFieldCharacter(string $fieldName): void
     {
         $this->expectException(\AssertionError::class);
-        $this->expectExceptionMessage('A field named "' . $fieldName . '" uses unsupported character in index "test"');
+        $this->expectExceptionMessage('A field named "' . $fieldName . '" in index "test" uses unsupported format');
 
         new Index('test', [
             'uuid' => new Field\IdentifierField('uuid'),
@@ -93,7 +93,7 @@ class IndexTest extends TestCase
     public function testFalseObjectFieldCharacter(string $fieldName): void
     {
         $this->expectException(\AssertionError::class);
-        $this->expectExceptionMessage('A field named "' . $fieldName . '" uses unsupported character in index "test"');
+        $this->expectExceptionMessage('A field named "' . $fieldName . '" in index "test" uses unsupported format');
 
         new Index('test', [
             'uuid' => new Field\IdentifierField('uuid'),
