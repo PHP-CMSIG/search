@@ -157,7 +157,7 @@ final class AlgoliaSearcher implements SearcherInterface
                     && isset($hit['_highlightResult'][$highlightField])
                     && \is_array($hit['_highlightResult'][$highlightField])
                     && isset($hit['_highlightResult'][$highlightField]['value']),
-                    'Expected highlight field to be set.',
+                    \sprintf('Expected highlight field "%s" to be available in the search hit.', $highlightField),
                 );
 
                 $value = $hit['_highlightResult'][$highlightField]['value'];
