@@ -49,4 +49,9 @@ return new Index('news', [
     ], multiple: true),
     'tags' => new Field\TextField('tags', multiple: true),
     'categoryIds' => new Field\IntegerField('categoryIds', multiple: true),
+], [
+    'simpleOption' => 'value',
+    'nestedOption' => [
+        'key1' => 'value1',
+    ],
 ]);

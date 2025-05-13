@@ -44,10 +44,12 @@ final class Index
 
     /**
      * @param array<string, AbstractField> $fields
+     * @param array<string, mixed> $options
      */
     public function __construct(
         public readonly string $name,
         public readonly array $fields,
+        public readonly array $options = [],
     ) {
         $attributes = $this->getAttributes($fields);
         $this->searchableFields = $attributes['searchableFields'];

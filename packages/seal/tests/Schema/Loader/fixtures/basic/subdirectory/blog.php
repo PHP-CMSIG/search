@@ -18,4 +18,9 @@ return new Index('blog', [
     'id' => new Field\IdentifierField('id'),
     'title' => new Field\TextField('title'),
     'description' => new Field\TextField('description'),
+], [
+    'simpleOption' => 'value',
+    'nestedOption' => [
+        'key1' => 'value1',
+    ],
 ]);

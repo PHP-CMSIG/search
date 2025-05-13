@@ -139,6 +139,19 @@ class IndexTest extends TestCase
         $this->assertSame('media', $field->name);
     }
 
+    public function testGetOptions(): void
+    {
+        $index = new Index('test', [
+            'uuid' => new Field\IdentifierField('uuid'),
+        ], [
+            'key' => 'value',
+        ]);
+
+        $this->assertSame([
+            'key' => 'value',
+        ], $index->options);
+    }
+
     /**
      * @return \Generator<array{
      *     0: string,

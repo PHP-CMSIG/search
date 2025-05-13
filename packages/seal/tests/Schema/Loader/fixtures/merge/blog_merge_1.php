@@ -29,4 +29,11 @@ return new Index('blog', [
             'media' => new Field\TextField('media'),
         ],
     ], multiple: true),
+], [
+    'keepOption' => 'keepValue',
+    'simpleOption' => 'simpleValue',
+    'nestedOption' => [
+        'key1' => 'value1',
+        'key2' => 'value2',
+    ],
 ]);

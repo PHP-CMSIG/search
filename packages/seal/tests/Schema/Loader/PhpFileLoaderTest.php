@@ -73,6 +73,16 @@ class PhpFileLoaderTest extends TestCase
         $this->assertTrue(
             $schema->indexes['blog']->fields['blocks']->types['gallery']['media']->multiple,
         );
+
+        $this->assertSame([
+            'keepOption' => 'keepValue',
+            'simpleOption' => 'simpleOption-overwrite',
+            'nestedOption' => [
+                'key1' => 'value1-overwrite',
+                'key2' => 'value2',
+                'key3' => 'value3-new',
+            ],
+        ], $schema->indexes['blog']->options);
     }
 
     public function testMergeWithPrefix(): void

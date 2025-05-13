@@ -63,9 +63,9 @@ final class PhpFileLoader implements LoaderInterface
             foreach ($pathIndexes as $index) {
                 $name = $index->name;
                 if (isset($indexes[$name])) {
-                    $index = new Index($this->indexNamePrefix . $name, $this->mergeFields($indexes[$index->name]->fields, $index->fields));
+                    $index = new Index($this->indexNamePrefix . $name, $this->mergeFields($indexes[$index->name]->fields, $index->fields), $this->mergeOptions($indexes[$index->name]->options, $index->options));
                 } else {
-                    $index = new Index($this->indexNamePrefix . $name, $index->fields);
+                    $index = new Index($this->indexNamePrefix . $name, $index->fields, $index->options);
                 }
 
                 $indexes[$name] = $index;
@@ -96,6 +96,17 @@ final class PhpFileLoader implements LoaderInterface
         }
 
         return $fields;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $newOptions
+     *
+     * @return array<string, mixed>
+     */
+    private function mergeOptions(array $options, array $newOptions): array
+    {
+        return \array_replace_recursive($options, $newOptions);
     }
 
     /**

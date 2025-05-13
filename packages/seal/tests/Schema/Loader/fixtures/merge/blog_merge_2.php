@@ -22,4 +22,10 @@ return new Index('blog', [
         ],
     ], multiple: true),
     'footerText' => new Field\TextField('footerText'),
+], [
+    'simpleOption' => 'simpleOption-overwrite',
+    'nestedOption' => [
+        'key1' => 'value1-overwrite',
+        'key3' => 'value3-new',
+    ],
 ]);
