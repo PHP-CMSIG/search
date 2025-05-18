@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.18.5",
+            "version": "4.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "3c9dae285929a41ca27ab6628815e2df78a72862"
+                "reference": "9817acb7a515e7470d5e54af3138c78096e6c6ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/3c9dae285929a41ca27ab6628815e2df78a72862",
-                "reference": "3c9dae285929a41ca27ab6628815e2df78a72862",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/9817acb7a515e7470d5e54af3138c78096e6c6ab",
+                "reference": "9817acb7a515e7470d5e54af3138c78096e6c6ab",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.18.5"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.19.0"
             },
-            "time": "2025-04-30T12:32:30+00:00"
+            "time": "2025-05-12T13:49:35+00:00"
         },
         {
             "name": "cmsig/seal",
@@ -944,12 +944,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b7137d1a5be9f129daf5c3520e7b50f187194ded"
+                "reference": "84cbf8f018e01834b9b1ac3dacf3b9780e209e53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b7137d1a5be9f129daf5c3520e7b50f187194ded",
-                "reference": "b7137d1a5be9f129daf5c3520e7b50f187194ded",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/84cbf8f018e01834b9b1ac3dacf3b9780e209e53",
+                "reference": "84cbf8f018e01834b9b1ac3dacf3b9780e209e53",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-06T09:57:30+00:00"
+            "time": "2025-05-14T11:08:32+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1377,12 +1377,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8080be387a5be380dda48c6f41cee4a13aadab3d"
+                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8080be387a5be380dda48c6f41cee4a13aadab3d",
-                "reference": "8080be387a5be380dda48c6f41cee4a13aadab3d",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68984c5f8463717d4da3494c15cadd8d155d46c0",
+                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0",
                 "shasum": ""
             },
             "require": {
@@ -1454,7 +1454,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.46"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1478,7 +1478,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-02T06:46:24+00:00"
+            "time": "2025-05-14T13:32:40+00:00"
         },
         {
             "name": "rector/rector",
