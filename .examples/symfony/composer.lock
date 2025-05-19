@@ -3453,11 +3453,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "79c999fc58366ee1ddf9e02070dbe150f3ed77e5"
+                "reference": "f48db741f4cd727d2ea411041f6b79b22e0d650f"
             },
             "require": {
                 "cmsig/seal": "^0.8",
-                "loupe/loupe": "^0.8 || ^0.9 || ^0.10 || ^0.11",
+                "loupe/loupe": "^0.11",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },

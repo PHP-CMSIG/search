@@ -3761,16 +3761,16 @@
         },
         {
             "name": "spiral/roadrunner-grpc",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roadrunner-php/grpc.git",
-                "reference": "fb627f2de3a04310e3fb8952bdc0c88a0b01de4c"
+                "reference": "916c061de160d6b2f3efc82dcffac0360d84fab8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roadrunner-php/grpc/zipball/fb627f2de3a04310e3fb8952bdc0c88a0b01de4c",
-                "reference": "fb627f2de3a04310e3fb8952bdc0c88a0b01de4c",
+                "url": "https://api.github.com/repos/roadrunner-php/grpc/zipball/916c061de160d6b2f3efc82dcffac0360d84fab8",
+                "reference": "916c061de160d6b2f3efc82dcffac0360d84fab8",
                 "shasum": ""
             },
             "require": {
@@ -3780,7 +3780,8 @@
                 "php": ">=8.1",
                 "spiral/goridge": "^4.0",
                 "spiral/roadrunner": "^2024.3 || ^2025.1",
-                "spiral/roadrunner-worker": "^3.0"
+                "spiral/roadrunner-worker": "^3.0",
+                "symfony/polyfill-php83": "*"
             },
             "require-dev": {
                 "jetbrains/phpstorm-attributes": "^1.0",
@@ -3829,7 +3830,7 @@
                 "docs": "https://docs.roadrunner.dev",
                 "forum": "https://forum.roadrunner.dev/",
                 "issues": "https://github.com/roadrunner-server/roadrunner/issues",
-                "source": "https://github.com/roadrunner-php/grpc/tree/v3.5.1"
+                "source": "https://github.com/roadrunner-php/grpc/tree/v3.5.2"
             },
             "funding": [
                 {
@@ -3837,7 +3838,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-13T11:13:21+00:00"
+            "time": "2025-05-18T13:54:33+00:00"
         },
         {
             "name": "spiral/roadrunner-http",
@@ -7140,11 +7141,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "79c999fc58366ee1ddf9e02070dbe150f3ed77e5"
+                "reference": "f48db741f4cd727d2ea411041f6b79b22e0d650f"
             },
             "require": {
                 "cmsig/seal": "^0.8",
-                "loupe/loupe": "^0.8 || ^0.9 || ^0.10 || ^0.11",
+                "loupe/loupe": "^0.11",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },

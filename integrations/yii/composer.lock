@@ -1606,11 +1606,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "79c999fc58366ee1ddf9e02070dbe150f3ed77e5"
+                "reference": "f48db741f4cd727d2ea411041f6b79b22e0d650f"
             },
             "require": {
                 "cmsig/seal": "^0.8",
-                "loupe/loupe": "^0.8 || ^0.9 || ^0.10 || ^0.11",
+                "loupe/loupe": "^0.11",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -2446,16 +2446,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1089fcb6aa469fec43e0459ac148f2f3d92bb6d0"
+                "reference": "9cd1b2b38d90c9da96c03a6fa51253d8822f01a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1089fcb6aa469fec43e0459ac148f2f3d92bb6d0",
-                "reference": "1089fcb6aa469fec43e0459ac148f2f3d92bb6d0",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/9cd1b2b38d90c9da96c03a6fa51253d8822f01a3",
+                "reference": "9cd1b2b38d90c9da96c03a6fa51253d8822f01a3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/deprecations": "^0.5.3|^1",
+                "doctrine/deprecations": "^1.1.5",
                 "php": "^8.2",
                 "psr/cache": "^1|^2|^3",
                 "psr/log": "^1|^2|^3"
@@ -2544,7 +2544,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-17T20:03:02+00:00"
+            "time": "2025-05-18T16:31:25+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -4563,12 +4563,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "84cbf8f018e01834b9b1ac3dacf3b9780e209e53"
+                "reference": "fea728f03454f7a119d607e318c8e4c058d20294"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/84cbf8f018e01834b9b1ac3dacf3b9780e209e53",
-                "reference": "84cbf8f018e01834b9b1ac3dacf3b9780e209e53",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fea728f03454f7a119d607e318c8e4c058d20294",
+                "reference": "fea728f03454f7a119d607e318c8e4c058d20294",
                 "shasum": ""
             },
             "require": {
@@ -4613,7 +4613,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-14T11:08:32+00:00"
+            "time": "2025-05-18T21:24:56+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",

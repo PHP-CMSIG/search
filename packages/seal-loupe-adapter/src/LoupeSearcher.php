@@ -79,8 +79,12 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withFilter($filters);
         }
 
+        if (0 !== $search->offset) {
+            $searchParameters = $searchParameters->withOffset($search->offset);
+        }
+
         if ($search->limit) {
-            $searchParameters = $searchParameters->withHitsPerPage($search->limit);
+            $searchParameters = $searchParameters->withLimit($search->limit);
         }
 
         if ([] !== $search->highlightFields) {
@@ -89,12 +93,6 @@ final class LoupeSearcher implements SearcherInterface
                 $search->highlightPreTag,
                 $search->highlightPostTag,
             );
-        }
-
-        if ($search->offset && $search->limit && 0 === ($search->offset % $search->limit)) {
-            $searchParameters = $searchParameters->withPage((int) (($search->offset / $search->limit) + 1));
-        } elseif (null !== $search->limit && 0 !== $search->offset) {
-            throw new \RuntimeException('None paginated limit and offset not supported. See https://github.com/loupe-php/loupe/issues/13');
         }
 
         $sorts = [];
