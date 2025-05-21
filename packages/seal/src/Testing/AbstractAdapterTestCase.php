@@ -114,7 +114,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         foreach ($loadedDocuments as $key => $loadedDocument) {
             $expectedDocument = $documents[$key];
 
-            $this->assertSame($expectedDocument, $loadedDocument);
+            $this->assertSame($expectedDocument, $loadedDocument, 'Expected the loaded document to be the same as the saved document (' . $expectedDocument['uuid'] . ').');
         }
 
         foreach ($documents as $document) {
