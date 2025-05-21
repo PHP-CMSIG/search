@@ -148,7 +148,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => $field->searchable ? 'text_general' : 'string',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => true, // required to be set to stored for highlighting
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
@@ -157,7 +157,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => 'boolean',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => false,
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
@@ -166,7 +166,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => 'pdate',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => false,
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
@@ -175,7 +175,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => 'pint',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => false,
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
@@ -184,7 +184,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => 'pfloat',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => false,
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
@@ -193,13 +193,25 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'type' => 'location',
                     'indexed' => $field->searchable,
                     'docValues' => $field->filterable || $field->sortable,
-                    'stored' => false,
+                    'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,
                 ],
                 $field instanceof Field\ObjectField => $indexFields = \array_replace($indexFields, $this->createIndexFields($field->fields, $name . '.', $isMultiple)),
                 $field instanceof Field\TypedField => \array_map(function ($fields, $type) use ($name, &$indexFields, $isMultiple) {
                     $indexFields = \array_replace($indexFields, $this->createIndexFields($fields, $name . '.' . $type . '.', $isMultiple));
+
+                    if ($isMultiple) {
+                        $indexFields[$name . '.' . $type . '._originalIndex'] = [
+                            'name' => $name . '.' . $type . '._originalIndex',
+                            'type' => 'pint',
+                            'indexed' => false,
+                            'docValues' => false,
+                            'stored' => true,
+                            'useDocValuesAsStored' => false,
+                            'multiValued' => true,
+                        ];
+                    }
                 }, $field->types, \array_keys($field->types)),
                 default => throw new \RuntimeException(\sprintf('Field type "%s" is not supported.', $field::class)),
             };
