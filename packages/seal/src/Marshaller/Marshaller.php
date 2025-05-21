@@ -309,7 +309,10 @@ final class Marshaller
                 }
 
                 if (\is_string($value) && \str_ends_with($value, 'Z')) {
-                    return \date('c', \strtotime($value));
+                    /** @var int $time */
+                    $time = \strtotime($value);
+
+                    return \date('c', $time);
                 }
 
                 /** @var string */
@@ -324,7 +327,10 @@ final class Marshaller
         }
 
         if (\is_string($value) && \str_ends_with($value, 'Z')) {
-            return \date('c', \strtotime($value));
+            /** @var int $time */
+            $time = \strtotime($value);
+
+            return \date('c', $time);
         }
 
         /** @var string|null */
