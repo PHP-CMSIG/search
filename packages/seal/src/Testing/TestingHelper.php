@@ -189,7 +189,6 @@ final class TestingHelper
                 'commentsCount' => 0,
                 'rating' => 2.5,
                 'isSpecial' => false,
-                'comments' => [],
                 'tags' => ['UI', 'UX'],
                 'categoryIds' => [2, 3],
                 'location' => [
@@ -207,7 +206,6 @@ final class TestingHelper
                 ],
                 'created' => '2023-02-03T12:00:00+01:00',
                 'commentsCount' => 0,
-                'comments' => [],
                 'tags' => ['Tech', 'UX'],
                 'categoryIds' => [3, 4],
                 'location' => [
