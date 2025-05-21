@@ -24,7 +24,6 @@ use Loupe\Loupe\LoupeFactory;
 final class LoupeHelper
 {
     public const SEPARATOR = '_';
-    public const SOURCE_FIELD = 'l_source'; // fields are not allowed to begin with `_`
 
     /**
      * @var Loupe[]

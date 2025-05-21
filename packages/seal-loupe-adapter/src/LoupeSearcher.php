@@ -30,12 +30,11 @@ final class LoupeSearcher implements SearcherInterface
     ) {
         $this->marshaller = new FlattenMarshaller(
             dateAsInteger: true,
-            separator: LoupeHelper::SEPARATOR,
-            sourceField: LoupeHelper::SOURCE_FIELD,
             geoPointFieldConfig: [
                 'latitude' => 'lat',
                 'longitude' => 'lng',
             ],
+            fieldSeparator: LoupeHelper::SEPARATOR,
         );
     }
 

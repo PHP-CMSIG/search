@@ -33,8 +33,9 @@ class FlattenMarshallerTest extends TestCase
         $marshaller = new FlattenMarshaller(addRawFilterTextField: true);
 
         $marshalledDocument = $marshaller->marshall($fields, $document);
+        unset($marshalledDocument['s_metadata']);
 
-        $this->assertSame([...$flattenDocument, '_source' => \json_encode($document, \JSON_THROW_ON_ERROR)], $marshalledDocument);
+        $this->assertSame($flattenDocument, $marshalledDocument);
     }
 
     /**
@@ -47,7 +48,11 @@ class FlattenMarshallerTest extends TestCase
     {
         $marshaller = new FlattenMarshaller(addRawFilterTextField: true);
 
-        $flattenDocument['_source'] = \json_encode($document, \JSON_THROW_ON_ERROR);
+        $marshalledDocument = $marshaller->marshall($fields, $document);
+        $metadata = $marshalledDocument['s_metadata'] ?? null;
+        if (null !== $metadata) {
+            $flattenDocument['s_metadata'] = $metadata;
+        }
         $unmarshalledDocument = $marshaller->unmarshall($fields, $flattenDocument);
 
         $this->assertSame($document, $unmarshalledDocument);
@@ -124,9 +129,11 @@ class FlattenMarshallerTest extends TestCase
                 'title' => 'New Blog',
                 'header.image.media' => 1,
                 'article' => '<article><h2>New Subtitle</h2><p>A html field with some content</p></article>',
+                'blocks.text._originalIndex' => [0, 1, 3],
                 'blocks.text.title' => ['Title', 'Title 2', 'Title 4'],
                 'blocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.media' => [3, 4, 3, 4],
+                'blocks.embed._originalIndex' => [2],
                 'blocks.embed.title' => ['Video'],
                 'blocks.embed.media' => ['https://www.youtube.com/watch?v=iYM2zFP3Zn0'],
                 'footer.title' => 'New Footer',
@@ -137,12 +144,12 @@ class FlattenMarshallerTest extends TestCase
                 'comments.email' => ['admin.nonesearchablefield@localhost', 'example.nonesearchablefield@localhost'],
                 'comments.text' => ['Awesome blog!', 'Like this blog!'],
                 'tags' => ['Tech', 'UI'],
+                'tags.raw' => ['Tech', 'UI'],
                 'categoryIds' => [1, 2],
                 'location' => [
                     'latitude' => 40.7128,
                     'longitude' => -74.006,
                 ],
-                'tags.raw' => ['Tech', 'UI'],
             ],
             [
                 'uuid' => new Field\IdentifierField('uuid'),
@@ -173,7 +180,7 @@ class FlattenMarshallerTest extends TestCase
                 'created' => new Field\DateTimeField('created', filterable: true, sortable: true),
                 'commentsCount' => new Field\IntegerField('commentsCount', searchable: false, filterable: true, sortable: true),
                 'rating' => new Field\FloatField('rating', searchable: false, filterable: true, sortable: true),
-                'isSpecial' => new Field\BooleanField('rating', searchable: false, filterable: true),
+                'isSpecial' => new Field\BooleanField('isSpecial', searchable: false, filterable: true),
                 'comments' => new Field\ObjectField('comments', [
                     'email' => new Field\TextField('email', searchable: false),
                     'text' => new Field\TextField('text'),
@@ -376,14 +383,18 @@ class FlattenMarshallerTest extends TestCase
             ],
             [
                 'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
+                'blocks.text._originalIndex' => [0, 1, 3],
                 'blocks.text.title' => ['Title', 'Title 2', 'Title 4'],
                 'blocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.media' => [3, 4, 3, 4],
+                'blocks.text.secondaryBlocks.text._originalIndex' => [0, 1, 3, 0, 1, 3],
                 'blocks.text.secondaryBlocks.text.title' => ['Title', 'Title 2', 'Title 4', 'Title', 'Title 2', 'Title 4'],
                 'blocks.text.secondaryBlocks.text.description' => ['<p>Description</p>', null, '<p>Description 4</p>', '<p>Description</p>', null, '<p>Description 4</p>'],
                 'blocks.text.secondaryBlocks.text.media' => [3, 4, 3, 4, 3, 4, 3, 4],
+                'blocks.text.secondaryBlocks.embed._originalIndex' => [2, 2],
                 'blocks.text.secondaryBlocks.embed.title' => ['Video', 'Video'],
                 'blocks.text.secondaryBlocks.embed.media' => ['https://www.youtube.com/watch?v=iYM2zFP3Zn0', 'https://www.youtube.com/watch?v=iYM2zFP3Zn0'],
+                'blocks.embed._originalIndex' => [2],
                 'blocks.embed.title' => ['Video'],
                 'blocks.embed.media' => ['https://www.youtube.com/watch?v=iYM2zFP3Zn0'],
             ],

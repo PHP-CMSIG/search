@@ -24,6 +24,10 @@ use CmsIg\Seal\Schema\Field;
  */
 final class FlattenMarshaller
 {
+    private readonly Marshaller $marshaller;
+
+    private readonly Flattener $flattener;
+
     /**
      * @param array{
      *     name?: string,
@@ -32,14 +36,24 @@ final class FlattenMarshaller
      *     separator?: string,
      *     multiple?: bool,
      * }|null $geoPointFieldConfig
+     * @param non-empty-string $fieldSeparator
      */
     public function __construct(
         private readonly bool $dateAsInteger = false,
         private readonly bool $addRawFilterTextField = false,
-        private readonly string $separator = '.',
-        private readonly string $sourceField = '_source',
         private readonly array|null $geoPointFieldConfig = null,
+        private readonly string $fieldSeparator = '.',
     ) {
+        $this->marshaller = new Marshaller(
+            $this->dateAsInteger,
+            $this->addRawFilterTextField,
+            $this->geoPointFieldConfig,
+        );
+
+        $this->flattener = new Flattener(
+            metadataKey: 's_metadata',
+            fieldSeparator: $this->fieldSeparator,
+        );
     }
 
     /**
@@ -50,8 +64,20 @@ final class FlattenMarshaller
      */
     public function marshall(array $fields, array $document): array
     {
-        $flattenDocument = $this->flatten($fields, $document);
-        $flattenDocument[$this->sourceField] = \json_encode($document, \JSON_THROW_ON_ERROR);
+        $marshalledDocument = $this->marshaller->marshall($fields, $document);
+
+        $geoFieldName = $this->findGeoFieldName($fields);
+        $geoFieldValue = null;
+        if (null !== $geoFieldName && \array_key_exists($geoFieldName, $marshalledDocument)) {
+            $geoFieldValue = $marshalledDocument[$geoFieldName];
+            unset($marshalledDocument[$geoFieldName]);
+        }
+
+        $flattenDocument = $this->flattener->flatten($marshalledDocument);
+
+        if (null !== $geoFieldName) {
+            $flattenDocument[$geoFieldName] = $geoFieldValue;
+        }
 
         return $flattenDocument;
     }
@@ -64,224 +90,42 @@ final class FlattenMarshaller
      */
     public function unmarshall(array $fields, array $raw): array
     {
-        /** @var array<string, mixed> */
-        return \json_decode($raw[$this->sourceField], true, flags: \JSON_THROW_ON_ERROR); // @phpstan-ignore-line
+        $raw = \array_filter($raw, static fn ($value) => null !== $value);
+
+        $geoFieldName = $this->findGeoFieldName($fields);
+        $geoFieldValue = null;
+        if (null !== $geoFieldName && \array_key_exists($geoFieldName, $raw)) {
+            $geoFieldValue = $raw[$geoFieldName];
+            unset($raw[$geoFieldName]);
+        }
+
+        $unflattenDocument = $this->flattener->unflatten($raw);
+
+        if (null !== $geoFieldName && null !== $geoFieldValue) {
+            $unflattenDocument[$geoFieldName] = $geoFieldValue;
+        }
+
+        $unmarshalledDocument = $this->marshaller->unmarshall($fields, $unflattenDocument);
+
+        return $unmarshalledDocument;
     }
 
     /**
      * @param Field\AbstractField[] $fields
-     * @param array<string, mixed> $raw
-     *
-     * @return array<string, mixed>
      */
-    private function flatten(array $fields, array $raw, bool $rootIsParentMultiple = false)
+    private function findGeoFieldName(array $fields): string|null
     {
-        foreach ($fields as $name => $field) {
-            if (!\array_key_exists($name, $raw)) {
-                continue;
-            }
-
-            match (true) {
-                $field instanceof Field\DateTimeField => $raw[$name] = $this->flattenDateTime($raw[$field->name], $field), // @phpstan-ignore-line
-                $field instanceof Field\GeoPointField => $raw[$name] = $this->flattenGeoPointField($raw[$field->name], $field), // @phpstan-ignore-line
-                $field instanceof Field\ObjectField => $raw = $this->flattenObject($name, $raw, $field, $rootIsParentMultiple),
-                $field instanceof Field\TypedField => $raw = $this->flattenTyped($name, $raw, $field, $rootIsParentMultiple),
-                default => null,
-            };
-
-            if ($this->addRawFilterTextField
-                && $field instanceof Field\TextField && $field->searchable && ($field->sortable || $field->filterable)
-            ) {
-                $raw[$name . '.raw'] = $raw[$name];
-            }
+        $geoFieldName = $this->geoPointFieldConfig['name'] ?? null;
+        if (null !== $geoFieldName) {
+            return $geoFieldName;
         }
 
-        return $raw;
-    }
-
-    /**
-     * @param string|string[]|null $value
-     *
-     * @return int|string|string[]|int[]|null
-     */
-    private function flattenDateTime(string|array|null $value, Field\DateTimeField $field): int|string|array|null
-    {
-        if ($field->multiple) {
-            /** @var string[]|null $value */
-
-            return \array_map(function ($value) {
-                if (null !== $value && $this->dateAsInteger) {
-                    /** @var int */
-                    return \strtotime($value);
-                }
-
-                return $value;
-            }, (array) $value);
-        }
-
-        /** @var string|null $value */
-        if (null !== $value && $this->dateAsInteger) {
-            /** @var int */
-            return \strtotime($value);
-        }
-
-        return $value;
-    }
-
-    /**
-     * @param array{latitude: float, longitude: float}|null $value
-     *
-     * @return array<int|string, array<int|string, float>|float|string>|string|null
-     */
-    private function flattenGeoPointField(array|null $value, Field\GeoPointField $field): array|string|null
-    {
-        if ($field->multiple) {
-            throw new \LogicException('GeoPointField currently does not support multiple values.');
-        }
-
-        if ($value) {
-            $value = [
-                $this->geoPointFieldConfig['latitude'] ?? 'latitude' => $value['latitude'],
-                $this->geoPointFieldConfig['longitude'] ?? 'longitude' => $value['longitude'],
-            ];
-
-            \ksort($value); // consistent to the Marshaller where we need this for the redisearch
-
-            if ($this->geoPointFieldConfig['separator'] ?? false) {
-                $value = \implode($this->geoPointFieldConfig['separator'], $value);
+        foreach ($fields as $field) {
+            if ($field instanceof Field\GeoPointField) {
+                return $field->name;
             }
-
-            if ($this->geoPointFieldConfig['multiple'] ?? false) {
-                $value = [$value];
-            }
-
-            return $value;
         }
 
         return null;
-    }
-
-    /**
-     * @param array<string, mixed> $raw
-     *
-     * @return array<string, mixed>
-     */
-    private function flattenObject(string $name, array $raw, Field\ObjectField $field, bool $rootIsParentMultiple)
-    {
-        /** @var array<array<string, mixed>> $objects */
-        $objects = $field->multiple ? $raw[$name] : [$raw[$name]];
-
-        $newRawData = [];
-        foreach ($objects as $object) {
-            $isParentMultiple = $rootIsParentMultiple || $field->multiple;
-            $flattenedObject = $this->flatten($field->fields, $object, $isParentMultiple);
-
-            foreach ($flattenedObject as $key => $value) {
-                $flattenKey = $name . $this->separator . $key;
-
-                if (!$isParentMultiple) {
-                    $newRawData[$flattenKey] = $value;
-
-                    continue;
-                }
-
-                if (!isset($newRawData[$flattenKey])) {
-                    $newRawData[$flattenKey] = [];
-                }
-
-                if (!\is_array($value)) {
-                    $newRawData[$flattenKey][] = $value; // @phpstan-ignore-line
-
-                    continue;
-                }
-
-                foreach ($value as $valuePart) {
-                    $newRawData[$flattenKey][] = $valuePart; // @phpstan-ignore-line
-                }
-            }
-        }
-
-        $keepOrderRaw = [];
-        foreach ($raw as $key => $value) {
-            if ($key === $name) {
-                foreach ($newRawData as $key2 => $value2) {
-                    $keepOrderRaw[$key2] = $value2;
-                }
-
-                continue;
-            }
-
-            $keepOrderRaw[$key] = $value;
-        }
-
-        return $keepOrderRaw;
-    }
-
-    /**
-     * @param array<string, mixed> $raw
-     *
-     * @return array<string, mixed>
-     */
-    private function flattenTyped(string $name, array $raw, Field\TypedField $field, bool $rootIsParentMultiple)
-    {
-        /** @var array<array<string, mixed>> $objects */
-        $objects = $field->multiple ? $raw[$name] : [$raw[$name]];
-
-        $newRawData = [];
-        foreach ($objects as $object) {
-            /** @var string $type */
-            $type = $object[$field->typeField];
-            unset($object[$field->typeField]);
-
-            $isParentMultiple = $rootIsParentMultiple || $field->multiple;
-
-            if (!isset($field->types[$type])) {
-                throw new \RuntimeException(\sprintf(
-                    'Type "%s" not found. Existing types are "%s"',
-                    $type,
-                    \implode('", "', \array_keys($field->types)),
-                ));
-            }
-
-            $flattenedObject = $this->flatten($field->types[$type], $object, $isParentMultiple);
-            foreach ($flattenedObject as $key => $value) {
-                $flattenKey = $name . $this->separator . $type . $this->separator . $key;
-
-                if (!$isParentMultiple) {
-                    $newRawData[$flattenKey] = $value;
-
-                    continue;
-                }
-
-                if (!isset($newRawData[$flattenKey])) {
-                    $newRawData[$flattenKey] = [];
-                }
-
-                if (!\is_array($value)) {
-                    $newRawData[$flattenKey][] = $value; // @phpstan-ignore-line
-
-                    continue;
-                }
-
-                foreach ($value as $valuePart) {
-                    $newRawData[$flattenKey][] = $valuePart; // @phpstan-ignore-line
-                }
-            }
-        }
-
-        $keepOrderRaw = [];
-        foreach ($raw as $key => $value) {
-            if ($key === $name) {
-                foreach ($newRawData as $key2 => $value2) {
-                    $keepOrderRaw[$key2] = $value2;
-                }
-
-                continue;
-            }
-
-            $keepOrderRaw[$key] = $value;
-        }
-
-        return $keepOrderRaw;
     }
 }

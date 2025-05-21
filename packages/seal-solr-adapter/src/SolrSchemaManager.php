@@ -217,8 +217,8 @@ final class SolrSchemaManager implements SchemaManagerInterface
         }
 
         if ('' === $prefix) {
-            $indexFields['_source'] = [
-                'name' => '_source',
+            $indexFields['s_metadata'] = [
+                'name' => 's_metadata',
                 'type' => 'string',
                 'indexed' => false,
                 'docValues' => false,
