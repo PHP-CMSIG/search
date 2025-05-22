@@ -1959,7 +1959,8 @@ After that you can use the ``reindex`` to index all documents:
             $engine->reindex($reindexProviders);
 
             // reindex specific index and drop data before
-            $engine->reindex($reindexProviders, 'blog', dropIndex: true);
+            $reindexConfig = ReindexConfig::create()->withIndex('blog')->withDropIndex(true);
+            $engine->reindex($reindexProviders, $reindexConfig);
 
     .. group-tab:: Laravel
 
