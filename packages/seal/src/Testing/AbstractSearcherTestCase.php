@@ -87,7 +87,7 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         foreach ($documents as $document) {
             self::$taskHelper->tasks[] = self::$indexer->save(
-                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $schema->indexes[TestingHelper::INDEX_DISTINCT],
                 $document,
                 ['return_slow_promise_result' => true],
             );
