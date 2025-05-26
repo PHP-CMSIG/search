@@ -96,6 +96,11 @@ final class RediSearchSearcher implements SearcherInterface
             }
         }
 
+        if (null !== $search->index->getDistinctAttribute()) {
+            $arguments[] = 'GROUPBY';
+            $arguments[] =  $search->index->getDistinctAttribute();
+        }
+
         $arguments[] = 'DIALECT';
         $arguments[] = '3';
 
