@@ -101,6 +101,11 @@ final class TypesenseSearcher implements SearcherInterface
             $searchParams['highlight_end_tag'] = $search->highlightPostTag;
         }
 
+        if (null !== $search->index->getDistinctAttribute()) {
+            $body['group_by'] = $search->index->getDistinctAttribute();
+            $body['group_limit'] = 1;
+        }
+
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
 
         return new Result(
