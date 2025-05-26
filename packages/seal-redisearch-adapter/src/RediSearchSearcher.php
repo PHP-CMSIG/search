@@ -41,40 +41,87 @@ final class RediSearchSearcher implements SearcherInterface
 
     public function search(Search $search): Result
     {
-        // optimized single document query
         if (
             1 === \count($search->filters)
             && $search->filters[0] instanceof Condition\IdentifierCondition
             && 0 === $search->offset
             && 1 === $search->limit
         ) {
-            /** @var string|false $jsonGet */
-            $jsonGet = $this->client->rawCommand(
-                'JSON.GET',
-                $search->index->name . ':' . $search->filters[0]->identifier,
-            );
-
-            if (false === $jsonGet) {
-                return new Result(
-                    $this->hitsToDocuments($search->index, []),
-                    0,
-                );
-            }
-
-            /** @var array<string, mixed> $document */
-            $document = \json_decode($jsonGet, true, flags: \JSON_THROW_ON_ERROR);
-
-            return new Result(
-                $this->hitsToDocuments($search->index, [$document]),
-                1,
-            );
+            return $this->searchByIdentifier($search);
         }
 
         $parameters = [];
-
         $query = $this->recursiveResolveFilterConditions($search->index, $search->filters, true, $parameters) ?: '*';
 
+        if (null !== $search->index->getDistinctAttribute()) {
+            return $this->searchGrouped($search, $query);
+        }
+
+        return $this->searchDirectly($search, $query, $parameters);
+    }
+
+    private function searchGrouped(Search $search, string $query): Result
+    {
+        $distinctField = '@' . $search->index->getDistinctAttribute();
+        $identifierField = '@' . $search->index->getIdentifierField()->name;
+
+        $arguments = [
+            'GROUPBY', 1, $distinctField,
+            'REDUCE', 'FIRST_VALUE', '1', $identifierField, 'AS', 'documentId',
+            'DIALECT', '3',
+        ];
+
+        $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
+        if (false === $result) {
+            throw $this->createRedisLastErrorException();
+        }
+
+        $documentIds = [];
+        $total = (int) $result[0];
+
+        for ($i = 1; $i <= $total; ++$i) {
+            $row = [];
+            foreach ($result[$i] as $j => $value) {
+                if (0 === $j % 2 && isset($result[$i][$j + 1])) {
+                    $row[$value] = $result[$i][$j + 1];
+                }
+            }
+            if (isset($row['documentId'])) {
+                $documentIds[] = $row['documentId'];
+            }
+        }
+
+        if ([] === $documentIds) {
+            return new Result($this->hitsToDocuments($search->index, []), 0);
+        }
+
+        $identifierFieldName = $search->index->getIdentifierField()->name;
+        $escapedIds = \array_map([$this, 'escapeFilterValue'], $documentIds);
+        $searchQuery = \sprintf('@%s:{%s}', $identifierFieldName, \implode('|', $escapedIds));
+
+        $parameters = [];
+
+        return $this->searchDirectly($search, $searchQuery, $parameters);
+    }
+
+    private function searchByIdentifier(Search $search): Result
+    {
+        $key = $search->index->name . ':' . $search->filters[0]->identifier;
+        $jsonGet = $this->client->rawCommand('JSON.GET', $key);
+
+        if (false === $jsonGet) {
+            return new Result($this->hitsToDocuments($search->index, []), 0);
+        }
+
+        $document = \json_decode($jsonGet, true, flags: \JSON_THROW_ON_ERROR);
+
+        return new Result($this->hitsToDocuments($search->index, [$document]), 1);
+    }
+
+    private function searchDirectly(Search $search, string $query, array $parameters): Result
+    {
         $arguments = [];
+
         foreach ($search->sortBys as $field => $direction) {
             $arguments[] = 'SORTBY';
             $arguments[] = $this->escapeFilterValue($field);
@@ -96,30 +143,17 @@ final class RediSearchSearcher implements SearcherInterface
             }
         }
 
-        if (null !== $search->index->getDistinctAttribute()) {
-            $arguments[] = 'GROUPBY';
-            $arguments[] =  $search->index->getDistinctAttribute();
-        }
-
         $arguments[] = 'DIALECT';
         $arguments[] = '3';
 
-        /** @var mixed[]|false $result */
-        $result = $this->client->rawCommand(
-            'FT.SEARCH',
-            $search->index->name,
-            $query,
-            ...$arguments,
-        );
-
+        $result = $this->client->rawCommand('FT.SEARCH', $search->index->name, $query, ...$arguments);
         if (false === $result) {
             throw $this->createRedisLastErrorException();
         }
 
-        /** @var int $total */
-        $total = $result[0];
-
+        $total = (int) $result[0];
         $documents = [];
+
         foreach ($result as $item) {
             if (!\is_array($item)) {
                 continue;
@@ -128,12 +162,9 @@ final class RediSearchSearcher implements SearcherInterface
             $previousValue = null;
             foreach ($item as $value) {
                 if ('$' === $previousValue) {
-                    /** @var array<string, mixed> $document */
-                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR)[0]; // @phpstan-ignore-line
-
+                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR)[0];
                     $documents[] = $document;
                 }
-
                 $previousValue = $value;
             }
         }
