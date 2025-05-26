@@ -102,8 +102,8 @@ final class TypesenseSearcher implements SearcherInterface
         }
 
         if (null !== $search->index->getDistinctAttribute()) {
-            $body['group_by'] = $search->index->getDistinctAttribute();
-            $body['group_limit'] = 1;
+            $searchParams['group_by'] = $search->index->getDistinctAttribute();
+            $searchParams['group_limit'] = 1;
         }
 
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
