@@ -108,6 +108,10 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
             }
         }
 
+        if (null !== $index->getDistinctAttribute()) {
+            $attributes['attributeForDistinct'] = $index->getDistinctAttribute();
+        }
+
         $indexResponses = [];
         $indexResponses[] = [
             'indexName' => $index->name,

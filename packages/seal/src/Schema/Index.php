@@ -27,6 +27,8 @@ final class Index
 {
     private readonly IdentifierField|null $identifierField;
 
+    private string|null $distinctAttribute = null;
+
     /**
      * @var string[]
      */
@@ -56,6 +58,23 @@ final class Index
         $this->filterableFields = $attributes['filterableFields'];
         $this->sortableFields = $attributes['sortableFields'];
         $this->identifierField = $attributes['identifierField'];
+    }
+
+    public function withDistinctAttribute(string|null $distinctAttribute): self
+    {
+        if (null !== $distinctAttribute && !\in_array($distinctAttribute, $this->filterableFields, true)) {
+            throw new \LogicException('The distinct attribute has to be filterable.');
+        }
+
+        $clone = clone $this;
+        $clone->distinctAttribute = $distinctAttribute;
+
+        return $clone;
+    }
+
+    public function getDistinctAttribute(): string|null
+    {
+        return $this->distinctAttribute;
     }
 
     public function getIdentifierField(): IdentifierField

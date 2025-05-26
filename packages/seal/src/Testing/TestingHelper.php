@@ -23,6 +23,8 @@ final class TestingHelper
 
     public const INDEX_SIMPLE = 'simple';
 
+    public const INDEX_DISTINCT = 'distinct';
+
     private function __construct()
     {
     }
@@ -77,10 +79,12 @@ final class TestingHelper
 
         $complexIndex = new Index($prefix . 'complex', $complexFields);
         $simpleIndex = new Index($prefix . 'simple', $simpleFields);
+        $indexWithDistinct = (new Index($prefix . 'distinct', $complexFields))->withDistinctAttribute('commentsCount');
 
         return new Schema([
             self::INDEX_COMPLEX => $complexIndex,
             self::INDEX_SIMPLE => $simpleIndex,
+            self::INDEX_DISTINCT => $indexWithDistinct,
         ]);
     }
 
