@@ -55,6 +55,25 @@ final class MemorySearcher implements SearcherInterface
             }
         }
 
+        if (null !== $search->index->getDistinctAttribute()) {
+            $distinctValues = [];
+
+            foreach ($documents as $i => $document) {
+                if (!isset($document[$search->index->getDistinctAttribute()])) {
+                    continue;
+                }
+
+                if (\in_array($document[$search->index->getDistinctAttribute()], $distinctValues, true)) {
+                    unset($documents[$i]);
+                    continue;
+                }
+
+                $distinctValues[] = $document[$search->index->getDistinctAttribute()];
+            }
+            
+            $documents = array_values($documents);
+        }
+
         $sortBys = \array_reverse($search->sortBys);
         foreach ($sortBys as $field => $direction) {
             \usort($documents, function ($docA, $docB) use ($field, $direction) {
