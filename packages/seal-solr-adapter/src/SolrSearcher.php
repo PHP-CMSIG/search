@@ -112,6 +112,7 @@ final class SolrSearcher implements SearcherInterface
         if (null !== $search->index->getDistinctAttribute()) {
             $grouping = $query->getGrouping();
             $grouping->setFields($search->index->getDistinctAttribute());
+            $grouping->setMainResult(true);
         }
 
         $result = $this->client->select($query);
