@@ -95,7 +95,7 @@ final class MeilisearchSearcher implements SearcherInterface
         }
 
         if (null !== $search->index->getDistinctAttribute()) {
-            $body['distinct'] = $search->index->getDistinctAttribute();
+            $searchParams['distinct'] = $search->index->getDistinctAttribute();
         }
 
         $data = $searchIndex->search($query, $searchParams)->toArray();
