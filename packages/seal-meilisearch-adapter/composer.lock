@@ -1144,12 +1144,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162"
+                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3a6e423c076ab39dfedc307e2ac627ef579db162",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7644bd0270a3ba1099839649bdfedbadfc699b24",
+                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24",
                 "shasum": ""
             },
             "require": {
@@ -1194,7 +1194,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-21T20:51:45+00:00"
+            "time": "2025-05-24T17:35:05+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1577,12 +1577,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0"
+                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68984c5f8463717d4da3494c15cadd8d155d46c0",
-                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69e703f07c6fc03c4bc1a0489566b3074fd931da",
+                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da",
                 "shasum": ""
             },
             "require": {
@@ -1678,7 +1678,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-14T13:32:40+00:00"
+            "time": "2025-05-25T06:00:37+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -2811,7 +2811,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0-BETA1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {

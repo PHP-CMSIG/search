@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6947dbf14f27b1bcd7e278c87d71bf27",
+    "content-hash": "4925ce8a3af264f3ad6a153f2ac6cbf4",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -109,12 +109,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d1fd89735279fb6c6cbf8a57b1d1a32680344106"
+                "reference": "79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d1fd89735279fb6c6cbf8a57b1d1a32680344106",
-                "reference": "d1fd89735279fb6c6cbf8a57b1d1a32680344106",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15",
+                "reference": "79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15",
                 "shasum": ""
             },
             "require": {
@@ -207,7 +207,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-20T18:15:51+00:00"
+            "time": "2025-05-25T15:06:22+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -428,16 +428,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.11.0",
+            "version": "0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "196a9543fc7a248d8206601245c29caaab3b616b"
+                "reference": "49a9b62cd472a112cdd6b91952c04b1028ccf8e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/196a9543fc7a248d8206601245c29caaab3b616b",
-                "reference": "196a9543fc7a248d8206601245c29caaab3b616b",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/49a9b62cd472a112cdd6b91952c04b1028ccf8e4",
+                "reference": "49a9b62cd472a112cdd6b91952c04b1028ccf8e4",
                 "shasum": ""
             },
             "require": {
@@ -480,7 +480,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.11.0"
+                "source": "https://github.com/loupe-php/loupe/tree/0.12.0"
             },
             "funding": [
                 {
@@ -488,7 +488,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-12T13:30:59+00:00"
+            "time": "2025-05-26T17:14:53+00:00"
         },
         {
             "name": "loupe/matcher",
@@ -890,7 +890,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0-BETA1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -1349,12 +1349,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162"
+                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3a6e423c076ab39dfedc307e2ac627ef579db162",
-                "reference": "3a6e423c076ab39dfedc307e2ac627ef579db162",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7644bd0270a3ba1099839649bdfedbadfc699b24",
+                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24",
                 "shasum": ""
             },
             "require": {
@@ -1399,7 +1399,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-21T20:51:45+00:00"
+            "time": "2025-05-24T17:35:05+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1782,12 +1782,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0"
+                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68984c5f8463717d4da3494c15cadd8d155d46c0",
-                "reference": "68984c5f8463717d4da3494c15cadd8d155d46c0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69e703f07c6fc03c4bc1a0489566b3074fd931da",
+                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da",
                 "shasum": ""
             },
             "require": {
@@ -1883,7 +1883,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-14T13:32:40+00:00"
+            "time": "2025-05-25T06:00:37+00:00"
         },
         {
             "name": "rector/rector",
