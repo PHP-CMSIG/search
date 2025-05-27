@@ -47,7 +47,9 @@ final class RediSearchSearcher implements SearcherInterface
             && 0 === $search->offset
             && 1 === $search->limit
         ) {
-            return $this->searchByIdentifier($search);
+            $key = $search->index->name . ':' . $search->filters[0]->identifier;
+
+            return $this->searchByIdentifier($search, $key);
         }
 
         $parameters = [];
@@ -71,17 +73,20 @@ final class RediSearchSearcher implements SearcherInterface
             'DIALECT', '3',
         ];
 
+        /** @var array<mixed>|false $result */
         $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
+
         if (false === $result) {
             throw $this->createRedisLastErrorException();
         }
 
         $documentIds = [];
-        $total = (int) $result[0];
+        /** @var int $total */
+        $total = $result[0];
 
         for ($i = 1; $i <= $total; ++$i) {
             $row = [];
-            foreach ($result[$i] as $j => $value) {
+            foreach ((array) $result[$i] as $j => $value) {
                 if (0 === $j % 2 && isset($result[$i][$j + 1])) {
                     $row[$value] = $result[$i][$j + 1];
                 }
@@ -104,20 +109,24 @@ final class RediSearchSearcher implements SearcherInterface
         return $this->searchDirectly($search, $searchQuery, $parameters);
     }
 
-    private function searchByIdentifier(Search $search): Result
+    private function searchByIdentifier(Search $search, string $key): Result
     {
-        $key = $search->index->name . ':' . $search->filters[0]->identifier;
+        /** @var string|false $jsonGet */
         $jsonGet = $this->client->rawCommand('JSON.GET', $key);
 
         if (false === $jsonGet) {
             return new Result($this->hitsToDocuments($search->index, []), 0);
         }
 
+        /** @var array<string, mixed> $document */
         $document = \json_decode($jsonGet, true, flags: \JSON_THROW_ON_ERROR);
 
         return new Result($this->hitsToDocuments($search->index, [$document]), 1);
     }
 
+    /**
+     * @param array<string, string> $parameters
+     */
     private function searchDirectly(Search $search, string $query, array $parameters): Result
     {
         $arguments = [];
@@ -146,12 +155,14 @@ final class RediSearchSearcher implements SearcherInterface
         $arguments[] = 'DIALECT';
         $arguments[] = '3';
 
+        /** @var mixed[]|false $result */
         $result = $this->client->rawCommand('FT.SEARCH', $search->index->name, $query, ...$arguments);
         if (false === $result) {
             throw $this->createRedisLastErrorException();
         }
 
-        $total = (int) $result[0];
+        /** @var int $total */
+        $total = $result[0];
         $documents = [];
 
         foreach ($result as $item) {
@@ -162,7 +173,8 @@ final class RediSearchSearcher implements SearcherInterface
             $previousValue = null;
             foreach ($item as $value) {
                 if ('$' === $previousValue) {
-                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR)[0];
+                    /** @var array<string, mixed> $document */
+                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR)[0]; // @phpstan-ignore-line
                     $documents[] = $document;
                 }
                 $previousValue = $value;
