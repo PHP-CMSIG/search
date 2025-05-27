@@ -86,6 +86,10 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withLimit($search->limit);
         }
 
+        if ($search->distinct) {
+            $searchParameters = $searchParameters->withDistinct($search->distinct);
+        }
+
         if ([] !== $search->highlightFields) {
             $searchParameters = $searchParameters->withAttributesToHighlight(
                 $search->highlightFields,
