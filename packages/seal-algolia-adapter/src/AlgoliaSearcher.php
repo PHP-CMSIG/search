@@ -113,6 +113,10 @@ final class AlgoliaSearcher implements SearcherInterface
             $searchParams['highlightPostTag'] = $search->highlightPostTag;
         }
 
+        if ($search->distinct) {
+            $searchParams['distinct'] = true; // Algolia does not support multiple fields, so it can only be the one in the schema
+        }
+
         $data = $this->client->searchSingleIndex($indexName, $searchParams);
         \assert(\is_array($data) && isset($data['hits']) && \is_array($data['hits']), 'The "hits" array is expected to be returned by algolia client.');
         \assert(isset($data['nbHits']) && \is_int($data['nbHits']), 'The "nbHits" value is expected to be returned by algolia client.');
