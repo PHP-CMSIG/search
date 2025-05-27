@@ -80,7 +80,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
-        if (\count($index->distinctFields) >= 1) {
+        if (\count($index->distinctFields) > 1) {
             throw new \LogicException('Algolia does not support more than one distinct field.');
         }
 
