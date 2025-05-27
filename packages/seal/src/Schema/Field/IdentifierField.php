@@ -33,6 +33,7 @@ final class IdentifierField extends AbstractField
             searchable: false,
             filterable: true,
             sortable: true,
+            distinct: false,
             options: [],
         );
     }

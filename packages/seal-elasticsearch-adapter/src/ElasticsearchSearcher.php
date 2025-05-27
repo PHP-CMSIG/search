@@ -113,8 +113,8 @@ final class ElasticsearchSearcher implements SearcherInterface
             ];
         }
 
-        if (null !== $search->index->getDistinctAttribute()) {
-            $body['collapse']['field'] = $search->index->getDistinctAttribute();
+        if (null !== $search->distinct) {
+            $body['collapse']['field'] = $search->distinct;
         }
 
         /** @var Elasticsearch $response */

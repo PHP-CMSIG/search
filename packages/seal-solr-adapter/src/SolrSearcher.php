@@ -109,9 +109,9 @@ final class SolrSearcher implements SearcherInterface
             $highlighting->setSimplePostfix($search->highlightPostTag);
         }
 
-        if (null !== $search->index->getDistinctAttribute()) {
+        if (null !== $search->distinct) {
             $grouping = $query->getGrouping();
-            $grouping->setFields($search->index->getDistinctAttribute());
+            $grouping->setFields($search->distinct);
             $grouping->setMainResult(true);
         }
 

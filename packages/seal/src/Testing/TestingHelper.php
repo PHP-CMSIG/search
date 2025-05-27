@@ -23,8 +23,6 @@ final class TestingHelper
 
     public const INDEX_SIMPLE = 'simple';
 
-    public const INDEX_DISTINCT = 'distinct';
-
     private function __construct()
     {
     }
@@ -60,7 +58,7 @@ final class TestingHelper
                 'title' => new Field\TextField('title'),
             ]),
             'created' => new Field\DateTimeField('created', filterable: true, sortable: true),
-            'commentsCount' => new Field\IntegerField('commentsCount', filterable: true, sortable: true),
+            'commentsCount' => new Field\IntegerField('commentsCount', filterable: true, sortable: true, distinct: true),
             'rating' => new Field\FloatField('rating', filterable: true, sortable: true),
             'isSpecial' => new Field\BooleanField('isSpecial', filterable: true),
             'comments' => new Field\ObjectField('comments', [
@@ -79,12 +77,10 @@ final class TestingHelper
 
         $complexIndex = new Index($prefix . 'complex', $complexFields);
         $simpleIndex = new Index($prefix . 'simple', $simpleFields);
-        $indexWithDistinct = (new Index($prefix . 'distinct', $complexFields))->withDistinctAttribute('commentsCount');
 
         return new Schema([
             self::INDEX_COMPLEX => $complexIndex,
             self::INDEX_SIMPLE => $simpleIndex,
-            self::INDEX_DISTINCT => $indexWithDistinct,
         ]);
     }
 

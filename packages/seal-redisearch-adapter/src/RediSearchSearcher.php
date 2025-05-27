@@ -53,7 +53,7 @@ final class RediSearchSearcher implements SearcherInterface
         $parameters = [];
         $query = $this->recursiveResolveFilterConditions($search->index, $search->filters, true, $parameters) ?: '*';
 
-        if (null !== $search->index->getDistinctAttribute()) {
+        if (null !== $search->distinct) {
             return $this->searchGrouped($search, $query);
         }
 
@@ -62,7 +62,7 @@ final class RediSearchSearcher implements SearcherInterface
 
     private function searchGrouped(Search $search, string $query): Result
     {
-        $distinctField = '@' . $search->index->getDistinctAttribute();
+        $distinctField = '@' . $search->distinct;
         $identifierField = '@' . $search->index->getIdentifierField()->name;
 
         $arguments = [

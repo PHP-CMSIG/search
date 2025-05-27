@@ -87,7 +87,7 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         foreach ($documents as $document) {
             self::$taskHelper->tasks[] = self::$indexer->save(
-                $schema->indexes[TestingHelper::INDEX_DISTINCT],
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
                 $document,
                 ['return_slow_promise_result' => true],
             );
@@ -95,8 +95,9 @@ abstract class AbstractSearcherTestCase extends TestCase
         self::$taskHelper->waitForAll();
 
         $search = new SearchBuilder($schema, self::$searcher);
-        $search->index(TestingHelper::INDEX_DISTINCT);
+        $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFilter(new Condition\SearchCondition('Other'));
+        $search->distinct('commentsCount');
 
         $loadedDocuments = [...$search->getResult()];
         $this->assertCount(1, $loadedDocuments);
@@ -104,7 +105,7 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         foreach ($documents as $document) {
             self::$taskHelper->tasks[] = self::$indexer->delete(
-                $schema->indexes[TestingHelper::INDEX_DISTINCT],
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
                 $document['uuid'],
                 ['return_slow_promise_result' => true],
             );

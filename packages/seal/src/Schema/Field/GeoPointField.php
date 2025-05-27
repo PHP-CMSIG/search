@@ -38,6 +38,7 @@ final class GeoPointField extends AbstractField
         bool $searchable = false,
         bool $filterable = false,
         bool $sortable = false,
+        bool $distinct = false,
         array $options = [],
     ) {
         if ($searchable) { // @phpstan-ignore-line
@@ -50,6 +51,7 @@ final class GeoPointField extends AbstractField
             $searchable,
             $filterable,
             $sortable,
+            $distinct,
             $options,
         );
     }

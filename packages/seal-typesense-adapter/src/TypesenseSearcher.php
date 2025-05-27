@@ -103,8 +103,8 @@ final class TypesenseSearcher implements SearcherInterface
 
         $isGrouped = false;
 
-        if (null !== $search->index->getDistinctAttribute()) {
-            $searchParams['group_by'] = $search->index->getDistinctAttribute();
+        if (null !== $search->distinct) {
+            $searchParams['group_by'] = $search->distinct;
             $searchParams['group_limit'] = '1';
             $isGrouped = true;
         }

@@ -15,6 +15,7 @@ namespace CmsIg\Seal\Adapter\Loupe;
 
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Schema\SchemaHelper;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
 
@@ -43,6 +44,8 @@ final class LoupeSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
+        SchemaHelper::validateDistinctFieldsAreFilterable($index);
+
         $this->loupeHelper->createIndex($index);
         $this->loupeHelper->getLoupe($index);
 

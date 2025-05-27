@@ -55,20 +55,20 @@ final class MemorySearcher implements SearcherInterface
             }
         }
 
-        if (null !== $search->index->getDistinctAttribute()) {
+        if (null !== $search->distinct) {
             $distinctValues = [];
 
             foreach ($documents as $i => $document) {
-                if (!isset($document[$search->index->getDistinctAttribute()])) {
+                if (!isset($document[$search->distinct])) {
                     continue;
                 }
 
-                if (\in_array($document[$search->index->getDistinctAttribute()], $distinctValues, true)) {
+                if (\in_array($document[$search->distinct], $distinctValues, true)) {
                     unset($documents[$i]);
                     continue;
                 }
 
-                $distinctValues[] = $document[$search->index->getDistinctAttribute()];
+                $distinctValues[] = $document[$search->distinct];
             }
             
             $documents = array_values($documents);

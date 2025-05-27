@@ -27,8 +27,6 @@ final class Index
 {
     private readonly IdentifierField|null $identifierField;
 
-    private string|null $distinctAttribute = null;
-
     /**
      * @var string[]
      */
@@ -45,6 +43,11 @@ final class Index
     public readonly array $filterableFields;
 
     /**
+     * @var string[]
+     */
+    public readonly array $distinctFields;
+
+    /**
      * @param array<string, AbstractField> $fields
      * @param array<string, mixed> $options
      */
@@ -57,24 +60,8 @@ final class Index
         $this->searchableFields = $attributes['searchableFields'];
         $this->filterableFields = $attributes['filterableFields'];
         $this->sortableFields = $attributes['sortableFields'];
+        $this->distinctFields = $attributes['distinctFields'];
         $this->identifierField = $attributes['identifierField'];
-    }
-
-    public function withDistinctAttribute(string|null $distinctAttribute): self
-    {
-        if (null !== $distinctAttribute && !\in_array($distinctAttribute, $this->filterableFields, true)) {
-            throw new \LogicException('The distinct attribute has to be filterable.');
-        }
-
-        $clone = clone $this;
-        $clone->distinctAttribute = $distinctAttribute;
-
-        return $clone;
-    }
-
-    public function getDistinctAttribute(): string|null
-    {
-        return $this->distinctAttribute;
     }
 
     public function getIdentifierField(): IdentifierField
@@ -143,6 +130,7 @@ final class Index
             'searchableFields' => [],
             'filterableFields' => [],
             'sortableFields' => [],
+            'distinctFields' => [],
         ];
 
         foreach ($fields as $name => $field) {
@@ -195,6 +183,10 @@ final class Index
 
             if ($field->sortable) {
                 $attributes['sortableFields'][] = $name;
+            }
+
+            if ($field->distinct) {
+                $attributes['distinctFields'][] = $name;
             }
 
             if ($field instanceof IdentifierField) {

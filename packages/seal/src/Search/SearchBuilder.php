@@ -44,6 +44,8 @@ final class SearchBuilder
 
     private string $highlightPostTag = '</mark>';
 
+    private string|null $distinct = null;
+
     public function __construct(
         readonly private Schema $schema,
         readonly private SearcherInterface $searcher,
@@ -88,6 +90,18 @@ final class SearchBuilder
         return $this;
     }
 
+    public function distinct(string|null $field): self
+    {
+        $clone = clone $this;
+
+        if (null !== $field && !\in_array($field, $this->index->distinctFields, true)) {
+            throw new \LogicException('The distinct attribute has to be part of the distinct fields in the schema.');
+        }
+
+        $clone->distinct = $field;
+        return $clone;
+    }
+
     /**
      * @param array<string> $fields
      */
@@ -116,6 +130,7 @@ final class SearchBuilder
             $this->highlightFields,
             $this->highlightPreTag,
             $this->highlightPostTag,
+            $this->distinct,
         );
     }
 

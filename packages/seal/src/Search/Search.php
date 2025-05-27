@@ -31,6 +31,7 @@ final class Search
         public readonly array $highlightFields = [],
         public readonly string $highlightPreTag = '<mark>',
         public readonly string $highlightPostTag = '</mark>',
+        public readonly string|null $distinct = null,
     ) {
     }
 }

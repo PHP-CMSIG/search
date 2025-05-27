@@ -80,6 +80,10 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
+        if (\count($index->distinctFields) >= 1) {
+            throw new \LogicException('Algolia does not support more than one distinct field.');
+        }
+
         $geoPointField = $index->getGeoPointField();
         $replicas = [];
         foreach ($index->sortableFields as $field) {
@@ -108,8 +112,8 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
             }
         }
 
-        if (null !== $index->getDistinctAttribute()) {
-            $attributes['attributeForDistinct'] = $index->getDistinctAttribute();
+        if ([] !== $index->distinctFields) {
+            $attributes['attributeForDistinct'] = $index->distinctFields[0];
         }
 
         $indexResponses = [];

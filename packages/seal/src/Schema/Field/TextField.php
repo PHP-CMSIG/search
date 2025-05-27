@@ -29,6 +29,7 @@ final class TextField extends AbstractField
         bool $searchable = true,
         bool $filterable = false,
         bool $sortable = false,
+        bool $distinct = false,
         array $options = [],
     ) {
         parent::__construct(
@@ -37,6 +38,7 @@ final class TextField extends AbstractField
             $searchable,
             $filterable,
             $sortable,
+            $distinct,
             $options,
         );
     }

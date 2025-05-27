@@ -16,6 +16,7 @@ namespace CmsIg\Seal\Adapter\Meilisearch;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field\GeoPointField;
 use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Schema\SchemaHelper;
 use CmsIg\Seal\Task\AsyncTask;
 use CmsIg\Seal\Task\TaskInterface;
 use Meilisearch\Client;
@@ -58,6 +59,8 @@ final class MeilisearchSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
+        SchemaHelper::validateDistinctFieldsAreFilterable($index);
+
         $this->client->createIndex(
             $index->name,
             [
