@@ -92,14 +92,13 @@ final class SearchBuilder
 
     public function distinct(string|null $field): self
     {
-        $clone = clone $this;
-
         if (null !== $field && !\in_array($field, $this->index->distinctFields, true)) {
             throw new \LogicException('The distinct attribute has to be part of the distinct fields in the schema.');
         }
 
-        $clone->distinct = $field;
-        return $clone;
+        $this->distinct = $field;
+
+        return $this;
     }
 
     /**
