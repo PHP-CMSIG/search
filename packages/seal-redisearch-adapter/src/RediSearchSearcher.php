@@ -97,7 +97,7 @@ final class RediSearchSearcher implements SearcherInterface
         }
 
         $arguments[] = 'DIALECT';
-        $arguments[] = '3';
+        $arguments[] = '2';
 
         /** @var mixed[]|false $result */
         $result = $this->client->rawCommand(
@@ -124,7 +124,7 @@ final class RediSearchSearcher implements SearcherInterface
             foreach ($item as $value) {
                 if ('$' === $previousValue) {
                     /** @var array<string, mixed> $document */
-                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR)[0]; // @phpstan-ignore-line
+                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR);
 
                     $documents[] = $document;
                 }
