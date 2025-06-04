@@ -24,7 +24,7 @@ abstract class AbstractGroupCondition
     public readonly array $conditions;
 
     /**
-     * @param EqualCondition|GreaterThanCondition|GreaterThanCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition $conditions
+     * @param EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition $conditions
      */
     public function __construct(...$conditions)
     {
