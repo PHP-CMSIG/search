@@ -19,7 +19,7 @@ namespace CmsIg\Seal\Search\Condition;
 abstract class AbstractGroupCondition
 {
     /**
-     * @var array<EqualCondition|GeoBoundingBoxCondition|GeoDistanceCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition>
+     * @var array<EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition>
      */
     public readonly array $conditions;
 
