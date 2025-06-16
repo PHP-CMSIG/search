@@ -15,7 +15,6 @@ namespace CmsIg\Seal\Adapter\Loupe;
 
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Index;
-use CmsIg\Seal\Schema\SchemaHelper;
 use CmsIg\Seal\Task\SyncTask;
 use CmsIg\Seal\Task\TaskInterface;
 

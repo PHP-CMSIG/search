@@ -16,7 +16,6 @@ namespace CmsIg\Seal\Adapter\Meilisearch;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field\GeoPointField;
 use CmsIg\Seal\Schema\Index;
-use CmsIg\Seal\Schema\SchemaHelper;
 use CmsIg\Seal\Task\AsyncTask;
 use CmsIg\Seal\Task\TaskInterface;
 use Meilisearch\Client;

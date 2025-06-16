@@ -70,8 +70,8 @@ final class MemorySearcher implements SearcherInterface
 
                 $distinctValues[] = $document[$search->distinct];
             }
-            
-            $documents = array_values($documents);
+
+            $documents = \array_values($documents);
         }
 
         $sortBys = \array_reverse($search->sortBys);
