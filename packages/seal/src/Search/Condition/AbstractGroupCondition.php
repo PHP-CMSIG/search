@@ -19,12 +19,12 @@ namespace CmsIg\Seal\Search\Condition;
 abstract class AbstractGroupCondition
 {
     /**
-     * @var array<EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|AndCondition|OrCondition>
+     * @var array<EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition>
      */
     public readonly array $conditions;
 
     /**
-     * @param EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|AndCondition|OrCondition $conditions
+     * @param EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition $conditions
      */
     public function __construct(...$conditions)
     {
