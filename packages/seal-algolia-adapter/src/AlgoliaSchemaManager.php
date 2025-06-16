@@ -81,7 +81,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         if (\count($index->distinctFields) > 1) {
-            throw new \LogicException('Algolia does not support more than one distinct field.');
+            throw new \LogicException('Algolia does not support more than one distinct field. See https://github.com/PHP-CMSIG/search/issues/557');
         }
 
         $geoPointField = $index->getGeoPointField();
