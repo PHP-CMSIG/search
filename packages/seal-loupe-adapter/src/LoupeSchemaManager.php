@@ -44,8 +44,6 @@ final class LoupeSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
-        SchemaHelper::validateDistinctFieldsAreFilterable($index);
-
         $this->loupeHelper->createIndex($index);
         $this->loupeHelper->getLoupe($index);
 

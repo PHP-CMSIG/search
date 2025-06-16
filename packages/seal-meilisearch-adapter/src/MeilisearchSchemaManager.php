@@ -59,8 +59,6 @@ final class MeilisearchSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
-        SchemaHelper::validateDistinctFieldsAreFilterable($index);
-
         $this->client->createIndex(
             $index->name,
             [
@@ -68,9 +66,14 @@ final class MeilisearchSchemaManager implements SchemaManagerInterface
             ],
         );
 
+        $filterableFields = \array_unique(\array_merge(
+            $index->filterableFields,
+            $index->distinctFields, // to use distinct the field also need to be filterable
+        ));
+
         $attributes = [
             'searchableAttributes' => $index->searchableFields,
-            'filterableAttributes' => $index->filterableFields,
+            'filterableAttributes' => $filterableFields,
             'sortableAttributes' => $index->sortableFields,
         ];
 
