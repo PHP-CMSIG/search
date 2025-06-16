@@ -91,7 +91,7 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
                 $field instanceof Field\TextField => $properties[$name] = \array_replace([
                     'type' => 'text',
                     'index' => $field->searchable,
-                ], ($field->filterable || $field->sortable) ? [
+                ], ($field->filterable || $field->sortable || $field->distinct) ? [
                     'fields' => [
                         'raw' => ['type' => 'keyword'],
                     ],

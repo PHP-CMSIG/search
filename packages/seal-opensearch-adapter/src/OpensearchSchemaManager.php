@@ -87,7 +87,7 @@ final class OpensearchSchemaManager implements SchemaManagerInterface
                 $field instanceof Field\TextField => $properties[$name] = \array_replace([
                     'type' => 'text',
                     'index' => $field->searchable || $field->filterable, // TODO recheck doc_values https://github.com/php-cmsig/search/issues/65
-                ], ($field->filterable || $field->sortable) ? [
+                ], ($field->filterable || $field->sortable || $field->distinct) ? [
                     'fields' => [
                         'raw' => [
                             'type' => 'keyword',

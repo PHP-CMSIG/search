@@ -114,7 +114,7 @@ final class ElasticsearchSearcher implements SearcherInterface
         }
 
         if (null !== $search->distinct) {
-            $body['collapse']['field'] = $search->distinct;
+            $body['collapse']['field'] = $this->getFilterField($search->index, $search->distinct);
         }
 
         /** @var Elasticsearch $response */
