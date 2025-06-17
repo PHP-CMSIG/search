@@ -7,7 +7,7 @@ the ``Standalone`` usage.
 
 A Schema is a collection of one or more ``Index`` definitions. An ``Index`` is defined by a name and a list of ``Fields``.
 Where every field is defined by a name and a type. All fields types with exception from the ``Identifier``
-are possible to be defined as ``filterable``, ``sortable`` and ``multiple``.
+are possible to be defined as ``filterable``, ``sortable``, ``multiple`` and ``distinct``.
 
 Basic Field Types
 -----------------
@@ -32,7 +32,7 @@ Lets have a look at the following example fields:
     ];
 
 The following field definitions will show us how we can use ``Text`` fields to index the above fields
-via ``sortable``, ``multiple``, ``filterable`` and ``searchable`` flags:
+via ``sortable``, ``multiple``, ``filterable``, ``searchable`` and ``distinct`` flags:
 
 .. code-block:: php
 
@@ -45,6 +45,7 @@ via ``sortable``, ``multiple``, ``filterable`` and ``searchable`` flags:
         'title' => new Field\TextField('title', sortable: true),
         'tags' => new Field\TextField('tags', multiple: true, filterable: true),
         'internalNote' => new Field\TextField('internalNote', searchable: false),
+        'productId' => new Field\TextField('productId', distinct: true),
     ]);
 
 **Options:**
@@ -59,6 +60,8 @@ via ``sortable``, ``multiple``, ``filterable`` and ``searchable`` flags:
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``searchable``  | ``true``        |
++-----------------+-----------------+
+| ``distinct``    | ``false``       |
 +-----------------+-----------------+
 
 .. note::
@@ -150,6 +153,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
+| ``distinct``    | ``false``       |
++-----------------+-----------------+
 
 IntegerField
 ~~~~~~~~~~~~
@@ -195,6 +200,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``sortable``    | ``false``       |
 +-----------------+-----------------+
 | ``multiple``    | ``false``       |
++-----------------+-----------------+
+| ``distinct``    | ``false``       |
 +-----------------+-----------------+
 
 BooleanField
@@ -242,6 +249,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
+| ``distinct``    | ``false``       |
++-----------------+-----------------+
 
 DateTimeField
 ~~~~~~~~~~~~~
@@ -287,6 +296,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``sortable``    | ``false``       |
 +-----------------+-----------------+
 | ``multiple``    | ``false``       |
++-----------------+-----------------+
+| ``distinct``    | ``false``       |
 +-----------------+-----------------+
 
 Complex Field Types

@@ -136,7 +136,7 @@ Configure Schema
 
 The ``Schema`` defines the different ``Indexes`` and their ``Fields``.
 The definition of the fields depends on which data you want to store (text, int, float, ...) in the search engine
-and what you want todo with it later (searchable, filterable, sortable, ...).
+and what you want todo with it later (searchable, filterable, sortable, distinct, ...).
 
 In this section we will create a first schema for our ``Index``:
 
