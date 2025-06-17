@@ -436,6 +436,32 @@ this purpose. It is independent of Loupe Search usage — with zero dependencies
 
 --------------
 
+Distinct fields
+---------------
+
+Sometimes it's better to group search results by a distinct value in order to reduce the result set
+and improve the UX. Think of a product that exists in 20 variants for the different sizes and colors
+for example. Instead of displaying all the product variants, you may group them via their common identifier.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(new Condition\SearchCondition('product title'))
+        ->distinct('product_id')
+        ->getResult();
+    }
+
+.. note::
+
+    For `->distinct()` to work, your field (`product_id` in our example) has to be configured using 
+    `distict: true` in the  index schema.
+
+--------------
+
 Summary
 -------
 
