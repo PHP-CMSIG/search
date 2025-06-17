@@ -115,11 +115,13 @@ final class Index
      *     searchableFields: string[],
      *     filterableFields: string[],
      *     sortableFields: string[],
+     *     distinctFields: string[],
      *     identifierField: IdentifierField|null,
      * } : array{
      *     searchableFields: string[],
      *     filterableFields: string[],
      *     sortableFields: string[],
+     *     distinctFields: string[],
      * })
      */
     private function getAttributes(array $fields, bool $withoutIdentifierField = false): array
