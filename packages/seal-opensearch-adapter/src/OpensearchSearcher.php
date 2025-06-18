@@ -43,12 +43,9 @@ final class OpensearchSearcher implements SearcherInterface
     public function count(Index $index): int
     {
         try {
-            /** @var Elasticsearch $response */
-            $response = $this->client->count([
+            return $this->client->count([
                 'index' => $index->name,
-            ]);
-
-            return $response->asArray()['count'] ?? 0;
+            ])['count'] ?? 0;
         } catch (ClientResponseException $e) {
             return 0;
         }
