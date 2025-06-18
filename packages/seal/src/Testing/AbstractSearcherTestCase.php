@@ -129,6 +129,15 @@ abstract class AbstractSearcherTestCase extends TestCase
         self::$taskHelper->waitForAll();
 
         $this->assertSame(4, self::$searcher->count($schema->indexes[TestingHelper::INDEX_COMPLEX]));
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
     }
 
     public function testSearchCondition(): void
