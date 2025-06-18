@@ -30,6 +30,11 @@ final class MemorySearcher implements SearcherInterface
         $this->marshaller = new Marshaller();
     }
 
+    public function count(Index $index): int
+    {
+        return MemoryStorage::countDocuments($index);
+    }
+
     public function search(Search $search): Result
     {
         $documents = [];

@@ -42,6 +42,15 @@ final class MemoryStorage
         return self::$documents[$index->name];
     }
 
+    public static function countDocuments(Index $index): int
+    {
+        if (!\array_key_exists($index->name, self::$indexes)) {
+            self::createIndex($index);
+        }
+
+        return \count(self::$documents[$index->name]);
+    }
+
     /**
      * @param array<string, mixed> $document
      *

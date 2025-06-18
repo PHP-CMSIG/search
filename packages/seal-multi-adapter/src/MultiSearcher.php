@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Adapter\Multi;
 
 use CmsIg\Seal\Adapter\SearcherInterface;
+use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Search;
 
 /**
@@ -27,6 +28,13 @@ final class MultiSearcher implements SearcherInterface
     public function __construct(
         public readonly iterable $searchers,
     ) {
+    }
+
+    public function count(Index $index): int
+    {
+        throw new \LogicException(
+            'Not implemented yet, use the ReadWriteAdapter to define a specific read adapter.',
+        );
     }
 
     public function search(Search $search): never

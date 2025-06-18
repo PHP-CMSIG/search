@@ -38,6 +38,11 @@ final class TypesenseSearcher implements SearcherInterface
         );
     }
 
+    public function count(Index $index): int
+    {
+        return $this->client->collections[$index->name]->retrieve()['num_documents'] ?? 0;
+    }
+
     public function search(Search $search): Result
     {
         // optimized single document query

@@ -38,6 +38,13 @@ final class LoupeSearcher implements SearcherInterface
         );
     }
 
+    public function count(Index $index): int
+    {
+        $loupe = $this->loupeHelper->getLoupe($index);
+
+        return $loupe->countDocuments();
+    }
+
     public function search(Search $search): Result
     {
         // optimized single document query

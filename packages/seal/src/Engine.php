@@ -81,6 +81,11 @@ final class Engine implements EngineInterface
         return $document;
     }
 
+    public function countDocuments(string $index): int
+    {
+        return $this->adapter->getSearcher()->count($this->schema->indexes[$index]);
+    }
+
     public function createSearchBuilder(string $index): SearchBuilder
     {
         return (new SearchBuilder(

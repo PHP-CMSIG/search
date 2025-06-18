@@ -38,6 +38,11 @@ final class MeilisearchSearcher implements SearcherInterface
         );
     }
 
+    public function count(Index $index): int
+    {
+        return $this->client->index($index->name)->stats()['numberOfDocuments'] ?? 0;
+    }
+
     public function search(Search $search): Result
     {
         // optimized single document query

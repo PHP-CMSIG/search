@@ -42,6 +42,18 @@ final class SolrSearcher implements SearcherInterface
         );
     }
 
+    public function count(Index $index): int
+    {
+        $this->client->getEndpoint()
+            ->setCollection($index->name);
+
+        $query = $this->client->createSelect();
+        $query->setQuery('*:*');     // Match all docs
+        $query->setRows(0);          // Don't return actual docs
+
+        return $client->select($query)->getNumFound();
+    }
+
     public function search(Search $search): Result
     {
         // optimized single document query

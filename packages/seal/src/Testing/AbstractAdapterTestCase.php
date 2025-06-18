@@ -93,6 +93,8 @@ abstract class AbstractAdapterTestCase extends TestCase
         $task = $engine->createSchema(['return_slow_promise_result' => true]);
         $task->wait();
 
+        $this->assertSame(0, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
+
         $documents = TestingHelper::createComplexFixtures();
 
         foreach ($documents as $document) {
@@ -100,6 +102,8 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
 
         self::$taskHelper->waitForAll();
+
+        $this->assertSame(4, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
 
         $loadedDocuments = [];
         foreach ($documents as $document) {

@@ -39,6 +39,13 @@ final class RediSearchSearcher implements SearcherInterface
         );
     }
 
+    public function count(Index $index): int
+    {
+        $info = $this->client->rawCommand('FT.INFO', $index->name);
+
+        return (int) $info[9] ?? 0;
+    }
+
     public function search(Search $search): Result
     {
         if (

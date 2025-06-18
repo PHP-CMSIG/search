@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter;
 
+use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 
 interface SearcherInterface
 {
     public function search(Search $search): Result;
+
+    public function count(Index $index): int;
 }

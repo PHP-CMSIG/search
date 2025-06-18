@@ -52,6 +52,8 @@ interface EngineInterface
      */
     public function getDocument(string $index, string $identifier): array;
 
+    public function countDocuments(string $index): int;
+
     public function createSearchBuilder(string $index): SearchBuilder;
 
     /**
