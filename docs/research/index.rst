@@ -79,6 +79,7 @@ Optimization links:
 - `https://github.com/uschindler/german-decompounder <https://github.com/uschindler/german-decompounder>`__
 - `https://symfony.com/blog/migrating-symfony-com-search-engine-to-meilisearch <https://symfony.com/blog/migrating-symfony-com-search-engine-to-meilisearch>`__
 - `https://thetizzo.com/2024/02/13/scaling-elasticsearch-for-fun-and-profit <https://thetizzo.com/2024/02/13/scaling-elasticsearch-for-fun-and-profit>`__
+- `https://www.youtube.com/watch?v=cDiCX3mVAlQ&list=PLq-odUc2x7i8dTff006Wg2r0fsseSGrpJ <https://www.youtube.com/watch?v=cDiCX3mVAlQ&list=PLq-odUc2x7i8dTff006Wg2r0fsseSGrpJ>`__ Kevin Liang – Performance Tuning Apache Solr for Dense Vectors
 
 Interesting articles:
 ---------------------
