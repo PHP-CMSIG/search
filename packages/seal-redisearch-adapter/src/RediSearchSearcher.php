@@ -41,6 +41,7 @@ final class RediSearchSearcher implements SearcherInterface
 
     public function count(Index $index): int
     {
+        /** @var array<mixed>|false $result */
         $result = $this->client->rawCommand('FT.INFO', $index->name);
 
         if (false === $result) {
