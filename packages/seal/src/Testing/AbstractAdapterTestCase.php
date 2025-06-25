@@ -35,7 +35,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         self::$taskHelper = new TaskHelper();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         self::$taskHelper->waitForAll();
     }

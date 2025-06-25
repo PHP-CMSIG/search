@@ -70,7 +70,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         self::$taskHelper->waitForAll();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         self::$taskHelper->waitForAll();
     }
