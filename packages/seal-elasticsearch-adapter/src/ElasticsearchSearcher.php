@@ -48,7 +48,7 @@ final class ElasticsearchSearcher implements SearcherInterface
             ]);
 
             return $response->asArray()['count'] ?? 0;
-        } catch (ClientResponseException $e) {
+        } catch (ClientResponseException) {
             return 0;
         }
     }
