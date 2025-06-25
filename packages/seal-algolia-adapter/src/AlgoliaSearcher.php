@@ -41,7 +41,7 @@ final class AlgoliaSearcher implements SearcherInterface
 
     public function count(Index $index): int
     {
-        return $this->client->searchSingleIndex($index->name)['nbHits'] ?? 0;
+        return (int) $this->client->searchSingleIndex($index->name)['nbHits'] ?? 0;
     }
 
     public function search(Search $search): Result
