@@ -33,10 +33,15 @@ abstract class AbstractAdapterTestCase extends TestCase
     protected function setUp(): void
     {
         self::$taskHelper = new TaskHelper();
+        $task = self::getEngine()->createSchema(['return_slow_promise_result' => true]);
+        $task->wait();
     }
 
     protected function tearDown(): void
     {
+        $task = self::getEngine()->dropSchema(['return_slow_promise_result' => true]);
+        $task->wait();
+
         self::$taskHelper->waitForAll();
     }
 
@@ -95,9 +100,6 @@ abstract class AbstractAdapterTestCase extends TestCase
     public function testDocument(): void
     {
         $engine = self::getEngine();
-        $task = $engine->createSchema(['return_slow_promise_result' => true]);
-        $task->wait();
-
         $documents = TestingHelper::createComplexFixtures();
 
         foreach ($documents as $document) {
@@ -147,9 +149,6 @@ abstract class AbstractAdapterTestCase extends TestCase
     public function testCountDocuments(): void
     {
         $engine = self::getEngine();
-        $task = $engine->createSchema(['return_slow_promise_result' => true]);
-        $task->wait();
-
         $this->assertSame(0, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
 
         $documents = TestingHelper::createComplexFixtures();
@@ -167,21 +166,5 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
 
         self::$taskHelper->waitForAll();
-    }
-
-    public static function setUpBeforeClass(): void
-    {
-        try {
-            $task = self::getEngine()->dropSchema(['return_slow_promise_result' => true]);
-            $task->wait();
-        } catch (\Exception) {
-            // ignore eventuell not existing indexes to drop
-        }
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        $task = self::getEngine()->dropSchema(['return_slow_promise_result' => true]);
-        $task->wait();
     }
 }
