@@ -93,8 +93,6 @@ abstract class AbstractAdapterTestCase extends TestCase
         $task = $engine->createSchema(['return_slow_promise_result' => true]);
         $task->wait();
 
-        $this->assertSame(0, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
-
         $documents = TestingHelper::createComplexFixtures();
 
         foreach ($documents as $document) {
@@ -102,8 +100,6 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
 
         self::$taskHelper->waitForAll();
-
-        $this->assertSame(4, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
 
         $loadedDocuments = [];
         foreach ($documents as $document) {
@@ -141,6 +137,31 @@ abstract class AbstractAdapterTestCase extends TestCase
                 'Expected the exception "DocumentNotFoundException" to be thrown.',
             );
         }
+    }
+
+    public function testCountDocuments(): void
+    {
+        $engine = self::getEngine();
+        $task = $engine->createSchema(['return_slow_promise_result' => true]);
+        $task->wait();
+
+        $this->assertSame(0, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
+
+        $documents = TestingHelper::createComplexFixtures();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = $engine->saveDocument(TestingHelper::INDEX_COMPLEX, $document, ['return_slow_promise_result' => true]);
+        }
+
+        self::$taskHelper->waitForAll();
+
+        $this->assertSame(4, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = $engine->deleteDocument(TestingHelper::INDEX_COMPLEX, $document['uuid'], ['return_slow_promise_result' => true]);
+        }
+
+        self::$taskHelper->waitForAll();
     }
 
     public static function setUpBeforeClass(): void
