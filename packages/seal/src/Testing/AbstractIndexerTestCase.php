@@ -41,6 +41,11 @@ abstract class AbstractIndexerTestCase extends TestCase
         self::$taskHelper = new TaskHelper();
     }
 
+    public function tearDown(): void
+    {
+        self::$taskHelper->waitForAll();
+    }
+
     public static function setUpBeforeClass(): void
     {
         self::$schemaManager = self::$adapter->getSchemaManager();
