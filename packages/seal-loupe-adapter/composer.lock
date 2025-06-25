@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4925ce8a3af264f3ad6a153f2ac6cbf4",
+    "content-hash": "7e95c39a8cfee84c586994abd59e9d3c",
     "packages": [
         {
             "name": "cmsig/seal",
-            "version": "0.9.x-dev",
+            "version": "0.10.0",
             "dist": {
                 "type": "path",
                 "url": "./../seal",
@@ -109,12 +109,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15"
+                "reference": "5fe09532be619202d59c70956c6fb20e97933ee3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15",
-                "reference": "79a0f177f8a9c5d5ebc0ce04beb1cd9bf501dd15",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/5fe09532be619202d59c70956c6fb20e97933ee3",
+                "reference": "5fe09532be619202d59c70956c6fb20e97933ee3",
                 "shasum": ""
             },
             "require": {
@@ -127,12 +127,12 @@
                 "doctrine/coding-standard": "13.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.2",
-                "phpstan/phpstan": "2.1.1",
+                "phpstan/phpstan": "2.1.17",
                 "phpstan/phpstan-phpunit": "2.0.6",
                 "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "11.5.15",
+                "phpunit/phpunit": "11.5.23",
                 "slevomat/coding-standard": "8.16.2",
-                "squizlabs/php_codesniffer": "3.12.0",
+                "squizlabs/php_codesniffer": "3.13.1",
                 "symfony/cache": "^6.3.8|^7.0",
                 "symfony/console": "^5.4|^6.3|^7.0"
             },
@@ -207,7 +207,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-25T15:06:22+00:00"
+            "time": "2025-06-16T19:31:04+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -215,12 +215,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38"
+                "reference": "fad1854935ed49eeca580d1b878cac358ec02d04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
-                "reference": "459c2f5dd3d6a4633d3b5f46ee2b1c40f57d3f38",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/fad1854935ed49eeca580d1b878cac358ec02d04",
+                "reference": "fad1854935ed49eeca580d1b878cac358ec02d04",
                 "shasum": ""
             },
             "require": {
@@ -254,9 +254,9 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.5"
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.x"
             },
-            "time": "2025-04-07T20:06:18+00:00"
+            "time": "2025-06-09T20:23:56+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -337,21 +337,22 @@
         },
         {
             "name": "joomla/string",
-            "version": "dev-3.x-dev",
+            "version": "dev-4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla-framework/string.git",
-                "reference": "15878f3260eefd443b6af3d9fb34b1e386a5f626"
+                "reference": "8b15a0f9ff70f71bc69f6c09fc21ef45a86a27cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/string/zipball/15878f3260eefd443b6af3d9fb34b1e386a5f626",
-                "reference": "15878f3260eefd443b6af3d9fb34b1e386a5f626",
+                "url": "https://api.github.com/repos/joomla-framework/string/zipball/8b15a0f9ff70f71bc69f6c09fc21ef45a86a27cf",
+                "reference": "8b15a0f9ff70f71bc69f6c09fc21ef45a86a27cf",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1.0",
-                "symfony/deprecation-contracts": "^2|^3"
+                "symfony/deprecation-contracts": "^2|^3",
+                "symfony/polyfill-mbstring": "^1.31.0"
             },
             "conflict": {
                 "doctrine/inflector": "<1.2"
@@ -369,32 +370,15 @@
                 "doctrine/inflector": "To use the string inflector",
                 "ext-mbstring": "For improved processing"
             },
-            "default-branch": true,
             "type": "joomla-package",
             "extra": {
                 "branch-alias": {
                     "dev-2.0-dev": "2.0-dev",
-                    "dev-3.x-dev": "3.0-dev"
+                    "dev-3.x-dev": "3.x-dev",
+                    "dev-4.x-dev": "4.x-dev"
                 }
             },
             "autoload": {
-                "files": [
-                    "src/phputf8/utf8.php",
-                    "src/phputf8/ord.php",
-                    "src/phputf8/str_ireplace.php",
-                    "src/phputf8/str_pad.php",
-                    "src/phputf8/str_split.php",
-                    "src/phputf8/strcasecmp.php",
-                    "src/phputf8/strcspn.php",
-                    "src/phputf8/stristr.php",
-                    "src/phputf8/strrev.php",
-                    "src/phputf8/strspn.php",
-                    "src/phputf8/trim.php",
-                    "src/phputf8/ucfirst.php",
-                    "src/phputf8/ucwords.php",
-                    "src/phputf8/utils/ascii.php",
-                    "src/phputf8/utils/validation.php"
-                ],
                 "psr-4": {
                     "Joomla\\String\\": "src/"
                 }
@@ -412,32 +396,22 @@
             ],
             "support": {
                 "issues": "https://github.com/joomla-framework/string/issues",
-                "source": "https://github.com/joomla-framework/string/tree/3.0.2"
+                "source": "https://github.com/joomla-framework/string/tree/4.x-dev"
             },
-            "funding": [
-                {
-                    "url": "https://community.joomla.org/sponsorship-campaigns.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/joomla",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-31T20:29:53+00:00"
+            "time": "2025-06-04T17:31:21+00:00"
         },
         {
             "name": "loupe/loupe",
-            "version": "0.12.0",
+            "version": "0.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "49a9b62cd472a112cdd6b91952c04b1028ccf8e4"
+                "reference": "16ef1710d8a8fc30de0edbaabdc39ea2df67d02c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/49a9b62cd472a112cdd6b91952c04b1028ccf8e4",
-                "reference": "49a9b62cd472a112cdd6b91952c04b1028ccf8e4",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/16ef1710d8a8fc30de0edbaabdc39ea2df67d02c",
+                "reference": "16ef1710d8a8fc30de0edbaabdc39ea2df67d02c",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +429,7 @@
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^10.5",
+                "phpunit/phpunit": "^10.5.44",
                 "symfony/filesystem": "^6.2",
                 "symfony/finder": "^6.2",
                 "symfony/var-dumper": "^6.2",
@@ -480,7 +454,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.12.0"
+                "source": "https://github.com/loupe-php/loupe/tree/0.12.2"
             },
             "funding": [
                 {
@@ -488,7 +462,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-26T17:14:53+00:00"
+            "time": "2025-06-04T17:08:10+00:00"
         },
         {
             "name": "loupe/matcher",
@@ -909,6 +883,88 @@
             "time": "2024-09-25T14:21:43+00:00"
         },
         {
+            "name": "symfony/polyfill-mbstring",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=7.2"
+            },
+            "provide": {
+                "ext-mbstring": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.32.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-12-23T08:48:59+00:00"
+        },
+        {
             "name": "toflar/state-set-index",
             "version": "3.0.2",
             "source": {
@@ -1067,16 +1123,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -1119,9 +1175,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1349,12 +1405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24"
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7644bd0270a3ba1099839649bdfedbadfc699b24",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/43c44ee1146b5ba673e25cfcb7874e5e8546305f",
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f",
                 "shasum": ""
             },
             "require": {
@@ -1399,7 +1455,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-24T17:35:05+00:00"
+            "time": "2025-06-13T08:43:11+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1782,12 +1838,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da"
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69e703f07c6fc03c4bc1a0489566b3074fd931da",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a2b49aac934bb0c88ae715e24ca9739f4df014b1",
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1",
                 "shasum": ""
             },
             "require": {
@@ -1883,7 +1939,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-25T06:00:37+00:00"
+            "time": "2025-06-18T11:49:00+00:00"
         },
         {
             "name": "rector/rector",

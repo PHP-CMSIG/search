@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7e5ac2207aa33e0ffa6b97c4799c63f",
+    "content-hash": "5c9a3702d3d907e25d20c1b3d29a776d",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.19.0",
+            "version": "4.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "9817acb7a515e7470d5e54af3138c78096e6c6ab"
+                "reference": "bbac5600a57f6f6cf43b62a68cef17839ec9682e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/9817acb7a515e7470d5e54af3138c78096e6c6ab",
-                "reference": "9817acb7a515e7470d5e54af3138c78096e6c6ab",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/bbac5600a57f6f6cf43b62a68cef17839ec9682e",
+                "reference": "bbac5600a57f6f6cf43b62a68cef17839ec9682e",
                 "shasum": ""
             },
             "require": {
@@ -69,13 +69,13 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.19.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.22.0"
             },
-            "time": "2025-05-12T13:49:35+00:00"
+            "time": "2025-06-17T09:00:34+00:00"
         },
         {
             "name": "cmsig/seal",
-            "version": "0.9.x-dev",
+            "version": "0.10.0",
             "dist": {
                 "type": "path",
                 "url": "./../seal",
@@ -662,16 +662,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -714,9 +714,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -944,12 +944,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24"
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7644bd0270a3ba1099839649bdfedbadfc699b24",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/43c44ee1146b5ba673e25cfcb7874e5e8546305f",
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-24T17:35:05+00:00"
+            "time": "2025-06-13T08:43:11+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1377,12 +1377,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da"
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69e703f07c6fc03c4bc1a0489566b3074fd931da",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a2b49aac934bb0c88ae715e24ca9739f4df014b1",
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1",
                 "shasum": ""
             },
             "require": {
@@ -1478,7 +1478,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-25T06:00:37+00:00"
+            "time": "2025-06-18T11:49:00+00:00"
         },
         {
             "name": "rector/rector",

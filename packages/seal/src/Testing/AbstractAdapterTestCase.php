@@ -35,6 +35,11 @@ abstract class AbstractAdapterTestCase extends TestCase
         self::$taskHelper = new TaskHelper();
     }
 
+    protected function tearDown(): void
+    {
+        self::$taskHelper->waitForAll();
+    }
+
     protected static function getEngine(): EngineInterface
     {
         if (!isset(self::$engine)) {

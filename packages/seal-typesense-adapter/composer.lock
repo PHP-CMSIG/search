@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b27a9dba8c81d4fc460aafd87cb69a2f",
+    "content-hash": "c96b087bfecc83a8e34b2972ee164779",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -75,7 +75,7 @@
         },
         {
             "name": "cmsig/seal",
-            "version": "0.9.x-dev",
+            "version": "0.10.0",
             "dist": {
                 "type": "path",
                 "url": "./../seal",
@@ -1025,12 +1025,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "57e4fb86314015a695a750ace358d07a7e37b8a9"
+                "reference": "c1e306869c4711fe00a28a3f8a5c5cb947a9cb20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/57e4fb86314015a695a750ace358d07a7e37b8a9",
-                "reference": "57e4fb86314015a695a750ace358d07a7e37b8a9",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/c1e306869c4711fe00a28a3f8a5c5cb947a9cb20",
+                "reference": "c1e306869c4711fe00a28a3f8a5c5cb947a9cb20",
                 "shasum": ""
             },
             "require": {
@@ -1042,6 +1042,7 @@
             },
             "conflict": {
                 "amphp/amp": "<2.5",
+                "amphp/socket": "<1.1",
                 "php-http/discovery": "<1.15",
                 "symfony/http-foundation": "<6.4"
             },
@@ -1054,18 +1055,17 @@
             "require-dev": {
                 "amphp/http-client": "^4.2.1|^5.0",
                 "amphp/http-tunnel": "^1.0|^2.0",
-                "amphp/socket": "^1.1",
                 "guzzlehttp/promises": "^1.4|^2.0",
                 "nyholm/psr7": "^1.0",
                 "php-http/httplug": "^1.0|^2.0",
                 "psr/http-client": "^1.0",
                 "symfony/amphp-http-client-meta": "^1.0|^2.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/messenger": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0",
-                "symfony/rate-limiter": "^6.4|^7.0",
-                "symfony/stopwatch": "^6.4|^7.0"
+                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
+                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "symfony/messenger": "^6.4|^7.0|^8.0",
+                "symfony/process": "^6.4|^7.0|^8.0",
+                "symfony/rate-limiter": "^6.4|^7.0|^8.0",
+                "symfony/stopwatch": "^6.4|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -1096,7 +1096,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v7.3.0-RC1"
+                "source": "https://github.com/symfony/http-client/tree/7.4"
             },
             "funding": [
                 {
@@ -1112,7 +1112,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-02T08:23:16+00:00"
+            "time": "2025-06-05T15:38:23+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -1427,16 +1427,16 @@
         },
         {
             "name": "typesense/typesense-php",
-            "version": "v5.1.0",
+            "version": "v5.2.0-RC2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/typesense/typesense-php.git",
-                "reference": "0e8dee542c05b201becf4734319075e6c4d540b3"
+                "reference": "89bace59799e4bd326704990e3f4f9d729e331ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/typesense/typesense-php/zipball/0e8dee542c05b201becf4734319075e6c4d540b3",
-                "reference": "0e8dee542c05b201becf4734319075e6c4d540b3",
+                "url": "https://api.github.com/repos/typesense/typesense-php/zipball/89bace59799e4bd326704990e3f4f9d729e331ac",
+                "reference": "89bace59799e4bd326704990e3f4f9d729e331ac",
                 "shasum": ""
             },
             "require": {
@@ -1494,7 +1494,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-05T17:35:26+00:00"
+            "time": "2025-06-02T15:05:15+00:00"
         }
     ],
     "packages-dev": [
@@ -1561,16 +1561,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -1613,9 +1613,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -1909,12 +1909,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24"
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7644bd0270a3ba1099839649bdfedbadfc699b24",
-                "reference": "7644bd0270a3ba1099839649bdfedbadfc699b24",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/43c44ee1146b5ba673e25cfcb7874e5e8546305f",
+                "reference": "43c44ee1146b5ba673e25cfcb7874e5e8546305f",
                 "shasum": ""
             },
             "require": {
@@ -1959,7 +1959,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-24T17:35:05+00:00"
+            "time": "2025-06-13T08:43:11+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -2342,12 +2342,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da"
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69e703f07c6fc03c4bc1a0489566b3074fd931da",
-                "reference": "69e703f07c6fc03c4bc1a0489566b3074fd931da",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a2b49aac934bb0c88ae715e24ca9739f4df014b1",
+                "reference": "a2b49aac934bb0c88ae715e24ca9739f4df014b1",
                 "shasum": ""
             },
             "require": {
@@ -2443,7 +2443,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-25T06:00:37+00:00"
+            "time": "2025-06-18T11:49:00+00:00"
         },
         {
             "name": "rector/rector",

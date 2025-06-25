@@ -70,6 +70,11 @@ abstract class AbstractSearcherTestCase extends TestCase
         self::$taskHelper->waitForAll();
     }
 
+    protected function tearDown(): void
+    {
+        self::$taskHelper->waitForAll();
+    }
+
     protected static function getSchema(): Schema
     {
         if (!isset(self::$schema)) {
