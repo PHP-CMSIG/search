@@ -41,7 +41,10 @@ final class AlgoliaSearcher implements SearcherInterface
 
     public function count(Index $index): int
     {
-        return (int) $this->client->searchSingleIndex($index->name)['nbHits'] ?? 0;
+        $data = $this->client->searchSingleIndex($index->name);
+        \assert(isset($data['nbHits']) && \is_int($data['nbHits']), 'The "nbHits" value is expected to be returned by algolia client.');
+
+        return $data['nbHits'];
     }
 
     public function search(Search $search): Result
