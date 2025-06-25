@@ -20,10 +20,9 @@ use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
-use Elastic\Elasticsearch\Exception\ClientResponseException;
-use Elastic\Elasticsearch\Response\Elasticsearch;
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\Missing404Exception;
+use OpenSearch\Common\Exceptions\OpenSearchException;
 
 final class OpensearchSearcher implements SearcherInterface
 {
@@ -46,7 +45,7 @@ final class OpensearchSearcher implements SearcherInterface
             return $this->client->count([
                 'index' => $index->name,
             ])['count'] ?? 0;
-        } catch (ClientResponseException $e) {
+        } catch (OpenSearchException) {
             return 0;
         }
     }
