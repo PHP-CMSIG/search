@@ -33,8 +33,6 @@ abstract class AbstractAdapterTestCase extends TestCase
     protected function setUp(): void
     {
         self::$taskHelper = new TaskHelper();
-        $task = self::getEngine()->createSchema(['return_slow_promise_result' => true]);
-        $task->wait();
     }
 
     protected function tearDown(): void
@@ -100,6 +98,9 @@ abstract class AbstractAdapterTestCase extends TestCase
     public function testDocument(): void
     {
         $engine = self::getEngine();
+        $task = self::getEngine()->createSchema(['return_slow_promise_result' => true]);
+        $task->wait();
+
         $documents = TestingHelper::createComplexFixtures();
 
         foreach ($documents as $document) {
@@ -149,6 +150,9 @@ abstract class AbstractAdapterTestCase extends TestCase
     public function testCountDocuments(): void
     {
         $engine = self::getEngine();
+        $task = self::getEngine()->createSchema(['return_slow_promise_result' => true]);
+        $task->wait();
+
         $this->assertSame(0, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
 
         $documents = TestingHelper::createComplexFixtures();

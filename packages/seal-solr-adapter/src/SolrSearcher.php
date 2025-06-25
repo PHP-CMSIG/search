@@ -52,7 +52,7 @@ final class SolrSearcher implements SearcherInterface
         $query->setQuery('*:*');     // Match all docs
         $query->setRows(0);          // Don't return actual docs
 
-        return $this->client->select($query)->getNumFound();
+        return (int) $this->client->select($query)->getNumFound();
     }
 
     public function search(Search $search): Result
