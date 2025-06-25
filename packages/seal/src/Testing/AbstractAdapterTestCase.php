@@ -37,8 +37,12 @@ abstract class AbstractAdapterTestCase extends TestCase
 
     protected function tearDown(): void
     {
-        $task = self::getEngine()->dropSchema(['return_slow_promise_result' => true]);
-        $task->wait();
+        try {
+            $task = self::getEngine()->dropSchema(['return_slow_promise_result' => true]);
+            $task->wait();
+        } catch (\Exception) {
+            // ignore eventuell not existing indexes to drop
+        }
 
         self::$taskHelper->waitForAll();
     }
