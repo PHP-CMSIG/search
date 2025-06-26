@@ -462,6 +462,17 @@ for example. Instead of displaying all the product variants, you may group them 
 
 --------------
 
+Counting documents
+------------------
+
+If you need to know the number of documents in your index, simply ask the engine for it:
+
+.. code-block:: php
+
+    <?php
+
+    $count = $this->engine->countDocuments('blog');
+
 Summary
 -------
 
