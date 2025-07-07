@@ -67,6 +67,14 @@ integration of the package or the ``Standalone`` version.
 
 .. tabs::
 
+    .. group-tab:: Loupe
+
+        Install the `Loupe <https://github.com/loupe-php/loupe>`__ adapter:
+
+        .. code-block:: bash
+
+            composer require cmsig/seal-loupe-adapter
+
     .. group-tab:: Meilisearch
 
         Install the `Meilisearch <https://www.meilisearch.com/>`__ adapter:
@@ -106,14 +114,6 @@ integration of the package or the ``Standalone`` version.
         .. code-block:: bash
 
             composer require cmsig/seal-redisearch-adapter
-
-    .. group-tab:: Loupe
-
-        Install the `Loupe <https://github.com/loupe-php/loupe>`__ adapter:
-
-        .. code-block:: bash
-
-            composer require cmsig/seal-loupe-adapter
 
     .. group-tab:: Solr
 
@@ -276,6 +276,29 @@ It requires an instance of the ``Adapter`` which we did install before to connec
 
         .. tabs::
 
+            .. group-tab:: Loupe
+
+                Use the following code to create a new ``Engine`` using the ``Loupe`` adapter:
+
+                .. code-block:: php
+
+                    <?php
+
+                    use Loupe\Loupe\LoupeFactory;
+                    use CmsIg\Seal\Adapter\Loupe\LoupeAdapter;
+                    use CmsIg\Seal\Adapter\Loupe\LoupeHelper;
+                    use CmsIg\Seal\Engine;
+
+                    $loupeHelper = new LoupeHelper(
+                        new LoupeFactory(),
+                        $directory,
+                    );
+
+                    $engine = new Engine(
+                        new LoupeAdapter($loupeHelper),
+                        $schema,
+                    );
+
             .. group-tab:: Meilisearch
 
                 Use the following code to create a new ``Engine`` using the ``Meilisearch`` adapter:
@@ -382,29 +405,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         $schema,
                     );
 
-            .. group-tab:: Loupe
-
-                Use the following code to create a new ``Engine`` using the ``Loupe`` adapter:
-
-                .. code-block:: php
-
-                    <?php
-
-                    use Loupe\Loupe\LoupeFactory;
-                    use CmsIg\Seal\Adapter\Loupe\LoupeAdapter;
-                    use CmsIg\Seal\Adapter\Loupe\LoupeHelper;
-                    use CmsIg\Seal\Engine;
-
-                    $loupeHelper = new LoupeHelper(
-                        new LoupeFactory(),
-                        $directory,
-                    );
-
-                    $engine = new Engine(
-                        new LoupeAdapter($loupeHelper),
-                        $schema,
-                    );
-
             .. group-tab:: Solr
 
                 Use the following code to create a new ``Engine`` using the ``Solr`` adapter:
@@ -476,6 +476,28 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         in the ``config/cmsig_seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
+
+            .. group-tab:: Loupe
+
+                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
+
+                .. code-block:: php
+
+                    <?php // config/cmsig_seal.php
+
+                    return [
+                        'schemas' => [
+                            'default' => [
+                                'dir' => resource_path('schemas'),
+                            ],
+                        ],
+
+                        'engines' => [
+                            'default' => [
+                                'adapter' => 'loupe://storage/indexes',
+                            ],
+                        ],
+                    ];
 
             .. group-tab:: Meilisearch
 
@@ -588,28 +610,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         ],
                     ];
 
-            .. group-tab:: Loupe
-
-                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
-
-                .. code-block:: php
-
-                    <?php // config/cmsig_seal.php
-
-                    return [
-                        'schemas' => [
-                            'default' => [
-                                'dir' => resource_path('schemas'),
-                            ],
-                        ],
-
-                        'engines' => [
-                            'default' => [
-                                'adapter' => 'loupe://storage/indexes',
-                            ],
-                        ],
-                    ];
-
             .. group-tab:: Solr
 
                 Use the following configuration to use ``Solr`` as your default ``Engine`` adapter:
@@ -667,6 +667,22 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         via a ``DSN`` like string.
 
         .. tabs::
+
+            .. group-tab:: Loupe
+
+                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
+
+                .. code-block:: yaml
+
+                    # config/packages/cmsig_seal.yaml
+
+                    cmsig_seal:
+                        schemas:
+                            default:
+                                dir: '%kernel.project_dir%/config/schemas'
+                        engines:
+                            default:
+                                adapter: 'loupe://%kernel.project_dir%/var/indexes'
 
             .. group-tab:: Meilisearch
 
@@ -749,22 +765,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             default:
                                 adapter: 'redis://127.0.0.1:6379'
 
-            .. group-tab:: Loupe
-
-                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
-
-                .. code-block:: yaml
-
-                    # config/packages/cmsig_seal.yaml
-
-                    cmsig_seal:
-                        schemas:
-                            default:
-                                dir: '%kernel.project_dir%/config/schemas'
-                        engines:
-                            default:
-                                adapter: 'loupe://%kernel.project_dir%/var/indexes'
-
             .. group-tab:: Solr
 
                 Use the following configuration to use ``Solr`` as your default ``Engine`` adapter:
@@ -803,6 +803,28 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         in the ``app/config/cmsig_seal.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
+
+            .. group-tab:: Loupe
+
+                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
+
+                .. code-block:: php
+
+                    <?php // app/config/cmsig_seal.php
+
+                    return [
+                        'schemas' => [
+                            'default' => [
+                                'dir' => resource_path('schemas'),
+                            ],
+                        ],
+
+                        'engines' => [
+                            'default' => [
+                                'adapter' => 'loupe://runtime/var/indexes',
+                            ],
+                        ],
+                    ];
 
             .. group-tab:: Meilisearch
 
@@ -915,28 +937,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         ],
                     ];
 
-            .. group-tab:: Loupe
-
-                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
-
-                .. code-block:: php
-
-                    <?php // app/config/cmsig_seal.php
-
-                    return [
-                        'schemas' => [
-                            'default' => [
-                                'dir' => resource_path('schemas'),
-                            ],
-                        ],
-
-                        'engines' => [
-                            'default' => [
-                                'adapter' => 'loupe://runtime/var/indexes',
-                            ],
-                        ],
-                    ];
-
             .. group-tab:: Solr
 
                 Use the following configuration to use ``Solr`` as your default ``Engine`` adapter:
@@ -987,6 +987,37 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         in the ``src/App/src/ConfigProvider.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
+
+            .. group-tab:: Loupe
+
+                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
+
+                .. code-block:: php
+
+                    <?php // src/App/src/ConfigProvider.php
+
+                    class ConfigProvider
+                    {
+                        public function __invoke(): array
+                        {
+                            return [
+                                // ...
+                                'cmsig_seal' => [
+                                    'schemas' => [
+                                        'default' => [
+                                            'dir' => 'config/schemas',
+                                        ],
+                                    ],
+
+                                    'engines' => [
+                                        'default' => [
+                                            'adapter' => 'loupe://data/indexes',
+                                        ],
+                                    ],
+                                ],
+                            ];
+                        }
+                    }
 
             .. group-tab:: Meilisearch
 
@@ -1143,36 +1174,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             ];
                         }
                     }
-            .. group-tab:: Loupe
-
-                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
-
-                .. code-block:: php
-
-                    <?php // src/App/src/ConfigProvider.php
-
-                    class ConfigProvider
-                    {
-                        public function __invoke(): array
-                        {
-                            return [
-                                // ...
-                                'cmsig_seal' => [
-                                    'schemas' => [
-                                        'default' => [
-                                            'dir' => 'config/schemas',
-                                        ],
-                                    ],
-
-                                    'engines' => [
-                                        'default' => [
-                                            'adapter' => 'loupe://data/indexes',
-                                        ],
-                                    ],
-                                ],
-                            ];
-                        }
-                    }
 
             .. group-tab:: Solr
 
@@ -1242,6 +1243,31 @@ It requires an instance of the ``Adapter`` which we did install before to connec
         in the ``config/common/params.php`` file. The ``Adapter`` is configured via a ``DSN`` like string.
 
         .. tabs::
+
+            .. group-tab:: Loupe
+
+                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
+
+                .. code-block:: php
+
+                    <?php // config/common/params.php
+
+                    return [
+                        // ...
+                        'cmsig/seal-yii-module' => [
+                            'schemas' => [
+                                'default' => [
+                                    'dir' => 'config/schemas',
+                                ],
+                            ],
+
+                            'engines' => [
+                                'default' => [
+                                    'adapter' => 'loupe://runtime/indexes',
+                                ],
+                            ],
+                        ],
+                    ];
 
             .. group-tab:: Meilisearch
 
@@ -1369,31 +1395,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                         ],
                     ];
 
-            .. group-tab:: Loupe
-
-                Use the following configuration to use ``Loupe`` as your default ``Engine`` adapter:
-
-                .. code-block:: php
-
-                    <?php // config/common/params.php
-
-                    return [
-                        // ...
-                        'cmsig/seal-yii-module' => [
-                            'schemas' => [
-                                'default' => [
-                                    'dir' => 'config/schemas',
-                                ],
-                            ],
-
-                            'engines' => [
-                                'default' => [
-                                    'adapter' => 'loupe://runtime/indexes',
-                                ],
-                            ],
-                        ],
-                    ];
-
             .. group-tab:: Solr
 
                 Use the following configuration to use ``Solr`` as your default ``Engine`` adapter:
@@ -1452,6 +1453,12 @@ provide here different `docker-compose <https://www.docker.com/products/docker-d
 search engine.
 
 .. tabs::
+
+    .. group-tab:: Loupe
+
+        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no service other service required to use it.
+        You just need to make sure that you have the required `sqlite php extension <https://www.php.net/pdo_sqlite>`__ installed. The
+        php package manager `composer <https://getcomposer.org/>`__ should already tell you if you are missing the extension.
 
     .. group-tab:: Meilisearch
 
@@ -1608,12 +1615,6 @@ search engine.
 
         Depending on the service after a few seconds up to a minute the service is ready to use.
         And you can continue with the next step.
-
-    .. group-tab:: Loupe
-
-        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no service other service required to use it.
-        You just need to make sure that you have the required `sqlite php extension <https://www.php.net/pdo_sqlite>`__` installed. The
-        php package manager `composer <https://getcomposer.org/>`__ should already tell you if you are missing the extension.
 
     .. group-tab:: Solr
 
