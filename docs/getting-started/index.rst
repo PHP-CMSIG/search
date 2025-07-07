@@ -1673,7 +1673,7 @@ search engine.
 
             services:
               typesense:
-                image: typesense/typesense:28.0
+                image: typesense/typesense:29.0
                 ports:
                   - "8108:8108"
                 environment:
