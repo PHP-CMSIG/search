@@ -121,7 +121,7 @@ The following projects in the past target a similar problem:
 - [https://github.com/nresni/Ariadne](https://github.com/nresni/Ariadne) (Solr, Elasticsearch, Zendsearch: outdated 12 years ago)
 - [https://github.com/massiveart/MassiveSearchBundle](https://github.com/massiveart/MassiveSearchBundle) (ZendSearch, Elasticsearch)
 - [https://github.com/laravel/scout](https://github.com/laravel/scout) (Algolia, Meilisearch, Typesense)
-- [https://github.com/Mezcalito/ux-search/](https://github.com/Mezcalito/ux-search/) (Doctrine, Meilisearch)
+- [https://github.com/Mezcalito/ux-search/](https://github.com/Mezcalito/ux-search/) (Doctrine, Meilisearch, Algolia)
 
 ## 📩 Authors
 
