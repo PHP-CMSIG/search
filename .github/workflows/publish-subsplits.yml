@@ -21,7 +21,7 @@ jobs:
                   fetch-depth: '0'
                   persist-credentials: 'false'
 
-            - uses: frankdejonge/use-github-token@1.0.1
+            - uses: frankdejonge/use-github-token@0001015147267203898034927e8cccad3a7a9aa7 # as 1.1.0
               with:
                   authentication: 'alexander-schranz:${{ secrets.PERSONAL_ACCESS_TOKEN }}'
                   user_name: 'Alexander Schranz'
@@ -34,7 +34,7 @@ jobs:
                   path: './.splitsh'
                   key: '${{ runner.os }}-splitsh'
 
-            - uses: frankdejonge/use-subsplit-publish@1.0.0
+            - uses: frankdejonge/use-subsplit-publish@0001015147267203898034927e8cccad3a7a9aa7 # as 1.1.0
               with:
                   source-branch: '${{ github.ref_name }}'
                   config-path: './config.subsplit-publish.json'
