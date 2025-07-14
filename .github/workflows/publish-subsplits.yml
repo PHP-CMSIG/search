@@ -21,7 +21,7 @@ jobs:
                   fetch-depth: '0'
                   persist-credentials: 'false'
 
-            - uses: frankdejonge/use-github-token@0001015147267203898034927e8cccad3a7a9aa7 # as 1.1.0
+            - uses: frankdejonge/use-github-token@15e6289d07c12b3b1603268a628bb74f2e9765f4 # as 1.1.0
               with:
                   authentication: 'alexander-schranz:${{ secrets.PERSONAL_ACCESS_TOKEN }}'
                   user_name: 'Alexander Schranz'
