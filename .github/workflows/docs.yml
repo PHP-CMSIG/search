@@ -12,6 +12,7 @@ permissions:
 
 jobs:
     docs-build:
+        name: "Build"
         runs-on: ubuntu-latest
         steps:
             - name: Output infos
@@ -52,6 +53,7 @@ jobs:
 
     docs-deploy:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/0.10' }}
+        name: "Deploy"
         needs: docs-build
         runs-on: ubuntu-latest
 
