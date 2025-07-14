@@ -23,7 +23,7 @@ final class Result extends \IteratorIterator
      */
     public function __construct(
         \Generator $documents,
-        readonly private int $total,
+        private readonly int $total,
     ) {
         parent::__construct($documents);
     }

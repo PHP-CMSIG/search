@@ -47,8 +47,8 @@ final class SearchBuilder
     private string|null $distinct = null;
 
     public function __construct(
-        readonly private Schema $schema,
-        readonly private SearcherInterface $searcher,
+        private readonly Schema $schema,
+        private readonly SearcherInterface $searcher,
     ) {
     }
 

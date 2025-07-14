@@ -26,7 +26,7 @@ final class ObjectField extends AbstractField
      */
     public function __construct(
         string $name,
-        readonly public array $fields,
+        public readonly array $fields,
         bool $multiple = false,
         array $options = [],
     ) {

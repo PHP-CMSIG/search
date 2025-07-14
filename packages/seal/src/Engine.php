@@ -26,8 +26,8 @@ use CmsIg\Seal\Task\TaskInterface;
 final class Engine implements EngineInterface
 {
     public function __construct(
-        readonly private AdapterInterface $adapter,
-        readonly private Schema $schema,
+        private readonly AdapterInterface $adapter,
+        private readonly Schema $schema,
     ) {
     }
 
