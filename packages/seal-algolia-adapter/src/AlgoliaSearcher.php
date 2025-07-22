@@ -138,7 +138,8 @@ final class AlgoliaSearcher implements SearcherInterface
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
         if (isset($searchParams['facets'])) {
-            var_dump($searchParams, $data); // debug
+            \var_dump($this->client->getSettings($indexName));
+            \var_dump($searchParams, $data); // debug
         }
 
         return new Result(
@@ -279,7 +280,7 @@ final class AlgoliaSearcher implements SearcherInterface
     {
         $formatted = [];
 
-        var_dump($facetsInfo, $facetsStatsInfo); // debug
+        \var_dump($facetsInfo, $facetsStatsInfo); // debug
 
         foreach ($facets as $facet) {
             if ($facet instanceof MinMaxFacet && isset($facetsStatsInfo[$facet->field]['min']) && isset($facetsStatsInfo[$facet->field]['max'])) {
