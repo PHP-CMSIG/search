@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e95c39a8cfee84c586994abd59e9d3c",
+    "content-hash": "5f6a4cd4aeba30824f74b1fcd027e133",
     "packages": [
         {
             "name": "cmsig/seal",
