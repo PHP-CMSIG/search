@@ -29,11 +29,27 @@ use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Mezzio\Service\CommandAbstractFactory;
+use CmsIg\Seal\Integration\Mezzio\Service\LoaderProviderInterface;
+use CmsIg\Seal\Integration\Mezzio\Service\PhpFileLoaderProvider;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
 use CmsIg\Seal\Schema\Schema;
 
+/**
+ * @phpstan-type TCmsSigSealConfig = array{
+ *      index_name_prefix: string,
+ *      schemas: array<string, array{
+ *          dir: string,
+ *          engine?: string,
+ *      }>,
+ *      engines: array<string, array{
+ *          adapter: string,
+ *      }>,
+ *      adapter_factories: array<class-string, class-string<AdapterFactoryInterface>>,
+ *      reindex_providers: string[],
+ *  }
+ */
 final class ConfigProvider
 {
     /**
@@ -87,6 +103,7 @@ final class ConfigProvider
             'factories' => [
                 EngineRegistry::class => SealContainerServiceAbstractFactory::class,
                 EngineInterface::class => SealContainerServiceAbstractFactory::class,
+                LoaderProviderInterface::class => PhpFileLoaderProvider::class,
                 Schema::class => SealContainerServiceAbstractFactory::class,
                 AdapterFactory::class => SealContainerServiceAbstractFactory::class,
                 SealContainer::class => SealContainerFactory::class,

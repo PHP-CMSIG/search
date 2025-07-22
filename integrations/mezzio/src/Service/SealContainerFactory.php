@@ -14,49 +14,30 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Mezzio\Service;
 
 use CmsIg\Seal\Adapter\AdapterFactory;
-use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
 use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
-use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Integration\Mezzio\ConfigProvider;
 use Doctrine\DBAL\Schema\Schema;
 use Psr\Container\ContainerInterface;
 
 /**
  * @internal
+ *
+ * @phpstan-import-type TCmsSigSealConfig from ConfigProvider
  */
 final class SealContainerFactory
 {
     public function __invoke(ContainerInterface $container): SealContainer
     {
-        /** @var array{cmsig_seal: mixed[]} $config */
+        /** @var array{cmsig_seal: TCmsSigSealConfig} $config */
         $config = $container->get('config');
 
-        /**
-         * @var array{
-         *     index_name_prefix: string,
-         *     schemas: array<string, array{
-         *         dir: string,
-         *         engine?: string,
-         *     }>,
-         *     engines: array<string, array{
-         *         adapter: string,
-         *     }>,
-         *     adapter_factories: array<class-string, class-string<AdapterFactoryInterface>>,
-         *     reindex_providers: string[],
-         * } $config
-         */
         $config = $config['cmsig_seal'];
 
-        $indexNamePrefix = $config['index_name_prefix'];
         $adapterFactoriesConfig = $config['adapter_factories'];
-
-        $engineSchemaDirs = [];
-        foreach ($config['schemas'] as $options) {
-            $engineSchemaDirs[$options['engine'] ?? 'default'][] = $options['dir'];
-        }
 
         $sealContainer = new SealContainer($container);
 
@@ -90,10 +71,11 @@ final class SealContainerFactory
 
             /** @var string $adapterDsn */
             $adapterDsn = $engineConfig['adapter'];
-            $dirs = $engineSchemaDirs[$name] ?? [];
-
             $adapter = $adapterFactory->createAdapter($adapterDsn);
-            $loader = new PhpFileLoader($dirs, $indexNamePrefix);
+
+            $loaderProvider = $container->get(LoaderProviderInterface::class);
+            \assert($loaderProvider instanceof LoaderProviderInterface);
+            $loader = $loaderProvider->getLoader($name, $config);
             $schema = $loader->load();
 
             $engine = new Engine($adapter, $schema);
