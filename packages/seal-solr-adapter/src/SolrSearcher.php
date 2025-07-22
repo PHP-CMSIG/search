@@ -18,11 +18,15 @@ use CmsIg\Seal\Marshaller\FlattenMarshaller;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Facet\AbstractFacet;
+use CmsIg\Seal\Search\Facet\CountFacet;
+use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 use Solarium\Client;
 use Solarium\Component\Result\Highlighting\Highlighting;
 use Solarium\Core\Query\DocumentInterface;
+use Solarium\QueryType\Select\Result\Result as SolariumResult;
 
 final class SolrSearcher implements SearcherInterface
 {
@@ -115,6 +119,19 @@ final class SolrSearcher implements SearcherInterface
             $query->addSort($this->getFilterField($search->index, $field), $direction);
         }
 
+        $stats = $query->getStats();
+        $facetSet = $query->getFacetSet();
+        foreach ($search->facets as $facet) {
+            if ($facet instanceof MinMaxFacet) {
+                $stats->createField($this->getFilterField($search->index, $facet->field));
+                continue;
+            }
+
+            $facetField = $facetSet
+                ->createFacetField($this->getFilterField($search->index, $facet->field))
+                ->setField($this->getFilterField($search->index, $facet->field));
+        }
+
         if ([] !== $search->highlightFields) {
             $highlighting = $query->getHighlighting();
             $highlighting->setFields(\implode(', ', $search->highlightFields));
@@ -133,6 +150,7 @@ final class SolrSearcher implements SearcherInterface
         return new Result(
             $this->hitsToDocuments($search->index, $result->getDocuments(), $result->getHighlighting(), $search->highlightFields),
             (int) $result->getNumFound(),
+            $this->formatFacets($result, $search->index, $search->facets),
         );
     }
 
@@ -259,5 +277,28 @@ final class SolrSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    /**
+     * @param array<AbstractFacet> $facets
+     *
+     * @return array<string, mixed>
+     */
+    private function formatFacets(SolariumResult $result, Index $index, array $facets): array
+    {
+        $formatted = [];
+
+        foreach ($facets as $facet) {
+            if ($facet instanceof MinMaxFacet && ($statResult = $result->getStats()?->getResult($this->getFilterField($index, $facet->field)))) {
+                $formatted[$facet->field]['min'] = $statResult->getStatValue('min');
+                $formatted[$facet->field]['max'] = $statResult->getStatValue('max');
+                continue;
+            }
+            if ($facet instanceof CountFacet && ($facetResult = $result->getFacetSet()?->getFacet($this->getFilterField($index, $facet->field)))) {
+                $formatted[$facet->field]['count'] = $facetResult->getValues();
+            }
+        }
+
+        return $formatted;
     }
 }
