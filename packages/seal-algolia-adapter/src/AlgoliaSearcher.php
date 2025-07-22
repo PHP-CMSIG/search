@@ -137,11 +137,6 @@ final class AlgoliaSearcher implements SearcherInterface
         $facets = isset($data['facets']) && \is_array($data['facets']) ? $data['facets'] : [];
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
-        if (isset($searchParams['facets'])) {
-            \var_dump($this->client->getSettings($indexName));
-            \var_dump($searchParams, $data); // debug
-        }
-
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['nbHits'] ?? null, // @phpstan-ignore-line
@@ -279,8 +274,6 @@ final class AlgoliaSearcher implements SearcherInterface
     private function formatFacets(array $facetsInfo, array $facetsStatsInfo, array $facets): array
     {
         $formatted = [];
-
-        \var_dump($facetsInfo, $facetsStatsInfo); // debug
 
         foreach ($facets as $facet) {
             if ($facet instanceof MinMaxFacet && isset($facetsStatsInfo[$facet->field]['min']) && isset($facetsStatsInfo[$facet->field]['max'])) {

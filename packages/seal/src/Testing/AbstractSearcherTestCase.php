@@ -117,6 +117,8 @@ abstract class AbstractSearcherTestCase extends TestCase
                 ['return_slow_promise_result' => true],
             );
         }
+
+        self::$taskHelper->waitForAll();
     }
 
     public function testFacetSearch(): void
@@ -189,6 +191,8 @@ abstract class AbstractSearcherTestCase extends TestCase
                 ['return_slow_promise_result' => true],
             );
         }
+
+        self::$taskHelper->waitForAll();
     }
 
     public function testCount(): void
