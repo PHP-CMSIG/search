@@ -151,6 +151,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
 
         return new AsyncTask(function () use ($indexResponses) {
             foreach ($indexResponses as $indexResponse) {
+                var_dump($indexResponse);
                 $this->client->waitForTask(
                     $indexResponse['indexName'],
                     $indexResponse['taskID'],
