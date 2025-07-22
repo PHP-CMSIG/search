@@ -18,6 +18,8 @@ use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Facet\CountFacet;
+use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 use Elastic\Elasticsearch\Client;
@@ -131,6 +133,16 @@ final class ElasticsearchSearcher implements SearcherInterface
             $body['collapse']['field'] = $this->getFilterField($search->index, $search->distinct);
         }
 
+        foreach ($search->facets as $facet) {
+            if ($facet instanceof CountFacet) {
+                $body['aggs'][$facet->field . '_count']['terms']['field'] = $this->getFilterField($search->index, $facet->field);
+            }
+            if ($facet instanceof MinMaxFacet) {
+                $body['aggs'][$facet->field . '_min']['min']['field'] = $this->getFilterField($search->index, $facet->field);
+                $body['aggs'][$facet->field . '_max']['max']['field'] = $this->getFilterField($search->index, $facet->field);
+            }
+        }
+
         /** @var Elasticsearch $response */
         $response = $this->client->search([
             'index' => $search->index->name,
@@ -152,6 +164,7 @@ final class ElasticsearchSearcher implements SearcherInterface
         return new Result(
             $this->hitsToDocuments($search->index, $searchResult['hits']['hits'], $search->highlightFields),
             $searchResult['hits']['total']['value'],
+            $this->formatFacets($searchResult['aggregations'] ?? [], $search->facets),
         );
     }
 
@@ -260,5 +273,29 @@ final class ElasticsearchSearcher implements SearcherInterface
                 $conjunctive ? 'must' : 'should' => $filterQueries,
             ],
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $aggregations
+     * @param array<AbstractFacet> $facets
+     */
+    private function formatFacets(array $aggregations, array $facets): array
+    {
+        $formatted = [];
+
+        foreach ($facets as $facet) {
+            if ($facet instanceof MinMaxFacet && isset($aggregations[$facet->field . '_min']) && isset($aggregations[$facet->field . '_max'])) {
+                $formatted[$facet->field]['min'] = $aggregations[$facet->field . '_min']['value'];
+                $formatted[$facet->field]['max'] = $aggregations[$facet->field . '_max']['value'];
+                continue;
+            }
+            if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count'])) {
+                foreach ($aggregations[$facet->field . '_count']['buckets'] as $bucket) {
+                    $formatted[$facet->field]['count'][$bucket['key']] = $bucket['doc_count'];
+                }
+            }
+        }
+
+        return $formatted;
     }
 }
