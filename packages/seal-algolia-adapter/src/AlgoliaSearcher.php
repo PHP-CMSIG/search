@@ -20,6 +20,9 @@ use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Facet\AbstractFacet;
+use CmsIg\Seal\Search\Facet\CountFacet;
+use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 
@@ -125,6 +128,10 @@ final class AlgoliaSearcher implements SearcherInterface
             $searchParams['distinct'] = true; // Algolia does not support multiple fields, so it can only be the one in the schema
         }
 
+        $searchParams['facets'] = \array_map(function (AbstractFacet $facet) {
+            return $facet->field;
+        }, $search->facets);
+
         $data = $this->client->searchSingleIndex($indexName, $searchParams);
         \assert(\is_array($data) && isset($data['hits']) && \is_array($data['hits']), 'The "hits" array is expected to be returned by algolia client.');
         \assert(isset($data['nbHits']) && \is_int($data['nbHits']), 'The "nbHits" value is expected to be returned by algolia client.');
@@ -132,6 +139,7 @@ final class AlgoliaSearcher implements SearcherInterface
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['nbHits'] ?? null, // @phpstan-ignore-line
+            $this->formatFacets($data['facets'] ?? [], $data['facet_stats'] ?? [], $search->facets),
         );
     }
 
@@ -253,5 +261,26 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         return $name;
+    }
+
+    /**
+     * @param array<AbstractFacet> $facets
+     */
+    private function formatFacets(array $facetsInfo, array $facetStatsInfo, array $facets): array
+    {
+        $formatted = [];
+
+        foreach ($facets as $facet) {
+            if ($facet instanceof MinMaxFacet && isset($facetStatsInfo[$facet->field])) {
+                $formatted[$facet->field]['min'] = $facetStatsInfo[$facet->field]['min'];
+                $formatted[$facet->field]['max'] = $facetStatsInfo[$facet->field]['max'];
+                continue;
+            }
+            if ($facet instanceof CountFacet && isset($facetsInfo[$facet->field])) {
+                $formatted[$facet->field]['count'] = $facetsInfo[$facet->field];
+            }
+        }
+
+        return $formatted;
     }
 }
