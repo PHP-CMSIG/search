@@ -137,7 +137,9 @@ final class AlgoliaSearcher implements SearcherInterface
         $facets = isset($data['facets']) && \is_array($data['facets']) ? $data['facets'] : [];
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
-        var_dump($searchParams, $$data); // debug
+        if (isset($searchParams['facets'])) {
+            var_dump($searchParams, $data); // debug
+        }
 
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
