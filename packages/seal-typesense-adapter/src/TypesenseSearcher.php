@@ -17,6 +17,9 @@ use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Facet\AbstractFacet;
+use CmsIg\Seal\Search\Facet\CountFacet;
+use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 use Typesense\Client;
@@ -114,11 +117,16 @@ final class TypesenseSearcher implements SearcherInterface
             $isGrouped = true;
         }
 
+        $searchParams['facet_by'] = \implode(',', \array_map(function (AbstractFacet $facet) {
+            return $facet->field;
+        }, $search->facets));
+
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
 
         return new Result(
             $this->hitsToDocuments($search->index, $isGrouped ? $data['grouped_hits'][0]['hits'] : $data['hits'], $search->highlightFields),
             $data['found'] ?? null,
+            $this->formatFacets($data['facet_counts'] ?? [], $search->facets),
         );
     }
 
@@ -226,5 +234,45 @@ final class TypesenseSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' && ' : ' || ', $filters);
+    }
+
+    /**
+     * @param array<mixed> $facetCounts
+     * @param array<AbstractFacet> $facets
+     *
+     * @return array<string, mixed>
+     */
+    private function formatFacets(array $facetCounts, array $facets): array
+    {
+        $facetInfoPerField = [];
+
+        foreach ($facetCounts as $facetCount) {
+            $count = [];
+
+            foreach ($facetCount['counts'] as $data) {
+                $count[$data['value']] = $data['count'];
+            }
+
+            $facetInfoPerField[$facetCount['field_name']] = [
+                'count' => $count,
+                'min' => $facetCount['stats']['min'] ?? null,
+                'max' => $facetCount['stats']['max'] ?? null,
+            ];
+        }
+
+        $formatted = [];
+
+        foreach ($facets as $facet) {
+            if ($facet instanceof MinMaxFacet && isset($facetInfoPerField[$facet->field])) {
+                $formatted[$facet->field]['min'] = $facetInfoPerField[$facet->field]['min'];
+                $formatted[$facet->field]['max'] = $facetInfoPerField[$facet->field]['max'];
+                continue;
+            }
+            if ($facet instanceof CountFacet && isset($facetInfoPerField[$facet->field])) {
+                $formatted[$facet->field]['count'] = $facetInfoPerField[$facet->field]['count'];
+            }
+        }
+
+        return $formatted;
     }
 }
