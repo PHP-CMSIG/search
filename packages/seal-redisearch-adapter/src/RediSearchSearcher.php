@@ -341,6 +341,9 @@ final class RediSearchSearcher implements SearcherInterface
                     'REDUCE', 'MAX', '1', '@' . $facet->field, 'AS', 'max_' . $this->getFilterField($search->index, $facet->field),
                 ]);
 
+                $arguments[] = 'DIALECT';
+                $arguments[] = '2';
+
                 /** @var mixed[]|false $result */
                 $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
 
@@ -357,6 +360,9 @@ final class RediSearchSearcher implements SearcherInterface
                     'GROUPBY', '1', '@' . $this->getFilterField($search->index, $facet->field),
                     'REDUCE', 'COUNT', '0', 'AS', 'count',
                 ]);
+
+                $arguments[] = 'DIALECT';
+                $arguments[] = '2';
 
                 /** @var mixed[]|false $result */
                 $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
