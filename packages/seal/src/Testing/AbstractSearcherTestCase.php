@@ -161,7 +161,6 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search->addFilter(new Condition\SearchCondition('Blog'));
         $search->addFacet(new MinMaxFacet(field: 'rating'));
         $search->addFacet(new CountFacet(field: 'tags'));
-        $search->addSortBy('title', 'asc');
 
         $facets = $search->getResult()->facets();
         TestingHelper::recursiveKeySort($facets);
