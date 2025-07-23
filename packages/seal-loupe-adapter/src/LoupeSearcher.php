@@ -100,9 +100,7 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withDistinct($search->distinct);
         }
 
-        $searchParameters = $searchParameters->withFacets(\array_map(function (AbstractFacet $facet) {
-            return $facet->field;
-        }, $search->facets));
+        $searchParameters = $searchParameters->withFacets(\array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets));
 
         if ([] !== $search->highlightFields) {
             $searchParameters = $searchParameters->withAttributesToHighlight(
@@ -230,6 +228,8 @@ final class LoupeSearcher implements SearcherInterface
     }
 
     /**
+     * @param array<string, array<string, float>> $facetStats
+     * @param array<string, array<string, int>> $facetDistribution
      * @param array<AbstractFacet> $facets
      *
      * @return array<string, mixed>

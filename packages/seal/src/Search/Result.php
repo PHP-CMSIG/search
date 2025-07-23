@@ -25,7 +25,7 @@ final class Result extends \IteratorIterator
     public function __construct(
         \Generator $documents,
         private readonly int $total,
-        private array $facets = [],
+        private readonly array $facets = [],
     ) {
         parent::__construct($documents);
     }
@@ -35,6 +35,9 @@ final class Result extends \IteratorIterator
         return $this->total;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function facets(): array
     {
         return $this->facets;

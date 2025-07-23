@@ -124,7 +124,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         $indexResponses = [];
         $indexResponses[] = [
             'indexName' => $index->name,
-            ...$this->client->setSettings($index->name, $attributes), // @phpstan-ignore-line
+            ...$this->client->setSettings($index->name, $attributes, true), // @phpstan-ignore-line
         ];
 
         foreach ($index->sortableFields as $field) {

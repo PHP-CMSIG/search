@@ -18,6 +18,7 @@ use CmsIg\Seal\Marshaller\Marshaller;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Facet\AbstractFacet;
 use CmsIg\Seal\Search\Facet\CountFacet;
 use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
@@ -251,20 +252,28 @@ final class OpensearchSearcher implements SearcherInterface
     }
 
     /**
-     * @param array<string, mixed> $aggregations
+     * @param array<string, array{
+     *          value?: float|null,
+     *          buckets?: array<array{
+     *              key: string|int,
+     *              doc_count: int
+     *          }>
+     *       }> $aggregations
      * @param array<AbstractFacet> $facets
+     *
+     * @return array<string, mixed>
      */
     private function formatFacets(array $aggregations, array $facets): array
     {
         $formatted = [];
 
         foreach ($facets as $facet) {
-            if ($facet instanceof MinMaxFacet && isset($aggregations[$facet->field . '_min']) && isset($aggregations[$facet->field . '_max'])) {
+            if ($facet instanceof MinMaxFacet && isset($aggregations[$facet->field . '_min']['value']) && isset($aggregations[$facet->field . '_max']['value'])) {
                 $formatted[$facet->field]['min'] = $aggregations[$facet->field . '_min']['value'];
                 $formatted[$facet->field]['max'] = $aggregations[$facet->field . '_max']['value'];
                 continue;
             }
-            if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count'])) {
+            if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count']['buckets'])) {
                 foreach ($aggregations[$facet->field . '_count']['buckets'] as $bucket) {
                     $formatted[$facet->field]['count'][$bucket['key']] = $bucket['doc_count'];
                 }

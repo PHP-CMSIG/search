@@ -27,11 +27,14 @@ final class TestingHelper
     {
     }
 
+    /**
+     * @param array<mixed> $array
+     */
     public static function recursiveKeySort(array &$array): void
     {
-        ksort($array);
+        \ksort($array);
         foreach ($array as &$value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 self::recursiveKeySort($value);
             }
         }

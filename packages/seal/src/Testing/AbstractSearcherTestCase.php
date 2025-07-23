@@ -152,7 +152,7 @@ abstract class AbstractSearcherTestCase extends TestCase
                     'Tech' => 2,
                     'UI' => 2,
                     'UX' => 2,
-                ]
+                ],
             ],
         ], $facets);
 
@@ -175,7 +175,7 @@ abstract class AbstractSearcherTestCase extends TestCase
                     'Tech' => 1,
                     'UI' => 2,
                     'UX' => 1,
-                ]
+                ],
             ],
         ], $facets);
 

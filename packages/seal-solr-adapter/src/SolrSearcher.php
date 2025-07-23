@@ -24,6 +24,8 @@ use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 use Solarium\Client;
+use Solarium\Component\Facet\Field as SolariumFacetField;
+use Solarium\Component\Result\Facet\Field as SolariumResultFacetField;
 use Solarium\Component\Result\Highlighting\Highlighting;
 use Solarium\Core\Query\DocumentInterface;
 use Solarium\QueryType\Select\Result\Result as SolariumResult;
@@ -127,9 +129,9 @@ final class SolrSearcher implements SearcherInterface
                 continue;
             }
 
-            $facetField = $facetSet
-                ->createFacetField($this->getFilterField($search->index, $facet->field))
-                ->setField($this->getFilterField($search->index, $facet->field));
+            /** @var SolariumFacetField $facetField */
+            $facetField = $facetSet->createFacetField($this->getFilterField($search->index, $facet->field));
+            $facetField->setField($this->getFilterField($search->index, $facet->field));
         }
 
         if ([] !== $search->highlightFields) {
@@ -294,7 +296,7 @@ final class SolrSearcher implements SearcherInterface
                 $formatted[$facet->field]['max'] = $statResult->getStatValue('max');
                 continue;
             }
-            if ($facet instanceof CountFacet && ($facetResult = $result->getFacetSet()?->getFacet($this->getFilterField($index, $facet->field)))) {
+            if ($facet instanceof CountFacet && ($facetResult = $result->getFacetSet()?->getFacet($this->getFilterField($index, $facet->field))) instanceof SolariumResultFacetField) {
                 $formatted[$facet->field]['count'] = $facetResult->getValues();
             }
         }

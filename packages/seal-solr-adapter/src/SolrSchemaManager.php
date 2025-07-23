@@ -192,7 +192,7 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'name' => $name,
                     'type' => 'location',
                     'indexed' => $field->searchable,
-                    'docValues' => $field->filterable || $field->sortable || $field->facet,
+                    'docValues' => $field->filterable || $field->sortable || $field->facet, // @phpstan-ignore-line
                     'stored' => true,
                     'useDocValuesAsStored' => false,
                     'multiValued' => $isMultiple,

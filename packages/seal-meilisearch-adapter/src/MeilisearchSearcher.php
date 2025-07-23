@@ -106,18 +106,20 @@ final class MeilisearchSearcher implements SearcherInterface
             $searchParams['distinct'] = $search->distinct;
         }
 
-        $searchParams['facets'] = \array_map(function (AbstractFacet $facet) {
-            return $facet->field;
-        }, $search->facets);
+        $searchParams['facets'] = \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets);
 
         $searchResult = $searchIndex->search($query, $searchParams);
         $data = $searchResult->toArray();
-        $data['facetStats'] = $searchResult->getFacetStats(); // Can be removed as soon as https://github.com/meilisearch/meilisearch-php/pull/768 is merged and released
+
+        /** @var array<string, array{min: float, max: float}> $facetStats */
+        $facetStats = $searchResult->getFacetStats();
+        /** @var array<string, array<string, int>> $facetDistribution */
+        $facetDistribution = $searchResult->getFacetDistribution();
 
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['totalHits'] ?? $data['estimatedTotalHits'] ?? null,
-            $this->formatFacets($data['facetStats'] ?? [], $data['facetDistribution'] ?? [], $search->facets),
+            $this->formatFacets($facetStats, $facetDistribution, $search->facets),
         );
     }
 
@@ -238,6 +240,8 @@ final class MeilisearchSearcher implements SearcherInterface
 
     /**
      * @param array<AbstractFacet> $facets
+     * @param array<string, array{min: float, max: float}> $facetStats
+     * @param array<string, array<string, int>> $facetDistribution
      *
      * @return array<string, mixed>
      */

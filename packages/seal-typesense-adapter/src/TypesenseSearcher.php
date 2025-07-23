@@ -117,16 +117,30 @@ final class TypesenseSearcher implements SearcherInterface
             $isGrouped = true;
         }
 
-        $searchParams['facet_by'] = \implode(',', \array_map(function (AbstractFacet $facet) {
-            return $facet->field;
-        }, $search->facets));
+        $searchParams['facet_by'] = \implode(',', \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets));
 
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
+
+        /** @var array<int, array{
+         *     field_name: string,
+         *     counts: array<int, array{
+         *         value: string,
+         *         count: int
+         *     }>,
+         *     stats?: array{
+         *         avg?: float,
+         *         max?: float|int,
+         *         min?: float|int,
+         *         sum?: float|int
+         *     }
+         * }> $facetCounts
+         */
+        $facetCounts = $data['facet_counts'] ?? [];
 
         return new Result(
             $this->hitsToDocuments($search->index, $isGrouped ? $data['grouped_hits'][0]['hits'] : $data['hits'], $search->highlightFields),
             $data['found'] ?? null,
-            $this->formatFacets($data['facet_counts'] ?? [], $search->facets),
+            $this->formatFacets($facetCounts, $search->facets),
         );
     }
 
@@ -237,7 +251,19 @@ final class TypesenseSearcher implements SearcherInterface
     }
 
     /**
-     * @param array<mixed> $facetCounts
+     * @param array<int, array{
+     *      field_name: string,
+     *      counts: array<int, array{
+     *          value: string,
+     *          count: int
+     *      }>,
+     *      stats?: array{
+     *          avg?: float,
+     *          max?: float|int,
+     *          min?: float|int,
+     *          sum?: float|int
+     *      }
+     *  }> $facetCounts
      * @param array<AbstractFacet> $facets
      *
      * @return array<string, mixed>

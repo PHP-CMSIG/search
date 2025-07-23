@@ -315,6 +315,8 @@ final class RediSearchSearcher implements SearcherInterface
 
     /**
      * @param array<string, string> $parameters
+     *
+     * @return array<string, mixed> $facets
      */
     private function addFacets(Search $search, string $query, array $parameters): array
     {
