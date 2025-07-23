@@ -341,9 +341,6 @@ final class RediSearchSearcher implements SearcherInterface
                     'REDUCE', 'MAX', '1', '@' . $facet->field, 'AS', 'max_' . $this->getFilterField($search->index, $facet->field),
                 ]);
 
-                $arguments[] = 'DIALECT';
-                $arguments[] = '3';
-
                 /** @var mixed[]|false $result */
                 $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
 
@@ -361,16 +358,25 @@ final class RediSearchSearcher implements SearcherInterface
                     'REDUCE', 'COUNT', '0', 'AS', 'count',
                 ]);
 
-                $arguments[] = 'DIALECT';
-                $arguments[] = '3';
-
                 /** @var mixed[]|false $result */
                 $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
+
+                if (false === $result) {
+                    continue;
+                }
+
                 $counts = [];
+                $total = \count($result);
 
-                // TODO: no idea why tags does not work properly here...
+                for ($i = 1; $i < $total; ++$i) {
+                    if (!isset($result[$i][1]) || false === $result[$i][1] || '' === $result[$i][1]) {
+                        continue;
+                    }
 
-                $formatted[$facet->field] = $counts;
+                    $counts[$result[$i][1]] = (int) $result[$i][3];
+                }
+
+                $formatted[$facet->field]['count'] = $counts;
             }
         }
 
