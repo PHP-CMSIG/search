@@ -115,7 +115,7 @@ final class ConfigProvider
             ],
             'aliases' => [
                 LoaderProviderInterface::class => PhpFileLoaderProvider::class,
-            ]
+            ],
         ];
     }
 
