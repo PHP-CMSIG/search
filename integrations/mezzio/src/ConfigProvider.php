@@ -35,6 +35,7 @@ use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
 use CmsIg\Seal\Schema\Schema;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * @phpstan-type TCmsSigSealConfig = array{
@@ -103,7 +104,7 @@ final class ConfigProvider
             'factories' => [
                 EngineRegistry::class => SealContainerServiceAbstractFactory::class,
                 EngineInterface::class => SealContainerServiceAbstractFactory::class,
-                LoaderProviderInterface::class => PhpFileLoaderProvider::class,
+                PhpFileLoaderProvider::class => InvokableFactory::class,
                 Schema::class => SealContainerServiceAbstractFactory::class,
                 AdapterFactory::class => SealContainerServiceAbstractFactory::class,
                 SealContainer::class => SealContainerFactory::class,
@@ -112,6 +113,9 @@ final class ConfigProvider
                 Command\ReindexCommand::class => CommandAbstractFactory::class,
                 ...$adapterFactories,
             ],
+            'aliases' => [
+                LoaderProviderInterface::class => PhpFileLoaderProvider::class,
+            ]
         ];
     }
 
