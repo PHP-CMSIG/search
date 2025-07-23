@@ -6,7 +6,7 @@ namespace CmsIg\Seal\Integration\Mezzio\Service;
 
 use Psr\Container\ContainerInterface;
 
-final readonly class PhpFileLoaderProviderFactory
+final class PhpFileLoaderProviderFactory
 {
     public function __invoke(ContainerInterface $container): PhpFileLoaderProvider
     {
