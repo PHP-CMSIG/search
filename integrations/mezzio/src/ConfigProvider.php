@@ -31,11 +31,11 @@ use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Mezzio\Service\CommandAbstractFactory;
 use CmsIg\Seal\Integration\Mezzio\Service\LoaderProviderInterface;
 use CmsIg\Seal\Integration\Mezzio\Service\PhpFileLoaderProvider;
+use CmsIg\Seal\Integration\Mezzio\Service\PhpFileLoaderProviderFactory;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainer;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerFactory;
 use CmsIg\Seal\Integration\Mezzio\Service\SealContainerServiceAbstractFactory;
 use CmsIg\Seal\Schema\Schema;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * @phpstan-type TCmsSigSealConfig = array{
@@ -104,7 +104,7 @@ final class ConfigProvider
             'factories' => [
                 EngineRegistry::class => SealContainerServiceAbstractFactory::class,
                 EngineInterface::class => SealContainerServiceAbstractFactory::class,
-                PhpFileLoaderProvider::class => InvokableFactory::class,
+                PhpFileLoaderProvider::class => PhpFileLoaderProviderFactory::class,
                 Schema::class => SealContainerServiceAbstractFactory::class,
                 AdapterFactory::class => SealContainerServiceAbstractFactory::class,
                 SealContainer::class => SealContainerFactory::class,
