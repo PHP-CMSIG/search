@@ -86,7 +86,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         return self::$schema;
     }
 
-    public function doTemporarilyNotTestDistinctSearch(): void
+    public function testDistinctSearch(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -188,7 +188,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestCount(): void
+    public function testCount(): void
     {
         $schema = self::getSchema();
         $this->assertSame(0, self::$searcher->count($schema->indexes[TestingHelper::INDEX_COMPLEX]));
@@ -216,7 +216,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         self::$taskHelper->waitForAll();
     }
 
-    public function doTemporarilyNotTestSearchCondition(): void
+    public function testSearchCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -268,7 +268,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSearchConditionWithHighlight(): void
+    public function testSearchConditionWithHighlight(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -337,7 +337,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestNoneSearchableFields(): void
+    public function testNoneSearchableFields(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -359,7 +359,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         $this->assertCount(0, [...$search->getResult()]);
     }
 
-    public function doTemporarilyNotTestLimitAndOffset(): void
+    public function testLimitAndOffset(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -412,7 +412,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestEqualCondition(): void
+    public function testEqualCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -458,7 +458,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestEqualConditionWithBoolean(): void
+    public function testEqualConditionWithBoolean(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -502,7 +502,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestEqualConditionSpecialString(string $specialString = "^The 17\" O'Conner && O`Series \n OR a || 1%2 1~2 1*2 \r\n book? \r \twhat \\ text: }{ )( ][ - + // \n\r ok? end$"): void
+    public function testEqualConditionSpecialString(string $specialString = "^The 17\" O'Conner && O`Series \n OR a || 1%2 1~2 1*2 \r\n book? \r \twhat \\ text: }{ )( ][ - + // \n\r ok? end$"): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -552,7 +552,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestMultiEqualCondition(): void
+    public function testMultiEqualCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -589,7 +589,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestEqualConditionWithSearchCondition(): void
+    public function testEqualConditionWithSearchCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -623,7 +623,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestNotEqualCondition(): void
+    public function testNotEqualCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -669,7 +669,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestGreaterThanCondition(): void
+    public function testGreaterThanCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -704,7 +704,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestGreaterThanEqualCondition(): void
+    public function testGreaterThanEqualCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -744,7 +744,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestGreaterThanEqualConditionMultiValue(): void
+    public function testGreaterThanEqualConditionMultiValue(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -784,7 +784,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestLessThanCondition(): void
+    public function testLessThanCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -824,7 +824,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestLessThanEqualCondition(): void
+    public function testLessThanEqualCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -864,7 +864,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestGeoDistanceCondition(): void
+    public function testGeoDistanceCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -929,7 +929,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestGeoBoundingBoxCondition(): void
+    public function testGeoBoundingBoxCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1010,7 +1010,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestLessThanEqualConditionMultiValue(): void
+    public function testLessThanEqualConditionMultiValue(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1050,7 +1050,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestInCondition(): void
+    public function testInCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1096,7 +1096,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestNotInCondition(): void
+    public function testNotInCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1143,7 +1143,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSortByAsc(): void
+    public function testSortByAsc(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1182,7 +1182,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSortByDesc(): void
+    public function testSortByDesc(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1220,7 +1220,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSortByTextFieldAsc(): void
+    public function testSortByTextFieldAsc(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1259,7 +1259,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSortByTextFieldDesc(): void
+    public function testSortByTextFieldDesc(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -1298,7 +1298,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function doTemporarilyNotTestSearchingWithNestedAndOrConditions(): void
+    public function testSearchingWithNestedAndOrConditions(): void
     {
         $expectedDocumentIds = [];
         $documents = TestingHelper::createComplexFixtures();

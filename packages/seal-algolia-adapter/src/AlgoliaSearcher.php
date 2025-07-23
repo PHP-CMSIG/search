@@ -88,7 +88,6 @@ final class AlgoliaSearcher implements SearcherInterface
         if ($sortByField) {
             $indexName .= '__' . \str_replace('.', '_', $sortByField) . '_' . $search->sortBys[$sortByField];
         }
-        var_dump($this->client->getSettings($indexName));
 
         $query = '';
         $geoFilters = [];
