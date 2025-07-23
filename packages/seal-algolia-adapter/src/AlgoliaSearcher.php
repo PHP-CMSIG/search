@@ -88,6 +88,7 @@ final class AlgoliaSearcher implements SearcherInterface
         if ($sortByField) {
             $indexName .= '__' . \str_replace('.', '_', $sortByField) . '_' . $search->sortBys[$sortByField];
         }
+        var_dump($this->client->getSettings($indexName));
 
         $query = '';
         $geoFilters = [];
@@ -137,6 +138,7 @@ final class AlgoliaSearcher implements SearcherInterface
         $facets = isset($data['facets']) && \is_array($data['facets']) ? $data['facets'] : [];
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
+        var_dump($data);
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['nbHits'] ?? null, // @phpstan-ignore-line
