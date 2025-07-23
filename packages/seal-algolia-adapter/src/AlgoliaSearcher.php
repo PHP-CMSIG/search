@@ -138,7 +138,7 @@ final class AlgoliaSearcher implements SearcherInterface
         $facets = isset($data['facets']) && \is_array($data['facets']) ? $data['facets'] : [];
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
-        var_dump($data);
+        var_dump($data['facets'] ?? null, $data['facets_stats'] ?? null);
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
             $data['nbHits'] ?? null, // @phpstan-ignore-line
@@ -287,6 +287,8 @@ final class AlgoliaSearcher implements SearcherInterface
                 $formatted[$facet->field]['count'] = $facetsInfo[$facet->field];
             }
         }
+
+        var_dump('formatted', $formatted);
 
         return $formatted;
     }
