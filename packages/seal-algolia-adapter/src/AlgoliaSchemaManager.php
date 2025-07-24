@@ -99,7 +99,6 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         $attributes = [
             'searchableAttributes' => $index->searchableFields,
             'attributesForFaceting' => $index->filterableFields,
-            'replicas' => $replicas,
         ];
 
         if ($geoPointField instanceof GeoPointField) {
@@ -119,7 +118,10 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         $indexResponses = [];
         $indexResponses[] = [
             'indexName' => $index->name,
-            ...$this->client->setSettings($index->name, $attributes), // @phpstan-ignore-line
+            ...$this->client->setSettings($index->name, [  // @phpstan-ignore-line
+                ...$attributes,
+                'replicas' => $replicas,
+            ]),
         ];
 
         foreach ($index->sortableFields as $field) {
@@ -131,8 +133,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
                     ...$this->client->setSettings(  // @phpstan-ignore-line
                         $sortIndexName,
                         [
-                            'searchableAttributes' => $index->searchableFields,
-                            'attributesForFaceting' => $index->filterableFields,
+                            ...$attributes,
                             'ranking' => [
                                 $direction . '(' . $field . ')',
                             ],
