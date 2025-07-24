@@ -131,6 +131,8 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
                     ...$this->client->setSettings(  // @phpstan-ignore-line
                         $sortIndexName,
                         [
+                            'searchableAttributes' => $index->searchableFields,
+                            'attributesForFaceting' => $index->filterableFields,
                             'ranking' => [
                                 $direction . '(' . $field . ')',
                             ],
