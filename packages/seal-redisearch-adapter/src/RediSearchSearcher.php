@@ -356,33 +356,40 @@ final class RediSearchSearcher implements SearcherInterface
             }
 
             if ($facet instanceof CountFacet) {
-                $arguments = \array_merge($arguments, [
-                    'GROUPBY', '1', '@' . $this->getFilterField($search->index, $facet->field),
-                    'REDUCE', 'COUNT', '0', 'AS', 'count',
-                ]);
+                // RediSearch doesn't "explode" TAG arrays in aggregation. It groups per-document,
+                // not per tag value — and returns whichever tag happens to be internalized first. So we have
+                // to run one query first to get all the values and then for each one of them get the count individually.
+                /** @var string[]|false $tagValues */
+                $tagValues = $this->client->rawCommand('FT.TAGVALS', $search->index->name, $this->getFilterField($search->index, $facet->field));
 
-                $arguments[] = 'DIALECT';
-                $arguments[] = '2';
-
-                /** @var mixed[]|false $result */
-                $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
-
-                if (false === $result) {
+                if (false === $tagValues) {
                     continue;
                 }
 
-                $counts = [];
-                $total = \count($result);
+                foreach ($tagValues as $tagValue) {
+                    $tagArguments = \array_merge($arguments, [
+                        $query . '@' . $this->getFilterField($search->index, $facet->field) . ':{' . $tagValue . '}',
+                        'GROUPBY', '0',
+                        'REDUCE', 'COUNT', '0', 'AS', 'count',
+                    ]);
 
-                for ($i = 1; $i < $total; ++$i) {
-                    if (!isset($result[$i][1]) || false === $result[$i][1] || '' === $result[$i][1]) {
+                    $tagArguments[] = 'DIALECT';
+                    $tagArguments[] = '2';
+
+                    /** @var array<mixed>|false $result */
+                    $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, ...$tagArguments);
+
+                    if (false === $result) {
                         continue;
                     }
 
-                    $counts[$result[$i][1]] = (int) $result[$i][3];
+                    if (isset($result[1]) && \is_array($result[1]) && \is_string($result[1][1])) {
+                        $count = (int) $result[1][1];
+                        if ($count > 0) {
+                            $formatted[$facet->field]['count'][$tagValue] = $count;
+                        }
+                    }
                 }
-
-                $formatted[$facet->field]['count'] = $counts;
             }
         }
 
