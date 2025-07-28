@@ -126,7 +126,6 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
             'indexName' => $index->name,
             ...$this->client->setSettings($index->name, [  // @phpstan-ignore-line
                 ...$attributes,
-                'replicas' => $replicas,
             ]),
         ];
 
