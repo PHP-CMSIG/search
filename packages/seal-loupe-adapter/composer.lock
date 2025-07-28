@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7525944aaf612207883479f0794a3978",
+    "content-hash": "560f298a36b1c858cc4def4939d57367",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -391,16 +391,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.12.10",
+            "version": "0.12.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "418acbacbc2c55156f8144e748af175c09987079"
+                "reference": "f6473ede33733582890f8b256ba438e3a74dbd40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/418acbacbc2c55156f8144e748af175c09987079",
-                "reference": "418acbacbc2c55156f8144e748af175c09987079",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/f6473ede33733582890f8b256ba438e3a74dbd40",
+                "reference": "f6473ede33733582890f8b256ba438e3a74dbd40",
                 "shasum": ""
             },
             "require": {
@@ -443,7 +443,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.12.10"
+                "source": "https://github.com/loupe-php/loupe/tree/0.12.11"
             },
             "funding": [
                 {
@@ -451,7 +451,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-23T10:34:20+00:00"
+            "time": "2025-07-28T14:50:09+00:00"
         },
         {
             "name": "loupe/matcher",
