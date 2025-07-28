@@ -297,7 +297,7 @@ final class SolrSearcher implements SearcherInterface
                 continue;
             }
             if ($facet instanceof CountFacet && ($facetResult = $result->getFacetSet()?->getFacet($this->getFilterField($index, $facet->field))) instanceof SolariumResultFacetField) {
-                $formatted[$facet->field]['count'] = $facetResult->getValues();
+                $formatted[$facet->field]['count'] = \array_filter($facetResult->getValues());
             }
         }
 
