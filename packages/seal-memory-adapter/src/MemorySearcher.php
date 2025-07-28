@@ -514,16 +514,39 @@ final class MemorySearcher implements SearcherInterface
      */
     private function generateFacets(array $documents, Search $search): array
     {
+        $fieldDefinitions = $search->index->fields;
         $facets = [];
 
         foreach ($documents as $document) {
             foreach ($search->facets as $facet) {
-                if (!isset($document[$facet->field])) {
+                if (!isset($document[$facet->field]) || !isset($fieldDefinitions[$facet->field])) {
                     continue;
                 }
 
-                if ($facet instanceof CountFacet && \is_array($document[$facet->field])) {
-                    foreach ($document[$facet->field] as $value) {
+                if ($facet instanceof CountFacet) {
+                    if ($fieldDefinitions[$facet->field]->multiple && \is_array($document[$facet->field])) {
+                        foreach ($document[$facet->field] as $value) {
+                            if (!isset($facets[$facet->field]['count'][$value])) {
+                                $facets[$facet->field]['count'][$value] = 0;
+                            }
+
+                            ++$facets[$facet->field]['count'][$value];
+                        }
+                    } else {
+                        if (!\is_scalar($document[$facet->field])) {
+                            continue;
+                        }
+
+                        $value = (string) $document[$facet->field];
+
+                        if ($fieldDefinitions[$facet->field] instanceof Field\BooleanField) {
+                            $value = match ($value) {
+                                '' => 'false',
+                                '1' => 'true',
+                                default => throw new \LogicException('This should not happen.'),
+                            };
+                        }
+
                         if (!isset($facets[$facet->field]['count'][$value])) {
                             $facets[$facet->field]['count'][$value] = 0;
                         }
