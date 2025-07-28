@@ -7,7 +7,7 @@ the ``Standalone`` usage.
 
 A Schema is a collection of one or more ``Index`` definitions. An ``Index`` is defined by a name and a list of ``Fields``.
 Where every field is defined by a name and a type. All fields types with exception from the ``Identifier``
-are possible to be defined as ``filterable``, ``sortable``, ``multiple`` and ``distinct``.
+are possible to be defined as ``filterable``, ``sortable``, ``multiple``, ``facet`` and ``distinct``.
 
 Basic Field Types
 -----------------
@@ -43,7 +43,7 @@ via ``sortable``, ``multiple``, ``filterable``, ``searchable`` and ``distinct`` 
 
     $index = new Index('blog', [
         'title' => new Field\TextField('title', sortable: true),
-        'tags' => new Field\TextField('tags', multiple: true, filterable: true),
+        'tags' => new Field\TextField('tags', multiple: true, filterable: true, facet: true),
         'internalNote' => new Field\TextField('internalNote', searchable: false),
         'productId' => new Field\TextField('productId', distinct: true),
     ]);
@@ -60,6 +60,8 @@ via ``sortable``, ``multiple``, ``filterable``, ``searchable`` and ``distinct`` 
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``searchable``  | ``true``        |
++-----------------+-----------------+
+| ``facet``       | ``false``        |
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
 +-----------------+-----------------+

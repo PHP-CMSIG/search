@@ -436,6 +436,38 @@ this purpose. It is independent of Loupe Search usage — with zero dependencies
 
 --------------
 
+Facetting
+---------
+
+SEAL also supports search facets which are currently limited to the ``MinMaxFacet`` and ``CountFacet`` which is what most
+search engines support:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Facet\MinMaxFacet;
+    use CmsIg\Seal\Search\Facet\CountFacet;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFacet(MinMaxFacet('age'))
+        ->addFacet(CountFacet('tags'))
+        ->getResult();
+
+    $facets = $result->facets(); // Output depends on the facet type
+
+.. note::
+
+    For ``->addFacet()`` to work, your fields (``age`` and ``tags`` in our our example) have to be configured using
+    `facet: true` in the index schema.
+
+.. note::
+
+    Facets on fields that are configured ``multiple`` is currently not supported by ``RediSearch`` adapter.
+    See `this GitHub Issue <https://github.com/PHP-CMSIG/search/issues/583>`__ for more information.
+
+--------------
+
 Distinct fields
 ---------------
 
