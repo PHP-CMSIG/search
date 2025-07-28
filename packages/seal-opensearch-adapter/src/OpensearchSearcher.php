@@ -256,6 +256,7 @@ final class OpensearchSearcher implements SearcherInterface
      *          value?: float|null,
      *          buckets?: array<array{
      *              key: string|int,
+     *              key_as_string?: string,
      *              doc_count: int
      *          }>
      *       }> $aggregations
@@ -275,7 +276,8 @@ final class OpensearchSearcher implements SearcherInterface
             }
             if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count']['buckets'])) {
                 foreach ($aggregations[$facet->field . '_count']['buckets'] as $bucket) {
-                    $formatted[$facet->field]['count'][$bucket['key']] = $bucket['doc_count'];
+                    $key = (string) ($bucket['key_as_string'] ?? $bucket['key']);
+                    $formatted[$facet->field]['count'][$key] = $bucket['doc_count'];
                 }
             }
         }
