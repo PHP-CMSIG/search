@@ -31,7 +31,7 @@
         "php": "^8.1",
         "ext-redis": "^5 || ^6.0",
         "ext-json": "*",
-        "cmsig/seal": "^0.10",
+        "cmsig/seal": "^0.11",
         "psr/container": "^1.0 || ^2.0"
     },
     "require-dev": {

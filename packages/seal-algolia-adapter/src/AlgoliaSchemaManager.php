@@ -124,7 +124,10 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         $indexResponses = [];
         $indexResponses[] = [
             'indexName' => $index->name,
-            ...$this->client->setSettings($index->name, $attributes, true), // @phpstan-ignore-line
+            ...$this->client->setSettings($index->name, [  // @phpstan-ignore-line
+                ...$attributes,
+                'replicas' => $replicas,
+            ]),
         ];
 
         foreach ($index->sortableFields as $field) {
@@ -136,6 +139,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
                     ...$this->client->setSettings(  // @phpstan-ignore-line
                         $sortIndexName,
                         [
+                            ...$attributes,
                             'ranking' => [
                                 $direction . '(' . $field . ')',
                             ],

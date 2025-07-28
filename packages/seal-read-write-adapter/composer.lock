@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f15458af3e05d649ec67f89df8b343d8",
+    "content-hash": "263ffd6e809ec47fbbb229a058c81df6",
     "packages": [
         {
             "name": "cmsig/seal",
-            "version": "0.10.x-dev",
+            "version": "0.11.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../seal",
@@ -399,16 +399,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.82.2",
+            "version": "v3.84.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "2dbabef3dae30752382cf4b9864780e78f71bc59"
+                "reference": "8208dabb176cbc03a76df5a908220dfb75c0af9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/2dbabef3dae30752382cf4b9864780e78f71bc59",
-                "reference": "2dbabef3dae30752382cf4b9864780e78f71bc59",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/8208dabb176cbc03a76df5a908220dfb75c0af9a",
+                "reference": "8208dabb176cbc03a76df5a908220dfb75c0af9a",
                 "shasum": ""
             },
             "require": {
@@ -445,9 +445,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.82.2"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.84.0"
             },
-            "time": "2025-07-08T21:13:44+00:00"
+            "time": "2025-07-15T18:22:22+00:00"
         },
         {
             "name": "phpstan/extension-installer",
@@ -504,12 +504,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "400ba6df7d3527c64fac096c8565419fbfd703c6"
+                "reference": "fcf8b71aeab4e1a1131d1783cef97b23a51b87a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/400ba6df7d3527c64fac096c8565419fbfd703c6",
-                "reference": "400ba6df7d3527c64fac096c8565419fbfd703c6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/fcf8b71aeab4e1a1131d1783cef97b23a51b87a9",
+                "reference": "fcf8b71aeab4e1a1131d1783cef97b23a51b87a9",
                 "shasum": ""
             },
             "require": {
@@ -554,7 +554,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-08T07:49:56+00:00"
+            "time": "2025-07-17T17:15:39+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -937,12 +937,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "6e0a2bc39f6fae7617989d690d76c48e6d2eb541"
+                "reference": "9fff2dee2f3e1e7b0f21cb4355a78481cf96af5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e0a2bc39f6fae7617989d690d76c48e6d2eb541",
-                "reference": "6e0a2bc39f6fae7617989d690d76c48e6d2eb541",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9fff2dee2f3e1e7b0f21cb4355a78481cf96af5e",
+                "reference": "9fff2dee2f3e1e7b0f21cb4355a78481cf96af5e",
                 "shasum": ""
             },
             "require": {
@@ -1014,7 +1014,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.48"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1038,7 +1038,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-11T04:07:17+00:00"
+            "time": "2025-07-18T08:09:53+00:00"
         },
         {
             "name": "rector/rector",
