@@ -104,7 +104,6 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         $attributes = [
             'searchableAttributes' => $index->searchableFields,
             'attributesForFaceting' => $filterableAndFacetFields,
-            'replicas' => $replicas,
         ];
 
         if ($geoPointField instanceof GeoPointField) {
@@ -126,6 +125,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
             'indexName' => $index->name,
             ...$this->client->setSettings($index->name, [  // @phpstan-ignore-line
                 ...$attributes,
+                'replicas' => $replicas,
             ]),
         ];
 
