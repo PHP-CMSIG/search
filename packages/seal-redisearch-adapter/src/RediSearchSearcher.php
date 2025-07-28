@@ -337,8 +337,8 @@ final class RediSearchSearcher implements SearcherInterface
             if ($facet instanceof MinMaxFacet) {
                 $arguments = \array_merge($arguments, [
                     'GROUPBY', '0',
-                    'REDUCE', 'MIN', '1', '@' . $facet->field, 'AS', 'min_' . $this->getFilterField($search->index, $facet->field),
-                    'REDUCE', 'MAX', '1', '@' . $facet->field, 'AS', 'max_' . $this->getFilterField($search->index, $facet->field),
+                    'REDUCE', 'MIN', '1', '@' . $this->getFilterField($search->index, $facet->field), 'AS', 'min_' . $this->getFilterField($search->index, $facet->field),
+                    'REDUCE', 'MAX', '1', '@' . $this->getFilterField($search->index, $facet->field), 'AS', 'max_' . $this->getFilterField($search->index, $facet->field),
                 ]);
 
                 $arguments[] = 'DIALECT';
@@ -356,38 +356,48 @@ final class RediSearchSearcher implements SearcherInterface
             }
 
             if ($facet instanceof CountFacet) {
-                // RediSearch doesn't "explode" TAG arrays in aggregation. It groups per-document,
-                // not per tag value — and returns whichever tag happens to be internalized first. So we have
-                // to run one query first to get all the values and then for each one of them get the count individually.
-                /** @var string[]|false $tagValues */
-                $tagValues = $this->client->rawCommand('FT.TAGVALS', $search->index->name, $this->getFilterField($search->index, $facet->field));
+                $field = $search->index->getFieldByPath($facet->field);
 
-                if (false === $tagValues) {
+                if ($field->multiple) {
+                    throw new \RuntimeException('Facets on multiple fields are not supported by RediSearch: https://github.com/PHP-CMSIG/search/issues/583');
+                }
+
+                $arguments = \array_merge($arguments, [
+                    'GROUPBY', '1', '@' . $this->getFilterField($search->index, $facet->field),
+                    'REDUCE', 'COUNT', '0', 'AS', 'count',
+                ]);
+
+                $arguments[] = 'DIALECT';
+                $arguments[] = '2';
+
+                /** @var mixed[]|false $result */
+                $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, $query, ...$arguments);
+
+                if (false === $result) {
                     continue;
                 }
 
-                foreach ($tagValues as $tagValue) {
-                    $tagArguments = \array_merge($arguments, [
-                        $query . '@' . $this->getFilterField($search->index, $facet->field) . ':{' . $tagValue . '}',
-                        'GROUPBY', '0',
-                        'REDUCE', 'COUNT', '0', 'AS', 'count',
-                    ]);
+                /** @var int $total */
+                $total = $result[0];
 
-                    $tagArguments[] = 'DIALECT';
-                    $tagArguments[] = '2';
+                for ($i = 1; $i <= $total; ++$i) {
+                    if (isset($result[$i][1]) && isset($result[$i][3])) {
+                        $value = (string) $result[$i][1];
+                        $count = (int) $result[$i][3];
 
-                    /** @var array<mixed>|false $result */
-                    $result = $this->client->rawCommand('FT.AGGREGATE', $search->index->name, ...$tagArguments);
-
-                    if (false === $result) {
-                        continue;
-                    }
-
-                    if (isset($result[1]) && \is_array($result[1]) && \is_string($result[1][1])) {
-                        $count = (int) $result[1][1];
-                        if ($count > 0) {
-                            $formatted[$facet->field]['count'][$tagValue] = $count;
+                        if ($field instanceof Field\BooleanField) {
+                            $value = match ($value) {
+                                '0' => 'false',
+                                '1' => 'true',
+                                default => '',
+                            };
                         }
+
+                        if ('' === $value) {
+                            continue;
+                        }
+
+                        $formatted[$facet->field]['count'][$value] = $count;
                     }
                 }
             }

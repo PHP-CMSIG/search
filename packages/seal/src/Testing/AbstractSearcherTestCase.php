@@ -119,7 +119,76 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
-    public function testFacetSearch(): void
+    public function testCountFacet(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFacet(new CountFacet(field: 'rating'));
+        $search->addFacet(new CountFacet(field: 'isSpecial'));
+
+        $facets = $search->getResult()->facets();
+        TestingHelper::recursiveKeySort($facets);
+
+        $this->assertSame([
+            'isSpecial' => [
+                'count' => [
+                    'false' => 1,
+                    'true' => 1,
+                ],
+            ],
+            'rating' => [
+                'count' => [
+                    '2.5' => 1,
+                    '3.5' => 1,
+                ],
+            ],
+        ], $facets);
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(new Condition\SearchCondition('Other'));
+        $search->addFacet(new CountFacet(field: 'rating'));
+        $search->addFacet(new CountFacet(field: 'isSpecial'));
+
+        $facets = $search->getResult()->facets();
+        TestingHelper::recursiveKeySort($facets);
+
+        $this->assertSame([
+            'isSpecial' => [
+                'count' => [
+                    'false' => 1,
+                ],
+            ],
+            'rating' => [
+                'count' => [
+                    '2.5' => 1,
+                ],
+            ],
+        ], $facets);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
+    public function testMinMaxFacet(): void
     {
         $documents = TestingHelper::createComplexFixtures();
 
@@ -137,7 +206,6 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFacet(new MinMaxFacet(field: 'rating'));
-        $search->addFacet(new CountFacet(field: 'tags'));
 
         $facets = $search->getResult()->facets();
         TestingHelper::recursiveKeySort($facets);
@@ -147,6 +215,55 @@ abstract class AbstractSearcherTestCase extends TestCase
                 'max' => 3.5,
                 'min' => 2.5,
             ],
+        ], $facets);
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(new Condition\SearchCondition('Other'));
+        $search->addFacet(new MinMaxFacet(field: 'rating'));
+
+        $facets = $search->getResult()->facets();
+        TestingHelper::recursiveKeySort($facets);
+
+        $this->assertSame([
+            'rating' => [
+                'max' => 2.5,
+                'min' => 2.5,
+            ],
+        ], $facets);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
+    public function testCountFacetOnMultiValue(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFacet(new CountFacet(field: 'tags'));
+
+        $facets = $search->getResult()->facets();
+        TestingHelper::recursiveKeySort($facets);
+
+        $this->assertSame([
             'tags' => [
                 'count' => [
                     'Tech' => 2,
@@ -159,17 +276,12 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFilter(new Condition\SearchCondition('Blog'));
-        $search->addFacet(new MinMaxFacet(field: 'rating'));
         $search->addFacet(new CountFacet(field: 'tags'));
 
         $facets = $search->getResult()->facets();
         TestingHelper::recursiveKeySort($facets);
 
         $this->assertSame([
-            'rating' => [
-                'max' => 3.5,
-                'min' => 2.5,
-            ],
             'tags' => [
                 'count' => [
                     'Tech' => 1,
