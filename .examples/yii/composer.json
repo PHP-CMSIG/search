@@ -78,8 +78,8 @@
         "yiisoft/i18n": "^1.1",
         "yiisoft/log": "^2.1",
         "yiisoft/log-target-file": "^3.0",
-        "yiisoft/router": "^3.0",
-        "yiisoft/router-fastroute": "^3.0",
+        "yiisoft/router": "^4.0",
+        "yiisoft/router-fastroute": "^4.0",
         "yiisoft/translator": "^3.0",
         "yiisoft/translator-message-php": "^1.1",
         "yiisoft/view": "^12.0",
@@ -119,7 +119,6 @@
         "symfony/css-selector": "^6.2 || ^7.1",
         "symfony/dom-crawler": "^6.2 || ^7.1",
         "yiisoft/yii-debug-api": "^3.0@dev",
-        "yiisoft/yii-debug-viewer": "^3.0@dev",
         "yiisoft/yii-testing": "dev-master"
     },
     "conflict": {
