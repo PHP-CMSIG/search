@@ -119,7 +119,7 @@
         },
         {
             "name": "cmsig/seal",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal",
@@ -216,7 +216,7 @@
         },
         {
             "name": "cmsig/seal-yii-module",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../integrations/yii",
@@ -6088,7 +6088,7 @@
         },
         {
             "name": "cmsig/seal-algolia-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-algolia-adapter",
@@ -6180,7 +6180,7 @@
         },
         {
             "name": "cmsig/seal-elasticsearch-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-elasticsearch-adapter",
@@ -6275,7 +6275,7 @@
         },
         {
             "name": "cmsig/seal-loupe-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
@@ -6367,7 +6367,7 @@
         },
         {
             "name": "cmsig/seal-meilisearch-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-meilisearch-adapter",
@@ -6461,7 +6461,7 @@
         },
         {
             "name": "cmsig/seal-memory-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-memory-adapter",
@@ -6550,7 +6550,7 @@
         },
         {
             "name": "cmsig/seal-multi-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-multi-adapter",
@@ -6640,7 +6640,7 @@
         },
         {
             "name": "cmsig/seal-opensearch-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-opensearch-adapter",
@@ -6736,7 +6736,7 @@
         },
         {
             "name": "cmsig/seal-read-write-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-read-write-adapter",
@@ -6826,7 +6826,7 @@
         },
         {
             "name": "cmsig/seal-redisearch-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-redisearch-adapter",
@@ -6920,7 +6920,7 @@
         },
         {
             "name": "cmsig/seal-solr-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-solr-adapter",
@@ -7017,7 +7017,7 @@
         },
         {
             "name": "cmsig/seal-typesense-adapter",
-            "version": "0.11.x-dev",
+            "version": "0.11.0",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-typesense-adapter",
@@ -8639,31 +8639,29 @@
         },
         {
             "name": "joomla/string",
-            "version": "3.0.4",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla-framework/string.git",
-                "reference": "0b3d33564db389e27346f7e275c694897c939434"
+                "reference": "da2329e05f1f5fc98b709f8638f279513bcd1108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/string/zipball/0b3d33564db389e27346f7e275c694897c939434",
-                "reference": "0b3d33564db389e27346f7e275c694897c939434",
+                "url": "https://api.github.com/repos/joomla-framework/string/zipball/da2329e05f1f5fc98b709f8638f279513bcd1108",
+                "reference": "da2329e05f1f5fc98b709f8638f279513bcd1108",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1.0",
-                "symfony/deprecation-contracts": "^2|^3"
-            },
-            "conflict": {
-                "doctrine/inflector": "<1.2"
+                "php": "^8.3.0",
+                "symfony/deprecation-contracts": "^2|^3",
+                "symfony/polyfill-mbstring": "^1.31.0"
             },
             "require-dev": {
-                "doctrine/inflector": "^1.2",
-                "joomla/test": "^3.0",
-                "phpstan/phpstan": "1.12.27",
-                "phpstan/phpstan-deprecation-rules": "1.2.1",
-                "phpunit/phpunit": "^9.5.28",
+                "doctrine/inflector": "^2.0.10",
+                "joomla/test": "^4.0",
+                "phpstan/phpstan": "2.1.17",
+                "phpstan/phpstan-deprecation-rules": "2.0.3",
+                "phpunit/phpunit": "^12.2.6",
                 "squizlabs/php_codesniffer": "^3.7.2"
             },
             "suggest": {
@@ -8671,30 +8669,7 @@
                 "ext-mbstring": "For improved processing"
             },
             "type": "joomla-package",
-            "extra": {
-                "branch-alias": {
-                    "dev-2.0-dev": "2.0-dev",
-                    "dev-3.x-dev": "3.0-dev"
-                }
-            },
             "autoload": {
-                "files": [
-                    "src/phputf8/utf8.php",
-                    "src/phputf8/ord.php",
-                    "src/phputf8/str_ireplace.php",
-                    "src/phputf8/str_pad.php",
-                    "src/phputf8/str_split.php",
-                    "src/phputf8/strcasecmp.php",
-                    "src/phputf8/strcspn.php",
-                    "src/phputf8/stristr.php",
-                    "src/phputf8/strrev.php",
-                    "src/phputf8/strspn.php",
-                    "src/phputf8/trim.php",
-                    "src/phputf8/ucfirst.php",
-                    "src/phputf8/ucwords.php",
-                    "src/phputf8/utils/ascii.php",
-                    "src/phputf8/utils/validation.php"
-                ],
                 "psr-4": {
                     "Joomla\\String\\": "src/"
                 }
@@ -8712,9 +8687,9 @@
             ],
             "support": {
                 "issues": "https://github.com/joomla-framework/string/issues",
-                "source": "https://github.com/joomla-framework/string/tree/3.0.4"
+                "source": "https://github.com/joomla-framework/string/tree/4.0.0"
             },
-            "time": "2025-07-19T15:25:56+00:00"
+            "time": "2025-07-23T18:42:26+00:00"
         },
         {
             "name": "loupe/loupe",

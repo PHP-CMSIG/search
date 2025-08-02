@@ -115,11 +115,11 @@ final class SolrSchemaManager implements SchemaManagerInterface
      * @return array<string, array{
      *     name: string,
      *     type: string,
-     *     indexed: boolean,
-     *     docValues: boolean,
-     *     stored: boolean,
-     *     useDocValuesAsStored?: boolean,
-     *     multiValued: boolean,
+     *     indexed: bool,
+     *     docValues: bool,
+     *     stored: bool,
+     *     useDocValuesAsStored?: bool,
+     *     multiValued: bool,
      * }>
      */
     private function createIndexFields(array $fields, string $prefix = '', bool $isParentMultiple = false): array
@@ -128,11 +128,11 @@ final class SolrSchemaManager implements SchemaManagerInterface
          * @var array<string, array{
          *     name: string,
          *     type: string,
-         *     indexed: boolean,
-         *     docValues: boolean,
-         *     stored: boolean,
-         *     useDocValuesAsStored: boolean,
-         *     multiValued: boolean,
+         *     indexed: bool,
+         *     docValues: bool,
+         *     stored: bool,
+         *     useDocValuesAsStored: bool,
+         *     multiValued: bool,
          * }> $indexFields
          */
         $indexFields = [];
