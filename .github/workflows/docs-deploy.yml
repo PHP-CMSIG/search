@@ -1,11 +1,17 @@
 name: Docs
 
 on:
-    pull_request_target:
+    push:
+        branches:
+            - '[0-9]+.[0-9]+'
+    workflow_dispatch:
+
+permissions:
+    contents: write
 
 jobs:
-    docs-build:
-        name: "Build"
+    docs-deploy:
+        name: "Build & Deploy"
         runs-on: ubuntu-latest
         steps:
             - name: Output infos
@@ -37,36 +43,8 @@ jobs:
               run: |
                   sphinx-build docs docs/_build
 
-            - name: Upload build artifact
-              id: upload
-              uses: actions/upload-artifact@v4
-              with:
-                  name: docs-build
-                  path: docs/_build/
-
-    docs-deploy:
-        if: |
-            github.event_name == 'workflow_dispatch' || (
-            github.event_name == 'push'
-                && github.ref == 'refs/heads/0.11'
-            )
-        name: "Deploy"
-        needs: docs-build
-        runs-on: ubuntu-latest
-
-        permissions:
-            contents: write
-
-        steps:
-            - name: Download built docs
-              uses: actions/download-artifact@v4
-              with:
-                  name: docs-build
-                  path: docs/_build/
-
             - name: Deploy
               uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
-              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/0.11' }}
               with:
                   publish_branch: gh-pages
                   github_token: ${{ secrets.GITHUB_TOKEN }}
