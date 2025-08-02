@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Search\Facet;
 
 /**
+ * @internal this class is internal please use CountFacet or MinMaxFacet directly
+ *
  * @readonly
  */
 abstract class AbstractFacet

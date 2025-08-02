@@ -436,8 +436,8 @@ this purpose. It is independent of Loupe Search usage — with zero dependencies
 
 --------------
 
-Facetting
----------
+Faceting
+--------
 
 SEAL also supports search facets which are currently limited to the ``MinMaxFacet`` and ``CountFacet`` which is what most
 search engines support:
@@ -450,8 +450,8 @@ search engines support:
     use CmsIg\Seal\Search\Facet\CountFacet;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFacet(MinMaxFacet('age'))
-        ->addFacet(CountFacet('tags'))
+        ->addFacet(new MinMaxFacet('age'))
+        ->addFacet(new CountFacet('tags'))
         ->getResult();
 
     $facets = $result->facets(); // Output depends on the facet type
@@ -489,7 +489,7 @@ for example. Instead of displaying all the product variants, you may group them 
 
 .. note::
 
-    For `->distinct()` to work, your field (`product_id` in our example) has to be configured using 
+    For `->distinct()` to work, your field (`product_id` in our example) has to be configured using
     `distict: true` in the  index schema.
 
 --------------
