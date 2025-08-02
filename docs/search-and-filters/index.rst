@@ -490,7 +490,7 @@ for example. Instead of displaying all the product variants, you may group them 
 .. note::
 
     For `->distinct()` to work, your field (`product_id` in our example) has to be configured using
-    `distict: true` in the  index schema.
+    `distinct: true` in the  index schema.
 
 --------------
 
