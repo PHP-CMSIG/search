@@ -1,4 +1,4 @@
-name: Docs
+name: Docs Test
 
 on:
     pull_request_target:
@@ -24,6 +24,8 @@ jobs:
                   git branch --show-current
 
             - uses: actions/setup-python@v5
+              with:
+                  python-version: 3.12
 
             - name: Install dependencies
               run: |
