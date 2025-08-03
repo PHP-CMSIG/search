@@ -287,16 +287,14 @@ final class SolrSearcher implements SearcherInterface
      *
      * @param T $value
      *
-     * @return T|int
+     * @return T|string
      */
     private function convertValue(Index $index, string $field, mixed $value): mixed
     {
         $field = $index->findFieldByPath($field);
 
-        $dateTime = new \DateTimeImmutable($value, new \DateTimeZone('UTC'));
-
         return match(true) {
-            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => $dateTime->format('Y-m-d\TH:i:s\Z'),
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField && \is_string($value) => (new \DateTimeImmutable($value, new \DateTimeZone('UTC')))->format('Y-m-d\TH:i:s\Z'),
             default => $value,
         };
     }

@@ -31,7 +31,7 @@ final class RediSearchSearcher implements SearcherInterface
         private readonly \Redis $client,
     ) {
         $this->marshaller = new Marshaller(
-            dateAsInteger: true,
+            dateFormat: 'U',
             addRawFilterTextField: true,
             geoPointFieldConfig: [
                 'latitude' => 1,

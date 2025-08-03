@@ -45,21 +45,21 @@ class MarshallerTest extends TestCase
 
     public function testMarshallDateAsInt(): void
     {
-        $marshaller = new Marshaller(dateAsInteger: true);
+        $marshaller = new Marshaller(dateFormat: 'U');
         $complexIndex = TestingHelper::createSchema()->indexes[TestingHelper::INDEX_COMPLEX];
         $documents = TestingHelper::createComplexFixtures();
 
         $rawDocument = $marshaller->marshall($complexIndex->fields, $documents[0]);
 
-        $this->assertSame($this->getRawDocument(dateAsInteger: true), $rawDocument);
+        $this->assertSame($this->getRawDocument(dateFormat: 'U'), $rawDocument);
     }
 
     public function testUnmarshallDateAsInt(): void
     {
-        $marshaller = new Marshaller(dateAsInteger: true);
+        $marshaller = new Marshaller(dateFormat: 'U');
         $complexIndex = TestingHelper::createSchema()->indexes[TestingHelper::INDEX_COMPLEX];
 
-        $document = $marshaller->unmarshall($complexIndex->fields, $this->getRawDocument(dateAsInteger: true));
+        $document = $marshaller->unmarshall($complexIndex->fields, $this->getRawDocument(dateFormat: 'U'));
 
         $documents = TestingHelper::createComplexFixtures();
         $this->assertSame($documents[0], $document);
@@ -68,7 +68,7 @@ class MarshallerTest extends TestCase
     /**
      * @return array<string, mixed>
      */
-    private function getRawDocument(bool $dateAsInteger = false): array
+    private function getRawDocument(string $dateFormat = 'c'): array
     {
         return [
             'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
@@ -109,7 +109,7 @@ class MarshallerTest extends TestCase
             'footer' => [
                 'title' => 'New Footer',
             ],
-            'created' => $dateAsInteger ? 1_643_022_000 : '2022-01-24T12:00:00+01:00',
+            'created' => 'U' === $dateFormat ? 1_643_022_000 : '2022-01-24T12:00:00+01:00',
             'commentsCount' => 2,
             'rating' => 3.5,
             'isSpecial' => true,

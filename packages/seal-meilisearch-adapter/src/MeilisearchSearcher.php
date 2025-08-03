@@ -33,7 +33,7 @@ final class MeilisearchSearcher implements SearcherInterface
         private readonly Client $client,
     ) {
         $this->marshaller = new Marshaller(
-            dateAsInteger: true,
+            dateFormat: 'U',
             geoPointFieldConfig: [
                 'name' => '_geo',
                 'latitude' => 'lat',

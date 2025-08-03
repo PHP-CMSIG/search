@@ -32,7 +32,7 @@ final class LoupeSearcher implements SearcherInterface
         private readonly LoupeHelper $loupeHelper,
     ) {
         $this->marshaller = new FlattenMarshaller(
-            dateAsInteger: true,
+            dateFormat: 'U',
             geoPointFieldConfig: [
                 'latitude' => 'lat',
                 'longitude' => 'lng',

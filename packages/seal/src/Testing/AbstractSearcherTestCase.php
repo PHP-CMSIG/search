@@ -839,7 +839,9 @@ abstract class AbstractSearcherTestCase extends TestCase
         $this->assertGreaterThanOrEqual(1, \count($loadedDocuments));
 
         foreach ($loadedDocuments as $loadedDocument) {
-            $this->assertGreaterThan(\strtotime('2022-12-26T12:00:00+01:00'), \strtotime($loadedDocument['created'] ?? '1970-01-01T00:00:00+00:00'));
+            $created = $loadedDocument['created'] ?? '1970-01-01T00:00:00+00:00';
+            $this->assertIsString($created);
+            $this->assertGreaterThan(\strtotime('2022-12-26T12:00:00+01:00'), \strtotime($created));
         }
 
         foreach ($documents as $document) {
@@ -914,7 +916,9 @@ abstract class AbstractSearcherTestCase extends TestCase
         $this->assertGreaterThanOrEqual(2, \count($loadedDocuments));
 
         foreach ($loadedDocuments as $loadedDocument) {
-            $this->assertGreaterThanOrEqual(\strtotime('2022-12-26T12:00:00+01:00'), \strtotime($loadedDocument['created'] ?? '1970-01-01T00:00:00+00:00'));
+            $created = $loadedDocument['created'] ?? '1970-01-01T00:00:00+00:00';
+            $this->assertIsString($created);
+            $this->assertGreaterThanOrEqual(\strtotime('2022-12-26T12:00:00+01:00'), \strtotime($created));
         }
 
         foreach ($documents as $document) {

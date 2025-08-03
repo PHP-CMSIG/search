@@ -32,7 +32,7 @@ final class Marshaller
      * }|null $geoPointFieldConfig
      */
     public function __construct(
-        private readonly bool $dateAsInteger = false,
+        private readonly string $dateFormat = 'c',
         private readonly bool $addRawFilterTextField = false,
         private readonly array|null $geoPointFieldConfig = null,
     ) {
@@ -118,23 +118,31 @@ final class Marshaller
         if ($field->multiple) {
             /** @var string[]|null $value */
 
-            return \array_map(function ($value) {
-                if (null !== $value && $this->dateAsInteger) {
-                    /** @var int */
-                    return \strtotime($value);
-                }
-
-                return $value;
-            }, (array) $value);
+            return \array_map(fn (string $value): int|string => $this->marshallDateTimeFieldValue($value), (array) $value);
         }
 
-        /** @var string|null $value */
-        if (null !== $value && $this->dateAsInteger) {
+        if (null === $value) {
+            return null;
+        }
+
+        /** @var string $value */
+
+        return $this->marshallDateTimeFieldValue($value);
+    }
+
+    private function marshallDateTimeFieldValue(string $value): int|string
+    {
+        if ('U' === $this->dateFormat) {
             /** @var int */
             return \strtotime($value);
         }
 
-        return $value;
+        $timestamp = \strtotime($value);
+
+        \assert(false !== $timestamp, 'Invalid date format: ' . $value);
+
+        /** @var string */
+        return \date($this->dateFormat, $timestamp);
     }
 
     /**
@@ -296,45 +304,43 @@ final class Marshaller
     /**
      * @param string|int|string[]|int[]|null $value
      *
-     * @return string|string[]
+     * @return string|string[]|null
      */
     private function unmarshallDateTimeField(string|int|array|null $value, Field\DateTimeField $field): string|array|null
     {
         if ($field->multiple) {
-            return \array_map(function ($value) {
-                if (null !== $value && $this->dateAsInteger) {
-                    /** @var int $value */
+            /** @var string[]|int[]|null $value */
 
-                    return \date('c', $value);
-                }
-
-                if (\is_string($value) && \str_ends_with($value, 'Z')) {
-                    /** @var int $time */
-                    $time = \strtotime($value);
-
-                    return \date('c', $time);
-                }
-
-                /** @var string */
-                return $value;
-            }, (array) $value);
+            return \array_map(fn (string|int $value): string => $this->unmarshallDateTimeFieldValue($value), (array) $value);
         }
 
-        if (null !== $value && $this->dateAsInteger) {
-            /** @var int $value */
+        /** @var string|int|null $value */
+        if (null === $value) {
+            return null;
+        }
 
+        return $this->unmarshallDateTimeFieldValue($value);
+    }
+
+    private function unmarshallDateTimeFieldValue(string|int $value): string
+    {
+        if ('U' === $this->dateFormat) {
+            /** @var int $value */
             return \date('c', $value);
         }
 
-        if (\is_string($value) && \str_ends_with($value, 'Z')) {
-            /** @var int $time */
-            $time = \strtotime($value);
+        /** @var string $value */
+        $dateTime = match ($this->dateFormat) {
+            'c' => new \DateTimeImmutable($value),
+            default => \DateTimeImmutable::createFromFormat($this->dateFormat, $value),
+        };
 
-            return \date('c', $time);
+        if (false === $dateTime) {
+            throw new \RuntimeException('Invalid date format: ' . \json_encode(\DateTimeImmutable::getLastErrors()));
         }
 
-        /** @var string|null */
-        return $value;
+        /** @var string */
+        return $dateTime->format('c');
     }
 
     /**

@@ -39,13 +39,13 @@ final class FlattenMarshaller
      * @param non-empty-string $fieldSeparator
      */
     public function __construct(
-        private readonly bool $dateAsInteger = false,
+        private readonly string $dateFormat = 'c',
         private readonly bool $addRawFilterTextField = false,
         private readonly array|null $geoPointFieldConfig = null,
         private readonly string $fieldSeparator = '.',
     ) {
         $this->marshaller = new Marshaller(
-            $this->dateAsInteger,
+            $this->dateFormat,
             $this->addRawFilterTextField,
             $this->geoPointFieldConfig,
         );

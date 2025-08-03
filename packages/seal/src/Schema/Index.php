@@ -92,7 +92,7 @@ final class Index
         return null;
     }
 
-    public function findFieldByPath(string $path): ?AbstractField
+    public function findFieldByPath(string $path): AbstractField|null
     {
         $pathParts = \explode('.', $path);
         $fields = $this->fields;

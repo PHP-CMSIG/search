@@ -29,7 +29,7 @@ final class TypesenseIndexer implements IndexerInterface
         private readonly Client $client,
     ) {
         $this->marshaller = new Marshaller(
-            dateAsInteger: true,
+            dateFormat: 'U',
             geoPointFieldConfig: [
                 'latitude' => 0,
                 'longitude' => 1,
