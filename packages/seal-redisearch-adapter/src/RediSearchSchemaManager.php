@@ -137,7 +137,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
                     'sortable' => $field->sortable,
                     'filterable' => $field->filterable || $field->facet, // @phpstan-ignore-line
                 ],
-                $field instanceof Field\TextField, $field instanceof Field\DateTimeField => $indexFields = \array_replace($indexFields, $field->searchable ? [
+                $field instanceof Field\TextField => $indexFields = \array_replace($indexFields, $field->searchable ? [
                     $name => [
                         'jsonPath' => $jsonPath,
                         'type' => 'TEXT',
@@ -161,7 +161,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
                     'sortable' => $field->sortable,
                     'filterable' => $field->filterable || $field->facet,
                 ],
-                $field instanceof Field\IntegerField, $field instanceof Field\FloatField => $indexFields[$name] = [
+                $field instanceof Field\IntegerField, $field instanceof Field\FloatField, $field instanceof Field\DateTimeField => $indexFields[$name] = [
                     'jsonPath' => $jsonPath,
                     'type' => 'NUMERIC',
                     'searchable' => $field->searchable,

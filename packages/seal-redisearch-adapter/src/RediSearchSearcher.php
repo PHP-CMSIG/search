@@ -31,6 +31,7 @@ final class RediSearchSearcher implements SearcherInterface
         private readonly \Redis $client,
     ) {
         $this->marshaller = new Marshaller(
+            dateAsInteger: true,
             addRawFilterTextField: true,
             geoPointFieldConfig: [
                 'latitude' => 1,
@@ -267,12 +268,12 @@ final class RediSearchSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\SearchCondition => $filters[] = '%%' . \implode('%% ', \explode(' ', $this->escapeFilterValue($filter->query))) . '%%', // levenshtein of 2 per word
                 $filter instanceof Condition\IdentifierCondition => $filters[] = '@' . $index->getIdentifierField()->name . ':{' . $this->escapeFilterValue($filter->identifier) . '}',
-                $filter instanceof Condition\EqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($filter->value) . '}',
-                $filter instanceof Condition\NotEqualCondition => $filters[] = '-@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($filter->value) . '}',
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[(' . $this->escapeFilterValue($filter->value) . ' inf]',
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[' . $this->escapeFilterValue($filter->value) . ' inf]',
-                $filter instanceof Condition\LessThanCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[-inf (' . $this->escapeFilterValue($filter->value) . ']',
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[-inf ' . $this->escapeFilterValue($filter->value) . ']',
+                $filter instanceof Condition\EqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . '}',
+                $filter instanceof Condition\NotEqualCondition => $filters[] = '-@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . '}',
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[(' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . ' inf]',
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . ' inf]',
+                $filter instanceof Condition\LessThanCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[-inf (' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . ']',
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':[-inf ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . ']',
                 $filter instanceof Condition\GeoDistanceCondition => $filters[] = \sprintf(
                     '@%s:[%s %s %s]',
                     $this->getFilterField($index, $filter->field),
@@ -311,6 +312,23 @@ final class RediSearchSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' ' : ' | ', $filters);
+    }
+
+    /**
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return T|int
+     */
+    private function convertValue(Index $index, string $field, mixed $value): mixed
+    {
+        $field = $index->findFieldByPath($field);
+
+        return match(true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => \strtotime($value),
+            default => $value,
+        };
     }
 
     /**
