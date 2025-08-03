@@ -191,14 +191,14 @@ final class LoupeSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ' = ' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' = ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' != ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' > ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' >= ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' < ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' <= ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\InCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' IN (' . \implode(', ', \array_map(fn ($value) => $this->escapeFilterValue($value), $filter->values)) . ')',
-                $filter instanceof Condition\NotInCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' NOT IN (' . \implode(', ', \array_map(fn ($value) => $this->escapeFilterValue($value), $filter->values)) . ')',
+                $filter instanceof Condition\EqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' = ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\NotEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' != ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' > ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' >= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' < ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' <= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\InCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' IN (' . \implode(', ', \array_map(fn ($value) => $this->escapeFilterValue($this->convertValue($index, $filter->field, $value)), $filter->values)) . ')',
+                $filter instanceof Condition\NotInCondition => $filters[] = $this->loupeHelper->formatField($filter->field) . ' NOT IN (' . \implode(', ', \array_map(fn ($value) => $this->escapeFilterValue($this->convertValue($index, $filter->field, $value)), $filter->values)) . ')',
                 $filter instanceof Condition\GeoDistanceCondition => $filters[] = \sprintf(
                     '_geoRadius(%s, %s, %s, %s)',
                     $this->loupeHelper->formatField($filter->field),
@@ -225,6 +225,23 @@ final class LoupeSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    /**
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return T|int
+     */
+    private function convertValue(Index $index, string $field, mixed $value): mixed
+    {
+        $field = $index->findFieldByPath($field);
+
+        return match(true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => \strtotime($value),
+            default => $value,
+        };
     }
 
     /**

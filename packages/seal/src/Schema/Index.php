@@ -92,7 +92,7 @@ final class Index
         return null;
     }
 
-    public function getFieldByPath(string $path): AbstractField
+    public function findFieldByPath(string $path): ?AbstractField
     {
         $pathParts = \explode('.', $path);
         $fields = $this->fields;
@@ -109,9 +109,20 @@ final class Index
             } elseif ($field instanceof AbstractField) {
                 return $field;
             } else {
-                throw new FieldByPathNotFoundException($this->name, $path);
+                return null;
             }
         }
+    }
+
+    public function getFieldByPath(string $path): AbstractField
+    {
+        $field = $this->findFieldByPath($path);
+
+        if (!$field instanceof AbstractField) {
+            throw new FieldByPathNotFoundException($this->name, $path);
+        }
+
+        return $field;
     }
 
     /**
