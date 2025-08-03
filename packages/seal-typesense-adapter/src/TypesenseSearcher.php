@@ -211,12 +211,12 @@ final class TypesenseSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = 'id:=' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filters[] = $filter->field . ':=' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotEqualCondition => $filters[] = $filter->field . ':!=' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = $filter->field . ':>' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $filter->field . ':>=' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanCondition => $filters[] = $filter->field . ':<' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $filter->field . ':<=' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\EqualCondition => $filters[] = $filter->field . ':=' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\NotEqualCondition => $filters[] = $filter->field . ':!=' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = $filter->field . ':>' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $filter->field . ':>=' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanCondition => $filters[] = $filter->field . ':<' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $filter->field . ':<=' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
                 $filter instanceof Condition\GeoDistanceCondition => $filters[] = \sprintf(
                     '%s:(%s, %s, %s)',
                     $filter->field,
@@ -248,6 +248,23 @@ final class TypesenseSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' && ' : ' || ', $filters);
+    }
+
+    /**
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return T|int
+     */
+    private function convertValue(Index $index, string $field, mixed $value): mixed
+    {
+        $field = $index->findFieldByPath($field);
+
+        return match(true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => \strtotime($value),
+            default => $value,
+        };
     }
 
     /**
