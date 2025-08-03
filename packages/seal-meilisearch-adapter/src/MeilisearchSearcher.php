@@ -33,6 +33,7 @@ final class MeilisearchSearcher implements SearcherInterface
         private readonly Client $client,
     ) {
         $this->marshaller = new Marshaller(
+            dateAsInteger: true,
             geoPointFieldConfig: [
                 'name' => '_geo',
                 'latitude' => 'lat',
@@ -205,13 +206,13 @@ final class MeilisearchSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ' = ' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filters[] = $filter->field . ' = ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotEqualCondition => $filters[] = $filter->field . ' != ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotInCondition => $filters[] = $filter->field . ' NOT IN [' . $this->escapeArrayFilterValues($filter->values) . ']',
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = $filter->field . ' > ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $filter->field . ' >= ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanCondition => $filters[] = $filter->field . ' < ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $filter->field . ' <= ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\EqualCondition => $filters[] = $filter->field . ' = ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\NotEqualCondition => $filters[] = $filter->field . ' != ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\NotInCondition => $filters[] = $filter->field . ' NOT IN [' . $this->escapeArrayFilterValues(\array_map(fn ($value) => $this->convertValue($index, $filter->field, $value), $filter->values)) . ']',
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = $filter->field . ' > ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $filter->field . ' >= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanCondition => $filters[] = $filter->field . ' < ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $filter->field . ' <= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
                 $filter instanceof Condition\GeoDistanceCondition => $filters[] = \sprintf(
                     '_geoRadius(%s, %s, %s)',
                     $filter->latitude,
@@ -236,6 +237,23 @@ final class MeilisearchSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    /**
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return T|int
+     */
+    private function convertValue(Index $index, string $field, mixed $value): mixed
+    {
+        $field = $index->findFieldByPath($field);
+
+        return match(true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => \strtotime($value),
+            default => $value,
+        };
     }
 
     /**
