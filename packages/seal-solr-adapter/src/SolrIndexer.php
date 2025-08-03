@@ -29,6 +29,7 @@ final class SolrIndexer implements IndexerInterface
         private readonly Client $client,
     ) {
         $this->marshaller = new FlattenMarshaller(
+            dateFormat: 'Y-m-d\TH:i:s\Z',
             addRawFilterTextField: true,
             geoPointFieldConfig: [
                 'latitude' => 0,
