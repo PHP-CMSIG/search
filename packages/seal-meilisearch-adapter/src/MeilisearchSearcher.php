@@ -250,8 +250,8 @@ final class MeilisearchSearcher implements SearcherInterface
     {
         $field = $index->findFieldByPath($field);
 
-        return match(true) {
-            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField => \strtotime($value),
+        return match (true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField && \is_string($value) => \strtotime($value) ?: $value,
             default => $value,
         };
     }

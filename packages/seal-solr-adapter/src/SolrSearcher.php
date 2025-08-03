@@ -293,7 +293,7 @@ final class SolrSearcher implements SearcherInterface
     {
         $field = $index->findFieldByPath($field);
 
-        return match(true) {
+        return match (true) {
             $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField && \is_string($value) => (new \DateTimeImmutable($value, new \DateTimeZone('UTC')))->format('Y-m-d\TH:i:s\Z'),
             default => $value,
         };
