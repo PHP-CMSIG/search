@@ -34,6 +34,7 @@ final class AlgoliaSearcher implements SearcherInterface
         private readonly SearchClient $client,
     ) {
         $this->marshaller = new Marshaller(
+            dateFormat: 'U',
             geoPointFieldConfig: [
                 'name' => '_geoloc',
                 'latitude' => 'lat',
@@ -223,12 +224,12 @@ final class AlgoliaSearcher implements SearcherInterface
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ':' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\NotEqualCondition => $filters[] = 'NOT ' . $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' > ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' >= ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' < ' . $this->escapeFilterValue($filter->value),
-                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' <= ' . $this->escapeFilterValue($filter->value),
+                $filter instanceof Condition\EqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\NotEqualCondition => $filters[] = 'NOT ' . $this->getFilterField($index, $filter->field) . ':' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' > ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\GreaterThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' >= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' < ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
+                $filter instanceof Condition\LessThanEqualCondition => $filters[] = $this->getFilterField($index, $filter->field) . ' <= ' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)),
                 $filter instanceof Condition\GeoDistanceCondition => $geoFilters = [
                     'aroundLatLng' => \sprintf(
                         '%s, %s',
@@ -262,6 +263,23 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         return $name;
+    }
+
+    /**
+     * @template T
+     *
+     * @param T $value
+     *
+     * @return T|int
+     */
+    private function convertValue(Index $index, string $field, mixed $value): mixed
+    {
+        $field = $index->findFieldByPath($field);
+
+        return match (true) {
+            $field instanceof \CmsIg\Seal\Schema\Field\DateTimeField && \is_string($value) => \strtotime($value) ?: $value,
+            default => $value,
+        };
     }
 
     /**

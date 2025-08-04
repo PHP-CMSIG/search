@@ -259,7 +259,10 @@ DateTimeField
 
 The ``DateTime`` field type is used to store dates. Unlike the text field type it is
 **not** ``searchable``, but the field can be marked as ``filterable`` and ``sortable``.
-It uses the PHP ``string`` type and represents the date a date in the ``ISO 8601`` format.
+It uses the PHP ``string`` type and represents the date in the ``ISO 8601`` (``'c'``) format.
+Depending on the used search engine it maybe is stored as a Unix timestamp. If the data
+is read from the index it will be converted back to ``ISO 8601`` format in the current configured
+timezone of your ``php.ini``.
 
 Lets have a look at the following example fields:
 

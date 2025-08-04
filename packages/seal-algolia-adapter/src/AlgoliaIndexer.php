@@ -29,6 +29,7 @@ final class AlgoliaIndexer implements IndexerInterface
         private readonly SearchClient $client,
     ) {
         $this->marshaller = new Marshaller(
+            dateFormat: 'U',
             geoPointFieldConfig: [
                 'name' => '_geoloc',
                 'latitude' => 'lat',
