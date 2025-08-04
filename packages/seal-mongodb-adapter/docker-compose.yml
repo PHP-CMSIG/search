@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mongodb:
+    # In production, you may want to use a managed database service
+    image: mongodb/mongodb-atlas-local:latest
+    environment:
+      - MONGODB_INITDB_DATABASE=${MONGODB_DB:-app}
+      # You should definitely set a root username and password in production
+      - MONGODB_INITDB_ROOT_USERNAME=${MONGODB_USERNAME:-}
+      - MONGODB_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD:-}
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/mongodb/data:/data/db:rw
+
+volumes:
+  mongodb_data:

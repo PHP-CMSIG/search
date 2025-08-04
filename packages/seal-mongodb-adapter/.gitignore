@@ -1,0 +1,9 @@
+/vendor/
+/composer.phar
+/phpunit.xml
+/.phpunit.cache
+/tests/var
+/docker-compose.override.yml
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+/phpstan.neon

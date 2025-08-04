@@ -57,6 +57,14 @@ jobs:
             directory: 'packages/seal-loupe-adapter'
             docker: false
 
+    mongodb-adapter:
+        name: MongoDB Adapter
+        uses: ./.github/workflows/callable-test.yml
+        with:
+            directory: 'packages/seal-mongodb-adapter'
+            docker: true
+        secrets: inherit
+
     redisearch-adapter:
         name: RediSearch Adapter
         uses: ./.github/workflows/callable-test.yml

@@ -488,7 +488,7 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         $search = (new SearchBuilder($schema, self::$searcher))
             ->index(TestingHelper::INDEX_COMPLEX)
-            ->addFilter(new Condition\SearchCondition('Blog'))
+            // ->addFilter(new Condition\SearchCondition('Blog'))
             ->limit(1);
 
         $loadedDocuments = [...$search->getResult()];

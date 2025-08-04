@@ -1,0 +1,13 @@
+name: Test MongoDB # todo remove this file before merge
+
+on:
+    pull_request:
+
+jobs:
+    mongodb-adapter:
+        name: MongoDB Adapter
+        uses: ./.github/workflows/callable-test.yml
+        with:
+            directory: 'packages/seal-mongodb-adapter'
+            docker: true
+        secrets: inherit

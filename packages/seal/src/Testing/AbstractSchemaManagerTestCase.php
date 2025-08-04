@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Testing;
 
+use CmsIg\Seal\Adapter\MongoDB\MongoDBSchemaManager;
+use CmsIg\Seal\Adapter\MongoDB\Tests\ClientHelper;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
@@ -26,6 +28,19 @@ abstract class AbstractSchemaManagerTestCase extends TestCase
     protected function setUp(): void
     {
         $this->schema = TestingHelper::createSchema();
+    }
+
+    public static function setUpBeforeClass(): void
+    {
+        $schema = TestingHelper::createSchema();
+
+        foreach ($schema->indexes as $index) {
+            try {
+                self::$schemaManager->dropIndex($index);
+            } catch (\Throwable $e) {
+                // not care if a error is thrown this is just cleaning up eventually canceled previous runs
+            }
+        }
     }
 
     public function testSimpleSchema(): void
