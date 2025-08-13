@@ -51,7 +51,7 @@ jobs:
               working-directory: ${{ inputs.directory }}
               run: |
                   # try a few times to start the docker services, if it may fails on the first tries
-                  docker compose up --wait || docker compose up --wait || docker compose up --wait
+                  docker compose up --wait || docker compose up --wait || docker compose up --wait || docker compose up --wait || docker compose up --wait
 
             - name: Install and configure PHP
               uses: shivammathur/setup-php@v2
