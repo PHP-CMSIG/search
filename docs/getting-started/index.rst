@@ -1513,7 +1513,7 @@ search engine.
 
             services:
               elasticsearch:
-                image: docker.elastic.co/elasticsearch/elasticsearch:9.1.1
+                image: docker.elastic.co/elasticsearch/elasticsearch:9.1.2
                 environment:
                   discovery.type: single-node
                   xpack.security.enabled: 'false'
