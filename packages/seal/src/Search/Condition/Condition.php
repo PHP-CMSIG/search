@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Search\Condition;
 
 /**
@@ -7,6 +18,10 @@ namespace CmsIg\Seal\Search\Condition;
  */
 final class Condition
 {
+    private function __construct()
+    {
+    }
+
     public static function search(string $query): SearchCondition
     {
         return new SearchCondition($query);
@@ -92,7 +107,7 @@ final class Condition
     }
 
     /**
-     * @var array<EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition> $conditions
+     * @param EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition $conditions
      */
     public static function and(...$conditions): AndCondition
     {
@@ -100,7 +115,7 @@ final class Condition
     }
 
     /**
-     * @var array<EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition> $conditions
+     * @param EqualCondition|GreaterThanCondition|GreaterThanEqualCondition|IdentifierCondition|InCondition|LessThanCondition|LessThanEqualCondition|NotEqualCondition|NotInCondition|AndCondition|OrCondition $conditions
      */
     public static function or(...$conditions): OrCondition
     {
