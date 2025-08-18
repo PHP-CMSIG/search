@@ -18,7 +18,7 @@ use CmsIg\Seal\Adapter\IndexerInterface;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Schema\Schema;
-use CmsIg\Seal\Search\Condition;
+use CmsIg\Seal\Search\Condition\Condition;
 use CmsIg\Seal\Search\SearchBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -103,7 +103,7 @@ abstract class AbstractIndexerTestCase extends TestCase
         foreach ($documents as $document) {
             $search = new SearchBuilder($schema, self::$searcher);
             $search->index(TestingHelper::INDEX_COMPLEX);
-            $search->addFilter(new Condition\IdentifierCondition($document['uuid']));
+            $search->addFilter(Condition::identifier($document['uuid']));
             $search->limit(1);
 
             $resultDocument = \iterator_to_array($search->getResult(), false)[0] ?? null;
@@ -137,7 +137,7 @@ abstract class AbstractIndexerTestCase extends TestCase
         foreach ($documents as $document) {
             $search = new SearchBuilder($schema, self::$searcher);
             $search->index(TestingHelper::INDEX_COMPLEX);
-            $search->addFilter(new Condition\IdentifierCondition($document['uuid']));
+            $search->addFilter(Condition::identifier($document['uuid']));
             $search->limit(1);
 
             $resultDocument = \iterator_to_array($search->getResult(), false)[0] ?? null;
@@ -168,7 +168,7 @@ abstract class AbstractIndexerTestCase extends TestCase
         foreach ($documents as $document) {
             $search = new SearchBuilder($schema, self::$searcher);
             $search->index(TestingHelper::INDEX_COMPLEX);
-            $search->addFilter(new Condition\IdentifierCondition($document['uuid']));
+            $search->addFilter(Condition::identifier($document['uuid']));
             $search->limit(1);
 
             $resultDocument = \iterator_to_array($search->getResult(), false)[0] ?? null;
@@ -205,7 +205,7 @@ abstract class AbstractIndexerTestCase extends TestCase
         foreach ($documents as $document) {
             $search = new SearchBuilder($schema, self::$searcher);
             $search->index(TestingHelper::INDEX_COMPLEX);
-            $search->addFilter(new Condition\IdentifierCondition($document['uuid']));
+            $search->addFilter(Condition::identifier($document['uuid']));
             $search->limit(1);
 
             $resultDocument = \iterator_to_array($search->getResult(), false)[0] ?? null;

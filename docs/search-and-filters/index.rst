@@ -14,7 +14,7 @@ The following shows the basic usage as already shown in the "Getting Started" do
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addFilter(/* ... */)
@@ -42,10 +42,10 @@ The ``SearchCondition`` is the most basic condition and can be used to search fo
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\SearchCondition('Search Term'))
+        ->addFilter(Condition::search('Search Term'))
         ->getResult();
 
 The condition does only search on fields which are marked as ``searchable`` in the index configuration.
@@ -59,10 +59,10 @@ The ``EqualCondition`` is used to filter the result by a specific field value ma
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\EqualCondition('tags', 'UI'))
+        ->addFilter(Condition::equal('tags', 'UI'))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration, it can be also
@@ -77,10 +77,10 @@ The ``NotEqualCondition`` is used to filter the result by a specific field value
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\NotEqualCondition('tags', 'UI'))
+        ->addFilter(Condition::notEqual('tags', 'UI'))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration, it can be also
@@ -97,10 +97,10 @@ then using a ``EqualCondition``.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\IdentifierCondition('23b30f01-d8fd-4dca-b36a-4710e360a965'))
+        ->addFilter(Condition::identifier('23b30f01-d8fd-4dca-b36a-4710e360a965'))
         ->getResult();
 
 GreaterThanCondition
@@ -113,10 +113,10 @@ the given value.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\GreaterThanCondition('rating', 2.5))
+        ->addFilter(Condition::greaterThan('rating', 2.5))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration.
@@ -131,10 +131,10 @@ the given value.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\GreaterThanEqualCondition('rating', 2.5))
+        ->addFilter(Condition::greaterThanEqual('rating', 2.5))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration.
@@ -149,10 +149,10 @@ the given value.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\LessThanCondition('rating', 2.5))
+        ->addFilter(Condition::lessThan('rating', 2.5))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration.
@@ -167,10 +167,10 @@ the given value.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\LessThanEqualCondition('rating', 2.5))
+        ->addFilter(Condition::lessThanEqual('rating', 2.5))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration.
@@ -184,10 +184,10 @@ The ``GeoDistanceCondition`` is used to filter results within a radius by specif
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('restaurants')
-        ->addFilter(new Condition\GeoDistanceCondition('location', 45.472735, 9.184019, 2000))
+        ->addFilter(Condition::geoDistance('location', 45.472735, 9.184019, 2000))
         ->getResult();
 
 The field is required to be marked as ``filterable`` in the index configuration.
@@ -201,10 +201,10 @@ The ``GeoBoundingBoxCondition`` is used to filter results within a bounding box 
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('restaurants')
-        ->addFilter(new Condition\GeoBoundingBoxCondition('location', 45.494181, 9.214024, 45.449484, 9.179175))
+        ->addFilter(Condition::geoBoundingBox('location', 45.494181, 9.214024, 45.449484, 9.179175))
         ->getResult();
 
 
@@ -224,12 +224,12 @@ The ``OrCondition`` is used to filter by two or more conditions where at least o
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\OrCondition(
-            new Condition\GreaterThanCondition('rating', 2.5),
-            new Condition\EqualCondition('isSpecial', true),
+        ->addFilter(Condition::or(
+            Condition::greaterThan('rating', 2.5),
+            Condition::equal('isSpecial', true),
         ))
         ->getResult();
 
@@ -246,14 +246,14 @@ in combination with ``OrCondition`` filters.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\AndCondition(
-            new Condition\EqualCondition('tags', 'Tech'),
-            new Condition\OrCondition(
-                new Condition\EqualCondition('tags', 'UX'),
-                new Condition\EqualCondition('isSpecial', true),
+        ->addFilter(Condition::and(
+            Condition::equal('tags', 'Tech'),
+            Condition::or(
+                Condition::equal('tags', 'UX'),
+                Condition::equal('isSpecial', true),
             ),
         ))
         ->getResult();
@@ -290,10 +290,10 @@ Need to be queried this way `<object>.<field>`:
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\LessThanEqualCondition('rating.value', 2.5))
+        ->addFilter(Condition::lessThanEqual('rating.value', 2.5))
         ->getResult();
 
 To filter on ``Typed`` objects also the `.` symbol is used but the type name need to be included as well.
@@ -317,10 +317,10 @@ Need to be queried this way `<object>.<type>.<field>`:
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\EqualCondition('header.image.media', 21))
+        ->addFilter(Condition::equal('header.image.media', 21))
         ->getResult();
 
 Also nested objects and types can be queried the same way.
@@ -376,7 +376,7 @@ your results but also ``sort`` them by a given field.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addSortBy('rating', 'desc')
@@ -386,7 +386,7 @@ your results but also ``sort`` them by a given field.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
         ->addSortBy('rating', 'asc')
@@ -405,10 +405,10 @@ The abstraction can also be used to highlight the search term in the result.
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\SearchCondition('Search Term'))
+        ->addFilter(Condition::search('Search Term'))
         ->highlight(['title'], '<mark>', '</mark>');
         ->getResult();
 
@@ -446,19 +446,18 @@ search engines support:
 
     <?php
 
-    use CmsIg\Seal\Search\Facet\MinMaxFacet;
-    use CmsIg\Seal\Search\Facet\CountFacet;
+    use CmsIg\Seal\Search\Facet\Facet;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFacet(new MinMaxFacet('age'))
-        ->addFacet(new CountFacet('tags'))
+        ->addFacet(Facet::minMax('rating'))
+        ->addFacet(Facet::count('tags'))
         ->getResult();
 
     $facets = $result->facets(); // Output depends on the facet type
 
 .. note::
 
-    For ``->addFacet()`` to work, your fields (``age`` and ``tags`` in our our example) have to be configured using
+    For ``->addFacet()`` to work, your fields (``rating`` and ``tags`` in our our example) have to be configured using
     `facet: true` in the index schema.
 
 .. note::
@@ -479,10 +478,10 @@ for example. Instead of displaying all the product variants, you may group them 
 
     <?php
 
-    use CmsIg\Seal\Search\Condition;
+    use CmsIg\Seal\Search\Condition\Condition;
 
     $result = $this->engine->createSearchBuilder('blog')
-        ->addFilter(new Condition\SearchCondition('product title'))
+        ->addFilter(Condition::search('product title'))
         ->distinct('product_id')
         ->getResult();
     }

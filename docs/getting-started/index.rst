@@ -1851,7 +1851,7 @@ many exists in the given index.
         public function someMethod()
         {
             $result = $this->engine->createSearchBuilder('blog')
-                ->addFilter(new \CmsIg\Seal\Search\Condition\SearchCondition('first'))
+                ->addFilter(\CmsIg\Seal\Search\Condition\Condition::search('first'))
                 ->getResult();
 
             foreach ($result as $document) {
@@ -1883,7 +1883,7 @@ we will filter by the ``tags`` field and get all documents which have the tag ``
         public function someMethod()
         {
             $result = $this->engine->createSearchBuilder('blog')
-                ->addFilter(new \CmsIg\Seal\Search\Condition\EqualCondition('tags', 'UI'));
+                ->addFilter(\CmsIg\Seal\Search\Condition\Condition::equal('tags', 'UI'));
                 ->getResult();
 
             foreach ($result as $document) {
