@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Search\Condition;
 
+/**
+ * Recommended way to create a new instance is use the {@see Condition::equal} factory method.
+ */
 class EqualCondition
 {
     public function __construct(

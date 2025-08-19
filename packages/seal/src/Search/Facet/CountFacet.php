@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Search\Facet;
 
+/**
+ * Recommended way to create a new instance is use the {@see Facet::count} factory method.
+ */
 class CountFacet extends AbstractFacet
 {
 }
