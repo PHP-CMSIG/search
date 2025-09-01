@@ -160,7 +160,7 @@ final class Engine implements EngineInterface
         }
 
         // Track documents that need to be deleted if an identifiers array was given
-        $documentIdsToDelete = array_flip($reindexConfig->getIdentifiers());
+        $documentIdsToDelete = \array_flip($reindexConfig->getIdentifiers());
 
         foreach ($reindexProvidersPerIndex as $index => $reindexProviders) {
             if ($reindexConfig->shouldDropIndex() && $this->existIndex($index)) {
