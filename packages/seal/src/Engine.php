@@ -145,15 +145,22 @@ final class Engine implements EngineInterface
     ): void {
         /** @var array<string, ReindexProviderInterface[]> $reindexProvidersPerIndex */
         $reindexProvidersPerIndex = [];
+        /** @var array<string, string> $identifiersPerIndex */
+        $identifiersPerIndex = [];
         foreach ($reindexProviders as $reindexProvider) {
             if (!isset($this->schema->indexes[$reindexProvider::getIndex()])) {
                 continue;
             }
 
+            $identifiersPerIndex[$reindexProvider::getIndex()] = $this->schema->indexes[$reindexProvider::getIndex()]->getIdentifierField()->name;
+
             if ($reindexProvider::getIndex() === $reindexConfig->getIndex() || null === $reindexConfig->getIndex()) {
                 $reindexProvidersPerIndex[$reindexProvider::getIndex()][] = $reindexProvider;
             }
         }
+
+        // Track documents that need to be deleted if an identifiers array was given
+        $documentIdsToDelete = array_flip($reindexConfig->getIdentifiers());
 
         foreach ($reindexProvidersPerIndex as $index => $reindexProviders) {
             if ($reindexConfig->shouldDropIndex() && $this->existIndex($index)) {
@@ -169,13 +176,16 @@ final class Engine implements EngineInterface
             foreach ($reindexProviders as $reindexProvider) {
                 $this->bulk(
                     $index,
-                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback) {
+                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, $documentIdsToDelete, $identifiersPerIndex) {
                         $count = 0;
                         $total = $reindexProvider->total();
 
                         $lastCount = -1;
                         foreach ($reindexProvider->provide($reindexConfig) as $document) {
                             ++$count;
+
+                            // Document still exists, do not delete
+                            unset($documentIdsToDelete[$document[$identifiersPerIndex[$index]]]);
 
                             yield $document;
 
@@ -197,6 +207,12 @@ final class Engine implements EngineInterface
                     $reindexConfig->getBulkSize(),
                 );
             }
+        }
+
+        if ([] !== $documentIdsToDelete) {
+            $index = $reindexConfig->getIndex();
+            \assert(null !== $index, 'Index must be set if identifiers are given in reindex config.');
+            $this->bulk($index, [], $documentIdsToDelete, $reindexConfig->getBulkSize());
         }
     }
 }
