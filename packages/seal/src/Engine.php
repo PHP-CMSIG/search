@@ -176,7 +176,7 @@ final class Engine implements EngineInterface
             foreach ($reindexProviders as $reindexProvider) {
                 $this->bulk(
                     $index,
-                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, $documentIdsToDelete, $identifiersPerIndex) {
+                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
                         $count = 0;
                         $total = $reindexProvider->total();
 
@@ -212,7 +212,7 @@ final class Engine implements EngineInterface
         if ([] !== $documentIdsToDelete) {
             $index = $reindexConfig->getIndex();
             \assert(null !== $index, 'Index must be set if identifiers are given in reindex config.');
-            $this->bulk($index, [], $documentIdsToDelete, $reindexConfig->getBulkSize());
+            $this->bulk($index, [], \array_keys($documentIdsToDelete), $reindexConfig->getBulkSize());
         }
     }
 }

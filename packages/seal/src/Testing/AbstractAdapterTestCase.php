@@ -17,6 +17,8 @@ use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\ReindexConfig;
+use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -151,6 +153,63 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
     }
 
+    public function testReindex(): void
+    {
+        $engine = self::getEngine();
+        $task = self::getEngine()->createSchema(['return_slow_promise_result' => true]);
+        $task->wait();
+
+        $removedDocument = [
+            'uuid' => '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+            'title' => 'Removed Document',
+        ];
+
+        $documents = [
+            ...TestingHelper::createComplexFixtures(),
+            $removedDocument,
+        ];
+
+        $reindexProvider = $this->createReindexProvider($documents);
+        $engine->reindex([$reindexProvider], new ReindexConfig());
+
+        $expectedDocuments = [];
+        foreach ($documents as $document) {
+            $expectedDocuments[] = $engine->getDocument(TestingHelper::INDEX_COMPLEX, $document['uuid']);
+        }
+
+        unset($expectedDocuments[\count($expectedDocuments) - 1]);
+
+        $this->assertCount(
+            \count($documents) - 1,
+            $expectedDocuments,
+        );
+
+        $reindexProvider = $this->createReindexProvider($expectedDocuments);
+        $reindexConfig = (new ReindexConfig())
+            ->withIndex(TestingHelper::INDEX_COMPLEX)
+            ->withIdentifiers(\array_map(
+                fn ($document) => $document['uuid'],
+                $documents,
+            ),
+        );
+        $engine->reindex([$reindexProvider], $reindexConfig);
+
+        $exception = null;
+        try {
+            $engine->getDocument(TestingHelper::INDEX_COMPLEX, '3fa85f64-5717-4562-b3fc-2c963f66afa6');
+        } catch (\Exception $e) {
+            $exception = $e;
+        }
+
+        $this->assertInstanceOf(DocumentNotFoundException::class, $exception);
+
+        foreach ($expectedDocuments as $document) {
+            self::$taskHelper->tasks[] = $engine->deleteDocument(TestingHelper::INDEX_COMPLEX, $document['uuid'], ['return_slow_promise_result' => true]);
+        }
+
+        self::$taskHelper->waitForAll();
+    }
+
     public function testCountDocuments(): void
     {
         $engine = self::getEngine();
@@ -174,5 +233,36 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
 
         self::$taskHelper->waitForAll();
+    }
+
+    private function createReindexProvider(array $documents): ReindexProviderInterface
+    {
+        return new class($documents) implements ReindexProviderInterface {
+            /**
+             * @param array<array<string, mixed>> $documents
+             */
+            public function __construct(private readonly array $documents)
+            {
+            }
+
+            public function total(): int
+            {
+                return 4;
+            }
+
+            public function provide(ReindexConfig $reindexConfig): \Generator
+            {
+                $documents = $this->documents;
+
+                foreach ($documents as $document) {
+                    yield $document;
+                }
+            }
+
+            public static function getIndex(): string
+            {
+                return TestingHelper::INDEX_COMPLEX;
+            }
+        };
     }
 }
