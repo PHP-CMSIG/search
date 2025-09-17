@@ -73,14 +73,14 @@ interface EngineInterface
     public function existIndex(string $index): bool;
 
     /**
-     * @param array{return_slow_promise_result?: bool} $options
+     * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
     public function createSchema(array $options = []): TaskInterface|null;
 
     /**
-     * @param array{return_slow_promise_result?: bool} $options
+     * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
@@ -92,10 +92,16 @@ interface EngineInterface
      *
      * @param iterable<ReindexProviderInterface> $reindexProviders
      * @param callable(string, int, int|null): void|null $progressCallback
+     *
+     * TODO: native return type in next minor, major release.
+     *
+     * @phpstan-ignore-next-line
+     * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
     public function reindex(
         iterable $reindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
-    ): void;
+        /* array $options = [], */
+    );
 }

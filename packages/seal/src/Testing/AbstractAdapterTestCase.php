@@ -170,7 +170,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         ];
 
         $reindexProvider = $this->createReindexProvider($documents);
-        $engine->reindex([$reindexProvider], new ReindexConfig());
+        $engine->reindex([$reindexProvider], new ReindexConfig(), null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
 
         $expectedDocuments = [];
         foreach ($documents as $document) {
@@ -192,7 +192,7 @@ abstract class AbstractAdapterTestCase extends TestCase
                 $documents,
             ),
         );
-        $engine->reindex([$reindexProvider], $reindexConfig);
+        $engine->reindex([$reindexProvider], $reindexConfig, null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
 
         $exception = null;
         try {
@@ -204,6 +204,7 @@ abstract class AbstractAdapterTestCase extends TestCase
         $this->assertInstanceOf(DocumentNotFoundException::class, $exception);
 
         foreach ($expectedDocuments as $document) {
+            \assert(\is_string($document['uuid']), 'UUID is not a string');
             self::$taskHelper->tasks[] = $engine->deleteDocument(TestingHelper::INDEX_COMPLEX, $document['uuid'], ['return_slow_promise_result' => true]);
         }
 
@@ -235,6 +236,9 @@ abstract class AbstractAdapterTestCase extends TestCase
         self::$taskHelper->waitForAll();
     }
 
+    /**
+     * @param array<array<string, mixed>> $documents
+     */
     private function createReindexProvider(array $documents): ReindexProviderInterface
     {
         return new class($documents) implements ReindexProviderInterface {
