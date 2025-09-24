@@ -131,6 +131,343 @@ integration of the package or the ``Standalone`` version.
 
             composer require cmsig/seal-typesense-adapter
 
+Prepare Search Engine
+----------------------
+
+If you already have your search engine running you can skip this step. Still we want to
+provide here different `docker-compose <https://www.docker.com/products/docker-desktop/>`__ files to get you started quickly with your favorite
+search engine.
+
+.. tabs::
+
+    .. group-tab:: Loupe
+
+        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no service other service required to use it.
+        You just need to make sure that you have the required `sqlite php extension <https://www.php.net/pdo_sqlite>`__ installed. The
+        php package manager `composer <https://getcomposer.org/>`__ should already tell you if you are missing the extension.
+
+    .. group-tab:: Meilisearch
+
+        A instance of `Meilisearch <https://www.meilisearch.com/>`__ can be started with the following docker-compose file:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              meilisearch:
+                image: getmeili/meilisearch:v1
+                environment:
+                  MEILI_ENV: development
+                ports:
+                  - "7700:7700"
+                healthcheck:
+                  test: ["CMD-SHELL", "curl --silent --fail localhost:7700/health || exit 1"]
+                  interval: 5s
+                  timeout: 5s
+                  retries: 20
+                volumes:
+                  - meilisearch-data:/data.ms
+
+            volumes:
+              meilisearch-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+    .. group-tab:: Algolia
+
+        As `Algolia <https://www.algolia.com/>`__ is SaaS, there is nothing to run it required. You can create a free account
+        at `https://www.algolia.com/users/sign_up <https://www.algolia.com/users/sign_up>`__.
+        After Signup you will get an ``ALGOLIA_APPLICATION_ID`` and an ``ALGOLIA_ADMIN_API_KEY``.
+        Which you need to configure that your engine adapter configuration will then use them like
+        above.
+
+    .. group-tab:: Elasticsearch
+
+        A instance of `Elasticsearch <https://www.elastic.co/what-is/elasticsearch>`__ can be started with the following docker-compose file:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              elasticsearch:
+                image: docker.elastic.co/elasticsearch/elasticsearch:9.1.2
+                environment:
+                  discovery.type: single-node
+                  xpack.security.enabled: 'false'
+                  cluster.routing.allocation.disk.threshold_enabled: 'false'
+                ports:
+                  - "9200:9200"
+                healthcheck:
+                  test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+                  interval: 5s
+                  timeout: 5s
+                  retries: 20
+                volumes:
+                  - elasticsearch-data:/usr/share/elasticsearch/data
+
+            volumes:
+                elasticsearch-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+    .. group-tab:: Opensearch
+
+        A instance of `Opensearch <https://opensearch.org/>`__ can be started with the following docker-compose file:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              opensearch:
+                image: opensearchproject/opensearch:2
+                environment:
+                  discovery.type: single-node
+                  cluster.routing.allocation.disk.threshold_enabled: 'false'
+                  DISABLE_SECURITY_PLUGIN: true
+                ports:
+                  - "9200:9200"
+                healthcheck:
+                  test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+                  interval: 5s
+                  timeout: 5s
+                  retries: 20
+                volumes:
+                  - opensearch-data:/usr/share/opensearch/data
+
+            volumes:
+              opensearch-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+    .. group-tab:: Redisearch
+
+        A instance of `Redisearch <https://redis.io/docs/stack/search/>`__ can be started with the following docker-compose file.
+        The here used `redis/redis-stack` image contains the required ``Redisearch``
+        and ``JSON`` modules to run the search engine:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              redis:
+                image: redis:8
+                ports:
+                  - 6379:6379
+                command: >
+                  --requirepass supersecure
+                volumes:
+                 - redisearch-data:/data
+
+              redisinsight: # optional for debug and visualize redis data
+                image: redis/redisinsight:latest
+                ports:
+                  - 5540:5540 # redis insight: to connect use "redis://default:supersecure@redis:6379"
+                depends_on:
+                  - "redis"
+
+            volumes:
+              redisearch-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+    .. group-tab:: Solr
+
+        A instance of `Solr <https://solr.apache.org/>`__ can be started with the following docker-compose file.
+        It uses the required cloud mode to run the search engine. Running it
+        without cloud mode is not supported yet:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              solr:
+                image: "solr:9"
+                ports:
+                 - "8983:8983"
+                 - "9983:9983"
+                command: solr -f -cloud
+                healthcheck:
+                  test: ["CMD-SHELL", "curl --silent --fail localhost:8983 || exit 1"]
+                  interval: 5s
+                  timeout: 5s
+                  retries: 20
+                environment:
+                  SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
+                volumes:
+                  - solr-data:/var/solr
+
+              zookeeper:
+                image: "solr:9"
+                depends_on:
+                  - "solr"
+                network_mode: "service:solr"
+                environment:
+                  SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
+                command: bash -c "set -x; export; wait-for-solr.sh; solr zk -z localhost:9983 upconfig -n default -d /opt/solr/server/solr/configsets/_default; tail -f /dev/null"
+
+            volumes:
+              solr-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+    .. group-tab:: Typesense
+
+        A instance of `Typesense <https://typesense.org/>`__ can be started with the following docker-compose file:
+
+        .. code-block:: yaml
+
+            # docker-compose.yml
+
+            services:
+              typesense:
+                image: typesense/typesense:29.0
+                ports:
+                  - "8108:8108"
+                environment:
+                  TYPESENSE_DATA_DIR: /data
+                  TYPESENSE_API_KEY: S3CR3T
+                healthcheck:
+                  test: ["CMD-SHELL", "exit 0"] # TODO currently not working as curl not available: https://github.com/typesense/typesense/issues/441#issuecomment-1383157680
+                  interval: 5s
+                  timeout: 5s
+                  retries: 20
+                volumes:
+                  - typesense-data:/data
+
+            volumes:
+              typesense-data:
+
+        To start the search engine run the following command:
+
+        .. code-block:: bash
+
+            docker-compose up
+
+        Depending on the service after a few seconds up to a minute the service is ready to use.
+        And you can continue with the next step.
+
+Create Indexes
+--------------
+
+Before you can use the search engine you need to create the indexes.
+
+.. tabs::
+
+    .. group-tab:: Standalone use
+
+        When using the ``Standalone`` version you need to create the ``Indexes``
+        in your search engines via the ``Engine`` instance which was created before:
+
+        .. code-block:: php
+
+            <?php
+
+            // create all indexes
+            $engine->createSchema();
+
+            // create specific index
+            $engine->createIndex('blog');
+
+    .. group-tab:: Laravel
+
+        To create the indexes in Laravel the following artisan command:
+
+        .. code-block:: bash
+
+            # create all indexes
+            php artisan cmsig:seal:index-create
+
+            # create specific index
+            php artisan cmsig:seal:index-create --index=blog
+
+    .. group-tab:: Symfony
+
+        To create the indexes in Symfony the following console command:
+
+        .. code-block:: bash
+
+            # create all indexes
+            bin/console cmsig:seal:index-create
+
+            # create specific index
+            bin/console cmsig:seal:index-create --index=blog
+
+    .. group-tab:: Spiral
+
+        To create the indexes in Spiral the following command:
+
+        .. code-block:: bash
+
+            # create all indexes
+            php app.php cmsig:seal:index-create
+
+            # create specific index
+            php app.php cmsig:seal:index-create --index=blog
+
+    .. group-tab:: Mezzio
+
+        To create the indexes in Mezzio the following command:
+
+        .. code-block:: bash
+
+            # create all indexes
+            vendor/bin/laminas cmsig:seal:index-create
+
+            # create specific index
+            vendor/bin/laminas cmsig:seal:index-create --index=blog
+
+    .. group-tab:: Yii
+
+        To create the indexes in Yii the following command:
+
+        .. code-block:: bash
+
+            # create all indexes
+            ./yii cmsig:seal:index-create
+
+            # create specific index
+            ./yii cmsig:seal:index-create --index=blog
+
 Configure Schema
 ----------------
 
@@ -1444,343 +1781,6 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             ],
                         ],
                     ];
-
-Prepare Search Engine
-----------------------
-
-If you already have your search engine running you can skip this step. Still we want to
-provide here different `docker-compose <https://www.docker.com/products/docker-desktop/>`__ files to get you started quickly with your favorite
-search engine.
-
-.. tabs::
-
-    .. group-tab:: Loupe
-
-        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no service other service required to use it.
-        You just need to make sure that you have the required `sqlite php extension <https://www.php.net/pdo_sqlite>`__ installed. The
-        php package manager `composer <https://getcomposer.org/>`__ should already tell you if you are missing the extension.
-
-    .. group-tab:: Meilisearch
-
-        A instance of `Meilisearch <https://www.meilisearch.com/>`__ can be started with the following docker-compose file:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              meilisearch:
-                image: getmeili/meilisearch:v1
-                environment:
-                  MEILI_ENV: development
-                ports:
-                  - "7700:7700"
-                healthcheck:
-                  test: ["CMD-SHELL", "curl --silent --fail localhost:7700/health || exit 1"]
-                  interval: 5s
-                  timeout: 5s
-                  retries: 20
-                volumes:
-                  - meilisearch-data:/data.ms
-
-            volumes:
-              meilisearch-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-    .. group-tab:: Algolia
-
-        As `Algolia <https://www.algolia.com/>`__ is SaaS, there is nothing to run it required. You can create a free account
-        at `https://www.algolia.com/users/sign_up <https://www.algolia.com/users/sign_up>`__.
-        After Signup you will get an ``ALGOLIA_APPLICATION_ID`` and an ``ALGOLIA_ADMIN_API_KEY``.
-        Which you need to configure that your engine adapter configuration will then use them like
-        above.
-
-    .. group-tab:: Elasticsearch
-
-        A instance of `Elasticsearch <https://www.elastic.co/what-is/elasticsearch>`__ can be started with the following docker-compose file:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              elasticsearch:
-                image: docker.elastic.co/elasticsearch/elasticsearch:9.1.2
-                environment:
-                  discovery.type: single-node
-                  xpack.security.enabled: 'false'
-                  cluster.routing.allocation.disk.threshold_enabled: 'false'
-                ports:
-                  - "9200:9200"
-                healthcheck:
-                  test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
-                  interval: 5s
-                  timeout: 5s
-                  retries: 20
-                volumes:
-                  - elasticsearch-data:/usr/share/elasticsearch/data
-
-            volumes:
-                elasticsearch-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-    .. group-tab:: Opensearch
-
-        A instance of `Opensearch <https://opensearch.org/>`__ can be started with the following docker-compose file:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              opensearch:
-                image: opensearchproject/opensearch:2
-                environment:
-                  discovery.type: single-node
-                  cluster.routing.allocation.disk.threshold_enabled: 'false'
-                  DISABLE_SECURITY_PLUGIN: true
-                ports:
-                  - "9200:9200"
-                healthcheck:
-                  test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
-                  interval: 5s
-                  timeout: 5s
-                  retries: 20
-                volumes:
-                  - opensearch-data:/usr/share/opensearch/data
-
-            volumes:
-              opensearch-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-    .. group-tab:: Redisearch
-
-        A instance of `Redisearch <https://redis.io/docs/stack/search/>`__ can be started with the following docker-compose file.
-        The here used `redis/redis-stack` image contains the required ``Redisearch``
-        and ``JSON`` modules to run the search engine:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              redis:
-                image: redis:8
-                ports:
-                  - 6379:6379
-                command: >
-                  --requirepass supersecure
-                volumes:
-                 - redisearch-data:/data
-
-              redisinsight: # optional for debug and visualize redis data
-                image: redis/redisinsight:latest
-                ports:
-                  - 5540:5540 # redis insight: to connect use "redis://default:supersecure@redis:6379"
-                depends_on:
-                  - "redis"
-
-            volumes:
-              redisearch-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-    .. group-tab:: Solr
-
-        A instance of `Solr <https://solr.apache.org/>`__ can be started with the following docker-compose file.
-        It uses the required cloud mode to run the search engine. Running it
-        without cloud mode is not supported yet:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              solr:
-                image: "solr:9"
-                ports:
-                 - "8983:8983"
-                 - "9983:9983"
-                command: solr -f -cloud
-                healthcheck:
-                  test: ["CMD-SHELL", "curl --silent --fail localhost:8983 || exit 1"]
-                  interval: 5s
-                  timeout: 5s
-                  retries: 20
-                environment:
-                  SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
-                volumes:
-                  - solr-data:/var/solr
-
-              zookeeper:
-                image: "solr:9"
-                depends_on:
-                  - "solr"
-                network_mode: "service:solr"
-                environment:
-                  SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
-                command: bash -c "set -x; export; wait-for-solr.sh; solr zk -z localhost:9983 upconfig -n default -d /opt/solr/server/solr/configsets/_default; tail -f /dev/null"
-
-            volumes:
-              solr-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-    .. group-tab:: Typesense
-
-        A instance of `Typesense <https://typesense.org/>`__ can be started with the following docker-compose file:
-
-        .. code-block:: yaml
-
-            # docker-compose.yml
-
-            services:
-              typesense:
-                image: typesense/typesense:29.0
-                ports:
-                  - "8108:8108"
-                environment:
-                  TYPESENSE_DATA_DIR: /data
-                  TYPESENSE_API_KEY: S3CR3T
-                healthcheck:
-                  test: ["CMD-SHELL", "exit 0"] # TODO currently not working as curl not available: https://github.com/typesense/typesense/issues/441#issuecomment-1383157680
-                  interval: 5s
-                  timeout: 5s
-                  retries: 20
-                volumes:
-                  - typesense-data:/data
-
-            volumes:
-              typesense-data:
-
-        To start the search engine run the following command:
-
-        .. code-block:: bash
-
-            docker-compose up
-
-        Depending on the service after a few seconds up to a minute the service is ready to use.
-        And you can continue with the next step.
-
-Create Indexes
---------------
-
-Before you can use the search engine you need to create the indexes.
-
-.. tabs::
-
-    .. group-tab:: Standalone use
-
-        When using the ``Standalone`` version you need to create the ``Indexes``
-        in your search engines via the ``Engine`` instance which was created before:
-
-        .. code-block:: php
-
-            <?php
-
-            // create all indexes
-            $engine->createSchema();
-
-            // create specific index
-            $engine->createIndex('blog');
-
-    .. group-tab:: Laravel
-
-        To create the indexes in Laravel the following artisan command:
-
-        .. code-block:: bash
-
-            # create all indexes
-            php artisan cmsig:seal:index-create
-
-            # create specific index
-            php artisan cmsig:seal:index-create --index=blog
-
-    .. group-tab:: Symfony
-
-        To create the indexes in Symfony the following console command:
-
-        .. code-block:: bash
-
-            # create all indexes
-            bin/console cmsig:seal:index-create
-
-            # create specific index
-            bin/console cmsig:seal:index-create --index=blog
-
-    .. group-tab:: Spiral
-
-        To create the indexes in Spiral the following command:
-
-        .. code-block:: bash
-
-            # create all indexes
-            php app.php cmsig:seal:index-create
-
-            # create specific index
-            php app.php cmsig:seal:index-create --index=blog
-
-    .. group-tab:: Mezzio
-
-        To create the indexes in Mezzio the following command:
-
-        .. code-block:: bash
-
-            # create all indexes
-            vendor/bin/laminas cmsig:seal:index-create
-
-            # create specific index
-            vendor/bin/laminas cmsig:seal:index-create --index=blog
-
-    .. group-tab:: Yii
-
-        To create the indexes in Yii the following command:
-
-        .. code-block:: bash
-
-            # create all indexes
-            ./yii cmsig:seal:index-create
-
-            # create specific index
-            ./yii cmsig:seal:index-create --index=blog
 
 Add or Update Documents
 -----------------------
