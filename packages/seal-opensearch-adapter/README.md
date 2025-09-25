@@ -9,7 +9,7 @@
 
 <div align="center">Logo created by <a href="https://cargocollective.com/meinewilma">Meine Wilma</a></div>
 
-<h1 align="center">SEAL <br /> Meilisearch Adapter</h1>
+<h1 align="center">SEAL <br /> OpenSearch Adapter</h1>
 
 <br />
 <br />
