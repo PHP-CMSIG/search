@@ -47,6 +47,8 @@ the name of the index and the identifier of the document which should be removed
 
     $this->engine->deleteDocument('blog', '1');
 
+.. _reindex-operations:
+
 Reindex operations
 ------------------
 
@@ -95,7 +97,9 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
         }
     }
 
-After that you can use the ``reindex`` to index all documents:
+If you are using Doctrine you might be interested in the :doc:`../cookbooks/orm-examples` cookbook.
+
+After that you created the ReindexProvider use the ``reindex`` to index all documents:
 
 .. tabs::
 

@@ -14,3 +14,4 @@ and over connecting Index updates to your favorite ``ORM`` or persistent layer.
     :maxdepth: 1
 
     create-own-adapter
+    orm-examples
