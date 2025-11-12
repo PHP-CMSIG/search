@@ -83,7 +83,7 @@ final class Marshaller
      */
     private function marshallGeoPointField(array|null $value, Field\GeoPointField $field): array|string|null
     {
-        if ($field->multiple) {
+        if ($field->multiple) { // @phpstan-ignore-line
             throw new \LogicException('GeoPointField currently does not support multiple values.');
         }
 
@@ -174,11 +174,14 @@ final class Marshaller
      */
     private function marshallJsonObjectFields(array $document, Field\JsonObjectField $field): array|string
     {
-        if (!$field->multiple) {
+        /** @var bool $multiple */
+        $multiple = $field->multiple;
+
+        if (!$multiple) {
             return \json_encode($document, \JSON_THROW_ON_ERROR);
         }
 
-        /** @var array<array<string, mixed>> $rawDocuments */
+        /** @var array<string> $rawDocuments */
         $rawDocuments = [];
         /** @var array<string, mixed> $data */
         foreach ($document as $data) {
@@ -329,18 +332,31 @@ final class Marshaller
      *
      * @return array<string, mixed>|array<array<string, mixed>>
      */
-    private function unmarshallJsonObjectFields(string|array $raw, Field\JsonObjectField $field): array
+    private function unmarshallJsonObjectFields(string|array|null $raw, Field\JsonObjectField $field): array
     {
-        if (!$field->multiple) {
-            return \json_decode($raw, true, flags: \JSON_THROW_ON_ERROR);
+        /** @var bool $multiple */
+        $multiple = $field->multiple;
+
+        if (!$multiple) {
+            /** @var string $raw */
+            $json = \json_decode($raw, true, flags: \JSON_THROW_ON_ERROR);
+
+            /** @var array<string, mixed> */
+            return $json;
+        }
+
+        /** @var string[]|null $raw */
+        if (null === $raw) {
+            return [];
         }
 
         /** @var array<array<string, mixed>> $documentFields */
         $documentFields = [];
 
-        /** @var array<string, mixed> $data */
         foreach ($raw as $data) {
-            $documentFields[] = \json_decode($data, true, flags: \JSON_THROW_ON_ERROR);;
+            $json = \json_decode($data, true, flags: \JSON_THROW_ON_ERROR);
+
+            $documentFields[] = $json;
         }
 
         return $documentFields;
@@ -395,7 +411,7 @@ final class Marshaller
      */
     private function unmarshallGeoPointField(array $document, Field\GeoPointField $field): array|null
     {
-        if ($field->multiple) {
+        if ($field->multiple) { // @phpstan-ignore-line
             throw new \LogicException('GeoPointField currently does not support multiple values.');
         }
 

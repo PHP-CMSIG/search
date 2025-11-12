@@ -187,11 +187,12 @@ abstract class AbstractAdapterTestCase extends TestCase
         $reindexProvider = $this->createReindexProvider($expectedDocuments);
         $reindexConfig = (new ReindexConfig())
             ->withIndex(TestingHelper::INDEX_COMPLEX)
-            ->withIdentifiers(\array_map(
-                fn ($document) => $document['uuid'],
-                $documents,
-            ),
-        );
+            ->withIdentifiers(
+                \array_map(
+                    fn ($document) => $document['uuid'],
+                    $documents,
+                ),
+            );
         $engine->reindex([$reindexProvider], $reindexConfig, null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
 
         $exception = null;

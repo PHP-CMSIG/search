@@ -17,6 +17,13 @@ namespace CmsIg\Seal\Schema\Field;
  * @experimental This is an experimental feature and the API can change at any time.
  *               If you use it let us know and give feedback here: https://github.com/PHP-CMSIG/search/issues/614
  *
+ * @property false $multiple
+ * @property false $searchable
+ * @property false $filterable
+ * @property false $sortable
+ * @property false $facet
+ * @property false $distinct
+ *
  * @readonly
  *
  * Type to store unstructured JSON objects (array<string, mixed) for example for some metadata.
@@ -24,6 +31,7 @@ namespace CmsIg\Seal\Schema\Field;
 final class JsonObjectField extends AbstractField
 {
     /**
+     * @param false $multiple
      * @param array<string, mixed> $options
      */
     public function __construct(

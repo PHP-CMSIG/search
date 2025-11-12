@@ -139,7 +139,7 @@ final class Engine implements EngineInterface
     }
 
     /**
-     * TODO remove phpdoc when added to interface
+     * TODO remove phpdoc when added to interface.
      *
      * @param array{return_slow_promise_result?: true} $options
      */

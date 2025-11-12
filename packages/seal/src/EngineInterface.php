@@ -93,9 +93,10 @@ interface EngineInterface
      * @param iterable<ReindexProviderInterface> $reindexProviders
      * @param callable(string, int, int|null): void|null $progressCallback
      *
-     * TODO: native return type in next minor, major release.
+     * TODO: native return type in next minor, major release
      *
      * @phpstan-ignore-next-line
+     *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
     public function reindex(

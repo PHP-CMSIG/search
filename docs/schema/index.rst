@@ -308,6 +308,44 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 Complex Field Types
 -------------------
 
+JsonObjectField
+~~~~~~~~~~~~~~~
+
+The ``JsonObject`` field type is used to index json string object. Unlike the other field types it is
+**not** ``searchable``, ``filterable``, ``sortable`` and is just used to store additonal metadata.
+
+It is represented in PHP as an ``associative array``.
+
+Lets have a look at the following example field:
+
+.. code-block:: php
+
+    <?php
+
+    $document = [
+        // ...
+        "metadata" => [
+            "routeAttributes" => [
+                "site" => "intranet",
+            ],
+        ],
+    ];
+
+The following field definitions will show us how we can use ``JsonObject`` field to index the above field:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Schema\Field;
+    use CmsIg\Seal\Schema\Index;
+
+    $index = new Index('blog', [
+        'metadata' => new Field\JsonObjectField('metadata'),
+    ]);
+
+This field type is ``experimental`` if you use it give feedback to `this Github Issue <https://github.com/PHP-CMSIG/search/issues/614>`_
+
 ObjectField
 ~~~~~~~~~~~
 
@@ -700,6 +738,11 @@ A whole complex example ``Index`` with different types of ``Fields`` for documen
         ],
         'tags' => ['Tech', 'UI'],
         'categoryIds' => [1, 2],
+        'metadata' => [
+            'routeAttributes' => [
+                'site' => 'intranet',
+            ],
+        ],
     ];
 
     $documentB = [
@@ -719,6 +762,11 @@ A whole complex example ``Index`` with different types of ``Fields`` for documen
         'comments' => [],
         'tags' => ['UI', 'UX'],
         'categoryIds' => [2, 3],
+        'metadata' => [
+            'routeAttributes' => [
+                'site' => 'intranet',
+            ],
+        ],
     ];
 
 Can be saved in an ``Index`` via the following ``Index`` and ``Field`` definitions:
@@ -765,6 +813,7 @@ Can be saved in an ``Index`` via the following ``Index`` and ``Field`` definitio
         ], multiple: true),
         'tags' => new Field\TextField('tags', multiple: true, filterable: true),
         'categoryIds' => new Field\IntegerField('categoryIds', multiple: true, filterable: true),
+        'metadata' => new Field\JsonObjectField('metadata'),
     ]);
 
 Best Practices
@@ -789,6 +838,7 @@ look like this:
         'url' => new Field\TextField('url'),
         'image' => new Field\IntegerField('image'),
         'content' => new Field\TextField('content', multiple: true),
+        'metadata' => new Field\JsonObjectField('metadata'),
     ]);
 
 Where the ``content`` field contains all relevant searchable texts. Optionally you maybe have some
