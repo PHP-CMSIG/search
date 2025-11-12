@@ -166,6 +166,11 @@ class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
             'location' => [
                 'type' => 'geo_point',
             ],
+            'metadata' => [
+                'type' => 'keyword',
+                'index' => false,
+                'doc_values' => false,
+            ],
             'rating' => [
                 'type' => 'float',
             ],

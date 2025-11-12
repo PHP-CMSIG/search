@@ -59,6 +59,7 @@ final class Marshaller
 
             match (true) {
                 $field instanceof Field\ObjectField => $rawDocument[$name] = $this->marshallObjectFields($document[$field->name], $field), // @phpstan-ignore-line
+                $field instanceof Field\JsonObjectField => $rawDocument[$name] = $this->marshallJsonObjectFields($document[$field->name], $field), // @phpstan-ignore-line
                 $field instanceof Field\TypedField => $rawDocument = \array_replace($rawDocument, $this->marhsallTypedFields($name, $document[$field->name], $field)), // @phpstan-ignore-line
                 $field instanceof Field\DateTimeField => $rawDocument[$name] = $this->marshallDateTimeField($document[$field->name], $field), // @phpstan-ignore-line
                 $field instanceof Field\GeoPointField => $rawDocument[$this->geoPointFieldConfig['name'] ?? $name] = $this->marshallGeoPointField($document[$field->name], $field), // @phpstan-ignore-line
@@ -167,6 +168,27 @@ final class Marshaller
     }
 
     /**
+     * @param array<string, mixed>|array<array<string, mixed>> $document
+     *
+     * @return string|array<string>
+     */
+    private function marshallJsonObjectFields(array $document, Field\JsonObjectField $field): array|string
+    {
+        if (!$field->multiple) {
+            return \json_encode($document, \JSON_THROW_ON_ERROR);
+        }
+
+        /** @var array<array<string, mixed>> $rawDocuments */
+        $rawDocuments = [];
+        /** @var array<string, mixed> $data */
+        foreach ($document as $data) {
+            $rawDocuments[] = \json_encode($document, \JSON_THROW_ON_ERROR);
+        }
+
+        return $rawDocuments;
+    }
+
+    /**
      * @param array<string, mixed>|array<int, array<string, mixed>> $document
      *
      * @return array<string, mixed>
@@ -228,6 +250,7 @@ final class Marshaller
 
             match (true) {
                 $field instanceof Field\ObjectField => $document[$field->name] = $this->unmarshallObjectFields($raw[$name], $field), // @phpstan-ignore-line
+                $field instanceof Field\JsonObjectField => $document[$field->name] = $this->unmarshallJsonObjectFields($raw[$name], $field), // @phpstan-ignore-line
                 $field instanceof Field\TypedField => $document = \array_replace($document, $this->unmarshallTypedFields($name, $raw, $field)),
                 $field instanceof Field\DateTimeField => $document[$name] = $this->unmarshallDateTimeField($raw[$field->name], $field), // @phpstan-ignore-line
                 $field instanceof Field\GeoPointField => $document[$name] = $this->unmarshallGeoPointField($raw, $field),
@@ -296,6 +319,28 @@ final class Marshaller
         /** @var array<string, mixed> $data */
         foreach ($raw as $data) {
             $documentFields[] = $this->unmarshall($field->fields, $data);
+        }
+
+        return $documentFields;
+    }
+
+    /**
+     * @param string|string[] $raw
+     *
+     * @return array<string, mixed>|array<array<string, mixed>>
+     */
+    private function unmarshallJsonObjectFields(string|array $raw, Field\JsonObjectField $field): array
+    {
+        if (!$field->multiple) {
+            return \json_decode($raw, true, flags: \JSON_THROW_ON_ERROR);
+        }
+
+        /** @var array<array<string, mixed>> $documentFields */
+        $documentFields = [];
+
+        /** @var array<string, mixed> $data */
+        foreach ($raw as $data) {
+            $documentFields[] = \json_decode($data, true, flags: \JSON_THROW_ON_ERROR);;
         }
 
         return $documentFields;

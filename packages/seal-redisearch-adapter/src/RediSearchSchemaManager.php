@@ -176,6 +176,13 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
                     'filterable' => $field->filterable || $field->facet, // @phpstan-ignore-line
                 ],
                 $field instanceof Field\ObjectField => $indexFields = \array_replace($indexFields, $this->createJsonFields($field->fields, $name, $jsonPath)),
+                $field instanceof Field\JsonObjectField => $indexFields[$name] = [
+                    'jsonPath' => $jsonPath,
+                    'type' => 'TEXT',
+                    'searchable' => false,
+                    'sortable' => false,
+                    'filterable' => false,
+                ],
                 $field instanceof Field\TypedField => \array_map(function ($fields, $type) use ($name, &$indexFields, $jsonPath, $field) {
                     $newJsonPath = $jsonPath . '[\'' . $type . '\']';
                     if ($field->multiple) {

@@ -179,6 +179,11 @@ class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
                 'type' => 'geo_point',
                 'index' => false,
             ],
+            'metadata' => [
+                'type' => 'keyword',
+                'index' => false,
+                'doc_values' => false,
+            ],
             'rating' => [
                 'type' => 'float',
                 'index' => false,

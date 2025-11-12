@@ -198,6 +198,15 @@ final class SolrSchemaManager implements SchemaManagerInterface
                     'multiValued' => $isMultiple,
                 ],
                 $field instanceof Field\ObjectField => $indexFields = \array_replace($indexFields, $this->createIndexFields($field->fields, $name . '.', $isMultiple)),
+                $field instanceof Field\JsonObjectField => $indexFields[$name] = [
+                    'name' => $name,
+                    'type' => 'string',
+                    'indexed' => false,
+                    'docValues' => false,
+                    'stored' => true,
+                    'useDocValuesAsStored' => false,
+                    'multiValued' => $isMultiple,
+                ],
                 $field instanceof Field\TypedField => \array_map(function ($fields, $type) use ($name, &$indexFields, $isMultiple) {
                     $indexFields = \array_replace($indexFields, $this->createIndexFields($fields, $name . '.' . $type . '.', $isMultiple));
 

@@ -149,6 +149,14 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
                     'facet' => $field->filterable || $field->facet, // @phpstan-ignore-line
                 ],
                 $field instanceof Field\ObjectField => $fields = [...$fields, ...$this->createObjectFields($name, $field)],
+                $field instanceof Field\JsonObjectField => $fields[] = [
+                    'name' => $name,
+                    'type' => $field->multiple ? 'string[]' : 'string',
+                    'optional' => true,
+                    'sort' => false,
+                    'index' => false,
+                    'facet' => false,
+                ],
                 $field instanceof Field\TypedField => $fields = [...$fields, ...$this->createTypedFields($name, $field)],
                 default => throw new \RuntimeException(\sprintf('Field type "%s" is not supported.', $field::class)),
             };

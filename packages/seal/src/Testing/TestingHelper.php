@@ -80,6 +80,7 @@ final class TestingHelper
             ], multiple: true),
             'tags' => new Field\TextField('tags', multiple: true, filterable: true, facet: true),
             'categoryIds' => new Field\IntegerField('categoryIds', multiple: true, filterable: true),
+            'metadata' => new Field\JsonObjectField('metadata'),
             'location' => new Field\GeoPointField('location', filterable: true, sortable: true),
         ];
 
@@ -122,6 +123,7 @@ final class TestingHelper
      *     }>|null,
      *     tags?: string[]|null,
      *     categoryIds?: int[]|null,
+     *     metadata?: array<string, mixed>,
      *     location?: array{
      *         latitude: float,
      *         longitude: float,
@@ -181,6 +183,11 @@ final class TestingHelper
                 ],
                 'tags' => ['Tech', 'UI'],
                 'categoryIds' => [1, 2],
+                'metadata' => [
+                    'routeAttributes' => [
+                        'site' => 'example',
+                    ],
+                ],
                 'location' => [
                     // New York
                     'latitude' => 40.7128,
@@ -204,6 +211,11 @@ final class TestingHelper
                 'isSpecial' => false,
                 'tags' => ['UI', 'UX'],
                 'categoryIds' => [2, 3],
+                'metadata' => [
+                    'routeAttributes' => [
+                        'site' => 'example',
+                    ],
+                ],
                 'location' => [
                     // London
                     'latitude' => 51.5074,

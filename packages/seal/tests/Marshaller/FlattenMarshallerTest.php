@@ -119,6 +119,11 @@ class FlattenMarshallerTest extends TestCase
                 ],
                 'tags' => ['Tech', 'UI'],
                 'categoryIds' => [1, 2],
+                'metadata' => [
+                    'routeAttributes' => [
+                        'site' => 'example',
+                    ],
+                ],
                 'location' => [
                     'latitude' => 40.7128,
                     'longitude' => -74.006,
@@ -146,6 +151,7 @@ class FlattenMarshallerTest extends TestCase
                 'tags' => ['Tech', 'UI'],
                 'tags.raw' => ['Tech', 'UI'],
                 'categoryIds' => [1, 2],
+                'metadata' => '{"routeAttributes":{"site":"example"}}',
                 'location' => [
                     'latitude' => 40.7128,
                     'longitude' => -74.006,
@@ -187,6 +193,7 @@ class FlattenMarshallerTest extends TestCase
                 ], multiple: true),
                 'tags' => new Field\TextField('tags', multiple: true, filterable: true),
                 'categoryIds' => new Field\IntegerField('categoryIds', multiple: true, searchable: false, filterable: true),
+                'metadata' => new Field\JsonObjectField('metadata'),
                 'location' => new Field\GeoPointField('location', filterable: true, sortable: true),
             ],
         ];

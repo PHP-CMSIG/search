@@ -21,6 +21,7 @@ namespace CmsIg\Seal\Schema\Field;
  *
  * ATTENTION: Different search engines support only one field for geopoint per index.
  *
+ * @property false $multiple
  * @property false $searchable
  * @property false $facet
  *

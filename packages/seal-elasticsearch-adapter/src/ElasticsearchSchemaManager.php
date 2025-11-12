@@ -125,6 +125,11 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
                     'type' => 'object',
                     'properties' => $this->createPropertiesMapping($field->fields),
                 ],
+                $field instanceof Field\JsonObjectField => $properties[$name] = [
+                    'type' => 'keyword',
+                    'index' => false,
+                    'doc_values' => false,
+                ],
                 $field instanceof Field\TypedField => $properties = \array_replace($properties, $this->createTypedFieldMapping($name, $field)),
                 default => throw new \RuntimeException(\sprintf('Field type "%s" is not supported.', $field::class)),
             };

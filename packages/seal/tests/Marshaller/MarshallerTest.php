@@ -125,6 +125,7 @@ class MarshallerTest extends TestCase
             ],
             'tags' => ['Tech', 'UI'],
             'categoryIds' => [1, 2],
+            'metadata' => '{"routeAttributes":{"site":"example"}}',
             'location' => [
                 'latitude' => 40.7128,
                 'longitude' => -74.006,

@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Schema\Field;
 
 /**
+ * @experimental This is an experimental feature and the API can change at any time.
+ *               If you use it let us know and give feedback here: https://github.com/PHP-CMSIG/search/issues/614
+ *
  * @readonly
  *
- * Type to store any text, options can maybe use to specify it more specific.
+ * Type to store unstructured JSON objects (array<string, mixed) for example for some metadata.
  */
-final class TextField extends AbstractField
+final class JsonObjectField extends AbstractField
 {
     /**
      * @param array<string, mixed> $options
@@ -26,22 +29,17 @@ final class TextField extends AbstractField
     public function __construct(
         string $name,
         bool $multiple = false,
-        bool $searchable = true,
-        bool $filterable = false,
-        bool $sortable = false,
-        bool $distinct = false,
-        bool $facet = false,
         array $options = [],
     ) {
         parent::__construct(
             $name,
             $multiple,
-            $searchable,
-            $filterable,
-            $sortable,
-            $distinct,
-            $facet,
-            $options,
+            searchable: false,
+            filterable: false,
+            sortable: false,
+            distinct: false,
+            facet: false,
+            options: $options,
         );
     }
 }
