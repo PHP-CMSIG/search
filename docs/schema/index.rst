@@ -110,6 +110,8 @@ The following field definition will show us how to define our ``Identifier`` fie
 
 Has no configurable options it is always  ``filterable``, but not ``searchable``, ``sortable`` or ``multiple``.
 
+.. include:: ../_shared/identifier-value.rst
+
 FloatField
 ~~~~~~~~~~
 

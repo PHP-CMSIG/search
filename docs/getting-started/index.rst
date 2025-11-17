@@ -1804,21 +1804,21 @@ With the following code we can add our first documents to our created index:
         public function someMethod()
         {
             $this->engine->saveDocument('blog', [
-                'id' => 1,
+                'id' => '1',
                 'title' => 'My first blog post',
                 'description' => 'This is the description of my first blog post',
                 'tags' => ['UI', 'UX'],
             ]);
 
             $this->engine->saveDocument('blog', [
-                'id' => 3,
+                'id' => '3',
                 'title' => 'My seconds blog post',
                 'content' => 'This is the description of my second blog post',
                 'tags' => ['Tech', 'UX'],
             ]);
 
             $this->engine->saveDocument('blog', [
-                'id' => 3,
+                'id' => '3',
                 'title' => 'My third blog post',
                 'content' => 'This is the description of my third blog post',
                 'tags' => ['Tech', 'UI'],
@@ -1829,6 +1829,8 @@ With the following code we can add our first documents to our created index:
 To update a document you can use the same ``saveDocument`` method with the same identifier.
 
 For all kind of indexing operations have a look at the :doc:`../indexing/index` documentation.
+
+.. include:: ../_shared/identifier-value.rst
 
 Search Documents
 ----------------
@@ -1921,13 +1923,13 @@ First you need to create a ``ReindexProvider`` providing all your documents.
             //     to support partial reindexing
 
             yield [
-                'id' => 1,
+                'id' => '1',
                 'title' => 'Title 1',
                 'description' => 'Description 1',
             ];
 
             yield [
-                'id' => 2,
+                'id' => '2',
                 'title' => 'Title 2',
                 'description' => 'Description 2',
             ];

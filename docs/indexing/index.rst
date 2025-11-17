@@ -28,6 +28,8 @@ be provided or can be null.
 To update a document the same method ``saveDocument`` need to be used with the same ``identifier``
 value.
 
+.. include:: ../_shared/identifier-value.rst
+
 .. note::
 
     Currently, you can use some kind of normalizer like `symfony/serializer <https://symfony.com/doc/current/components/serializer.html>`__
@@ -73,19 +75,19 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
             //     to support partial reindexing
 
             yield [
-                'id' => 1,
+                'id' => '1',
                 'title' => 'Title 1',
                 'description' => 'Description 1',
             ];
 
             yield [
-                'id' => 2,
+                'id' => '2',
                 'title' => 'Title 2',
                 'description' => 'Description 2',
             ];
 
             yield [
-                'id' => 3,
+                'id' => '3',
                 'title' => 'Title 3',
                 'description' => 'Description 3',
             ];
