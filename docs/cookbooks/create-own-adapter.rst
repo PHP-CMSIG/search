@@ -601,7 +601,10 @@ Conclusion
 If all tests are green you can be sure that your implementation works like expected.
 You can publish your own adapter also as a composer package if you want to make it public available.
 
-Tag the packagist package with `seal-adapter <https://packagist.org/search/?tags=seal-adapter>`__
+If you publish it you should also add a `cmsig/seal-adapter-implementation <https://packagist.org/providers/cmsig/seal-adapter-implementation>`__
+to the ``provide`` section in your ``composer.json``.
+
+Tag the packagist package with `cmsig-seal-adapter <https://packagist.org/search/?tags=cms-igseal-adapter>`__
 and your use the GitHub Topic `seal-php-adapter <https://github.com/topics/seal-php-adapter>`__.
 
 This way also other can easily find your own created adapter.

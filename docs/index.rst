@@ -100,5 +100,5 @@ Full list of packages provided by the SEAL project:
 
 Have also a look at the following tags:
 
-- `https://packagist.org/search/?tags=seal-adapter <https://packagist.org/search/?tags=seal-adapter>`_
+- `https://packagist.org/providers/cmsig/seal-adapter-implementation <https://packagist.org/providers/cmsig/seal-adapter-implementation>`_
 - `https://github.com/topics/seal-php-adapter <https://github.com/topics/seal-php-adapter>`_
