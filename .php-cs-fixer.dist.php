@@ -43,7 +43,7 @@ return (new PhpCsFixer\Config())
         'array_indentation' => true,
         'multiline_whitespace_before_semicolons' => true,
         'single_line_throw' => false,
-        'visibility_required' => ['elements' => ['property', 'method', 'const']],
+        'modifier_keywords' => ['elements' => ['property', 'method', 'const']],
         'phpdoc_to_comment' => [
             'ignored_tags' => ['todo', 'var'],
         ],

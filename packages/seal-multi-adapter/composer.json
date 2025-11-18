@@ -6,6 +6,7 @@
     "keywords": [
         "cmsig",
         "seal",
+        "cmsig-seal-adapter",
         "seal-adapter",
         "search-client"
     ],
@@ -37,6 +38,9 @@
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^1.0"
+    },
+    "provide": {
+        "cmsig/seal-adapter-implementation": "self.version"
     },
     "replace": {
         "schranz-search/seal-multi-adapter": "self.version"

@@ -6,6 +6,7 @@
     "keywords": [
         "cmsig",
         "seal",
+        "cmsig-seal-adapter",
         "seal-adapter",
         "search-client",
         "opensearch"
@@ -43,6 +44,9 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^1.0",
         "symfony/http-client": "^5.4 || ^6.0 || ^7.0"
+    },
+    "provide": {
+        "cmsig/seal-adapter-implementation": "self.version"
     },
     "replace": {
         "schranz-search/seal-opensearch-adapter": "self.version"
