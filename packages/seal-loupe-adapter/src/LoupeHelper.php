@@ -146,9 +146,9 @@ final class LoupeHelper
 
         return Configuration::create()
             ->withPrimaryKey($index->getIdentifierField()->name)
-            ->withSearchableAttributes(\array_map(fn (string $field) => $this->formatField($field), $index->searchableFields))
-            ->withFilterableAttributes(\array_map(fn (string $field) => $this->formatField($field), $filterableFields))
-            ->withSortableAttributes(\array_map(fn (string $field) => $this->formatField($field), $index->sortableFields));
+            ->withSearchableAttributes(\array_map($this->formatField(...), $index->searchableFields))
+            ->withFilterableAttributes(\array_map($this->formatField(...), $filterableFields))
+            ->withSortableAttributes(\array_map($this->formatField(...), $index->sortableFields));
     }
 
     private function getIndexDirectory(Index $index): string

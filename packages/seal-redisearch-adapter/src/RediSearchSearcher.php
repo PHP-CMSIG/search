@@ -192,7 +192,7 @@ final class RediSearchSearcher implements SearcherInterface
             foreach ($item as $value) {
                 if ('$' === $previousValue) {
                     /** @var array<string, mixed> $document */
-                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR);
+                    $document = \json_decode((string) $value, true, flags: \JSON_THROW_ON_ERROR);
                     $documents[] = $document;
                 }
                 $previousValue = $value;

@@ -954,7 +954,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             /** @var int[] $categoryIds */
             $categoryIds = $loadedDocument['categoryIds'];
-            $biggestCategoryId = \array_reduce($categoryIds, fn (int|null $categoryId, int|null $item): int|null => \max($categoryId, $item));
+            $biggestCategoryId = \array_reduce($categoryIds, \max(...));
 
             $this->assertNotNull($biggestCategoryId);
             $this->assertGreaterThanOrEqual(3.0, $biggestCategoryId);

@@ -119,7 +119,7 @@ final class Marshaller
         if ($field->multiple) {
             /** @var string[]|null $value */
 
-            return \array_map(fn (string $value): int|string => $this->marshallDateTimeFieldValue($value), (array) $value);
+            return \array_map($this->marshallDateTimeFieldValue(...), (array) $value);
         }
 
         if (null === $value) {
@@ -372,7 +372,7 @@ final class Marshaller
         if ($field->multiple) {
             /** @var string[]|int[]|null $value */
 
-            return \array_map(fn (string|int $value): string => $this->unmarshallDateTimeFieldValue($value), (array) $value);
+            return \array_map($this->unmarshallDateTimeFieldValue(...), (array) $value);
         }
 
         /** @var string|int|null $value */
