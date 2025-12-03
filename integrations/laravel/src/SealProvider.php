@@ -36,6 +36,7 @@ use CmsIg\Seal\Integration\Laravel\Console\ReindexCommand;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
 use CmsIg\Seal\Schema\Schema;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -99,24 +100,24 @@ final class SealProvider extends ServiceProvider
             $adapterDsn = $engineConfig['adapter'];
             $dirs = $engineSchemaDirs[$name] ?? [];
 
-            $this->app->singleton($adapterServiceId, function ($app) use ($adapterDsn) {
+            $this->app->singleton($adapterServiceId, function (Application $app) use ($adapterDsn) {
                 /** @var AdapterFactory $factory */
-                $factory = $app['cmsig_seal.adapter_factory'];
+                $factory = $app['cmsig_seal.adapter_factory']; // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
 
                 return $factory->createAdapter($adapterDsn);
             });
 
             $this->app->singleton($schemaLoaderServiceId, fn () => new PhpFileLoader($dirs, $indexNamePrefix));
 
-            $this->app->singleton($schemaId, function ($app) use ($schemaLoaderServiceId) {
+            $this->app->singleton($schemaId, function (Application $app) use ($schemaLoaderServiceId) {
                 /** @var LoaderInterface $loader */
-                $loader = $app[$schemaLoaderServiceId];
+                $loader = $app[$schemaLoaderServiceId]; // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
 
                 return $loader->load();
             });
 
             $engineServices[$name] = $engineServiceId;
-            $this->app->singleton($engineServiceId, function ($app) use ($adapterServiceId, $schemaId) {
+            $this->app->singleton($engineServiceId, function (Application $app) use ($adapterServiceId, $schemaId) {
                 /** @var AdapterInterface $adapter */
                 $adapter = $app->get($adapterServiceId);
                 /** @var Schema $schema */
@@ -131,10 +132,13 @@ final class SealProvider extends ServiceProvider
             }
         }
 
-        $this->app->singleton('cmsig_seal.engine_factory', function ($app) use ($engineServices) {
+        $this->app->singleton('cmsig_seal.engine_factory', function (Application $app) use ($engineServices) {
+            /** @var array<string, EngineInterface> $engines */
             $engines = []; // TODO use tagged like in adapter factories
             foreach ($engineServices as $name => $engineServiceId) {
-                $engines[$name] = $app->get($engineServiceId);
+                /** @var EngineInterface $engine */
+                $engine = $app->get($engineServiceId);
+                $engines[$name] = $engine;
             }
 
             return new EngineRegistry($engines);
@@ -151,7 +155,7 @@ final class SealProvider extends ServiceProvider
 
     private function createAdapterFactories(): void
     {
-        $this->app->singleton('cmsig_seal.adapter_factory', function ($app) {
+        $this->app->singleton('cmsig_seal.adapter_factory', function (Application $app) {
             $factories = [];
             /** @var AdapterFactoryInterface $service */
             foreach ($app->tagged('cmsig_seal.adapter_factory') as $service) {
@@ -162,7 +166,7 @@ final class SealProvider extends ServiceProvider
         });
 
         if (\class_exists(AlgoliaAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.algolia.adapter_factory', fn ($app) => new AlgoliaAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.algolia.adapter_factory', fn (Application $app) => new AlgoliaAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.algolia.adapter_factory',
@@ -171,7 +175,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(ElasticsearchAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.elasticsearch.adapter_factory', fn ($app) => new ElasticsearchAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.elasticsearch.adapter_factory', fn (Application $app) => new ElasticsearchAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.elasticsearch.adapter_factory',
@@ -180,7 +184,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(LoupeAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.loupe.adapter_factory', fn ($app) => new LoupeAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.loupe.adapter_factory', fn (Application $app) => new LoupeAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.loupe.adapter_factory',
@@ -189,7 +193,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(OpensearchAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.opensearch.adapter_factory', fn ($app) => new OpensearchAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.opensearch.adapter_factory', fn (Application $app) => new OpensearchAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.opensearch.adapter_factory',
@@ -198,7 +202,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(MeilisearchAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.meilisearch.adapter_factory', fn ($app) => new MeilisearchAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.meilisearch.adapter_factory', fn (Application $app) => new MeilisearchAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.meilisearch.adapter_factory',
@@ -216,7 +220,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(RediSearchAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.redis.adapter_factory', fn ($app) => new RediSearchAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.redis.adapter_factory', fn (Application $app) => new RediSearchAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.redis.adapter_factory',
@@ -225,7 +229,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(SolrAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.solr.adapter_factory', fn ($app) => new SolrAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.solr.adapter_factory', fn (Application $app) => new SolrAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.solr.adapter_factory',
@@ -234,7 +238,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(TypesenseAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.typesense.adapter_factory', fn ($app) => new TypesenseAdapterFactory($app));
+            $this->app->singleton('cmsig_seal.typesense.adapter_factory', fn (Application $app) => new TypesenseAdapterFactory($app));
 
             $this->app->tag(
                 'cmsig_seal.typesense.adapter_factory',
@@ -245,7 +249,7 @@ final class SealProvider extends ServiceProvider
         // ...
 
         if (\class_exists(ReadWriteAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.read_write.adapter_factory', fn ($app) => new ReadWriteAdapterFactory(
+            $this->app->singleton('cmsig_seal.read_write.adapter_factory', fn (Application $app) => new ReadWriteAdapterFactory(
                 $app,
                 'cmsig_seal.adapter.',
             ));
@@ -257,7 +261,7 @@ final class SealProvider extends ServiceProvider
         }
 
         if (\class_exists(MultiAdapterFactory::class)) {
-            $this->app->singleton('cmsig_seal.multi.adapter_factory', fn ($app) => new MultiAdapterFactory(
+            $this->app->singleton('cmsig_seal.multi.adapter_factory', fn (Application $app) => new MultiAdapterFactory(
                 $app,
                 'cmsig_seal.adapter.',
             ));
