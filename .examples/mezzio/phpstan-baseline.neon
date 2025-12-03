@@ -1,0 +1,61 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cannot access offset ''config'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/container.php
+
+		-
+			message: '#^Cannot access offset ''dependencies'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/container.php
+
+		-
+			message: '#^Cannot access offset ''services'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/container.php
+
+		-
+			message: '#^Parameter \#1 \$config of class Laminas\\ServiceManager\\ServiceManager constructor expects array\{abstract_factories\?\: array\<class\-string\<Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>\|Laminas\\ServiceManager\\Factory\\AbstractFactoryInterface\>, aliases\?\: array\<string, string\>, delegators\?\: array\<string, array\<\(callable\(Psr\\Container\\ContainerInterface, string, callable\(\)\: object, array\<mixed\>\|null\)\: object\)\|class\-string\<Laminas\\ServiceManager\\Factory\\DelegatorFactoryInterface\>\>\>, factories\?\: mixed, initializers\?\: array\<\(callable\(Psr\\Container\\ContainerInterface, object\)\: void\)\|class\-string\<Laminas\\ServiceManager\\Initializer\\InitializerInterface\>\>, invokables\?\: array\<string, string\>, lazy_services\?\: array\{class_map\?\: array\<string, class\-string\>, proxies_namespace\?\: non\-empty\-string, proxies_target_dir\?\: non\-empty\-string, write_proxy_files\?\: bool\}, services\?\: array\<string, array\<mixed\>\|object\>, \.\.\.\}, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/container.php
+
+		-
+			message: '#^Trying to invoke mixed but it''s not a callable\.$#'
+			identifier: callable.nonCallable
+			count: 2
+			path: test/AppTest/FunctionalTestCase.php
+
+		-
+			message: '#^Cannot call method attr\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: test/AppTest/Handler/SearchHandlerTest.php
+
+		-
+			message: '#^Cannot call method text\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: test/AppTest/Handler/SearchHandlerTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: test/AppTest/Handler/SearchHandlerTest.php
+
+		-
+			message: '#^Parameter \#1 \$needle of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/AppTest/Handler/SearchHandlerTest.php
+
+		-
+			message: '#^Parameter \#2 \$uri of method Psr\\Http\\Message\\ServerRequestFactoryInterface\:\:createServerRequest\(\) expects Psr\\Http\\Message\\UriInterface\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/AppTest/Handler/SearchHandlerTest.php

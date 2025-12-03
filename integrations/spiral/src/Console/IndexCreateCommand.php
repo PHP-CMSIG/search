@@ -28,11 +28,11 @@ use Symfony\Component\Console\Input\InputOption;
 )]
 final class IndexCreateCommand extends Command
 {
-    #[Option(name: 'engine', mode: InputOption::VALUE_REQUIRED, description: 'The name of the engine')]
-    private string|null $engineName = null;
+    #[Option(name: 'engine', description: 'The name of the engine', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $engineName = null; // @phpstan-ignore-line property.unusedType
 
-    #[Option(name: 'index', mode: InputOption::VALUE_REQUIRED, description: 'The name of the index')]
-    private string|null $indexName = null;
+    #[Option(name: 'index', description: 'The name of the index', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $indexName = null; // @phpstan-ignore-line property.unusedType
 
     public function __invoke(EngineRegistry $engineRegistry): int
     {

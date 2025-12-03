@@ -290,7 +290,6 @@ final class SearchController
     {
         $reflection = new \ReflectionClass($engine);
         $propertyReflection = $reflection->getProperty('adapter');
-        $propertyReflection->setAccessible(true);
 
         /** @var AdapterInterface $object */
         $object = $propertyReflection->getValue($engine);

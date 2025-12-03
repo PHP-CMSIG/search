@@ -28,7 +28,7 @@ final class SearchControllerTest extends TestCase
 
         $crawler = $this->crawler($content);
         $crawler->filter('a')->each(function ($node) {
-            $response = $this->tester->doRequest('GET', $node->attr('href'));
+            $response = $this->tester->doRequest('GET', (string) $node->attr('href'));
             $content = $response->getContent();
             self::assertSame(200, $response->getStatusCode(), $content);
 

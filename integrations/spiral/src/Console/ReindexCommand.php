@@ -30,11 +30,11 @@ use Symfony\Component\Console\Input\InputOption;
 )]
 final class ReindexCommand extends Command
 {
-    #[Option(name: 'engine', mode: InputOption::VALUE_REQUIRED, description: 'The name of the engine')]
-    private string|null $engineName = null;
+    #[Option(name: 'engine', description: 'The name of the engine', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $engineName = null; // @phpstan-ignore-line property.unusedType
 
-    #[Option(name: 'index', mode: InputOption::VALUE_REQUIRED, description: 'The name of the index')]
-    private string|null $indexName = null;
+    #[Option(name: 'index', description: 'The name of the index', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $indexName = null; // @phpstan-ignore-line property.unusedType
 
     #[Option(name: 'drop', description: 'Drop the index before reindexing.')]
     private bool $drop = false;
@@ -43,10 +43,10 @@ final class ReindexCommand extends Command
     private int $bulkSize = 100;
 
     #[Option(name: 'datetime-boundary', description: 'Do a partial update and limit to only documents that have been changed since a given datetime object.')]
-    private string|null $datetimeBoundary = null;
+    private string|null $datetimeBoundary = null; // @phpstan-ignore-line property.unusedType
 
     #[Option(name: 'identifiers', description: 'Do a partial update and limit to only a comma-separated list of identifiers.')]
-    private string|null $identifiers = null;
+    private string|null $identifiers = null; // @phpstan-ignore-line property.unusedType
 
     /**
      * @param iterable<ReindexProviderInterface> $reindexProviders

@@ -1,41 +1,97 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
 			count: 2
 			path: app/config/session.php
 
 		-
-			message: "#^Method App\\\\Application\\\\Bootloader\\\\LoggingBootloader\\:\\:__construct\\(\\) has parameter \\$config with generic interface Spiral\\\\Config\\\\ConfiguratorInterface but does not specify its types\\: TClass$#"
+			message: '#^Method App\\Application\\Bootloader\\LoggingBootloader\:\:__construct\(\) has parameter \$config with generic interface Spiral\\Config\\ConfiguratorInterface but does not specify its types\: TClass$#'
+			identifier: missingType.generics
 			count: 1
 			path: app/src/Application/Bootloader/LoggingBootloader.php
 
 		-
-			message: "#^Property App\\\\Application\\\\Bootloader\\\\LoggingBootloader\\:\\:\\$config is never read, only written\\.$#"
+			message: '#^Property App\\Application\\Bootloader\\LoggingBootloader\:\:\$config is never read, only written\.$#'
+			identifier: property.onlyWritten
 			count: 1
 			path: app/src/Application/Bootloader/LoggingBootloader.php
 
 		-
-			message: "#^Method App\\\\Application\\\\Bootloader\\\\RoutesBootloader\\:\\:middlewareGroups\\(\\) return type with generic class Spiral\\\\Core\\\\Container\\\\Autowire does not specify its types\\: TObject$#"
+			message: '#^Method App\\Application\\Bootloader\\RoutesBootloader\:\:middlewareGroups\(\) return type with generic class Spiral\\Core\\Container\\Autowire does not specify its types\: TObject$#'
+			identifier: missingType.generics
 			count: 1
 			path: app/src/Application/Bootloader/RoutesBootloader.php
 
 		-
-			message: "#^Parameter \\#1 \\$output of class Symfony\\\\Component\\\\VarDumper\\\\Dumper\\\\CliDumper constructor expects \\(callable\\(\\)\\: mixed\\)\\|resource\\|string\\|null, resource\\|false given\\.$#"
+			message: '#^Cannot call method dump\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: app/src/Application/helpers.php
 
 		-
-			message: "#^Class App\\\\Endpoint\\\\Console\\\\DoNothing has an uninitialized readonly property \\$name\\. Assign it in the constructor\\.$#"
+			message: '#^Parameter \#1 \$output of class Symfony\\Component\\VarDumper\\Dumper\\CliDumper constructor expects \(callable\(\)\: mixed\)\|resource\|string\|null, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/src/Application/helpers.php
+
+		-
+			message: '#^Class App\\Endpoint\\Console\\DoNothing has an uninitialized readonly property \$name\. Assign it in the constructor\.$#'
+			identifier: property.uninitializedReadonly
 			count: 1
 			path: app/src/Endpoint/Console/DoNothing.php
 
 		-
-			message: "#^Property App\\\\Endpoint\\\\Console\\\\DoNothing\\:\\:\\$name is never written, only read\\.$#"
+			message: '#^Property App\\Endpoint\\Console\\DoNothing\:\:\$name is never written, only read\.$#'
+			identifier: property.onlyRead
 			count: 1
 			path: app/src/Endpoint/Console/DoNothing.php
 
 		-
-			message: "#^Cannot call method setLocale\\(\\) on mixed\\.$#"
+			message: '#^Parameter \#1 \$locale of method Spiral\\Translator\\Translator\:\:setLocale\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/src/Endpoint/Web/Middleware/LocaleSelector.php
+
+		-
+			message: '#^Property App\\Endpoint\\Web\\Middleware\\LocaleSelector\:\:\$availableLocales \(array\<string\>\) does not accept array\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/src/Endpoint/Web/Middleware/LocaleSelector.php
+
+		-
+			message: '#^Cannot call method attr\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method text\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Parameter \#1 \$needle of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Parameter \#1 \$uri of method Spiral\\Testing\\Http\\FakeHttp\:\:get\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method setLocale\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: tests/TestCase.php

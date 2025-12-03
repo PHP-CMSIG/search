@@ -58,7 +58,7 @@ final class ReindexCommand extends Command
         $indexName = $this->option('index');
         /** @var bool $drop */
         $drop = $this->option('drop');
-        /** @var int $bulkSize */
+        /** @var positive-int $bulkSize */
         $bulkSize = ((int) $this->option('bulk-size')) ?: 100;
         /** @var \DateTimeImmutable|null $dateTimeBoundary */
         $dateTimeBoundary = $this->option('datetime-boundary') ? new \DateTimeImmutable((string) $this->option('datetime-boundary')) : null; // @phpstan-ignore-line

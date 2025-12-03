@@ -13,7 +13,7 @@ final class SearchControllerTest extends WebTestCase
 {
     public function testSearch(): void
     {
-        $client = static::createClient();
+        $client = self::createClient();
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();

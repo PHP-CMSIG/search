@@ -1,36 +1,79 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^PHPDoc tag @var for variable \\$params has no value type specified in iterable type array\\.$#"
+			message: '#^Cannot access offset ''charset'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: config/common/di/application-parameters.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$params has no value type specified in iterable type array\\.$#"
+			message: '#^Cannot access offset ''name'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: config/common/di/application-parameters.php
+
+		-
+			message: '#^PHPDoc tag @var for variable \$params has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: config/common/di/application-parameters.php
+
+		-
+			message: '#^Cannot access offset ''locale'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: config/common/di/i18n.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$params has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$params has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: config/common/di/i18n.php
+
+		-
+			message: '#^PHPDoc tag @var for variable \$params has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: config/common/di/logger.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$params has no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \.\.\.\$routes of method Yiisoft\\Router\\RouteCollector\:\:addRoute\(\) expects Yiisoft\\Router\\Group\|Yiisoft\\Router\\Route, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/common/di/router.php
+
+		-
+			message: '#^Cannot access offset ''defaultCategory'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: config/common/di/translator.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:withMiddlewares\\(\\)\\.$#"
+			message: '#^PHPDoc tag @var for variable \$params has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: config/common/di/translator.php
+
+		-
+			message: '#^Parameter \#1 \$name of class Yiisoft\\Translator\\CategorySource constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: config/common/di/translator.php
+
+		-
+			message: '#^Call to an undefined method object\:\:withMiddlewares\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: config/web/di/application.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$params has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$params has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: config/web/di/application.php
 
 		-
-			message: "#^Property App\\\\Asset\\\\AppAsset\\:\\:\\$css type has no value type specified in iterable type array\\.$#"
+			message: '#^Property App\\Asset\\AppAsset\:\:\$css type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Asset/AppAsset.php

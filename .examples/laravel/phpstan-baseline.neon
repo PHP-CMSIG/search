@@ -1,0 +1,97 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Part \$engineFacadeTargetClass \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Http/Controllers/SearchController.php
+
+		-
+			message: '#^Part \$engineRegistryFacadeTargetClass \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: app/Http/Controllers/SearchController.php
+
+		-
+			message: '#^Cannot call method assertExitCode\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 3
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Cannot call method expectsOutputToContain\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/CommandTest.php
+
+		-
+			message: '#^Cannot call method toBe\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Pest.php
+
+		-
+			message: '#^Cannot call method attr\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method content\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method count\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method each\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method filter\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method first\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method getContent\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method getStatusCode\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method status\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot call method text\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 4
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: tests/SearchControllerTest.php

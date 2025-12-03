@@ -22,6 +22,8 @@ use Psr\Container\ContainerInterface;
 /** @var array{"cmsig/seal-yii-module": array{reindex_providers: string[]}} $params */
 $reindexProviderNames = $params['cmsig/seal-yii-module']['reindex_providers'];
 
+$diConfig = [];
+
 $diConfig[IndexCreateCommand::class] = static function (ContainerInterface $container) {
     /** @var EngineRegistry $engineRegistry */
     $engineRegistry = $container->get(EngineRegistry::class);
