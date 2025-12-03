@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "935615a8d60d123a817518b912929aff",
+    "content-hash": "5d7e5e1aeb796975848db14891d388e7",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal",
-                "reference": "16c36c2aeb74a061fd60b0eabd37411121b51bc8"
+                "reference": "36ef56d7728d7ccd4a8cd6be6de6b4c0f66adc69"
             },
             "require": {
                 "php": "^8.1"
@@ -22,11 +22,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1335,7 +1335,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-algolia-adapter",
-                "reference": "aae5ef3604bc5295e208c4cc975815196f60d929"
+                "reference": "820a5ee56c1c1e2b863ad0e1f03568be35f3613a"
             },
             "require": {
                 "algolia/algoliasearch-client-php": "^4.4",
@@ -1351,11 +1351,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1431,7 +1431,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-elasticsearch-adapter",
-                "reference": "a76d960dfc2bdec95e896fb94461e2d021b9322c"
+                "reference": "4ca3cd4c86e6fedaa6e8b06f29219be509a362a7"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1450,11 +1450,11 @@
                 "php-cs-fixer/shim": "^3.51",
                 "php-http/curl-client": "^2.0",
                 "php-http/message": "^1.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1530,7 +1530,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "e56d70428d962687cfdf8674f3eab92f43a25046"
+                "reference": "aa9cc402258c00b8c7cfa99ebe411ff3ceee4b69"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1546,11 +1546,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1626,7 +1626,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-meilisearch-adapter",
-                "reference": "deb7f9186a525c9bb18e7d1f9384e161440b6334"
+                "reference": "0aff8f8b2986d995631966ae11bcaac4f5191e13"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1644,11 +1644,11 @@
                 "guzzlehttp/guzzle": "^7.5",
                 "http-interop/http-factory-guzzle": "^1.0",
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1724,7 +1724,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-memory-adapter",
-                "reference": "e0b4a3b4ceeba48d61820d14a9b168701ef57b07"
+                "reference": "e49baeb26fffeed697e5ee7cf6356aa0107d5a6d"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1738,11 +1738,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1817,7 +1817,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-multi-adapter",
-                "reference": "4d6aeb01a27485785cd3c2749823a2e39ca47a42"
+                "reference": "313995aff61ae0a2b74cdafb06f4af1f2cb6fb2d"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1832,11 +1832,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1911,7 +1911,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-opensearch-adapter",
-                "reference": "b3e7ae931f12fe91fe42e2cd21ea14b2fa41bfc6"
+                "reference": "f5899a6acecd0f99d2333a5e889c12578c5f1ca9"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -1930,11 +1930,11 @@
                 "php-cs-fixer/shim": "^3.51",
                 "php-http/curl-client": "^2.0",
                 "php-http/message": "^1.0",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0",
+                "rector/rector": "^2.0",
                 "symfony/http-client": "^5.4 || ^6.0 || ^7.0"
             },
             "type": "library",
@@ -2011,7 +2011,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-read-write-adapter",
-                "reference": "6a19c38523c479d7189e79b636d0ef1fb78fdf53"
+                "reference": "2d20cade232d3149825317759440a074d8f8c9e1"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -2026,11 +2026,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2105,7 +2105,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-redisearch-adapter",
-                "reference": "9fd932ed29adb676a67f0007fa91aa50e7e874cd"
+                "reference": "8b9d7c9931223151def0bd98e8882e90e8369794"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -2122,11 +2122,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2203,7 +2203,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-solr-adapter",
-                "reference": "9f2a770f1548d094c7ba6e19cebee4f76d20bb05"
+                "reference": "66fa3e93e36457bb859213e97af1d7ef793d2158"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -2222,11 +2222,11 @@
             },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.51",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0",
+                "rector/rector": "^2.0",
                 "symfony/event-dispatcher": "^5.4 || ^6.0 || ^7.0"
             },
             "type": "library",
@@ -2304,7 +2304,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-typesense-adapter",
-                "reference": "7350cd692eba3f7100bc1e3432723ef4767bcbcb"
+                "reference": "105ff9d649dc3d101c04dd70811e88a175d0faba"
             },
             "require": {
                 "cmsig/seal": "^0.12",
@@ -2326,11 +2326,11 @@
                 "php-cs-fixer/shim": "^3.51",
                 "php-http/curl-client": "^2.0",
                 "php-http/discovery": "^1.14",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
-                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^1.0"
+                "rector/rector": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -2406,12 +2406,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc"
+                "reference": "1cbda9fa97980a6529fab06cb936dc66fd54076d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc",
-                "reference": "e8c5163fbec0f34e357431bd1e5fc4056cdf4fdc",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1cbda9fa97980a6529fab06cb936dc66fd54076d",
+                "reference": "1cbda9fa97980a6529fab06cb936dc66fd54076d",
                 "shasum": ""
             },
             "require": {
@@ -2504,7 +2504,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-29T12:17:09+00:00"
+            "time": "2025-12-03T09:01:19+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -4449,28 +4449,29 @@
         },
         {
             "name": "phpstan/extension-installer",
-            "version": "1.4.3",
+            "version": "1.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "85e90b3942d06b2326fba0403ec24fe912372936"
+                "reference": "bf2498d946a62d325ee4849d5e04a8b6b8437626"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/85e90b3942d06b2326fba0403ec24fe912372936",
-                "reference": "85e90b3942d06b2326fba0403ec24fe912372936",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/bf2498d946a62d325ee4849d5e04a8b6b8437626",
+                "reference": "bf2498d946a62d325ee4849d5e04a8b6b8437626",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.9.0 || ^2.0"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2.0",
-                "phpstan/phpstan-strict-rules": "^0.11 || ^0.12 || ^1.0"
+                "phpstan/phpstan-strict-rules": "^2.0"
             },
+            "default-branch": true,
             "type": "composer-plugin",
             "extra": {
                 "class": "PHPStan\\ExtensionInstaller\\Plugin"
@@ -4491,25 +4492,26 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/extension-installer/issues",
-                "source": "https://github.com/phpstan/extension-installer/tree/1.4.3"
+                "source": "https://github.com/phpstan/extension-installer/tree/1.4.x"
             },
-            "time": "2024-09-04T20:21:43+00:00"
+            "time": "2025-11-26T18:10:11+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.x-dev",
+            "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2770dcdf5078d0b0d53f94317e06affe88419aa8",
-                "reference": "2770dcdf5078d0b0d53f94317e06affe88419aa8",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/53f44a5b48f7cc2df9a4f865f5d357b6fa616d05",
+                "reference": "53f44a5b48f7cc2df9a4f865f5d357b6fa616d05",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^7.4|^8.0"
             },
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
+            "default-branch": true,
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -4546,35 +4548,37 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-30T10:16:31+00:00"
+            "time": "2025-12-02T21:17:37+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.4.x-dev",
+            "version": "2.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "72a6721c9b64b3e4c9db55abbc38f790b318267e"
+                "reference": "83b717d01e4dc0525d6707508d9af9dcbd4d8049"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/72a6721c9b64b3e4c9db55abbc38f790b318267e",
-                "reference": "72a6721c9b64b3e4c9db55abbc38f790b318267e",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/83b717d01e4dc0525d6707508d9af9dcbd4d8049",
+                "reference": "83b717d01e4dc0525d6707508d9af9dcbd4d8049",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.12"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.1.32"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
             },
             "require-dev": {
-                "nikic/php-parser": "^4.13.0",
+                "nikic/php-parser": "^5",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-strict-rules": "^1.5.1",
-                "phpunit/phpunit": "^9.5"
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6"
             },
+            "default-branch": true,
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -4596,9 +4600,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.4.x"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.x"
             },
-            "time": "2024-12-17T17:20:49+00:00"
+            "time": "2025-11-26T18:09:43+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -5530,21 +5534,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "1.2.10",
+            "version": "2.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "40f9cf38c05296bd32f444121336a521a293fa61"
+                "reference": "7bd21a40b0332b93d4bfee284093d7400696902d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/40f9cf38c05296bd32f444121336a521a293fa61",
-                "reference": "40f9cf38c05296bd32f444121336a521a293fa61",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/7bd21a40b0332b93d4bfee284093d7400696902d",
+                "reference": "7bd21a40b0332b93d4bfee284093d7400696902d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.12.5"
+                "php": "^7.4|^8.0",
+                "phpstan/phpstan": "^2.1.32"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -5569,6 +5573,7 @@
                 "MIT"
             ],
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
+            "homepage": "https://getrector.com/",
             "keywords": [
                 "automation",
                 "dev",
@@ -5577,7 +5582,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/1.2.10"
+                "source": "https://github.com/rectorphp/rector/tree/2.2.11"
             },
             "funding": [
                 {
@@ -5585,7 +5590,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-08T13:59:10+00:00"
+            "time": "2025-12-02T11:23:46+00:00"
         },
         {
             "name": "sebastian/cli-parser",
