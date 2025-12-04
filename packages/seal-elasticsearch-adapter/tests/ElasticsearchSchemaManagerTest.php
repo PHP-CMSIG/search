@@ -47,7 +47,7 @@ class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
         $task = static::$schemaManager->dropIndex($index, ['return_slow_promise_result' => true]);
         $task->wait();
 
-        $this->assertTrue(isset($mapping[$index->name]['mappings']['properties']));
+        $this->assertTrue(isset($mapping[$index->name]['mappings']['properties'])); // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
 
         $this->assertSame([
             'id' => [
@@ -76,7 +76,7 @@ class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
         $task = static::$schemaManager->dropIndex($index, ['return_slow_promise_result' => true]);
         $task->wait();
 
-        $this->assertTrue(isset($mapping[$index->name]['mappings']['properties']));
+        $this->assertTrue(isset($mapping[$index->name]['mappings']['properties'])); // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
 
         $this->assertSame([
             'article' => [

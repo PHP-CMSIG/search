@@ -49,11 +49,11 @@ final class ElasticsearchIndexer implements IndexerInterface
 
         /** @var Elasticsearch $response */
         $response = $this->client->index([
-            'index' => $index->name,
             'id' => (string) $identifier,
-            'body' => $document,
+            'index' => $index->name,
             // TODO refresh should be refactored with async tasks
-            'refresh' => $options['return_slow_promise_result'] ?? false, // update document immediately, so it is available in the `/_search` api directly
+            'refresh' => ($options['return_slow_promise_result'] ?? false) ? 'true' : 'false', // update document immediately, so it is available in the `/_search` api directly
+            'body' => $document,
         ]);
 
         if (200 !== $response->getStatusCode() && 201 !== $response->getStatusCode()) {
@@ -75,7 +75,7 @@ final class ElasticsearchIndexer implements IndexerInterface
                 'index' => $index->name,
                 'id' => $identifier,
                 // TODO refresh should be refactored with async tasks
-                'refresh' => $options['return_slow_promise_result'] ?? false, // update document immediately, so it is no longer available in the `/_search` api directly
+                'refresh' => ($options['return_slow_promise_result'] ?? false) ? 'true' : 'false', // update document immediately, so it is no longer available in the `/_search` api directly
             ]);
 
             if (200 !== $response->getStatusCode() && ($response->asArray()['deleted'] ?? false) === false) {

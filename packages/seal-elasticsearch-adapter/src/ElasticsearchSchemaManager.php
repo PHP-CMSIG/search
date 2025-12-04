@@ -73,12 +73,13 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
     }
 
     /**
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      *
      * @return array<string, mixed>
      */
     private function createPropertiesMapping(array $fields): array
     {
+        /** @var array<string, mixed> $properties */
         $properties = [];
 
         foreach ($fields as $name => $field) {
