@@ -43,7 +43,7 @@ final class AlgoliaAdapterFactory implements AdapterFactoryInterface
      *     host: string,
      *     user?: string,
      *     pass?: string,
-     *     query: array<string, string>,
+     *     query: array<string, string|string[]>,
      * } $dsn
      */
     public function createClient(array $dsn): SearchClient
@@ -74,6 +74,7 @@ final class AlgoliaAdapterFactory implements AdapterFactoryInterface
             return $client;
         }
 
+        /** @var SearchConfig $config */
         $config = SearchConfig::create($applicationId, $adminApiKey);
 
         $query = $dsn['query'];
@@ -100,9 +101,11 @@ final class AlgoliaAdapterFactory implements AdapterFactoryInterface
 
         $defaultHeaders = $query['defaultHeaders'] ?? [];
         if ([] !== $defaultHeaders) {
+            \assert(\is_array($defaultHeaders), 'The "defaultHeaders" query param must be an array.');
             $config->setDefaultHeaders($defaultHeaders);
         }
 
+        /** @var SearchClient */
         return SearchClient::createWithConfig($config);
     }
 

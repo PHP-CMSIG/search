@@ -139,9 +139,9 @@ final class AlgoliaSearcher implements SearcherInterface
         $facetStats = isset($data['facets_stats']) && \is_array($data['facets_stats']) ? $data['facets_stats'] : [];
 
         return new Result(
-            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
-            $data['nbHits'] ?? null, // @phpstan-ignore-line
-            $this->formatFacets($facets, $facetStats, $search->facets),
+            $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag), // @phpstan-ignore-line argument-type
+            $data['nbHits'] ?? null, // @phpstan-ignore-linenullCoalesce.offset
+            $this->formatFacets($facets, $facetStats, $search->facets), // @phpstan-ignore-line argument-type
         );
     }
 
@@ -208,7 +208,12 @@ final class AlgoliaSearcher implements SearcherInterface
 
     /**
      * @param object[] $conditions
-     * @param object[] $geoFilters
+     * @param array{
+     *      aroundLatLng: string,
+     *      aroundRadius: int,
+     *  }|array{
+     *      insideBoundingBox: array<array<float>>,
+     *  }|array{} $geoFilters
      */
     private function recursiveResolveFilterConditions(Index $index, array $conditions, bool $conjunctive, string|null &$query, array &$geoFilters): string
     {

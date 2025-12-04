@@ -25,23 +25,31 @@ final class ClientHelper
     {
         if (!self::$client instanceof SearchClient) {
             if (!empty($_ENV['ALGOLIA_DSN'])) {
+                \assert(\is_string($_ENV['ALGOLIA_DSN']), 'The "ALGOLIA_DSN" environment variable must be a string.');
+
                 $algoliaAdapterFactory = new AlgoliaAdapterFactory();
                 $factory = new AdapterFactory([
                     'algolia' => $algoliaAdapterFactory,
                 ]);
 
-                $parsedDsn = $factory->parseDsn(\trim((string) $_ENV['ALGOLIA_DSN']));
+                $parsedDsn = $factory->parseDsn(\trim($_ENV['ALGOLIA_DSN']));
                 self::$client = $algoliaAdapterFactory->createClient($parsedDsn);
             } elseif (empty($_ENV['ALGOLIA_APPLICATION_ID']) || empty($_ENV['ALGOLIA_ADMIN_API_KEY'])) {
                 throw new \InvalidArgumentException(
                     'The "ALGOLIA_APPLICATION_ID" and "ALGOLIA_ADMIN_API_KEY" environment variables need to be defined.',
                 );
-            }
+            } else {
+                \assert(\is_string($_ENV['ALGOLIA_APPLICATION_ID']), 'The "ALGOLIA_APPLICATION_ID" environment variable must be a string.');
+                \assert(\is_string($_ENV['ALGOLIA_ADMIN_API_KEY']), 'The "ALGOLIA_ADMIN_API_KEY" environment variable must be a string.');
 
-            self::$client ??= SearchClient::create(
-                \trim((string) $_ENV['ALGOLIA_APPLICATION_ID']),
-                \trim((string) $_ENV['ALGOLIA_ADMIN_API_KEY']),
-            );
+                /** @var SearchClient $searchClient */
+                $searchClient = SearchClient::create(
+                    \trim($_ENV['ALGOLIA_APPLICATION_ID']),
+                    \trim($_ENV['ALGOLIA_ADMIN_API_KEY']),
+                );
+
+                self::$client = $searchClient;
+            }
         }
 
         return self::$client;

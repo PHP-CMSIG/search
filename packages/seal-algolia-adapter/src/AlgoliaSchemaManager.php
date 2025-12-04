@@ -29,7 +29,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
 
     public function existIndex(Index $index): bool
     {
-        return $this->client->indexExists($index->name);
+        return $this->client->indexExists($index->name); // @phpstan-ignore-line return.type
     }
 
     public function dropIndex(Index $index, array $options = []): TaskInterface|null
@@ -47,8 +47,8 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
             // see also: https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/delete-indices/#delete-multiple-indices
             // see also: https://support.algolia.com/hc/en-us/requests/540200
             $this->client->waitForTask(
-                $indexResponses[0]['indexName'],
-                $indexResponses[0]['taskID'],
+                $indexResponses[0]['indexName'], // @phpstan-ignore-line return.type
+                $indexResponses[0]['taskID'], // @phpstan-ignore-line return.type
             );
         }
 
@@ -71,8 +71,8 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         return new AsyncTask(function () use ($indexResponses) {
             foreach ($indexResponses as $indexResponse) {
                 $this->client->waitForTask(
-                    $indexResponse['indexName'],
-                    $indexResponse['taskID'],
+                    $indexResponse['indexName'], // @phpstan-ignore-line return.type
+                    $indexResponse['taskID'], // @phpstan-ignore-line return.type
                 );
             }
         });
@@ -155,8 +155,8 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         return new AsyncTask(function () use ($indexResponses) {
             foreach ($indexResponses as $indexResponse) {
                 $this->client->waitForTask(
-                    $indexResponse['indexName'],
-                    $indexResponse['taskID'],
+                    $indexResponse['indexName'], // @phpstan-ignore-line return.type
+                    $indexResponse['taskID'], // @phpstan-ignore-line return.type
                 );
             }
         });

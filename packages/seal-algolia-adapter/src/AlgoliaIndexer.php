@@ -111,8 +111,9 @@ final class AlgoliaIndexer implements IndexerInterface
 
         return new AsyncTask(function () use ($batchIndexingResponses, $index) {
             foreach ($batchIndexingResponses as $batchIndexingResponseList) {
+                \assert(\is_iterable($batchIndexingResponseList), 'Batch indexing response is expected to be iterable returned by algolia client.');
                 foreach ($batchIndexingResponseList as $batchIndexingResponse) {
-                    \assert(isset($batchIndexingResponse['taskID']) && \is_int($batchIndexingResponse['taskID']), 'Task ID is expected to be returned by algolia client.');
+                    \assert(\is_array($batchIndexingResponse) && isset($batchIndexingResponse['taskID']) && \is_int($batchIndexingResponse['taskID']), 'Task ID is expected to be returned by algolia client.');
 
                     $this->client->waitForTask(
                         $index->name,

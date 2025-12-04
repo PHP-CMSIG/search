@@ -26,7 +26,7 @@ interface AdapterFactoryInterface
      *     user?: string,
      *     pass?: string,
      *     path?: string,
-     *     query: array<string, string>,
+     *     query: array<string, string|string[]>,
      *     fragment?: string,
      * } $dsn
      */
