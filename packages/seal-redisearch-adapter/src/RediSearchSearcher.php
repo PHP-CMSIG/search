@@ -105,8 +105,8 @@ final class RediSearchSearcher implements SearcherInterface
         for ($i = 1; $i <= $total; ++$i) {
             $row = [];
             foreach ((array) $result[$i] as $j => $value) {
-                if (0 === $j % 2 && isset($result[$i][$j + 1])) {
-                    $row[$value] = $result[$i][$j + 1];
+                if (0 === $j % 2 && isset($result[$i][$j + 1])) { // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                    $row[$value] = $result[$i][$j + 1]; // @phpstan-ignore-line offsetAccess.invalidOffset
                 }
             }
             if (isset($row['documentId'])) {
@@ -189,10 +189,11 @@ final class RediSearchSearcher implements SearcherInterface
             }
 
             $previousValue = null;
+            /** @var string $value */
             foreach ($item as $value) {
                 if ('$' === $previousValue) {
                     /** @var array<string, mixed> $document */
-                    $document = \json_decode((string) $value, true, flags: \JSON_THROW_ON_ERROR);
+                    $document = \json_decode($value, true, flags: \JSON_THROW_ON_ERROR);
                     $documents[] = $document;
                 }
                 $previousValue = $value;
@@ -367,8 +368,8 @@ final class RediSearchSearcher implements SearcherInterface
 
                 if (isset($result[1]) && \is_array($result[1])) {
                     $formatted[$facet->field] = [
-                        'min' => (float) $result[1][1],
-                        'max' => (float) $result[1][3],
+                        'min' => (float) $result[1][1], // @phpstan-ignore-line cast.double
+                        'max' => (float) $result[1][3], // @phpstan-ignore-line cast.double
                     ];
                 }
             }
@@ -399,9 +400,9 @@ final class RediSearchSearcher implements SearcherInterface
                 $total = $result[0];
 
                 for ($i = 1; $i <= $total; ++$i) {
-                    if (isset($result[$i][1]) && isset($result[$i][3])) {
-                        $value = (string) $result[$i][1];
-                        $count = (int) $result[$i][3];
+                    if (isset($result[$i][1]) && isset($result[$i][3])) { // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                        $value = (string) $result[$i][1]; // @phpstan-ignore-line cast.string
+                        $count = (int) $result[$i][3]; // @phpstan-ignore-line cast.int
 
                         if ($field instanceof Field\BooleanField) {
                             $value = match ($value) {

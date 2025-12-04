@@ -20,12 +20,17 @@ final class ClientHelper
     public static function getClient(): \Redis
     {
         if (!self::$client instanceof \Redis) {
-            [$host, $port] = \explode(':', $_ENV['REDIS_HOST'] ?? '127.0.0.1:6379');
+            $redisHost = $_ENV['REDIS_HOST'] ?? '127.0.0.1:6379';
+            \assert(\is_string($redisHost), 'REDIS_HOST must be a string');
+
+            $redisPassword = $_ENV['REDIS_PASSWORD'] ?? '';
+            \assert(\is_string($redisPassword), 'REDIS_PASSWORD must be a string');
+
+            [$host, $port] = \explode(':', $redisHost);
 
             self::$client = new \Redis();
             self::$client->pconnect($host, (int) $port);
 
-            $redisPassword = $_ENV['REDIS_PASSWORD'] ?? null;
             if ($redisPassword) {
                 self::$client->auth($redisPassword);
             }
