@@ -95,11 +95,9 @@ interface EngineInterface
      *
      * TODO: native return type in next minor, major release
      *
-     * @phpstan-ignore-next-line
-     *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
-    public function reindex(
+    public function reindex( // @phpstan-ignore-line parameter.notFound
         iterable $reindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,

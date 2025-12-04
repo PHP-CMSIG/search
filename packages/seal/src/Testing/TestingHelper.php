@@ -43,6 +43,7 @@ final class TestingHelper
     public static function createSchema(): Schema
     {
         $prefix = \getenv('TEST_INDEX_PREFIX') ?: $_ENV['TEST_INDEX_PREFIX'] ?? 'test_';
+        \assert(\is_string($prefix), 'Environment variable TEST_INDEX_PREFIX must be a string');
 
         $complexFields = [
             'uuid' => new Field\IdentifierField('uuid'),

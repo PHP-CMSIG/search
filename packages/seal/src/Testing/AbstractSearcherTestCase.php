@@ -400,14 +400,14 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search->highlight(['title', 'article'], '<mark>', '</mark>');
 
         $expectedDocumentA = $documents[0];
-        $expectedDocumentA['_formatted']['title'] = \str_replace(
+        $expectedDocumentA['_formatted']['title'] = \str_replace( // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
             'Blog',
             '<mark>Blog</mark>',
             $expectedDocumentA['title'] ?? '',
         );
         $expectedDocumentA['_formatted']['article'] = null; // normalize the highlight behaviour none matches returned as null for every engine
         $expectedDocumentB = $documents[1];
-        $expectedDocumentB['_formatted']['title'] = \str_replace(
+        $expectedDocumentB['_formatted']['title'] = \str_replace( // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
             'Blog',
             '<mark>Blog</mark>',
             $expectedDocumentB['title'] ?? '',
@@ -877,7 +877,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             $this->assertNotNull(
                 $loadedDocument['rating'] ?? null,
-                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.',
+                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.',  // @phpstan-ignore-line binaryOp.invalid
             );
 
             $this->assertGreaterThanOrEqual(2.5, $loadedDocument['rating']);
@@ -954,7 +954,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             /** @var int[] $categoryIds */
             $categoryIds = $loadedDocument['categoryIds'];
-            $biggestCategoryId = \array_reduce($categoryIds, \max(...));
+            $biggestCategoryId = \array_reduce($categoryIds, \max(...)); // @phpstan-ignore-line argument.type
 
             $this->assertNotNull($biggestCategoryId);
             $this->assertGreaterThanOrEqual(3.0, $biggestCategoryId);
@@ -994,7 +994,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             $this->assertNotNull(
                 $loadedDocument['rating'] ?? null,
-                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.',
+                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $this->assertLessThan(3.5, $loadedDocument['rating']);
@@ -1034,7 +1034,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             $this->assertNotNull(
                 $loadedDocument['rating'] ?? null,
-                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.',
+                'Expected only documents with rating document "' . $loadedDocument['uuid'] . '" without rating returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $this->assertLessThanOrEqual(3.5, $loadedDocument['rating']);
@@ -1080,7 +1080,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             $this->assertNotNull(
                 $loadedDocument['location'] ?? null,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location returned.', // @phpstan-ignore-line binaryOp.invalid
             );
             $this->assertIsArray($loadedDocument['location']);
 
@@ -1089,17 +1089,17 @@ abstract class AbstractSearcherTestCase extends TestCase
 
             $this->assertNotNull(
                 $latitude,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $this->assertNotNull(
                 $longitude,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $distance = (int) (6_371_000 * 2 * \asin(\sqrt(
-                \sin(\deg2rad($latitude - 52.5200) / 2) ** 2 +
-                \cos(\deg2rad(52.5200)) * \cos(\deg2rad($latitude)) * \sin(\deg2rad($longitude - 13.4050) / 2) ** 2,
+                \sin(\deg2rad($latitude - 52.5200) / 2) ** 2 +  // @phpstan-ignore-line binaryOp.invalid
+                \cos(\deg2rad(52.5200)) * \cos(\deg2rad($latitude)) * \sin(\deg2rad($longitude - 13.4050) / 2) ** 2, // @phpstan-ignore-line binaryOp.invalid
             )));
 
             $this->assertLessThanOrEqual(6_000_000, $distance);
@@ -1146,7 +1146,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             $this->assertNotNull(
                 $loadedDocument['location'] ?? null,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location returned.', // @phpstan-ignore-line binaryOp.invalid
             );
             $this->assertIsArray($loadedDocument['location']);
 
@@ -1155,12 +1155,12 @@ abstract class AbstractSearcherTestCase extends TestCase
 
             $this->assertNotNull(
                 $latitude,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $this->assertNotNull(
                 $longitude,
-                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.',
+                'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
             $isInBoxFunction = function (
@@ -1182,8 +1182,8 @@ abstract class AbstractSearcherTestCase extends TestCase
             };
 
             // TODO: Fix this test
-            $isInBox = $isInBoxFunction($latitude, $longitude, 53.3498, 23.7275, 37.9838, -6.2603);
-            $this->assertTrue($isInBox, 'Document "' . $loadedDocument['uuid'] . '" is not in the box.');
+            $isInBox = $isInBoxFunction($latitude, $longitude, 53.3498, 23.7275, 37.9838, -6.2603); // @phpstan-ignore-line binaryOp.invalid
+            $this->assertTrue($isInBox, 'Document "' . $loadedDocument['uuid'] . '" is not in the box.'); // @phpstan-ignore-line binaryOp.invalid
         }
 
         foreach ($documents as $document) {

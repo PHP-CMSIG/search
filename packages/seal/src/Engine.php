@@ -95,12 +95,12 @@ final class Engine implements EngineInterface
             ->index($index);
     }
 
-    public function createIndex(string $index, array $options = []): TaskInterface|null
+    public function createIndex(string $index, array $options = []): TaskInterface|null // @phpstan-ignore-line return.unusedType
     {
         return $this->adapter->getSchemaManager()->createIndex($this->schema->indexes[$index], $options);
     }
 
-    public function dropIndex(string $index, array $options = []): TaskInterface|null
+    public function dropIndex(string $index, array $options = []): TaskInterface|null // @phpstan-ignore-line return.unusedType
     {
         return $this->adapter->getSchemaManager()->dropIndex($this->schema->indexes[$index], $options);
     }
@@ -192,7 +192,7 @@ final class Engine implements EngineInterface
                             ++$count;
 
                             // Document still exists, do not delete
-                            unset($documentIdsToDelete[$document[$identifiersPerIndex[$index]]]);
+                            unset($documentIdsToDelete[$document[$identifiersPerIndex[$index]]]); // @phpstan-ignore-line offsetAccess.invalidOffset
 
                             yield $document;
 

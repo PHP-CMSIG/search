@@ -104,7 +104,7 @@ final class Flattener
                 continue;
             }
 
-            $flattened = $this->doFlatten($value, $key . $this->metadataSeparator);
+            $flattened = $this->doFlatten($value, $key . $this->metadataSeparator); // @phpstan-ignore-line argument.type
             foreach ($flattened as $subKey => $subValue) {
                 $newData[$prefix . $subKey] = $subValue;
             }
@@ -145,6 +145,7 @@ final class Flattener
                 continue;
             }
 
+            /** @var string[] $keyParts */
             $keyParts = \explode($this->metadataSeparator, $metadataKey);
             if (!\is_array($value)) {
                 $value = [$value];
@@ -153,10 +154,11 @@ final class Flattener
             foreach ($value as $subKey => $subValue) {
                 \assert(\array_key_exists($subKey, $metadata[$metadataKey]), 'Expected key "' . $subKey . '" to exist in "' . $key . '".');
 
+                /** @var string[] $keyPartsReplacements */
                 $keyPartsReplacements = $keyParts;
 
                 /** @var string $newKeyPath */
-                $newKeyPath = \preg_replace_callback('/' . \preg_quote($this->metadataPlaceholder, '/') . '/', function () use (&$keyPartsReplacements) {
+                $newKeyPath = \preg_replace_callback('/' . \preg_quote($this->metadataPlaceholder, '/') . '/', function () use (&$keyPartsReplacements) {  // @phpstan-ignore-line argument.type
                     return \array_shift($keyPartsReplacements);
                 }, $metadata[$metadataKey][$subKey]);
 

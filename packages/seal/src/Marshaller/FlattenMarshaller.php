@@ -57,7 +57,7 @@ final class FlattenMarshaller
     }
 
     /**
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      * @param array<string, mixed> $document
      *
      * @return array<string, mixed>
@@ -83,7 +83,7 @@ final class FlattenMarshaller
     }
 
     /**
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      * @param array<string, mixed> $raw
      *
      * @return array<string, mixed>
@@ -111,7 +111,7 @@ final class FlattenMarshaller
     }
 
     /**
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      */
     private function findGeoFieldName(array $fields): string|null
     {

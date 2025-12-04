@@ -25,7 +25,7 @@ class FlattenMarshallerTest extends TestCase
     /**
      * @param array<string, mixed> $document
      * @param array<string, mixed> $flattenDocument
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      */
     #[DataProvider('provideData')]
     public function testMarshall(array $document, array $flattenDocument, array $fields): void
@@ -41,7 +41,7 @@ class FlattenMarshallerTest extends TestCase
     /**
      * @param array<string, mixed> $document
      * @param array<string, mixed> $flattenDocument
-     * @param Field\AbstractField[] $fields
+     * @param array<string, Field\AbstractField> $fields
      */
     #[DataProvider('provideData')]
     public function testUnmarshall(array $document, array $flattenDocument, array $fields): void
@@ -62,7 +62,7 @@ class FlattenMarshallerTest extends TestCase
      * @return \Generator<string, array{
      *     0: array<string, mixed>,
      *     1: array<string, mixed>,
-     *     2: Field\AbstractField[],
+     *     2: array<string, Field\AbstractField>,
      * }>
      */
     public static function provideData(): \Generator

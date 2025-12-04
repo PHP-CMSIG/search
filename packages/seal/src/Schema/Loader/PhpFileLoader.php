@@ -30,7 +30,7 @@ final class PhpFileLoader implements LoaderInterface
 
     public function load(): Schema
     {
-        /** @var Index[] $indexes */
+        /** @var array<string, Index> $indexes */
         $indexes = [];
 
         foreach ($this->directories as $directory) {
@@ -76,10 +76,10 @@ final class PhpFileLoader implements LoaderInterface
     }
 
     /**
-     * @param Field\AbstractField[] $fields
-     * @param Field\AbstractField[] $newFields
+     * @param array<string, Field\AbstractField> $fields
+     * @param array<string, Field\AbstractField> $newFields
      *
-     * @return Field\AbstractField[]
+     * @return array<string, Field\AbstractField>
      */
     private function mergeFields(array $fields, array $newFields): array
     {
@@ -106,7 +106,7 @@ final class PhpFileLoader implements LoaderInterface
      */
     private function mergeOptions(array $options, array $newOptions): array
     {
-        return \array_replace_recursive($options, $newOptions);
+        return \array_replace_recursive($options, $newOptions); // @phpstan-ignore-line return.type
     }
 
     /**
@@ -131,7 +131,7 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
@@ -143,7 +143,7 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
@@ -155,7 +155,7 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
@@ -167,7 +167,7 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
@@ -177,7 +177,7 @@ final class PhpFileLoader implements LoaderInterface
                 $newField->name,
                 fields: $this->mergeFields($field->fields, $newField->fields),
                 multiple: $newField->multiple,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
@@ -199,7 +199,7 @@ final class PhpFileLoader implements LoaderInterface
                 typeField: $newField->typeField,
                 types: $types,
                 multiple: $newField->multiple,
-                options: \array_replace_recursive($field->options, $newField->options),
+                options: $this->mergeOptions($field->options, $newField->options),
             );
         }
 
