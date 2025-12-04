@@ -21,10 +21,10 @@ final class ClientHelper
     {
         if (!self::$client instanceof \Redis) {
             $redisHost = $_ENV['REDIS_HOST'] ?? '127.0.0.1:6379';
-            \assert(\is_string($redisHost), 'REDIS_HOST must be a string');
+            \assert(\is_string($redisHost), 'REDIS_HOST must be a string.');
 
             $redisPassword = $_ENV['REDIS_PASSWORD'] ?? '';
-            \assert(\is_string($redisPassword), 'REDIS_PASSWORD must be a string');
+            \assert(\is_string($redisPassword), 'REDIS_PASSWORD must be a string.');
 
             [$host, $port] = \explode(':', $redisHost);
 

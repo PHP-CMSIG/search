@@ -42,7 +42,7 @@ class MeilisearchAdapterFactory implements AdapterFactoryInterface
      *     host: string,
      *     port?: int,
      *     user?: string,
-     *     query: array<string, string>,
+     *     query: array<string, string|string[]>,
      * } $dsn
      */
     public function createClient(array $dsn): Client

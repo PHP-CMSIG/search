@@ -22,7 +22,10 @@ final class ClientHelper
     public static function getClient(): Client
     {
         if (!self::$client instanceof Client) {
-            self::$client = new Client($_ENV['MEILISEARCH_HOST'] ?? '127.0.0.1:7700');
+            $meilisearchHost = $_ENV['MEILISEARCH_HOST'] ?? '127.0.0.1:7700';
+            \assert(\is_string($meilisearchHost), 'MEILISEARCH_HOST must be a string.');
+
+            self::$client = new Client($meilisearchHost);
         }
 
         return self::$client;

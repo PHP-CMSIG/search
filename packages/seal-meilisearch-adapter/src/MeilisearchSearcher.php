@@ -44,7 +44,7 @@ final class MeilisearchSearcher implements SearcherInterface
 
     public function count(Index $index): int
     {
-        return $this->client->index($index->name)->stats()['numberOfDocuments'] ?? 0;
+        return $this->client->index($index->name)->stats()['numberOfDocuments'] ?? 0; // @phpstan-ignore-line return.type
     }
 
     public function search(Search $search): Result
@@ -57,6 +57,7 @@ final class MeilisearchSearcher implements SearcherInterface
             && 1 === $search->limit
         ) {
             try {
+                /** @var array<string, mixed> $data */
                 $data = $this->client->index($search->index->name)->getDocument($search->filters[0]->identifier);
             } catch (ApiException $e) {
                 if (404 !== $e->httpStatus) {
@@ -110,6 +111,7 @@ final class MeilisearchSearcher implements SearcherInterface
         $searchParams['facets'] = \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets);
 
         $searchResult = $searchIndex->search($query, $searchParams);
+        /** @var array{hits: array<array<string, mixed>>, totalHits?: int, estimatedTotalHits?: int} $data */
         $data = $searchResult->toArray();
 
         /** @var array<string, array{min: float, max: float}> $facetStats */
@@ -119,7 +121,7 @@ final class MeilisearchSearcher implements SearcherInterface
 
         return new Result(
             $this->hitsToDocuments($search->index, $data['hits'], $search->highlightFields, $search->highlightPreTag),
-            $data['totalHits'] ?? $data['estimatedTotalHits'] ?? null,
+            $data['totalHits'] ?? $data['estimatedTotalHits'] ?? 0,
             $this->formatFacets($facetStats, $facetDistribution, $search->facets),
         );
     }

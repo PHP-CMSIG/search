@@ -49,7 +49,7 @@ final class MeilisearchIndexer implements IndexerInterface
             $this->marshaller->marshall($index->fields, $document),
         ], $identifierField->name);
 
-        if ('enqueued' !== $indexResponse['status']) {
+        if ('enqueued' !== $indexResponse['status']) { // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
             throw new \RuntimeException('Unexpected error while save document with identifier "' . $identifier . '" into Index "' . $index->name . '".');
         }
 
@@ -58,7 +58,7 @@ final class MeilisearchIndexer implements IndexerInterface
         }
 
         return new AsyncTask(function () use ($indexResponse, $document) {
-            $this->client->waitForTask($indexResponse['taskUid']);
+            $this->client->waitForTask($indexResponse['taskUid']); // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
 
             return $document;
         });
@@ -98,7 +98,7 @@ final class MeilisearchIndexer implements IndexerInterface
                 $identifierField->name,
             );
 
-            if ('enqueued' !== $indexResponse['status']) {
+            if ('enqueued' !== $indexResponse['status']) { // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 throw new \RuntimeException('Unexpected error while save documents into Index "' . $index->name . '".');
             }
 
@@ -128,7 +128,7 @@ final class MeilisearchIndexer implements IndexerInterface
 
         return new AsyncTask(function () use ($batchIndexingResponses) {
             foreach ($batchIndexingResponses as $batchIndexingResponse) {
-                $this->client->waitForTask($batchIndexingResponse['taskUid']);
+                $this->client->waitForTask($batchIndexingResponse['taskUid']); // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
             }
         });
     }
