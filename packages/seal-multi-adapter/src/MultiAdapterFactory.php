@@ -40,7 +40,7 @@ class MultiAdapterFactory implements AdapterFactoryInterface
      *
      * @param array{
      *     host: string,
-     *     query: array<string, string>,
+     *     query: array<string, string|string[]>,
      * } $dsn
      *
      * @return iterable<AdapterInterface>

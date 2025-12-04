@@ -37,7 +37,7 @@ class ReadWriteAdapterFactory implements AdapterFactoryInterface
         /** @var AdapterInterface $readAdapter */
         $readAdapter = $this->container->get($this->prefix . $dsn['host']);
         /** @var AdapterInterface $writeAdapter */
-        $writeAdapter = $this->container->get($this->prefix . $dsn['query']['write']);
+        $writeAdapter = $this->container->get($this->prefix . $dsn['query']['write']); // @phpstan-ignore-line binaryOp.invalid argument.type
 
         return new ReadWriteAdapter($readAdapter, $writeAdapter);
     }
