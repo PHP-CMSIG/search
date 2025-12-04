@@ -3092,11 +3092,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "aa9cc402258c00b8c7cfa99ebe411ff3ceee4b69"
+                "reference": "6706dcc488d920a14aa52bfd9d881f4f963b9ee3"
             },
             "require": {
                 "cmsig/seal": "^0.12",
-                "loupe/loupe": "^0.12.11",
+                "loupe/loupe": "^0.12.11 || ^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -4656,23 +4656,25 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.12.16",
+            "version": "0.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "6f6feb56700f8300ebc087b158df99633696979b"
+                "reference": "4b9f7a36362f028a62249c6bb222f6e3e0a04623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/6f6feb56700f8300ebc087b158df99633696979b",
-                "reference": "6f6feb56700f8300ebc087b158df99633696979b",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/4b9f7a36362f028a62249c6bb222f6e3e0a04623",
+                "reference": "4b9f7a36362f028a62249c6bb222f6e3e0a04623",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "^3.9 || ^4.0",
+                "doctrine/dbal": "^3.10.2 || ^4.0",
                 "doctrine/lexer": "^2.0 || ^3.0",
                 "ext-intl": "*",
                 "ext-mbstring": "*",
+                "ext-pdo_sqlite": "*",
+                "lib-pdo_sqlite-sqlite": ">= 3.35.0",
                 "loupe/matcher": "^0.2",
                 "mjaschen/phpgeo": "^5.0 || ^6.0",
                 "nitotm/efficient-language-detector": "^3.0",
@@ -4682,12 +4684,13 @@
                 "wamania/php-stemmer": "^4.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^10.5.44",
-                "symfony/filesystem": "^6.2",
-                "symfony/finder": "^6.2",
-                "symfony/var-dumper": "^6.2",
-                "symplify/easy-coding-standard": "11.2.4.72"
+                "phpstan/phpstan": "^2.1.31",
+                "phpunit/phpunit": "^10.5.58",
+                "symfony/filesystem": "^7.3.2",
+                "symfony/finder": "^7.3.5",
+                "symfony/process": "^7.3.4",
+                "symfony/var-dumper": "^7.3.5",
+                "symplify/easy-coding-standard": "^12.6.2"
             },
             "type": "library",
             "autoload": {
@@ -4708,7 +4711,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.12.16"
+                "source": "https://github.com/loupe-php/loupe/tree/0.13.0"
             },
             "funding": [
                 {
@@ -4716,7 +4719,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-29T12:18:57+00:00"
+            "time": "2025-12-04T06:51:41+00:00"
         },
         {
             "name": "loupe/matcher",
@@ -6063,8 +6066,8 @@
             "version": "2.1.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/53f44a5b48f7cc2df9a4f865f5d357b6fa616d05",
-                "reference": "53f44a5b48f7cc2df9a4f865f5d357b6fa616d05",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/03c904d5a3d7aa8c50f4bf46427b10da40243d46",
+                "reference": "03c904d5a3d7aa8c50f4bf46427b10da40243d46",
                 "shasum": ""
             },
             "require": {
@@ -6110,7 +6113,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-02T21:17:37+00:00"
+            "time": "2025-12-03T14:30:23+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
