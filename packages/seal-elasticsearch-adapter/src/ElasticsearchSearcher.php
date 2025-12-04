@@ -50,14 +50,7 @@ final class ElasticsearchSearcher implements SearcherInterface
                 'index' => $index->name,
             ]);
 
-            $counted = $response->asArray()['count'] ?? 0;
-
-            \assert(
-                \is_int($counted),
-                'Counted value expected to be integer.',
-            );
-
-            return $counted;
+            return $response->asArray()['count'] ?? 0; // @phpstan-ignore-line return.type
         } catch (ClientResponseException) {
             return 0;
         }

@@ -23,7 +23,10 @@ final class ClientHelper
     public static function getClient(): Client
     {
         if (!self::$client instanceof Client) {
-            [$host, $port] = \explode(':', $_ENV['TYPESENSE_HOST'] ?? '127.0.0.1:8108');
+            $typesenseHost = $_ENV['TYPESENSE_HOST'] ?? '127.0.0.1:8108';
+            \assert(\is_string($typesenseHost), 'TYPESENSE_HOST must be a string.');
+
+            [$host, $port] = \explode(':', $typesenseHost);
 
             self::$client = new Client(
                 [

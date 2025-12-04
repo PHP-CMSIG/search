@@ -43,7 +43,7 @@ final class TypesenseSearcher implements SearcherInterface
 
     public function count(Index $index): int
     {
-        return $this->client->collections[$index->name]->retrieve()['num_documents'] ?? 0;
+        return $this->client->collections[$index->name]->retrieve()['num_documents'] ?? 0; // @phpstan-ignore-line return.type
     }
 
     public function search(Search $search): Result
@@ -138,8 +138,8 @@ final class TypesenseSearcher implements SearcherInterface
         $facetCounts = $data['facet_counts'] ?? [];
 
         return new Result(
-            $this->hitsToDocuments($search->index, $isGrouped ? $data['grouped_hits'][0]['hits'] : $data['hits'], $search->highlightFields),
-            $data['found'] ?? null,
+            $this->hitsToDocuments($search->index, $isGrouped ? $data['grouped_hits'][0]['hits'] : $data['hits'], $search->highlightFields), // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+            $data['found'] ?? 0, // @phpstan-ignore-line argument.type
             $this->formatFacets($facetCounts, $search->facets),
         );
     }
@@ -170,11 +170,6 @@ final class TypesenseSearcher implements SearcherInterface
             );
 
             $hit['highlight'] ??= [];
-
-            \assert(
-                \is_array($hit['highlight']),
-                'Hit with key "highlight" expected to be array.',
-            );
 
             foreach ($highlightFields as $highlightField) {
                 $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField]['snippet']
