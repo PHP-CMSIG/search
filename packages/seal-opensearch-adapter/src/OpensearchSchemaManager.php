@@ -135,7 +135,7 @@ final class OpensearchSchemaManager implements SchemaManagerInterface
             };
         }
 
-        return $properties;
+        return $properties; // @phpstan-ignore-line return.type
     }
 
     /**

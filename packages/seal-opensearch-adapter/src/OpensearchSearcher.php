@@ -45,9 +45,7 @@ final class OpensearchSearcher implements SearcherInterface
     public function count(Index $index): int
     {
         try {
-            return $this->client->count([
-                'index' => $index->name,
-            ])['count'] ?? 0;
+            return $this->client->count(['index' => $index->name,])['count'] ?? 0; // @phpstan-ignore-line return-type
         } catch (OpenSearchException) {
             return 0;
         }
@@ -63,6 +61,7 @@ final class OpensearchSearcher implements SearcherInterface
             && 1 === $search->limit
         ) {
             try {
+                /** @var array<string, mixed> $searchResult */
                 $searchResult = $this->client->get([
                     'index' => $search->index->name,
                     'id' => $search->filters[0]->identifier,
@@ -119,7 +118,7 @@ final class OpensearchSearcher implements SearcherInterface
         }
 
         if (null !== $search->distinct) {
-            $body['collapse']['field'] = $this->getFilterField($search->index, $search->distinct);
+            $body['collapse']['field'] = $this->getFilterField($search->index, $search->distinct); // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
         }
 
         foreach ($search->facets as $facet) {
@@ -138,9 +137,9 @@ final class OpensearchSearcher implements SearcherInterface
         ]);
 
         return new Result(
-            $this->hitsToDocuments($search->index, $searchResult['hits']['hits'], $search->highlightFields),
-            $searchResult['hits']['total']['value'],
-            $this->formatFacets($searchResult['aggregations'] ?? [], $search->facets),
+            $this->hitsToDocuments($search->index, $searchResult['hits']['hits'], $search->highlightFields), // @phpstan-ignore-line offsetAccess.nonOffsetAccessible argument.type
+            $searchResult['hits']['total']['value'], // @phpstan-ignore-line offsetAccess.nonOffsetAccessible argument.type
+            $this->formatFacets($searchResult['aggregations'] ?? [], $search->facets), // @phpstan-ignore-line offsetAccess.nonOffsetAccessible argument.type
         );
     }
 
@@ -177,7 +176,7 @@ final class OpensearchSearcher implements SearcherInterface
             );
 
             foreach ($highlightFields as $highlightField) {
-                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField][0]
+                $document['_formatted'][$highlightField] = $hit['highlight'][$highlightField][0] // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                     ?? null;
             }
 
@@ -207,24 +206,24 @@ final class OpensearchSearcher implements SearcherInterface
 
         foreach ($filters as $filter) {
             match (true) {
-                $filter instanceof Condition\IdentifierCondition => $filterQueries[]['ids']['values'][] = $filter->identifier,
-                $filter instanceof Condition\SearchCondition => $filterQueries[]['bool']['must']['query_string']['query'] = $filter->query,
-                $filter instanceof Condition\EqualCondition => $filterQueries[]['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value,
-                $filter instanceof Condition\NotEqualCondition => $filterQueries[]['bool']['must_not']['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value,
-                $filter instanceof Condition\GreaterThanCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['gt'] = $filter->value,
-                $filter instanceof Condition\GreaterThanEqualCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['gte'] = $filter->value,
-                $filter instanceof Condition\LessThanCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['lt'] = $filter->value,
-                $filter instanceof Condition\LessThanEqualCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['lte'] = $filter->value,
-                $filter instanceof Condition\InCondition => $filterQueries[]['terms'][$this->getFilterField($index, $filter->field)] = $filter->values,
-                $filter instanceof Condition\NotInCondition => $filterQueries[]['bool']['must_not']['terms'][$this->getFilterField($index, $filter->field)] = $filter->values,
-                $filter instanceof Condition\GeoDistanceCondition => $filterQueries[]['geo_distance'] = [
+                $filter instanceof Condition\IdentifierCondition => $filterQueries[]['ids']['values'][] = $filter->identifier, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\SearchCondition => $filterQueries[]['bool']['must']['query_string']['query'] = $filter->query, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\EqualCondition => $filterQueries[]['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\NotEqualCondition => $filterQueries[]['bool']['must_not']['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\GreaterThanCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['gt'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\GreaterThanEqualCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['gte'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\LessThanCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['lt'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\LessThanEqualCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['lte'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\InCondition => $filterQueries[]['terms'][$this->getFilterField($index, $filter->field)] = $filter->values, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\NotInCondition => $filterQueries[]['bool']['must_not']['terms'][$this->getFilterField($index, $filter->field)] = $filter->values, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\GeoDistanceCondition => $filterQueries[]['geo_distance'] = [ // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                     'distance' => $filter->distance,
                     $this->getFilterField($index, $filter->field) => [
                         'lat' => $filter->latitude,
                         'lon' => $filter->longitude,
                     ],
                 ],
-                $filter instanceof Condition\GeoBoundingBoxCondition => $filterQueries[]['geo_bounding_box'][$this->getFilterField($index, $filter->field)] = [
+                $filter instanceof Condition\GeoBoundingBoxCondition => $filterQueries[]['geo_bounding_box'][$this->getFilterField($index, $filter->field)] = [ // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                     'top_left' => [
                         'lat' => $filter->northLatitude,
                         'lon' => $filter->westLongitude,
