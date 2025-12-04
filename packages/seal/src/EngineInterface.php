@@ -97,7 +97,7 @@ interface EngineInterface
      *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
-    public function reindex( // @phpstan-ignore-line parameter.notFound
+    public function reindex(// @phpstan-ignore-line parameter.notFound
         iterable $reindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,

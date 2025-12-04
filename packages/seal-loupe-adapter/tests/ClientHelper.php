@@ -29,7 +29,10 @@ final class ClientHelper
                 'loupe' => $loupeAdapterFactory,
             ]);
 
-            $parsedDsn = $factory->parseDsn(\trim((string) $_ENV['LOUPE_DSN']));
+            $loupeDsn = $_ENV['LOUPE_DSN'] ?? 'loupe://';
+            \assert(\is_string($loupeDsn), 'LOUPE_DSN must be a string.');
+
+            $parsedDsn = $factory->parseDsn(\trim($loupeDsn));
             self::$helper = $loupeAdapterFactory->createHelper($parsedDsn);
         }
 

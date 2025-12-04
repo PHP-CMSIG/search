@@ -45,7 +45,7 @@ final class OpensearchSearcher implements SearcherInterface
     public function count(Index $index): int
     {
         try {
-            return $this->client->count(['index' => $index->name,])['count'] ?? 0; // @phpstan-ignore-line return-type
+            return $this->client->count(['index' => $index->name])['count'] ?? 0; // @phpstan-ignore-line return-type
         } catch (OpenSearchException) {
             return 0;
         }

@@ -50,7 +50,7 @@ final class AdapterFactory
     {
         $adapterName = \explode(':', $dsn, 2)[0];
 
-        if (!$adapterName) {
+        if ('' === $adapterName) {
             throw new \InvalidArgumentException(
                 'Invalid DSN: "' . $dsn . '".',
             );
