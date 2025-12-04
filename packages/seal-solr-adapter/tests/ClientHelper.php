@@ -24,7 +24,10 @@ final class ClientHelper
     public static function getClient(): Client
     {
         if (!self::$client instanceof Client) {
-            [$host, $port] = \explode(':', $_ENV['SOLR_HOST'] ?? '127.0.0.1:8983');
+            $solrHost = $_ENV['SOLR_HOST'] ?? '127.0.0.1:8983';
+            \assert(\is_string($solrHost), 'SOLR_HOST environment variable must be a string.');
+
+            [$host, $port] = \explode(':', $solrHost);
 
             $adapter = new Curl();
             $adapter->setTimeout(30);

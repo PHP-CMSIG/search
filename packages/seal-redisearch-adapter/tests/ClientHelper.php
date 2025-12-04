@@ -31,7 +31,7 @@ final class ClientHelper
             self::$client = new \Redis();
             self::$client->pconnect($host, (int) $port);
 
-            if ($redisPassword !== '') {
+            if ('' !== $redisPassword) {
                 self::$client->auth($redisPassword);
             }
         }

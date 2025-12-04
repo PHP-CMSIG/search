@@ -249,6 +249,6 @@ final class SolrSchemaManager implements SchemaManagerInterface
             ];
         }
 
-        return $indexFields;
+        return $indexFields; // @phpstan-ignore-line return.type
     }
 }
