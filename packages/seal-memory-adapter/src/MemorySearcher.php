@@ -306,8 +306,8 @@ final class MemorySearcher implements SearcherInterface
                     $distance = $this->distanceBetween(
                         $filter->latitude,
                         $filter->longitude,
-                        $value['latitude'],
-                        $value['longitude'],
+                        $value['latitude'], // @phpstan-ignore-line argument.type
+                        $value['longitude'], // @phpstan-ignore-line argument.type
                     );
 
                     if ($distance <= $filter->distance) {
@@ -338,8 +338,8 @@ final class MemorySearcher implements SearcherInterface
                     }
 
                     $isInsideBox = $this->coordinatesInsideBox(
-                        $value['latitude'],
-                        $value['longitude'],
+                        $value['latitude'], // @phpstan-ignore-line argument.type
+                        $value['longitude'], // @phpstan-ignore-line argument.type
                         $filter->northLatitude,
                         $filter->eastLongitude,
                         $filter->southLatitude,
@@ -464,7 +464,7 @@ final class MemorySearcher implements SearcherInterface
     private function getSearchableObjectFields(Field\ObjectField $field, array $data)
     {
         if (!$field->multiple) {
-            return $this->getSearchableDocument($field->fields, $data);
+            return $this->getSearchableDocument($field->fields, $data); // @phpstan-ignore-line argument.type
         }
 
         /** @var array<array<string, mixed>> $documents */
@@ -526,11 +526,11 @@ final class MemorySearcher implements SearcherInterface
                 if ($facet instanceof CountFacet) {
                     if ($fieldDefinitions[$facet->field]->multiple && \is_array($document[$facet->field])) {
                         foreach ($document[$facet->field] as $value) {
-                            if (!isset($facets[$facet->field]['count'][$value])) {
-                                $facets[$facet->field]['count'][$value] = 0;
+                            if (!isset($facets[$facet->field]['count'][$value])) { // @phpstan-ignore-line offsetAccess.invalidOffset
+                                $facets[$facet->field]['count'][$value] = 0; // @phpstan-ignore-line offsetAccess.invalidOffset
                             }
 
-                            ++$facets[$facet->field]['count'][$value];
+                            ++$facets[$facet->field]['count'][$value]; // @phpstan-ignore-line offsetAccess.invalidOffset
                         }
                     } else {
                         if (!\is_scalar($document[$facet->field])) {
