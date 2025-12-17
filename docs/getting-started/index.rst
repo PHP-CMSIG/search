@@ -236,7 +236,7 @@ search engine.
 
             services:
               opensearch:
-                image: opensearchproject/opensearch:2
+                image: opensearchproject/opensearch:3
                 environment:
                   discovery.type: single-node
                   cluster.routing.allocation.disk.threshold_enabled: 'false'
