@@ -154,6 +154,10 @@ final class TestingHelper
                         'title' => 'Title 2',
                     ],
                     [
+                        'type' => 'text',
+                        'title' => 'FARA25008/B',
+                    ],
+                    [
                         'type' => 'embed',
                         'title' => 'Video',
                         'media' => 'https://www.youtube.com/watch?v=iYM2zFP3Zn0',
