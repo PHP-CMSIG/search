@@ -79,6 +79,7 @@ class MarshallerTest extends TestCase
                 ],
             ],
             'article' => '<article><h2>New Subtitle</h2><p>A html field with some content</p></article>',
+            'code' => 'FARA25008/B',
             'blocks' => [
                 'text' => [
                     [
