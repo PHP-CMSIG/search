@@ -90,6 +90,7 @@ class AlgoliaSchemaManagerTest extends AbstractSchemaManagerTestCase
             'searchableAttributes' => [
                 'title',
                 'article',
+                'code',
                 'blocks.text.title',
                 'blocks.text.description',
                 'blocks.embed.title',
