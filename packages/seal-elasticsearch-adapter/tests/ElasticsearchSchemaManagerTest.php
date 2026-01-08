@@ -124,6 +124,9 @@ class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
                 'type' => 'integer',
                 'index' => false,
             ],
+            'code' => [
+                'type' => 'text',
+            ],
             'comments' => [
                 'properties' => [
                     'email' => [
