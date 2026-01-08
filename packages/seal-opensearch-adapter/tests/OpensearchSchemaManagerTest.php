@@ -115,6 +115,9 @@ class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
             'categoryIds' => [
                 'type' => 'integer',
             ],
+            'code' => [
+                'type' => 'text',
+            ],
             'comments' => [
                 'properties' => [
                     'email' => [
@@ -165,6 +168,7 @@ class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
             ],
             'location' => [
                 'type' => 'geo_point',
+                'index' => false,
             ],
             'metadata' => [
                 'type' => 'keyword',

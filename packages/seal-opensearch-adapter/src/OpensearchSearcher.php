@@ -207,7 +207,7 @@ final class OpensearchSearcher implements SearcherInterface
         foreach ($filters as $filter) {
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filterQueries[]['ids']['values'][] = $filter->identifier, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
-                $filter instanceof Condition\SearchCondition => $filterQueries[]['bool']['must']['query_string']['query'] = $filter->query, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\SearchCondition => $filterQueries[]['multi_match']['query'] = $filter->query, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 $filter instanceof Condition\EqualCondition => $filterQueries[]['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 $filter instanceof Condition\NotEqualCondition => $filterQueries[]['bool']['must_not']['term'][$this->getFilterField($index, $filter->field)]['value'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 $filter instanceof Condition\GreaterThanCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['gt'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
