@@ -164,7 +164,7 @@ final class MemorySearcher implements SearcherInterface
                 $searchableDocument = $this->getSearchableDocument($index->fields, $document);
 
                 $text = \json_encode($searchableDocument, \JSON_THROW_ON_ERROR);
-                $query = preg_replace('#(/|"|\\\\)#', '\\\\$0', $filter->query);
+                $query = \trim(\json_encode($filter->query, \JSON_THROW_ON_ERROR), '"');
                 $terms = \explode(' ', $query);
                 $searchTerms = \array_unique([...$searchTerms, ...$terms]);
 
