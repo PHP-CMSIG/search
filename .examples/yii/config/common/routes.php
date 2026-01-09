@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Controller\SearchController;
+use App\Web\Search\SearchController;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
 

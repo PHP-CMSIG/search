@@ -1,0 +1,39 @@
+services:
+  app:
+    image: ${IMAGE}:${IMAGE_TAG}
+    networks:
+      - caddy_public
+    volumes:
+      - runtime:/app/runtime
+      - caddy_data:/data
+      - caddy_config:/config
+    env_file:
+      - path: ./prod/.env
+      - path: ./prod/override.env
+        required: false
+    deploy:
+      replicas: 2
+      update_config:
+        delay: 10s
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        monitor: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      labels:
+        caddy: ${PROD_HOST:-app.example.com}
+        caddy.reverse_proxy: "{{upstreams 80}}"
+
+volumes:
+  runtime:
+
+networks:
+  caddy_public:
+    external: true

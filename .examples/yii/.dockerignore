@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# except:
+
+!/config
+!/public
+!/src
+!autoload.php
+!yii
+!composer.json
+!composer.lock
+!.env*

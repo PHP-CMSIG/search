@@ -1,4 +1,1 @@
 actor: FunctionalTester
-modules:
-    enabled:
-    step_decorators: ~

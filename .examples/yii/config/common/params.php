@@ -2,38 +2,38 @@
 
 declare(strict_types=1);
 
-use App\Search\BlogReindexProvider;
-use App\ViewInjection\CommonViewInjection;
-use App\ViewInjection\LayoutViewInjection;
-use App\ViewInjection\TranslatorViewInjection;
+use App\Shared\ApplicationParams;
+use App\Shared\Search\BlogReindexProvider;
+use Yiisoft\Aliases\Aliases;
+use Yiisoft\Assets\AssetManager;
 use Yiisoft\Definitions\Reference;
+use Yiisoft\Router\CurrentRoute;
+use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Yii\View\Renderer\CsrfViewInjection;
 
 return [
-    'app' => [
-        'charset' => 'UTF-8',
-        'locale' => 'en',
-        'name' => 'My Project',
-    ],
+    'application' => require __DIR__ . '/application.php',
 
     'yiisoft/aliases' => [
         'aliases' => require __DIR__ . '/aliases.php',
     ],
 
-    'yiisoft/translator' => [
-        'locale' => 'en',
-        'fallbackLocale' => 'en',
-        'defaultCategory' => 'app',
+    'yiisoft/view' => [
+        'basePath' => null,
+        'parameters' => [
+            'assetManager' => Reference::to(AssetManager::class),
+            'applicationParams' => Reference::to(ApplicationParams::class),
+            'aliases' => Reference::to(Aliases::class),
+            'urlGenerator' => Reference::to(UrlGeneratorInterface::class),
+            'currentRoute' => Reference::to(CurrentRoute::class),
+        ],
     ],
 
     'yiisoft/yii-view-renderer' => [
-        'viewPath' => '@views',
-        'layout' => '@layout/main.php',
+        'viewPath' => null,
+        'layout' => '@src/Web/Shared/Layout/Main/layout.php',
         'injections' => [
-            Reference::to(CommonViewInjection::class),
             Reference::to(CsrfViewInjection::class),
-            Reference::to(LayoutViewInjection::class),
-            Reference::to(TranslatorViewInjection::class),
         ],
     ],
 

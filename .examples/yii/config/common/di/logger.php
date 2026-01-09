@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Psr\Log\LoggerInterface;
 use Yiisoft\Definitions\ReferencesArray;
 use Yiisoft\Log\Logger;
+use Yiisoft\Log\StreamTarget;
 use Yiisoft\Log\Target\File\FileTarget;
 
 /** @var array $params */
@@ -15,6 +16,7 @@ return [
         '__construct()' => [
             'targets' => ReferencesArray::from([
                 FileTarget::class,
+                StreamTarget::class,
             ]),
         ],
     ],

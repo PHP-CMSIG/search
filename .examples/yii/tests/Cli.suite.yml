@@ -1,4 +1,0 @@
-actor: CliTester
-suite_namespace: App\Tests\Cli
-modules:
-    enabled: [Cli]

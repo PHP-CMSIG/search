@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Command\Hello;
+use App\Console;
 
 return [
-    'hello' => Hello::class,
+    'hello' => Console\HelloCommand::class,
 ];

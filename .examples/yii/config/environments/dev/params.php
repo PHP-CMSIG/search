@@ -3,7 +3,5 @@
 declare(strict_types=1);
 
 return [
-    'yiisoft/yii-debug' => [
-        'enabled' => true,
-    ],
+    'traceLink' => 'phpstorm://open?url=file://{file}&line={line}',
 ];

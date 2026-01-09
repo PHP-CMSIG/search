@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      dockerfile: docker/Dockerfile
+      context: ..
+      target: dev
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
+    env_file:
+      - path: ./dev/.env
+      - path: ./dev/override.env
+        required: false
+    ports:
+      - "${DEV_PORT:-80}:80"
+    volumes:
+      - ../:/app
+      - ../runtime:/app/runtime
+      - caddy_data:/data
+      - caddy_config:/config
+    tty: true
+
