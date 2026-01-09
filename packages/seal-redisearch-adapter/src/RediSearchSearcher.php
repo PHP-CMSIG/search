@@ -110,7 +110,9 @@ final class RediSearchSearcher implements SearcherInterface
                 }
             }
             if (isset($row['documentId'])) {
-                $documentIds[] = $row['documentId'];
+                /** @var string|int $documentId */
+                $documentId = $row['documentId'];
+                $documentIds[] = $documentId;
             }
         }
 
@@ -119,7 +121,7 @@ final class RediSearchSearcher implements SearcherInterface
         }
 
         $identifierFieldName = $search->index->getIdentifierField()->name;
-        $escapedIds = \array_map([$this, 'escapeFilterValue'], $documentIds);
+        $escapedIds = \array_map($this->escapeFilterValue(...), $documentIds);
         $searchQuery = \sprintf('@%s:{%s}', $identifierFieldName, \implode('|', $escapedIds));
 
         $parameters = [];

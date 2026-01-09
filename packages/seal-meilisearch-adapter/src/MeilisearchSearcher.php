@@ -189,7 +189,7 @@ final class MeilisearchSearcher implements SearcherInterface
     {
         return \implode(
             ', ',
-            \array_map([$this, 'escapeFilterValue'], $value),
+            \array_map($this->escapeFilterValue(...), $value),
         );
     }
 

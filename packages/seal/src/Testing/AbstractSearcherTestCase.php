@@ -370,7 +370,6 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         $this->assertSame([$documents[2]], [...$search->getResult()]);
 
-
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFilter(Condition::search('FARA25008/B'));
