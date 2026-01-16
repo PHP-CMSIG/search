@@ -1,4 +1,18 @@
 <div align="center">
+    <sup>
+        <b>Your feedback is important 📘</b> <br />
+        <a href="https://github.com/PHP-CMSIG/search/discussions/416">Are you working with SEAL? Let us know!</a>
+        | 
+        <a href="https://github.com/PHP-CMSIG/search/discussions/457">Which Search Engines do you use and why?</a>
+    </sup>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<div align="center">
     <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
@@ -113,6 +127,16 @@ Have also a look at the following tags:
 
 - [https://packagist.org/providers/cmsig/seal-adapter-implementation](https://packagist.org/providers/cmsig/seal-adapter-implementation)
 - [https://github.com/topics/seal-php-adapter](https://github.com/topics/seal-php-adapter)
+
+##  Usages
+
+The following open source projects are using SEAL:
+
+- [Contao CMS](https://github.com/contao/contao)
+- [Sulu CMS](https://github.com/sulu/sulu)
+- [Typo3 Extension](https://extensions.typo3.org/extension/seal)
+
+You are using SEAL? [Let us know](https://github.com/PHP-CMSIG/search/discussions/416).
 
 ## 🦑 Similar Projects
 

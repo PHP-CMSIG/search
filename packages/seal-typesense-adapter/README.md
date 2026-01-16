@@ -4,6 +4,20 @@
 ---
 
 <div align="center">
+    <sup>
+        <b>Your feedback is important 📘</b> <br />
+        <a href="https://github.com/PHP-CMSIG/search/discussions/416">Are you working with SEAL? Let us know!</a>
+        | 
+        <a href="https://github.com/PHP-CMSIG/search/discussions/457">Which Search Engines do you use and why?</a>
+    </sup>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+<div align="center">
     <img alt="SEAL Logo with an abstract seal sitting on a telescope." src="https://avatars.githubusercontent.com/u/120221538?s=400&v=6" width="200" height="200">
 </div>
 
