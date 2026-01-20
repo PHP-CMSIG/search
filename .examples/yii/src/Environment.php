@@ -22,6 +22,7 @@ final class Environment
     {
         self::setEnvironment();
         self::setNonEmptyStringOrNull('ALGOLIA_DSN', null);
+        self::setNonEmptyStringOrNull('TEST_INDEX_PREFIX', null);
         self::setBoolean('APP_C3', false);
         self::setBoolean('APP_DEBUG', false);
         self::setNonEmptyStringOrNull('APP_HOST_PATH', null);
