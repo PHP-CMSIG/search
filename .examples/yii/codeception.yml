@@ -3,7 +3,7 @@ support_namespace: Support
 bootstrap: bootstrap.php
 
 settings:
-  shuffle: true
+  shuffle: false
   colors: true
 
 paths:
