@@ -78,9 +78,6 @@
     "guzzlehttp/psr7": {
         "version": "1.7.0"
     },
-    "masterminds/html5": {
-        "version": "2.6.0"
-    },
     "meilisearch/meilisearch-php": {
         "version": "v0.26.1"
     },

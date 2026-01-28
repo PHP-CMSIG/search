@@ -1,4 +1,9 @@
 when@dev:
-    _errors:
-        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
-        prefix: /_error
+    # for Symfony 6.4 -> 8.0 support manual register the route:
+    _preview_error:
+        controller: 'error_controller::preview'
+        path: /_error/{code}.{_format}
+        defaults:
+            _format: html
+        requirements:
+            code: '\d+'

@@ -44,8 +44,8 @@
         "rector/rector": "^2.0",
         "spiral/dumper": "^3.3",
         "spiral/testing": "^2.8",
-        "symfony/css-selector": "^6.2",
-        "symfony/dom-crawler": "^6.2",
+        "symfony/css-selector": "^6.2 || ^7.0 || ^8.0",
+        "symfony/dom-crawler": "^6.2 || ^7.0 || ^8.0",
         "vimeo/psalm": "^5.22"
     },
     "repositories": [

@@ -84,8 +84,8 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^2.0",
         "roave/security-advisories": "dev-master",
-        "symfony/css-selector": "^6.2",
-        "symfony/dom-crawler": "^6.2"
+        "symfony/css-selector": "^6.2 || ^7.0 || ^8.0",
+        "symfony/dom-crawler": "^6.2 || ^7.0 || ^8.0"
     },
     "repositories": [
         {

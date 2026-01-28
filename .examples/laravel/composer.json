@@ -37,8 +37,8 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "rector/rector": "^2.0",
         "spatie/laravel-ignition": "^2.4",
-        "symfony/css-selector": "^6.4 || 7.0",
-        "symfony/dom-crawler": "^6.4 || 7.0"
+        "symfony/css-selector": "^6.4 || ^7.0 || ^8.0",
+        "symfony/dom-crawler": "^6.4 || ^7.0 || ^8.0"
     },
     "conflict": {
         "react/promise": "<2.2.0"
