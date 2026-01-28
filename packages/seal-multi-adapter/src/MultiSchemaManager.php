@@ -58,7 +58,7 @@ final class MultiSchemaManager implements SchemaManagerInterface
             return null;
         }
 
-        return new AsyncTask(function () use ($tasks): void {
+        return new AsyncTask(static function () use ($tasks): void {
             $multiTask = new MultiTask($tasks);
             $multiTask->wait();
         });
@@ -79,7 +79,7 @@ final class MultiSchemaManager implements SchemaManagerInterface
             return null;
         }
 
-        return new AsyncTask(function () use ($tasks): void {
+        return new AsyncTask(static function () use ($tasks): void {
             $multiTask = new MultiTask($tasks);
             $multiTask->wait();
         });

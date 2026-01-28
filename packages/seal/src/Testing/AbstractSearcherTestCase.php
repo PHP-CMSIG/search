@@ -1169,7 +1169,7 @@ abstract class AbstractSearcherTestCase extends TestCase
                 'Expected only documents with location document "' . $loadedDocument['uuid'] . '" without location latitude returned.', // @phpstan-ignore-line binaryOp.invalid
             );
 
-            $isInBoxFunction = function (
+            $isInBoxFunction = static function (
                 float $latitude,
                 float $longitude,
                 float $northLatitude,
@@ -1226,7 +1226,7 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             /** @var int[] $categoryIds */
             $categoryIds = $loadedDocument['categoryIds'];
-            $smallestCategoryId = \array_reduce($categoryIds, fn (int|null $categoryId, int|null $item): int|null => null !== $categoryId ? \min($categoryId, $item) : $item);
+            $smallestCategoryId = \array_reduce($categoryIds, static fn (int|null $categoryId, int|null $item): int|null => null !== $categoryId ? \min($categoryId, $item) : $item);
 
             $this->assertNotNull($smallestCategoryId);
             $this->assertLessThanOrEqual(2.0, $smallestCategoryId);
@@ -1529,7 +1529,7 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         $search->addFilter($condition);
 
-        $loadedDocumentIds = \array_map(fn (array $document) => $document['uuid'], [...$search->getResult()]);
+        $loadedDocumentIds = \array_map(static fn (array $document) => $document['uuid'], [...$search->getResult()]);
 
         \sort($expectedDocumentIds);
         \sort($loadedDocumentIds);

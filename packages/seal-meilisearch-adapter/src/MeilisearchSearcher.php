@@ -108,7 +108,7 @@ final class MeilisearchSearcher implements SearcherInterface
             $searchParams['distinct'] = $search->distinct;
         }
 
-        $searchParams['facets'] = \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets);
+        $searchParams['facets'] = \array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets);
 
         $searchResult = $searchIndex->search($query, $searchParams);
         /** @var array{hits: array<array<string, mixed>>, totalHits?: int, estimatedTotalHits?: int} $data */

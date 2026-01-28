@@ -100,7 +100,7 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withDistinct($search->distinct);
         }
 
-        $searchParameters = $searchParameters->withFacets(\array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets));
+        $searchParameters = $searchParameters->withFacets(\array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets));
 
         if ([] !== $search->highlightFields) {
             $searchParameters = $searchParameters->withAttributesToHighlight(

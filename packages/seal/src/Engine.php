@@ -183,7 +183,7 @@ final class Engine implements EngineInterface
             foreach ($reindexProviders as $reindexProvider) {
                 $tasks[] = $this->bulk(
                     $index,
-                    (function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
+                    (static function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
                         $count = 0;
                         $total = $reindexProvider->total();
 

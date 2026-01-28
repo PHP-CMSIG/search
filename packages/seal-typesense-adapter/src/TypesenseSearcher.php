@@ -117,7 +117,7 @@ final class TypesenseSearcher implements SearcherInterface
             $isGrouped = true;
         }
 
-        $searchParams['facet_by'] = \implode(',', \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets));
+        $searchParams['facet_by'] = \implode(',', \array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets));
 
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
 

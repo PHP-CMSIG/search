@@ -129,7 +129,7 @@ final class AlgoliaSearcher implements SearcherInterface
             $searchParams['distinct'] = true; // Algolia does not support multiple fields, so it can only be the one in the schema
         }
 
-        $searchParams['facets'] = \array_map(fn (AbstractFacet $facet) => $facet->field, $search->facets);
+        $searchParams['facets'] = \array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets);
 
         $data = $this->client->searchSingleIndex($indexName, $searchParams);
         \assert(\is_array($data) && isset($data['hits']) && \is_array($data['hits']), 'The "hits" array is expected to be returned by algolia client.');

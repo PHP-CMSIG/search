@@ -84,7 +84,7 @@ final class ReindexCommand extends Command
             $engine->reindex(
                 $this->reindexProviders,
                 $reindexConfig,
-                function (string $index, int $count, int|null $total) use ($progressBar) {
+                static function (string $index, int $count, int|null $total) use ($progressBar) {
                     if (null !== $total) {
                         $progressBar->setMaxSteps($total);
                     }

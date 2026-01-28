@@ -189,7 +189,7 @@ abstract class AbstractAdapterTestCase extends TestCase
             ->withIndex(TestingHelper::INDEX_COMPLEX)
             ->withIdentifiers(
                 \array_map(
-                    fn ($document) => $document['uuid'],
+                    static fn ($document) => $document['uuid'],
                     $documents,
                 ),
             );

@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->singleton(BlogReindexProvider::class, fn () => new BlogReindexProvider());
+        $this->app->singleton(BlogReindexProvider::class, static fn () => new BlogReindexProvider());
 
         $this->app->tag(BlogReindexProvider::class, 'cmsig_seal.reindex_provider');
     }

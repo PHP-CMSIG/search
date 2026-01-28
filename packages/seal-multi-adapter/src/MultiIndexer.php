@@ -47,7 +47,7 @@ final class MultiIndexer implements IndexerInterface
             return null;
         }
 
-        return new AsyncTask(function () use ($tasks, $document) {
+        return new AsyncTask(static function () use ($tasks, $document) {
             $multiTask = new MultiTask($tasks);
             $multiTask->wait();
 
@@ -70,7 +70,7 @@ final class MultiIndexer implements IndexerInterface
             return null;
         }
 
-        return new AsyncTask(function () use ($tasks): void {
+        return new AsyncTask(static function () use ($tasks): void {
             $multiTask = new MultiTask($tasks);
             $multiTask->wait();
         });

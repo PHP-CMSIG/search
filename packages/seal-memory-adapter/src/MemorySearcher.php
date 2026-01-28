@@ -83,7 +83,7 @@ final class MemorySearcher implements SearcherInterface
 
         $sortBys = \array_reverse($search->sortBys);
         foreach ($sortBys as $field => $direction) {
-            \usort($documents, function ($docA, $docB) use ($field, $direction) {
+            \usort($documents, static function ($docA, $docB) use ($field, $direction) {
                 if ('desc' === $direction) {
                     return $docB[$field] <=> $docA[$field];
                 }
@@ -94,7 +94,7 @@ final class MemorySearcher implements SearcherInterface
 
         $documents = \array_slice($documents, $search->offset, $search->limit);
 
-        $generator = (function () use ($documents, $search, $searchTerms): \Generator {
+        $generator = (static function () use ($documents, $search, $searchTerms): \Generator {
             foreach ($documents as $document) {
                 foreach ($search->highlightFields as $highlightField) {
                     $highlightFieldContent = \json_encode($document[$highlightField], \JSON_THROW_ON_ERROR);

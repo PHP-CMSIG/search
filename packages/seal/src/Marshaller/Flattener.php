@@ -158,7 +158,7 @@ final class Flattener
                 $keyPartsReplacements = $keyParts;
 
                 /** @var string $newKeyPath */
-                $newKeyPath = \preg_replace_callback('/' . \preg_quote($this->metadataPlaceholder, '/') . '/', function () use (&$keyPartsReplacements) {  // @phpstan-ignore-line argument.type
+                $newKeyPath = \preg_replace_callback('/' . \preg_quote($this->metadataPlaceholder, '/') . '/', static function () use (&$keyPartsReplacements) {  // @phpstan-ignore-line argument.type
                     return \array_shift($keyPartsReplacements);
                 }, $metadata[$metadataKey][$subKey]);
 
