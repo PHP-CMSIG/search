@@ -61,31 +61,7 @@ parameters:
 			path: app/src/Endpoint/Web/Middleware/LocaleSelector.php
 
 		-
-			message: '#^Cannot call method attr\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/SearchControllerTest.php
-
-		-
-			message: '#^Cannot call method text\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 2
-			path: tests/SearchControllerTest.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: tests/SearchControllerTest.php
-
-		-
-			message: '#^Parameter \#1 \$needle of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/SearchControllerTest.php
-
-		-
-			message: '#^Parameter \#1 \$uri of method Spiral\\Testing\\Http\\FakeHttp\:\:get\(\) expects string, mixed given\.$#'
+			message: '#^Parameter \#1 \$uri of method Spiral\\Testing\\Http\\FakeHttp\:\:get\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/SearchControllerTest.php
