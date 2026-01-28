@@ -360,7 +360,7 @@ search engine.
 
             services:
               typesense:
-                image: typesense/typesense:29.0
+                image: typesense/typesense:30.0
                 ports:
                   - "8108:8108"
                 environment:
