@@ -59,7 +59,7 @@ final class ReindexCommand extends Command
         /** @var bool $drop */
         $drop = $input->getOption('drop');
         /** @var int $bulkSize */
-        $bulkSize = $input->getOption('bulk-size');
+        $bulkSize = ((int) $input->getOption('bulk-size')) ?: 100; // @phpstan-ignore-line
         /** @var \DateTimeImmutable|null $dateTimeBoundary */
         $dateTimeBoundary = $input->getOption('datetime-boundary') ? new \DateTimeImmutable((string) $input->getOption('datetime-boundary')) : null; // @phpstan-ignore-line
         /** @var array<string> $identifiers */
