@@ -100,7 +100,11 @@ final class ElasticsearchIndexer implements IndexerInterface
 
         $batchIndexingResponses = [];
         foreach (BulkHelper::splitBulk($saveDocuments, $bulkSize) as $bulkSaveDocuments) {
-            $params = ['body' => []];
+            $params = [
+                'body' => [],
+                // TODO refresh should be refactored with async tasks
+                'refresh' => ($options['return_slow_promise_result'] ?? false) ? 'true' : 'false', // update document immediately, so it is available in the `/_search` api directly
+            ];
             foreach ($bulkSaveDocuments as $document) {
                 $document = $this->marshaller->marshall($index->fields, $document);
 
@@ -128,7 +132,11 @@ final class ElasticsearchIndexer implements IndexerInterface
         }
 
         foreach (BulkHelper::splitBulk($deleteDocumentIdentifiers, $bulkSize) as $bulkDeleteDocumentIdentifiers) {
-            $params = ['body' => []];
+            $params = [
+                'body' => [],
+                // TODO refresh should be refactored with async tasks
+                'refresh' => ($options['return_slow_promise_result'] ?? false) ? 'true' : 'false', // update document immediately, so it is available in the `/_search` api directly
+            ];
             foreach ($bulkDeleteDocumentIdentifiers as $deleteDocumentIdentifier) {
                 $params['body'][] = [
                     'delete' => [
