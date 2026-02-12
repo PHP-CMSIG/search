@@ -45,7 +45,7 @@ class ElasticsearchAdapterFactory implements AdapterFactoryInterface
      *     port?: int,
      *     user?: string,
      *     pass?: string,
-     *     query: array<string, string>,
+     *     query: array<string, string|string[]>,
      * } $dsn
      */
     public function createClient(array $dsn): Client
@@ -60,7 +60,9 @@ class ElasticsearchAdapterFactory implements AdapterFactoryInterface
             return $client;
         }
 
-        $useTls = ($dsn['query']['tls'] ?? false) === true;
+        $tlsQuery = $dsn['query']['tls'] ?? 'false';
+        \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
+        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
         $scheme = $useTls ? 'https' : 'http';
         $port = $dsn['port'] ?? 9200;
 
