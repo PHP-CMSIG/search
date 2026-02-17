@@ -14,7 +14,6 @@ $cacheConfig = [
 
 $aggregator = new ConfigAggregator([
     \CmsIg\Seal\Integration\Mezzio\ConfigProvider::class,
-    \Mezzio\Tooling\ConfigProvider::class,
     \Mezzio\Helper\ConfigProvider::class,
     \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
@@ -23,12 +22,10 @@ $aggregator = new ConfigAggregator([
     \Mezzio\ConfigProvider::class,
     \Mezzio\Router\ConfigProvider::class,
     \Laminas\Diactoros\ConfigProvider::class,
-
     // Swoole config to overwrite some services (if installed)
     \class_exists(\Mezzio\Swoole\ConfigProvider::class)
         ? \Mezzio\Swoole\ConfigProvider::class
         : static fn (): array => [],
-
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):
     //   - `global.php`
@@ -36,10 +33,8 @@ $aggregator = new ConfigAggregator([
     //   - `local.php`
     //   - `*.local.php`
     new PhpFileProvider(\realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
-
     // Load development config if it exists
     new PhpFileProvider(\realpath(__DIR__) . '/development.config.php'),
-
     // Default App module config
     App\ConfigProvider::class,
 ], $cacheConfig['config_cache_path']);

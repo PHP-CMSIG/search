@@ -73,7 +73,6 @@
         "cmsig/seal-typesense-adapter": "^0.12",
         "filp/whoops": "^2.7.1",
         "laminas/laminas-development-mode": "^3.3.0",
-        "mezzio/mezzio-tooling": "^2.8",
         "php-cs-fixer/shim": "^3.51",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^2.0",
