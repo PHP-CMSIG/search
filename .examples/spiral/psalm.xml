@@ -1,15 +1,184 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="2"
-    resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    name="Psalm for Psalm"
+    errorLevel="1"
+    noCache="true"
+    forceJit="true"
+    throwExceptionOnError="0"
+    findUnusedCode="true"
+    ensureArrayStringOffsetsExist="true"
+    ensureArrayIntOffsetsExist="true"
+    xsi:schemaLocation="https://getpsalm.org/schema/config config.xsd"
+    limitMethodComplexity="true"
+    errorBaseline="psalm-baseline.xml"
+    allFunctionsGlobal="true"
+    ensureOverrideAttribute="true"
+    allConstantsGlobal="true"
+    findUnusedPsalmSuppress="true"
+    findUnusedBaselineEntry="true"
+    findUnusedIssueHandlerSuppression="true"
 >
+    <stubs>
+        <file name="stubs/phpparser.phpstub"/>
+    </stubs>
     <projectFiles>
-        <directory name="app/src"/>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <directory name="examples"/>
+        <file name="psalm"/>
+        <file name="psalm-language-server"/>
+        <file name="psalm-plugin"/>
+        <file name="psalm-refactor"/>
+        <file name="psalm-review"/>
+        <file name="psalter"/>
         <ignoreFiles>
-            <directory name="vendor"/>
+            <file name="src/Psalm/Internal/PhpTraverser/CustomTraverser.php"/>
+            <file name="tests/ErrorBaselineTest.php"/>
+            <file name="tests/Internal/CallMapTest.php"/>
+            <file name="vendor/symfony/console/Command/Command.php"/>
+            <directory name="tests/fixtures"/>
+            <file name="vendor/danog/advanced-json-rpc/lib/Dispatcher.php" />
+            <directory name="vendor/netresearch/jsonmapper" />
+            <directory name="vendor/phpunit" />
+            <directory name="vendor/mockery/mockery"/>
+            <file name="vendor/nikic/php-parser/lib/PhpParser/Node/UnionType.php" />
         </ignoreFiles>
     </projectFiles>
+
+    <ignoreExceptions>
+        <class name="UnexpectedValueException"/>
+        <class name="InvalidArgumentException"/>
+        <class name="LogicException"/>
+    </ignoreExceptions>
+
+    <plugins>
+        <plugin filename="examples/plugins/FunctionCasingChecker.php"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <plugin filename="examples/plugins/InternalChecker.php"/>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin"/>
+    </plugins>
+
+    <issueHandlers>
+        <Trace errorLevel="error"/>
+        <PossiblyNullOperand errorLevel="suppress"/>
+
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+            </errorLevel>
+        </DeprecatedMethod>
+
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <directory name="examples"/>
+                <directory name="src/Psalm/Internal/Fork" />
+                <directory name="src/Psalm/Node" />
+                <file name="src/Psalm/Plugin/Shepherd.php" />
+            </errorLevel>
+        </UnusedClass>
+
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+                <file name="vendor/nikic/php-parser/lib/PhpParser/Node/Name.php" />
+            </errorLevel>
+        </MissingConstructor>
+
+        <PossiblyUndefinedIntArrayOffset>
+            <errorLevel type="suppress">
+                <directory name="src/Psalm/Internal/ExecutionEnvironment" />
+                <directory name="tests"/>
+            </errorLevel>
+        </PossiblyUndefinedIntArrayOffset>
+
+        <MissingThrowsDocblock errorLevel="info"/>
+
+        <PossiblyUnusedProperty>
+            <errorLevel type="suppress">
+                <file name="src/Psalm/Report.php"/>
+            </errorLevel>
+        </PossiblyUnusedProperty>
+
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="src/Psalm/Plugin"/>
+                <directory name="src/Psalm/SourceControl/Git/"/>
+                <file name="src/Psalm/Internal/LanguageServer/Client/TextDocument.php"/>
+                <file name="src/Psalm/Internal/LanguageServer/Server/TextDocument.php"/>
+                <referencedMethod name="Psalm\Codebase::getParentInterfaces"/>
+                <referencedMethod name="Psalm\Codebase::getMethodParams"/>
+                <referencedMethod name="Psalm\Codebase::getMethodReturnType"/>
+                <referencedMethod name="Psalm\Codebase::getMethodReturnTypeLocation"/>
+                <referencedMethod name="Psalm\Codebase::getDeclaringMethodId"/>
+                <referencedMethod name="Psalm\Codebase::getAppearingMethodId"/>
+                <referencedMethod name="Psalm\Codebase::getOverriddenMethodIds"/>
+                <referencedMethod name="Psalm\Codebase::getCasedMethodId"/>
+                <referencedMethod name="Psalm\Codebase::createClassLikeStorage"/>
+                <referencedMethod name="Psalm\Codebase::isVariadic"/>
+                <referencedMethod name="Psalm\Codebase::getMethodReturnsByRef"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </InternalMethod>
+
+        <PossiblyUndefinedStringArrayOffset>
+            <errorLevel type="suppress">
+                <directory name="src/Psalm/Internal/Provider/ReturnTypeProvider" />
+                <file name="src/Psalm/Internal/Type/AssertionReconciler.php" />
+                <file name="src/Psalm/Internal/Type/NegatedAssertionReconciler.php" />
+                <file name="src/Psalm/Internal/Type/SimpleAssertionReconciler.php" />
+                <file name="src/Psalm/Internal/Type/SimpleNegatedAssertionReconciler.php" />
+                <directory name="tests"/>
+            </errorLevel>
+        </PossiblyUndefinedStringArrayOffset>
+
+        <MixedPropertyTypeCoercion>
+            <errorLevel type="suppress">
+                <directory name="vendor/nikic/php-parser" />
+            </errorLevel>
+        </MixedPropertyTypeCoercion>
+
+        <PropertyTypeCoercion>
+            <errorLevel type="suppress">
+                <directory name="vendor/nikic/php-parser" />
+            </errorLevel>
+        </PropertyTypeCoercion>
+
+        <InvalidArrayOffset>
+            <errorLevel type="suppress">
+                <file name="vendor/nikic/php-parser/lib/PhpParser/Node/Stmt/Class_.php" />
+                <file name="vendor/nikic/php-parser/lib/PhpParser/Node/Stmt/ClassMethod.php" />
+            </errorLevel>
+        </InvalidArrayOffset>
+
+        <InvalidPropertyAssignmentValue>
+            <errorLevel type="suppress">
+                <file name="vendor/nikic/php-parser/lib/PhpParser/Node/MatchArm.php" />
+            </errorLevel>
+        </InvalidPropertyAssignmentValue>
+
+        <MixedAssignment>
+            <errorLevel type="suppress">
+                <directory name="vendor/nikic/php-parser" />
+            </errorLevel>
+        </MixedAssignment>
+
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <referencedProperty name="PhpParser\Node\Const_::$namespacedName" />
+                <referencedProperty name="PhpParser\Node\Stmt\ClassLike::$namespacedName" />
+                <referencedProperty name="PhpParser\Node\Stmt\Function_::$namespacedName" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
+
+    <forbiddenFunctions>
+        <function name="die" />
+    </forbiddenFunctions>
 </psalm>

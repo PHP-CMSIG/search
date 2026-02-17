@@ -39,14 +39,17 @@
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
-        "phpunit/phpunit": "^10.3",
+        "phpunit/phpunit": "^9.6 || ^10.3",
         "qossmic/deptrac-shim": "^1.0",
         "rector/rector": "^2.0",
         "spiral/dumper": "^3.3",
         "spiral/testing": "^2.8",
         "symfony/css-selector": "^6.2 || ^7.0 || ^8.0",
         "symfony/dom-crawler": "^6.2 || ^7.0 || ^8.0",
-        "vimeo/psalm": "^5.22"
+        "vimeo/psalm": "^6.10"
+    },
+    "conflict": {
+        "phpunit/phpunit": ">10.5.45"
     },
     "repositories": [
         {
@@ -86,9 +89,6 @@
             "spiral/composer-publish-plugin": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true
-        },
-        "platform": {
-            "php": "8.2.16"
         }
     },
     "scripts": {
