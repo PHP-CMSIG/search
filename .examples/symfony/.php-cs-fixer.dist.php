@@ -13,6 +13,7 @@ $finder = (new PhpCsFixer\Finder())
         __DIR__ . '/tests',
     ])
     ->notPath('#reference\.php$#')
+    ->notPath('#bundles\.php$#')
     ->ignoreVCSIgnored(true);
 
 $phpCsConfig->setFinder($finder);
