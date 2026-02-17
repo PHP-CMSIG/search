@@ -29,33 +29,3 @@ parameters:
 			identifier: callable.nonCallable
 			count: 2
 			path: test/AppTest/FunctionalTestCase.php
-
-		-
-			message: '#^Cannot call method attr\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: test/AppTest/Handler/SearchHandlerTest.php
-
-		-
-			message: '#^Cannot call method text\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 2
-			path: test/AppTest/Handler/SearchHandlerTest.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: test/AppTest/Handler/SearchHandlerTest.php
-
-		-
-			message: '#^Parameter \#1 \$needle of method PHPUnit\\Framework\\Assert\:\:assertStringContainsString\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: test/AppTest/Handler/SearchHandlerTest.php
-
-		-
-			message: '#^Parameter \#2 \$uri of method Psr\\Http\\Message\\ServerRequestFactoryInterface\:\:createServerRequest\(\) expects Psr\\Http\\Message\\UriInterface\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: test/AppTest/Handler/SearchHandlerTest.php

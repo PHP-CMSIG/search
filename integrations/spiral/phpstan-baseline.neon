@@ -1,16 +1,7 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$index of method CmsIg\\\\Seal\\\\EngineInterface\\:\\:createIndex\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Console/IndexCreateCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$index of method CmsIg\\\\Seal\\\\EngineInterface\\:\\:dropIndex\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/Console/IndexDropCommand.php
-
-		-
-			message: "#^Cannot call method createProgressBar\\(\\) on Symfony\\\\Component\\\\Console\\\\Style\\\\SymfonyStyle\\|null\\.$#"
+			message: '#^Cannot call method createProgressBar\(\) on Symfony\\Component\\Console\\Style\\SymfonyStyle\|null\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: src/Console/ReindexCommand.php

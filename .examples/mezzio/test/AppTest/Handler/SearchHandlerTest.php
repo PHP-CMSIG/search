@@ -33,7 +33,9 @@ final class SearchHandlerTest extends FunctionalTestCase
 
         $crawler = $this->crawler($content);
         $crawler->filter('a')->each(function ($node) {
-            $request = $this->requestFactory->createServerRequest('GET', $node->attr('href'));
+            $href = $node->attr('href');
+            $this->assertNotNull($href);
+            $request = $this->requestFactory->createServerRequest('GET', $href);
             $response = $this->app->handle($request);
             self::assertSame(200, $response->getStatusCode());
             $content = $response->getBody()->__toString();
