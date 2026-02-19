@@ -80,6 +80,13 @@ Via DSN for your favorite framework:
 typesense://S3CR3T@127.0.0.1:8108
 ```
 
+Or with TLS enabled (uses `https` and defaults to port `443`):
+
+```env
+typesense://S3CR3T@127.0.0.1?tls=true
+typesense://S3CR3T@127.0.0.1:443?tls=true
+```
+
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)

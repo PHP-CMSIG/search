@@ -44,6 +44,7 @@ class TypesenseAdapterFactory implements AdapterFactoryInterface
      *     host: string,
      *     port?: int,
      *     user?: string,
+     *     query: array<string, string>,
      * } $dsn
      */
     public function createClient(array $dsn): Client
@@ -58,14 +59,20 @@ class TypesenseAdapterFactory implements AdapterFactoryInterface
             return $client;
         }
 
+        $tlsQuery = $dsn['query']['tls'] ?? 'false';
+        \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
+        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
+        $protocol = $useTls ? 'https' : 'http';
+        $port = $dsn['port'] ?? $useTls ? 443 : 8108;
+
         return new Client(
             [
                 'api_key' => $dsn['user'] ?? null,
                 'nodes' => [
                     [
                         'host' => $dsn['host'],
-                        'port' => $dsn['port'] ?? 8108,
-                        'protocol' => 'http',
+                        'port' => $port,
+                        'protocol' => $protocol,
                     ],
                 ],
                 'client' => $this->createClientClient(),
