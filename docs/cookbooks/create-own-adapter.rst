@@ -16,7 +16,7 @@ To create your own Adapter you need atleast the SEAL composer package:
 
 The project already ships a test suite based on PHPUnit to use it you need to install PHPUnit:
 
-    composer require phpunit/phpunit:"^9.6"
+    composer require phpunit/phpunit:"^10.3"
 
 Create Basic Classes
 --------------------
