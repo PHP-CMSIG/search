@@ -63,7 +63,7 @@ class TypesenseAdapterFactory implements AdapterFactoryInterface
         \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
         $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
         $protocol = $useTls ? 'https' : 'http';
-        $port = $dsn['port'] ?? $useTls ? 443 : 8108;
+        $port = $dsn['port'] ?? ($useTls ? 443 : 8108);
 
         return new Client(
             [
