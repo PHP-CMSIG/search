@@ -64,7 +64,7 @@ class ElasticsearchAdapterFactory implements AdapterFactoryInterface
         \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
         $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
         $scheme = $useTls ? 'https' : 'http';
-        $port = $dsn['port'] ?? 9200;
+        $port = $dsn['port'] ?? ($useTls ? 443 : 9200);
 
         $client = ClientBuilder::create()->setHosts([
             $scheme . '://' . $dsn['host'] . ':' . $port,
