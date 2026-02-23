@@ -254,6 +254,7 @@ integrations into Frameworks Dependency Injection container and constructing the
          *     port?: int,
          *     user?: string,
          *     pass?: string,
+         *     query: array<string, string|string[]>,
          * } $dsn
          */
         public function createClient(array $dsn): SearchClient
@@ -264,8 +265,12 @@ integrations into Frameworks Dependency Injection container and constructing the
                 return $client;
             }
 
+            $tlsQuery = $dsn['query']['tls'] ?? 'false';
+            $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
+            $scheme = $useTls ? 'https' : 'http';
+
             $client = new Client(
-                $dsn['host'] . ':' . ($dsn['port'] ?? 9200),+
+                $scheme . '://' . $dsn['host'] . ':' . ($dsn['port'] ?? ($useTls ? 443 : 80)),
                 $dsn['user'] ?? '',
                 $pass = $dsn['pass'] ?? '',
             );
