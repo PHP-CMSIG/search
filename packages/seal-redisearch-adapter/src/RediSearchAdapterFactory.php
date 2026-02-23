@@ -42,6 +42,7 @@ class RediSearchAdapterFactory implements AdapterFactoryInterface
      *     port?: int,
      *     user?: string,
      *     pass?: string,
+     *     query: array<string, string|string[]>,
      * } $dsn
      */
     public function createClient(array $dsn): \Redis
@@ -60,8 +61,14 @@ class RediSearchAdapterFactory implements AdapterFactoryInterface
         $password = $dsn['pass'] ?? '';
         $password = '' !== $password ? [$user, $password] : $user;
 
+        $tlsQuery = $dsn['query']['tls'] ?? 'false';
+        \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
+        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
+        $port = $dsn['port'] ?? ($useTls ? 6380 : 6379);
+        $scheme = $useTls ? 'tls://' : '';
+
         $client = new \Redis();
-        $client->pconnect($dsn['host'], $dsn['port'] ?? 6379);
+        $client->pconnect($scheme . $dsn['host'], $port);
 
         if ($password) {
             $client->auth($password);

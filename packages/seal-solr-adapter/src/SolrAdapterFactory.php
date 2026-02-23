@@ -51,6 +51,7 @@ class SolrAdapterFactory implements AdapterFactoryInterface
      *     port?: int,
      *     user?: string,
      *     pass?: string,
+     *     query: array<string, string|string[]>,
      * } $dsn
      */
     public function createClient(array $dsn): Client
@@ -65,13 +66,20 @@ class SolrAdapterFactory implements AdapterFactoryInterface
             return $client;
         }
 
+        $tlsQuery = $dsn['query']['tls'] ?? 'false';
+        \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
+        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
+        $scheme = $useTls ? 'https' : 'http';
+        $port = $dsn['port'] ?? ($useTls ? 443 : 8983);
+
         $adapter = $this->createClientAdapter();
         $eventDispatcher = $this->createEventDispatcher();
         $options = [
             'endpoint' => [
                 'localhost' => \array_filter([
+                    'scheme' => $scheme,
                     'host' => $dsn['host'],
-                    'port' => $dsn['port'] ?? 8983,
+                    'port' => $port,
                     'username' => $dsn['user'] ?? null,
                     'password' => $dsn['pass'] ?? null,
                 ]),
