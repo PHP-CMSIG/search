@@ -3334,16 +3334,16 @@
     "packages-dev": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.38.1",
+            "version": "4.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "e70df6a98a2fee91ba43e7c00b72e2e0a3c332c5"
+                "reference": "551987d31ad8ef7d0d93c17f374eaf60054a6f24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/e70df6a98a2fee91ba43e7c00b72e2e0a3c332c5",
-                "reference": "e70df6a98a2fee91ba43e7c00b72e2e0a3c332c5",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/551987d31ad8ef7d0d93c17f374eaf60054a6f24",
+                "reference": "551987d31ad8ef7d0d93c17f374eaf60054a6f24",
                 "shasum": ""
             },
             "require": {
@@ -3395,9 +3395,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.38.1"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.39.0"
             },
-            "time": "2026-02-12T17:28:29+00:00"
+            "time": "2026-02-18T21:44:42+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -6252,16 +6252,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.94.0",
+            "version": "v3.94.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "bf90113c2d4f349a639df42045d36e78ffc25c9a"
+                "reference": "80fd29f44a736136a2f05bae5464816a444b91d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/bf90113c2d4f349a639df42045d36e78ffc25c9a",
-                "reference": "bf90113c2d4f349a639df42045d36e78ffc25c9a",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/80fd29f44a736136a2f05bae5464816a444b91d1",
+                "reference": "80fd29f44a736136a2f05bae5464816a444b91d1",
                 "shasum": ""
             },
             "require": {
@@ -6298,9 +6298,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.94.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.94.2"
             },
-            "time": "2026-02-11T16:45:46+00:00"
+            "time": "2026-02-20T16:14:17+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -7543,16 +7543,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.3.6",
+            "version": "2.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "ca9ebb81d280cd362ea39474dabd42679e32ca6b"
+                "reference": "bbd37aedd8df749916cffa2a947cfc4714d1ba2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ca9ebb81d280cd362ea39474dabd42679e32ca6b",
-                "reference": "ca9ebb81d280cd362ea39474dabd42679e32ca6b",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/bbd37aedd8df749916cffa2a947cfc4714d1ba2c",
+                "reference": "bbd37aedd8df749916cffa2a947cfc4714d1ba2c",
                 "shasum": ""
             },
             "require": {
@@ -7591,7 +7591,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.3.6"
+                "source": "https://github.com/rectorphp/rector/tree/2.3.8"
             },
             "funding": [
                 {
@@ -7599,7 +7599,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-06T14:25:06+00:00"
+            "time": "2026-02-22T09:45:50+00:00"
         },
         {
             "name": "sebastian/cli-parser",
