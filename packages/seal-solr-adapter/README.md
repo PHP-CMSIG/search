@@ -57,6 +57,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 $client = new Client(new Curl(), new EventDispatcher(), [
     'endpoint' => [
         'localhost' => [
+            'scheme' => 'http',
             'host' => '127.0.0.1',
             'port' => '8983',
             // authenticated required for configset api https://solr.apache.org/guide/8_9/configsets-api.html
@@ -78,6 +79,7 @@ Via DSN for your favorite framework:
 ```env
 solr://127.0.0.1:8983
 solr://solr:SolrRocks@127.0.0.1:8983
+solr://solr:SolrRocks@127.0.0.1:8983?tls=true
 ```
 
 ## Authors

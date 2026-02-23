@@ -72,6 +72,8 @@ Via DSN for your favorite framework:
 
 ```env
 elasticsearch://127.0.0.1:9200
+elasticsearch://127.0.0.1:9200?tls=true
+elasticsearch://username:password@127.0.0.1:9200?tls=true
 ```
 
 ## Authors

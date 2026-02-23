@@ -70,6 +70,7 @@ Via DSN for your favorite framework:
 redis://127.0.0.1:6379
 redis://supersecure@127.0.0.1:6379
 redis://phpredis:phpredis@127.0.0.1:6379
+redis://phpredis:phpredis@127.0.0.1:6380&tls=true
 ```
 
 The `ext-redis` and `ext-json` PHP extension is required for this adapter.

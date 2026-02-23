@@ -65,6 +65,7 @@ Via DSN for your favorite framework:
 ```env
 meilisearch://127.0.0.1:7700
 meilisearch://apiKey@127.0.0.1:7700
+meilisearch://apiKey@127.0.0.1:7700?tls=true
 ```
 
 ## Authors

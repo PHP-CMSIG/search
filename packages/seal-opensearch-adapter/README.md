@@ -58,6 +58,8 @@ Via DSN for your favorite framework:
 
 ```env
 opensearch://127.0.0.1:9200
+opensearch://127.0.0.1:9200?tls=true
+opensearch://username:password@127.0.0.1:9200?tls=true
 ```
 
 ## Authors
