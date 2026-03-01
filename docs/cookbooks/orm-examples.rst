@@ -29,7 +29,7 @@ At first, a ``ReindexProvider`` is required for the newly created index.
         public function __construct(private BlogRepository $entityRepository)
         {}
 
-        public static function getIndex(): string
+        public function getIndex(): string
         {
             return 'blog';
         }

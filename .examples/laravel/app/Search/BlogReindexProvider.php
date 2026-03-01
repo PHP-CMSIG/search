@@ -35,7 +35,7 @@ class BlogReindexProvider implements ReindexProviderInterface
         ];
     }
 
-    public static function getIndex(): string
+    public function getIndex(): string
     {
         return 'blog';
     }
