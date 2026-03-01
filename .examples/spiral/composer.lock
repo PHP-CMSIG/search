@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb343c106c2fa0749d32637bd6c7af6d",
+    "content-hash": "a6701546cb8bfe7658d0f58fba187a60",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -179,7 +179,7 @@
         },
         {
             "name": "cmsig/seal",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal",
@@ -276,14 +276,14 @@
         },
         {
             "name": "cmsig/seal-spiral-bridge",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../integrations/spiral",
-                "reference": "e7dad4934259de4a01ed566a79ced51703f04f17"
+                "reference": "11faca01f238c488f1960579271005c7ccf29db6"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "spiral/boot": "^3.6",
                 "spiral/config": "^3.6",
@@ -291,33 +291,33 @@
                 "spiral/core": "^3.6"
             },
             "conflict": {
-                "cmsig/seal-algolia-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-elasticsearch-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-loupe-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-meilisearch-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-memory-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-multi-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-opensearch-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-read-write-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-redisearch-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-solr-adapter": "<0.12 || >=0.13",
-                "cmsig/seal-typesense-adapter": "<0.12 || >=0.13"
+                "cmsig/seal-algolia-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-elasticsearch-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-loupe-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-meilisearch-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-memory-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-multi-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-opensearch-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-read-write-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-redisearch-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-solr-adapter": "<0.13 || >=0.14",
+                "cmsig/seal-typesense-adapter": "<0.13 || >=0.14"
             },
             "replace": {
                 "schranz-search/spiral-bridge": "self.version"
             },
             "require-dev": {
-                "cmsig/seal-algolia-adapter": "^0.12",
-                "cmsig/seal-elasticsearch-adapter": "^0.12",
-                "cmsig/seal-loupe-adapter": "^0.12",
-                "cmsig/seal-meilisearch-adapter": "^0.12",
-                "cmsig/seal-memory-adapter": "^0.12",
-                "cmsig/seal-multi-adapter": "^0.12",
-                "cmsig/seal-opensearch-adapter": "^0.12",
-                "cmsig/seal-read-write-adapter": "^0.12",
-                "cmsig/seal-redisearch-adapter": "^0.12",
-                "cmsig/seal-solr-adapter": "^0.12",
-                "cmsig/seal-typesense-adapter": "^0.12",
+                "cmsig/seal-algolia-adapter": "^0.13",
+                "cmsig/seal-elasticsearch-adapter": "^0.13",
+                "cmsig/seal-loupe-adapter": "^0.13",
+                "cmsig/seal-meilisearch-adapter": "^0.13",
+                "cmsig/seal-memory-adapter": "^0.13",
+                "cmsig/seal-multi-adapter": "^0.13",
+                "cmsig/seal-opensearch-adapter": "^0.13",
+                "cmsig/seal-read-write-adapter": "^0.13",
+                "cmsig/seal-redisearch-adapter": "^0.13",
+                "cmsig/seal-solr-adapter": "^0.13",
+                "cmsig/seal-typesense-adapter": "^0.13",
                 "php-cs-fixer/shim": "^3.51",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^2.0",
@@ -7628,15 +7628,15 @@
         },
         {
             "name": "cmsig/seal-algolia-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-algolia-adapter",
-                "reference": "820a5ee56c1c1e2b863ad0e1f03568be35f3613a"
+                "reference": "4a76fc456deebaa8ded74e5db3ee0fbf7007744d"
             },
             "require": {
                 "algolia/algoliasearch-client-php": "^4.4",
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -7724,14 +7724,14 @@
         },
         {
             "name": "cmsig/seal-elasticsearch-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-elasticsearch-adapter",
-                "reference": "4ca3cd4c86e6fedaa6e8b06f29219be509a362a7"
+                "reference": "cffe1a9a6588d408cb7a4c03a4a2d2607df6eaca"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "elasticsearch/elasticsearch": "^8.5.3 || ^9.0",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
@@ -7823,14 +7823,14 @@
         },
         {
             "name": "cmsig/seal-loupe-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "6706dcc488d920a14aa52bfd9d881f4f963b9ee3"
+                "reference": "95e1bc5c8b6258d92879f26351c98fd7839b3d39"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "loupe/loupe": "^0.12.11 || ^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
@@ -7919,14 +7919,14 @@
         },
         {
             "name": "cmsig/seal-meilisearch-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-meilisearch-adapter",
-                "reference": "0aff8f8b2986d995631966ae11bcaac4f5191e13"
+                "reference": "5082e9c89a08cab055040a3ab2fb346024c14396"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "meilisearch/meilisearch-php": "^1.2",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
@@ -8017,14 +8017,14 @@
         },
         {
             "name": "cmsig/seal-memory-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-memory-adapter",
-                "reference": "e49baeb26fffeed697e5ee7cf6356aa0107d5a6d"
+                "reference": "bee919929e1cf8f5c6221c6ac1c754e080a40bee"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1"
             },
             "provide": {
@@ -8110,14 +8110,14 @@
         },
         {
             "name": "cmsig/seal-multi-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-multi-adapter",
-                "reference": "313995aff61ae0a2b74cdafb06f4af1f2cb6fb2d"
+                "reference": "5c3359c40da9d65e824a9968e7c8480473364162"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -8204,14 +8204,14 @@
         },
         {
             "name": "cmsig/seal-opensearch-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-opensearch-adapter",
-                "reference": "f5899a6acecd0f99d2333a5e889c12578c5f1ca9"
+                "reference": "1bd38b596ace1992a4992a5ca9e9a9436aa799db"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "opensearch-project/opensearch-php": "^2.0",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
@@ -8304,14 +8304,14 @@
         },
         {
             "name": "cmsig/seal-read-write-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-read-write-adapter",
-                "reference": "2d20cade232d3149825317759440a074d8f8c9e1"
+                "reference": "b6dec65daecbdc285fe1cdee014fdabb6db9560c"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0"
             },
@@ -8398,14 +8398,14 @@
         },
         {
             "name": "cmsig/seal-redisearch-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-redisearch-adapter",
-                "reference": "8b9d7c9931223151def0bd98e8882e90e8369794"
+                "reference": "28e59f1f2b1af931fc95661fabb2c42fd148bbd2"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "ext-json": "*",
                 "ext-redis": "^5 || ^6.0",
                 "php": "^8.1",
@@ -8496,14 +8496,14 @@
         },
         {
             "name": "cmsig/seal-solr-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-solr-adapter",
-                "reference": "66fa3e93e36457bb859213e97af1d7ef793d2158"
+                "reference": "6c960c0c48b401a7c32e861fb832d00b2538e9c7"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0",
                 "solarium/solarium": "^6.3"
@@ -8597,14 +8597,14 @@
         },
         {
             "name": "cmsig/seal-typesense-adapter",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-typesense-adapter",
-                "reference": "f045ca911dd0f82d4e258c05161a2b62e859dd9a"
+                "reference": "854a069aeffacf17d037e41de536e7dc6868176e"
             },
             "require": {
-                "cmsig/seal": "^0.12",
+                "cmsig/seal": "^0.13",
                 "php": "^8.1",
                 "psr/container": "^1.0 || ^2.0",
                 "symfony/http-client": "^5.4 || ^6.0 || ^7.0 || ^8.0",
@@ -11473,16 +11473,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "6.0.1",
+            "version": "6.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "2f5cbed597cb261d1ea458f3da3a9ad32e670b1e"
+                "reference": "897b5986ece6b4f9d8413fea345c7d49c757d6bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2f5cbed597cb261d1ea458f3da3a9ad32e670b1e",
-                "reference": "2f5cbed597cb261d1ea458f3da3a9ad32e670b1e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/897b5986ece6b4f9d8413fea345c7d49c757d6bf",
+                "reference": "897b5986ece6b4f9d8413fea345c7d49c757d6bf",
                 "shasum": ""
             },
             "require": {
@@ -11532,9 +11532,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/6.0.1"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/6.0.2"
             },
-            "time": "2026-01-20T15:30:42+00:00"
+            "time": "2026-03-01T18:43:49+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",

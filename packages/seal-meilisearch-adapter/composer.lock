@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "924c9cc4b0bd661a4c3138cb64c0d68f",
+    "content-hash": "e104730c7fb2874579d5f4ab0d17e889",
     "packages": [
         {
             "name": "cmsig/seal",
-            "version": "0.12.x-dev",
+            "version": "0.13.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../seal",
@@ -1238,8 +1238,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9f706c8ab5ee8083ada20ccb4e5ae090a86c3e21",
-                "reference": "9f706c8ab5ee8083ada20ccb4e5ae090a86c3e21",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cd881cf96c2370aa82f342d6bfb1a708f81752e8",
+                "reference": "cd881cf96c2370aa82f342d6bfb1a708f81752e8",
                 "shasum": ""
             },
             "require": {
@@ -1285,7 +1285,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-01T12:51:49+00:00"
+            "time": "2026-03-01T20:05:07+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
