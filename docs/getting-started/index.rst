@@ -823,6 +823,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -845,6 +847,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -868,6 +872,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -890,6 +896,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -912,6 +920,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -934,6 +944,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -956,6 +968,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -978,6 +992,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -997,6 +1013,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
             and ``EngineRegistry``. They are provided under the ``CmsIg\Seal\Integration\Laravel\Facade\``
             namespace. See also the `Laravel Integration README <https://github.com/php-cmsig/search/tree/0.1/integrations/laravel>`__.
 
+            The ``index_name_prefix`` allows you to set a prefix for all indexes which are loaded via the given paths.
+
     .. group-tab:: Symfony
 
         When we are using the Symfony Bundle we just need to configure our ``Engine``
@@ -1014,6 +1032,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1030,6 +1049,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1047,6 +1067,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1063,6 +1084,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1079,6 +1101,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1095,6 +1118,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1111,6 +1135,7 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
@@ -1127,12 +1152,17 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     # config/packages/cmsig_seal.yaml
 
                     cmsig_seal:
+                        index_name_prefix: ''
                         schemas:
                             default:
                                 dir: '%kernel.project_dir%/config/schemas'
                         engines:
                             default:
                                 adapter: 'typesense://S3CR3T@127.0.0.1:8108'
+
+        .. note::
+
+            The ``index_name_prefix`` allows you to set a prefix for all indexes which are loaded via the given paths.
 
     .. group-tab:: Spiral
 
@@ -1150,6 +1180,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1172,6 +1204,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1195,6 +1229,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1217,6 +1253,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1239,6 +1277,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1261,6 +1301,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1283,6 +1325,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1305,6 +1349,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     <?php // app/config/cmsig_seal.php
 
                     return [
+                        'index_name_prefix' => '',
+
                         'schemas' => [
                             'default' => [
                                 'dir' => resource_path('schemas'),
@@ -1317,6 +1363,10 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             ],
                         ],
                     ];
+
+        .. note::
+
+            The ``index_name_prefix`` allows you to set a prefix for all indexes which are loaded via the given paths.
 
     .. group-tab:: Mezzio
 
@@ -1340,6 +1390,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1371,6 +1423,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cms_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1403,6 +1457,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1434,6 +1490,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1465,6 +1523,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1496,6 +1556,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1527,6 +1589,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1558,6 +1622,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             return [
                                 // ...
                                 'cmsig_seal' => [
+                                    'index_name_prefix' => '',
+
                                     'schemas' => [
                                         'default' => [
                                             'dir' => 'config/schemas',
@@ -1573,6 +1639,10 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             ];
                         }
                     }
+
+        .. note::
+
+            The ``index_name_prefix`` allows you to set a prefix for all indexes which are loaded via the given paths.
 
     .. group-tab:: Yii
 
@@ -1592,6 +1662,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1617,6 +1689,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1643,6 +1717,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1668,6 +1744,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1693,6 +1771,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1718,6 +1798,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1743,6 +1825,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1768,6 +1852,8 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                     return [
                         // ...
                         'cmsig/seal-yii-module' => [
+                            'index_name_prefix' => '',
+
                             'schemas' => [
                                 'default' => [
                                     'dir' => 'config/schemas',
@@ -1781,6 +1867,10 @@ It requires an instance of the ``Adapter`` which we did install before to connec
                             ],
                         ],
                     ];
+
+        .. note::
+
+            The ``index_name_prefix`` allows you to set a prefix for all indexes which are loaded via the given paths.
 
 Add or Update Documents
 -----------------------
