@@ -1,0 +1,77 @@
+{
+    "name": "cmsig/seal-odm",
+    "description": "An object document mapper for seal.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "cmsig",
+        "seal",
+        "odm",
+        "object document mapper"
+    ],
+    "autoload": {
+        "psr-4": {
+            "CmsIg\\Seal\\Odm\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CmsIg\\Seal\\Odm\\Tests\\": "tests"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexander Schranz",
+            "email": "alexander@sulu.io"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "cmsig/seal": "^0.12"
+    },
+    "require-dev": {
+        "php-cs-fixer/shim": "^3.51",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^10.3",
+        "rector/rector": "^2.0"
+    },
+    "scripts": {
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpunit"
+        ],
+        "phpstan": "@php vendor/bin/phpstan analyze",
+        "lint-rector": "@php vendor/bin/rector process --dry-run",
+        "lint-php-cs": "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run",
+        "lint": [
+            "@phpstan",
+            "@lint-php-cs",
+            "@lint-rector",
+            "@lint-composer"
+        ],
+        "lint-composer": "@composer validate --strict",
+        "rector": "@php vendor/bin/rector process",
+        "php-cs-fix": "@php vendor/bin/php-cs-fixer fix",
+        "fix": [
+            "@rector",
+            "@php-cs-fix"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./../*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
+}
