@@ -25,7 +25,7 @@ final class ReindexConfig
      */
     private array $identifiers = [];
 
-    public function getIndex(): string|null
+    public function getIndexName(): string|null
     {
         return $this->index;
     }

@@ -30,5 +30,5 @@ interface ReindexProviderInterface
     /**
      * The name of the index for which the documents are for.
      */
-    public function getIndex(): string;
+    public function getIndexName(): string;
 }

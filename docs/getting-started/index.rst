@@ -2011,7 +2011,7 @@ First you need to create a ``ReindexProvider`` providing all your documents.
             ];
         }
 
-        public function getIndex(): string
+        public function getIndexName(): string
         {
             return 'blog';
         }

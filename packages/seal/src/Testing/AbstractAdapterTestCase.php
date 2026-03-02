@@ -264,7 +264,7 @@ abstract class AbstractAdapterTestCase extends TestCase
                 }
             }
 
-            public function getIndex(): string
+            public function getIndexName(): string
             {
                 return TestingHelper::INDEX_COMPLEX;
             }
