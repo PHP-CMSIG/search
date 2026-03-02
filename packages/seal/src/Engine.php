@@ -154,14 +154,14 @@ final class Engine implements EngineInterface
         /** @var array<string, string> $identifiersPerIndex */
         $identifiersPerIndex = [];
         foreach ($reindexProviders as $reindexProvider) {
-            if (!isset($this->schema->indexes[$reindexProvider::getIndex()])) {
+            if (!isset($this->schema->indexes[$reindexProvider->getIndex()])) {
                 continue;
             }
 
-            $identifiersPerIndex[$reindexProvider::getIndex()] = $this->schema->indexes[$reindexProvider::getIndex()]->getIdentifierField()->name;
+            $identifiersPerIndex[$reindexProvider->getIndex()] = $this->schema->indexes[$reindexProvider->getIndex()]->getIdentifierField()->name;
 
-            if ($reindexProvider::getIndex() === $reindexConfig->getIndex() || null === $reindexConfig->getIndex()) {
-                $reindexProvidersPerIndex[$reindexProvider::getIndex()][] = $reindexProvider;
+            if ($reindexProvider->getIndex() === $reindexConfig->getIndex() || null === $reindexConfig->getIndex()) {
+                $reindexProvidersPerIndex[$reindexProvider->getIndex()][] = $reindexProvider;
             }
         }
 

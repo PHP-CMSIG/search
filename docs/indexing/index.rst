@@ -93,7 +93,7 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
             ];
         }
 
-        public static function getIndex(): string
+        public function getIndex(): string
         {
             return 'blog';
         }
