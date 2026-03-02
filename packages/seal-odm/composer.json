@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "cmsig/seal": "^0.12"
+        "cmsig/seal": "^0.13"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.51",
