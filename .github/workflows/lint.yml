@@ -35,10 +35,20 @@ jobs:
                   ini-values: memory_limit=-1, zend.assertions=1
                   coverage: none
 
+            - name: Determine Composer root version
+              id: composer-root-version
+              run: |
+                  base_ref="${{ github.base_ref }}"
+                  if [[ "$base_ref" =~ ^[0-9]+\.[0-9]+$ ]]; then
+                      echo "value=${base_ref}.x-dev" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "value=0.12.x-dev" >> "$GITHUB_OUTPUT"
+                  fi
+
             - name: Install composer dependencies
               uses: ramsey/composer-install@v2
               env:
-                  COMPOSER_ROOT_VERSION: 0.12.x-dev
+                  COMPOSER_ROOT_VERSION: "${{ steps.composer-root-version.outputs.value }}"
               with:
                   working-directory: ${{ inputs.directory }}
                   dependency-versions: 'highest'
