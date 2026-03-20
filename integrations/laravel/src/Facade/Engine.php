@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Laravel\Facade;
 
 use CmsIg\Seal\EngineInterface;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Search\SearchBuilder;
 use Illuminate\Support\Facades\Facade;
 
@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool existIndex(string $index)
  * @method static void createSchema()
  * @method static void dropSchema()
- * @method static void reindex(iterable<ReindexProviderInterface> $reindexProviders, string|null $index = null, bool $dropIndex = false, callable $progressCallback = null)
+ * @method static void reindex(iterable<StaticReindexProviderInterface> $reindexProviders, string|null $index = null, bool $dropIndex = false, callable $progressCallback = null)
  *
  * @see \CmsIg\Seal\EngineInterface
  */

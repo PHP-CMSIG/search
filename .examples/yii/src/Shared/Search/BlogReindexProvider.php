@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Shared\Search;
 
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 
-class BlogReindexProvider implements ReindexProviderInterface
+class BlogReindexProvider implements StaticReindexProviderInterface
 {
     public function total(): int|null
     {

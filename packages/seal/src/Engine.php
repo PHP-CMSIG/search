@@ -16,7 +16,7 @@ namespace CmsIg\Seal;
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition\IdentifierCondition;
 use CmsIg\Seal\Search\SearchBuilder;
@@ -149,7 +149,7 @@ final class Engine implements EngineInterface
         callable|null $progressCallback = null,
         array $options = [],
     ): TaskInterface|null {
-        /** @var array<string, ReindexProviderInterface[]> $reindexProvidersPerIndex */
+        /** @var array<string, StaticReindexProviderInterface[]> $reindexProvidersPerIndex */
         $reindexProvidersPerIndex = [];
         /** @var array<string, string> $identifiersPerIndex */
         $identifiersPerIndex = [];

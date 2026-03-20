@@ -15,7 +15,7 @@ namespace CmsIg\Seal\Integration\Laravel\Console;
 
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use Illuminate\Console\Command;
 
 /**
@@ -38,7 +38,7 @@ final class ReindexCommand extends Command
     protected $description = 'Reindex configured search indexes.';
 
     /**
-     * @param iterable<ReindexProviderInterface> $reindexProviders
+     * @param iterable<StaticReindexProviderInterface> $reindexProviders
      */
     public function __construct(
         private readonly iterable $reindexProviders, // TODO move to handle method: https://discord.com/channels/297040613688475649/1105593000664498336

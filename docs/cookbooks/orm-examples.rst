@@ -24,7 +24,7 @@ At first, a ``ReindexProvider`` is required for the newly created index.
 
     <?php
 
-    class BlogReindexProvider implements ReindexProviderInterface
+    class BlogReindexProvider implements StaticReindexProviderInterface
     {
         public function __construct(private BlogRepository $entityRepository)
         {}

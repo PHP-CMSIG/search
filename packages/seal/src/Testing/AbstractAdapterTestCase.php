@@ -18,7 +18,7 @@ use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -240,9 +240,9 @@ abstract class AbstractAdapterTestCase extends TestCase
     /**
      * @param array<array<string, mixed>> $documents
      */
-    private function createReindexProvider(array $documents): ReindexProviderInterface
+    private function createReindexProvider(array $documents): StaticReindexProviderInterface
     {
-        return new class($documents) implements ReindexProviderInterface {
+        return new class($documents) implements StaticReindexProviderInterface {
             /**
              * @param array<array<string, mixed>> $documents
              */

@@ -1986,7 +1986,7 @@ First you need to create a ``ReindexProvider`` providing all your documents.
 
     <?php
 
-    class BlogReindexProvider implements ReindexProviderInterface
+    class BlogReindexProvider implements StaticReindexProviderInterface
     {
         public function total(): ?int
         {

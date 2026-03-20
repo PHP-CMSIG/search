@@ -15,7 +15,7 @@ namespace CmsIg\Seal\Integration\Symfony\Command;
 
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class ReindexCommand extends Command
 {
     /**
-     * @param iterable<ReindexProviderInterface> $reindexProviders
+     * @param iterable<StaticReindexProviderInterface> $reindexProviders
      */
     public function __construct(
         private readonly EngineRegistry $engineRegistry,

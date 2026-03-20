@@ -13,22 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Reindex;
 
-interface ReindexProviderInterface
+/**
+ * @deprecated Use the StaticReindexProviderInterface instead, the ReindexProviderInterface will be removed in newer versions.
+ */
+interface ReindexProviderInterface extends StaticReindexProviderInterface
 {
-    /**
-     * Returns how many documents this provider will provide. Returns `null` if the total is unknown.
-     */
-    public function total(): int|null;
-
-    /**
-     * The reindex provider returns a Generator which provides the documents to reindex.
-     *
-     * @return \Generator<array<string, mixed>>
-     */
-    public function provide(ReindexConfig $reindexConfig): \Generator;
-
-    /**
-     * The name of the index for which the documents are for.
-     */
-    public function getIndexName(): string;
 }
