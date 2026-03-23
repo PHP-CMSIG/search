@@ -2697,12 +2697,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "e1d061d4d56dd96136deecf840ad656e24bbb3d7"
+                "reference": "dc7688ab129588e3ff23f53fba81a19e785a817b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/e1d061d4d56dd96136deecf840ad656e24bbb3d7",
-                "reference": "e1d061d4d56dd96136deecf840ad656e24bbb3d7",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/dc7688ab129588e3ff23f53fba81a19e785a817b",
+                "reference": "dc7688ab129588e3ff23f53fba81a19e785a817b",
                 "shasum": ""
             },
             "require": {
@@ -2747,7 +2747,7 @@
                 "issues": "https://github.com/elastic/elasticsearch-php/issues",
                 "source": "https://github.com/elastic/elasticsearch-php/tree/9.3"
             },
-            "time": "2026-03-09T12:14:40+00:00"
+            "time": "2026-03-23T11:43:06+00:00"
         },
         {
             "name": "ezimuel/guzzlestreams",
@@ -4551,8 +4551,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1c6b361be144b5ed8d6db44035df9ff64e6fdb50",
-                "reference": "1c6b361be144b5ed8d6db44035df9ff64e6fdb50",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee25c7b32af5e356a3902b427cd60931ecdae5cd",
+                "reference": "ee25c7b32af5e356a3902b427cd60931ecdae5cd",
                 "shasum": ""
             },
             "require": {
@@ -4598,7 +4598,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-22T17:04:35+00:00"
+            "time": "2026-03-23T14:11:10+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
