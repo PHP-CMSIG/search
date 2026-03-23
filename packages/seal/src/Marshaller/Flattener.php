@@ -120,9 +120,11 @@ final class Flattener
      */
     public function unflatten(array $data): array
     {
+        /** @var array<string, mixed> $newData */
         $newData = [];
         /** @var array<string, array<string>> $metadata */
         $metadata = [];
+        /** @var array<string, string> $metadataKeyMapping */
         $metadataKeyMapping = [];
         if (\array_key_exists($this->metadataKey, $data)) {
             \assert(\is_string($data[$this->metadataKey]), 'Expected metadata to be a string.');
@@ -162,11 +164,13 @@ final class Flattener
                     return \array_shift($keyPartsReplacements);
                 }, $metadata[$metadataKey][$subKey]);
 
+                /** @var array<string, mixed> $newSubData */
                 $newSubData = &$newData;
                 foreach (\explode($this->metadataSeparator, $newKeyPath) as $newKeyPart) {
                     $newSubData = &$newSubData[$newKeyPart]; // @phpstan-ignore-line
                 }
 
+                /** @var array<string, mixed> $newSubData */
                 $newSubData = $subValue;
             }
         }

@@ -60,7 +60,7 @@ class MeilisearchAdapterFactory implements AdapterFactoryInterface
         $apiKey = $dsn['user'] ?? null;
         $tlsQuery = $dsn['query']['tls'] ?? 'false';
         \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
-        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOL, \FILTER_REQUIRE_SCALAR);
+        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOLEAN, \FILTER_REQUIRE_SCALAR);
 
         return new Client(
             ($useTls ? 'https' : 'http') . '://' . $dsn['host'] . ':' . ($dsn['port'] ?? 7700),

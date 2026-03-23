@@ -216,7 +216,7 @@ final class OpensearchSearcher implements SearcherInterface
                 $filter instanceof Condition\LessThanEqualCondition => $filterQueries[]['range'][$this->getFilterField($index, $filter->field)]['lte'] = $filter->value, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 $filter instanceof Condition\InCondition => $filterQueries[]['terms'][$this->getFilterField($index, $filter->field)] = $filter->values, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 $filter instanceof Condition\NotInCondition => $filterQueries[]['bool']['must_not']['terms'][$this->getFilterField($index, $filter->field)] = $filter->values, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
-                $filter instanceof Condition\GeoDistanceCondition => $filterQueries[]['geo_distance'] = [ // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                $filter instanceof Condition\GeoDistanceCondition => $filterQueries[]['geo_distance'] = [
                     'distance' => $filter->distance,
                     $this->getFilterField($index, $filter->field) => [
                         'lat' => $filter->latitude,
@@ -252,13 +252,13 @@ final class OpensearchSearcher implements SearcherInterface
 
     /**
      * @param array<string, array{
-     *          value?: float|null,
-     *          buckets?: array<array{
-     *              key: string|int,
-     *              key_as_string?: string,
-     *              doc_count: int
-     *          }>
-     *       }> $aggregations
+     *     value?: float|null,
+     *     buckets?: array<array{
+     *         key: string|int,
+     *         key_as_string?: string,
+     *         doc_count: int
+     *     }>
+     * }> $aggregations
      * @param array<AbstractFacet> $facets
      *
      * @return array<string, mixed>
@@ -276,7 +276,7 @@ final class OpensearchSearcher implements SearcherInterface
             if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count']['buckets'])) {
                 foreach ($aggregations[$facet->field . '_count']['buckets'] as $bucket) {
                     $key = (string) ($bucket['key_as_string'] ?? $bucket['key']);
-                    $formatted[$facet->field]['count'][$key] = $bucket['doc_count'];
+                    $formatted[$facet->field]['count'][$key] = $bucket['doc_count']; // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
                 }
             }
         }

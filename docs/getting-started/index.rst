@@ -199,7 +199,7 @@ search engine.
 
             services:
               elasticsearch:
-                image: docker.elastic.co/elasticsearch/elasticsearch:9.3.0
+                image: docker.elastic.co/elasticsearch/elasticsearch:9.3.2
                 environment:
                   discovery.type: single-node
                   xpack.security.enabled: 'false'
