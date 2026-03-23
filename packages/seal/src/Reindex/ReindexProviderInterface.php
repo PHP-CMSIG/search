@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Reindex;
 
 /**
- * @deprecated Use the StaticReindexProviderInterface instead, the ReindexProviderInterface will be removed in newer versions.
+ * @deprecated use the StaticReindexProviderInterface instead, the ReindexProviderInterface will be removed in newer versions
  */
 interface ReindexProviderInterface extends StaticReindexProviderInterface
 {
