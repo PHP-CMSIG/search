@@ -76,30 +76,18 @@ services:
       retries: 20
     volumes:
       - typesense-data:/data
+
   solr:
-    image: "solr:9"
+    image: "solr:10"
     ports:
       - "8983:8983"
-      - "9983:9983"
-    command: solr -f -cloud
     healthcheck:
-      test: ["CMD-SHELL", "curl --silent --fail localhost:8983 || exit 1"]
+      test: ["CMD-SHELL", "curl --silent --fail http://localhost:8983/solr/admin/info/system?wt=json || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 20
-    environment:
-      SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
     volumes:
       - solr-data:/var/solr
-
-  zookeeper:
-    image: "solr:9"
-    depends_on:
-      - "solr"
-    network_mode: "service:solr"
-    environment:
-      SOLR_OPTS: '-Dsolr.disableConfigSetsCreateAuthChecks=true'
-    command: bash -c "set -x; export; wait-for-solr.sh; solr zk -z localhost:9983 upconfig -n default -d /opt/solr/server/solr/configsets/_default; tail -f /dev/null"
 
 volumes:
   elasticsearch-data:
