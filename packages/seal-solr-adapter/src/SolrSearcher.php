@@ -224,7 +224,7 @@ final class SolrSearcher implements SearcherInterface
     {
         $field = $index->getFieldByPath($name);
 
-        if ($field instanceof Field\TextField) {
+        if ($field instanceof Field\TextField && $field->searchable && ($field->filterable || $field->sortable || $field->facet)) {
             return $name . '.raw';
         }
 
