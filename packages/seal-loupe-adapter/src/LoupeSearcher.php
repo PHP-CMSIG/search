@@ -100,7 +100,7 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withDistinct($search->distinct);
         }
 
-        $searchParameters = $searchParameters->withFacets(\array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets));
+        $searchParameters = $searchParameters->withFacets(\array_map(function (AbstractFacet $facet) {return $this->loupeHelper->formatField($facet->field);}, $search->facets));
 
         if ([] !== $search->highlightFields) {
             $searchParameters = $searchParameters->withAttributesToHighlight(
@@ -256,13 +256,15 @@ final class LoupeSearcher implements SearcherInterface
         $formatted = [];
 
         foreach ($facets as $facet) {
-            if ($facet instanceof MinMaxFacet && isset($facetStats[$facet->field])) {
-                $formatted[$facet->field]['min'] = $facetStats[$facet->field]['min'];
-                $formatted[$facet->field]['max'] = $facetStats[$facet->field]['max'];
+            $field = $this->loupeHelper->formatField($facet->field);
+            
+            if ($facet instanceof MinMaxFacet && isset($facetStats[$field])) {
+                $formatted[$facet->field]['min'] = $facetStats[$field]['min'];
+                $formatted[$facet->field]['max'] = $facetStats[$field]['max'];
                 continue;
             }
-            if ($facet instanceof CountFacet && isset($facetDistribution[$facet->field])) {
-                $formatted[$facet->field]['count'] = $facetDistribution[$facet->field];
+            if ($facet instanceof CountFacet && isset($facetDistribution[$field])) {
+                $formatted[$facet->field]['count'] = $facetDistribution[$field];
             }
         }
 
