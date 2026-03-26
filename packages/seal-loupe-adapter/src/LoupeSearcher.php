@@ -100,7 +100,7 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withDistinct($search->distinct);
         }
 
-        $searchParameters = $searchParameters->withFacets(\array_map(function (AbstractFacet $facet) {return $this->loupeHelper->formatField($facet->field);}, $search->facets));
+        $searchParameters = $searchParameters->withFacets(\array_map(fn (AbstractFacet $facet) => $this->loupeHelper->formatField($facet->field), $search->facets));
 
         if ([] !== $search->highlightFields) {
             $searchParameters = $searchParameters->withAttributesToHighlight(
@@ -257,7 +257,7 @@ final class LoupeSearcher implements SearcherInterface
 
         foreach ($facets as $facet) {
             $field = $this->loupeHelper->formatField($facet->field);
-            
+
             if ($facet instanceof MinMaxFacet && isset($facetStats[$field])) {
                 $formatted[$facet->field]['min'] = $facetStats[$field]['min'];
                 $formatted[$facet->field]['max'] = $facetStats[$field]['max'];
