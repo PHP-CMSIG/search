@@ -195,19 +195,18 @@ final class Engine implements EngineInterface
             }
 
             foreach ($reindexProviders as $reindexProvider) {
+                $total = $reindexProvider instanceof DynamicReindexProviderInterface
+                    ? $reindexProvider->total($index)
+                    : $reindexProvider->total();
+
+                if (0 === $total) {
+                    continue;
+                }
+
                 $tasks[] = $this->bulk(
                     $index,
-                    (static function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
+                    (static function () use ($index, $reindexProvider, $total, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
                         $count = 0;
-                        $total = $reindexProvider instanceof DynamicReindexProviderInterface
-                            ? $reindexProvider->total($index)
-                            : $reindexProvider->total();
-
-                        if (0 === $total) {
-                            $progressCallback($index, $count, $total);
-
-                            return;
-                        }
 
                         $documents = $reindexProvider instanceof DynamicReindexProviderInterface
                             ? $reindexProvider->provide($index, $reindexConfig)
