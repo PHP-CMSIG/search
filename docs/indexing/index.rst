@@ -122,7 +122,7 @@ during runtime which index is supported or not by the provider:
         public function provide(string $index, ReindexConfig $reindexConfig): \Generator
         {
             if (!str_starts_with($index, 'blog_')) {
-                return 0;
+                return;
             }
 
             // use `$reindexConfig->getIdentifiers()` or `$reindexConfig->getDateTimeBoundary()`
