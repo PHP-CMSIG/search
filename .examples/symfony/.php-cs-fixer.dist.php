@@ -6,14 +6,12 @@ declare(strict_types=1);
 $phpCsConfig = require(dirname(__DIR__, 2) . '/.php-cs-fixer.dist.php');
 
 $finder = (new PhpCsFixer\Finder())
-    ->in([
-        __DIR__ . '/src',
-        __DIR__ . '/config',
-        __DIR__ . '/public',
-        __DIR__ . '/tests',
+    ->in(__DIR__)
+    ->exclude('var')
+    ->notPath([
+        'config/bundles.php',
+        'config/reference.php',
     ])
-    ->notPath('#reference\.php$#')
-    ->notPath('#bundles\.php$#')
     ->ignoreVCSIgnored(true);
 
 $phpCsConfig->setFinder($finder);

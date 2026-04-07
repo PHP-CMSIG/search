@@ -17,9 +17,9 @@ use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
-use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 
