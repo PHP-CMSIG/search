@@ -34,6 +34,7 @@ use CmsIg\Seal\Integration\Spiral\Config\SealConfig;
 use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
 use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
 use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
@@ -182,11 +183,12 @@ final class SealBootloader extends Bootloader
                 foreach ($reindexProviderNames as $reindexProviderName) {
                     $reindexProvider = $container->get($reindexProviderName);
 
-                    if (!$reindexProvider instanceof ReindexProviderInterface) {
+                    if (!$reindexProvider instanceof ReindexProviderInterface && !$reindexProvider instanceof DynamicReindexProviderInterface) {
                         throw new \RuntimeException(\sprintf(
-                            'Reindex provider "%s" does not implement "%s".',
+                            'Reindex provider "%s" does not implement "%s" or "%s".',
                             $reindexProviderName,
                             ReindexProviderInterface::class,
+                            DynamicReindexProviderInterface::class,
                         ));
                     }
 

@@ -15,6 +15,7 @@ namespace CmsIg\Seal\Integration\Mezzio\Service;
 
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Psr\Container\ContainerInterface;
 
@@ -43,11 +44,12 @@ final class CommandAbstractFactory
             foreach ($reindexProviderNames as $reindexProviderName) {
                 $reindexProvider = $container->get($reindexProviderName);
 
-                if (!$reindexProvider instanceof ReindexProviderInterface) {
+                if (!$reindexProvider instanceof ReindexProviderInterface && !$reindexProvider instanceof DynamicReindexProviderInterface) {
                     throw new \RuntimeException(\sprintf(
-                        'Reindex provider "%s" does not implement "%s".',
+                        'Reindex provider "%s" does not implement "%s" or "%s".',
                         $reindexProviderName,
                         ReindexProviderInterface::class,
+                        DynamicReindexProviderInterface::class,
                     ));
                 }
 

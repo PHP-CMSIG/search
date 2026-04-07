@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal;
 
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Search\SearchBuilder;
@@ -90,7 +91,7 @@ interface EngineInterface
      * @experimental This method is experimental and may change in future versions, we are not sure if it stays here or the syntax change completely.
      *               For framework users it is uninteresting as there it is handled via CLI commands.
      *
-     * @param iterable<ReindexProviderInterface> $reindexProviders
+     * @param iterable<DynamicReindexProviderInterface|ReindexProviderInterface> $reindexProviders
      * @param callable(string, int, int|null): void|null $progressCallback
      *
      * TODO: native return type in next minor, major release

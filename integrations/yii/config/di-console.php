@@ -15,6 +15,7 @@ use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
 use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Psr\Container\ContainerInterface;
 
@@ -42,16 +43,17 @@ $diConfig[ReindexCommand::class] = static function (ContainerInterface $containe
     /** @var EngineRegistry $engineRegistry */
     $engineRegistry = $container->get(EngineRegistry::class);
 
-    /** @var array<ReindexProviderInterface> $reindexProviders */
+    /** @var array<DynamicReindexProviderInterface|ReindexProviderInterface> $reindexProviders */
     $reindexProviders = [];
     foreach ($reindexProviderNames as $reindexProviderName) {
         $reindexProvider = $container->get($reindexProviderName);
 
-        if (!$reindexProvider instanceof ReindexProviderInterface) {
+        if (!$reindexProvider instanceof ReindexProviderInterface && !$reindexProvider instanceof DynamicReindexProviderInterface) {
             throw new \RuntimeException(\sprintf(
-                'Reindex provider "%s" does not implement "%s".',
+                'Reindex provider "%s" does not implement "%s" or "%s".',
                 $reindexProviderName,
                 ReindexProviderInterface::class,
+                DynamicReindexProviderInterface::class,
             ));
         }
 

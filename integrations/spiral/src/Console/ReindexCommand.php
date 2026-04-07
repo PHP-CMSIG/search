@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Spiral\Console;
 
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Spiral\Console\Attribute\AsCommand;
@@ -49,7 +50,7 @@ final class ReindexCommand extends Command
     private string|null $identifiers = null; // @phpstan-ignore-line property.unusedType
 
     /**
-     * @param iterable<ReindexProviderInterface> $reindexProviders
+     * @param iterable<DynamicReindexProviderInterface|ReindexProviderInterface> $reindexProviders
      */
     public function __construct(
         private readonly iterable $reindexProviders, // TODO move to __invoke method

@@ -15,6 +15,7 @@ namespace CmsIg\Seal;
 
 use CmsIg\Seal\Adapter\AdapterInterface;
 use CmsIg\Seal\Exception\DocumentNotFoundException;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
@@ -149,11 +150,24 @@ final class Engine implements EngineInterface
         callable|null $progressCallback = null,
         array $options = [],
     ): TaskInterface|null {
-        /** @var array<string, ReindexProviderInterface[]> $reindexProvidersPerIndex */
+        /** @var array<string, array<DynamicReindexProviderInterface|ReindexProviderInterface>> $reindexProvidersPerIndex */
         $reindexProvidersPerIndex = [];
         /** @var array<string, string> $identifiersPerIndex */
         $identifiersPerIndex = [];
         foreach ($reindexProviders as $reindexProvider) {
+            if ($reindexProvider instanceof DynamicReindexProviderInterface) {
+                foreach ($this->schema->indexes as $indexName => $schemaIndex) {
+                    if ($indexName !== $reindexConfig->getIndex() && null !== $reindexConfig->getIndex()) {
+                        continue;
+                    }
+
+                    $identifiersPerIndex[$indexName] = $schemaIndex->getIdentifierField()->name;
+                    $reindexProvidersPerIndex[$indexName][] = $reindexProvider;
+                }
+
+                continue;
+            }
+
             if (!isset($this->schema->indexes[$reindexProvider::getIndex()])) {
                 continue;
             }
@@ -185,10 +199,15 @@ final class Engine implements EngineInterface
                     $index,
                     (static function () use ($index, $reindexProvider, $reindexConfig, $progressCallback, &$documentIdsToDelete, $identifiersPerIndex) {
                         $count = 0;
-                        $total = $reindexProvider->total();
+                        $total = $reindexProvider instanceof DynamicReindexProviderInterface
+                            ? $reindexProvider->total($index)
+                            : $reindexProvider->total();
+                        $documents = $reindexProvider instanceof DynamicReindexProviderInterface
+                            ? $reindexProvider->provide($index, $reindexConfig)
+                            : $reindexProvider->provide($reindexConfig);
 
                         $lastCount = -1;
-                        foreach ($reindexProvider->provide($reindexConfig) as $document) {
+                        foreach ($documents as $document) {
                             ++$count;
 
                             // Document still exists, do not delete

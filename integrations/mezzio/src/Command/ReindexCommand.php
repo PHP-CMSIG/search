@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Mezzio\Command;
 
 use CmsIg\Seal\EngineRegistry;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use Symfony\Component\Console\Command\Command;
@@ -28,7 +29,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class ReindexCommand extends Command
 {
     /**
-     * @param iterable<ReindexProviderInterface> $reindexProviders
+     * @param iterable<DynamicReindexProviderInterface|ReindexProviderInterface> $reindexProviders
      */
     public function __construct(
         private readonly EngineRegistry $engineRegistry,

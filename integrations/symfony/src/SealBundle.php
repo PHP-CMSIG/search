@@ -18,6 +18,7 @@ use CmsIg\Seal\Adapter\Multi\MultiAdapterFactory;
 use CmsIg\Seal\Adapter\ReadWrite\ReadWriteAdapterFactory;
 use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
 use CmsIg\Seal\Schema\Schema;
@@ -127,6 +128,9 @@ final class SealBundle extends AbstractBundle
         }
 
         $builder->registerForAutoconfiguration(ReindexProviderInterface::class)
+            ->addTag('cmsig_seal.reindex_provider');
+
+        $builder->registerForAutoconfiguration(DynamicReindexProviderInterface::class)
             ->addTag('cmsig_seal.reindex_provider');
 
         $container->import(\dirname(__DIR__) . '/config/services.php');
