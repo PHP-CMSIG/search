@@ -2017,6 +2017,8 @@ First you need to create a ``ReindexProvider`` providing all your documents.
         }
     }
 
+See the :doc:`../indexing/index` Documentation for the ``DynamicReindexProvider`` example.
+
 After that you can use the ``reindex`` to index all documents:
 
 .. tabs::

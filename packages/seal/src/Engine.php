@@ -202,6 +202,13 @@ final class Engine implements EngineInterface
                         $total = $reindexProvider instanceof DynamicReindexProviderInterface
                             ? $reindexProvider->total($index)
                             : $reindexProvider->total();
+
+                        if (0 === $total) {
+                            $progressCallback($index, $count, $total);
+
+                            return;
+                        }
+
                         $documents = $reindexProvider instanceof DynamicReindexProviderInterface
                             ? $reindexProvider->provide($index, $reindexConfig)
                             : $reindexProvider->provide($reindexConfig);

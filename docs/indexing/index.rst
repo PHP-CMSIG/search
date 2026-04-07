@@ -101,6 +101,53 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
 
 If you are using Doctrine you might be interested in the :doc:`../cookbooks/orm-examples` cookbook.
 
+Since SEAL 0.12.10 additionally a ``DynamicReindexProviderInterface`` exists which can decide
+during runtime which index is supported or not by the provider:
+
+.. code-block:: php
+
+    <?php
+
+    class BlogReindexProvider implements DynamicReindexProviderInterface
+    {
+        public function total(string $index): ?int
+        {
+            if (!str_starts_with($index, 'blog_')) {
+                return 0;
+            }
+
+            return 3;
+        }
+
+        public function provide(string $index, ReindexConfig $reindexConfig): \Generator
+        {
+            if (!str_starts_with($index, 'blog_')) {
+                return 0;
+            }
+
+            // use `$reindexConfig->getIdentifiers()` or `$reindexConfig->getDateTimeBoundary()`
+            //     to support partial reindexing
+
+            yield [
+                'id' => '1',
+                'title' => 'Title 1',
+                'description' => 'Description 1',
+            ];
+
+            yield [
+                'id' => '2',
+                'title' => 'Title 2',
+                'description' => 'Description 2',
+            ];
+
+            yield [
+                'id' => '3',
+                'title' => 'Title 3',
+                'description' => 'Description 3',
+            ];
+        }
+    }
+
 After that you created the ReindexProvider use the ``reindex`` to index all documents:
 
 .. tabs::

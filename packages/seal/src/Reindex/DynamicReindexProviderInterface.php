@@ -16,13 +16,14 @@ namespace CmsIg\Seal\Reindex;
 interface DynamicReindexProviderInterface
 {
     /**
-     * Returns how many documents this provider will provide for the given index.
-     * Returns `null` if the total is unknown.
+     * Returns how many documents this provider will provide. Returns `null` if the total is unknown.
+     * This method should return 0 if the index is not supported or no documents exists for the given index.
      */
     public function total(string $index): int|null;
 
     /**
      * The reindex provider returns a Generator which provides the documents to reindex for the given index.
+     * Early return; if the provider does not support the given index.
      *
      * @return \Generator<array<string, mixed>>
      */
