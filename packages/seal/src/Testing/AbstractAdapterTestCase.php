@@ -194,7 +194,12 @@ abstract class AbstractAdapterTestCase extends TestCase
                     $documents,
                 ),
             );
-        $engine->reindex([$reindexProvider], $reindexConfig, null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        $counter = 0;
+        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+            $counter = $count;
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+
+        $this->assertSame(4, $counter);
 
         $exception = null;
         try {
@@ -253,7 +258,12 @@ abstract class AbstractAdapterTestCase extends TestCase
                     $documents,
                 ),
             );
-        $engine->reindex([$reindexProvider], $reindexConfig, null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        $counter = 0;
+        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+            $counter = $count;
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+
+        $this->assertSame(4, $counter);
 
         $exception = null;
         try {
@@ -270,6 +280,21 @@ abstract class AbstractAdapterTestCase extends TestCase
         }
 
         self::$taskHelper->waitForAll();
+
+        $reindexConfig = (new ReindexConfig())
+            ->withIndex(TestingHelper::INDEX_SIMPLE)
+            ->withIdentifiers(
+                \array_map(
+                    static fn ($document) => $document['uuid'],
+                    $documents,
+                ),
+            );
+        $counter = 0;
+        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+            $counter = $count;
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+
+        $this->assertSame(0, $counter);
     }
 
     public function testCountDocuments(): void
