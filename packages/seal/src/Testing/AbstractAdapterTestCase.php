@@ -196,7 +196,7 @@ abstract class AbstractAdapterTestCase extends TestCase
             );
         $counter = 0;
         // @phpstan-ignore-next-line arguments.count
-        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+        $engine->reindex([$reindexProvider], $reindexConfig, static function (string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
         }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
@@ -262,7 +262,7 @@ abstract class AbstractAdapterTestCase extends TestCase
             );
         $counter = 0;
         // @phpstan-ignore-next-line arguments.count
-        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+        $engine->reindex([$reindexProvider], $reindexConfig, static function (string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
         }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
@@ -294,7 +294,7 @@ abstract class AbstractAdapterTestCase extends TestCase
             );
         $counter = 0;
         // @phpstan-ignore-next-line arguments.count
-        $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
+        $engine->reindex([$reindexProvider], $reindexConfig, static function (string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
         }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
