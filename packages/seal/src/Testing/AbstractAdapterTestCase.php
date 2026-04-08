@@ -195,9 +195,10 @@ abstract class AbstractAdapterTestCase extends TestCase
                 ),
             );
         $counter = 0;
+        // @phpstan-ignore-next-line arguments.count
         $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
-        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
         $this->assertSame(4, $counter);
 
@@ -235,7 +236,8 @@ abstract class AbstractAdapterTestCase extends TestCase
         ];
 
         $reindexProvider = $this->createDynamicReindexProvider($documents);
-        $engine->reindex([$reindexProvider], new ReindexConfig(), null, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        // @phpstan-ignore-next-line arguments.count
+        $engine->reindex([$reindexProvider], new ReindexConfig(), null, ['return_slow_promise_result' => true])->wait();
 
         $expectedDocuments = [];
         foreach ($documents as $document) {
@@ -259,9 +261,10 @@ abstract class AbstractAdapterTestCase extends TestCase
                 ),
             );
         $counter = 0;
+        // @phpstan-ignore-next-line arguments.count
         $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
-        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
         $this->assertSame(4, $counter);
 
@@ -290,9 +293,10 @@ abstract class AbstractAdapterTestCase extends TestCase
                 ),
             );
         $counter = 0;
+        // @phpstan-ignore-next-line arguments.count
         $engine->reindex([$reindexProvider], $reindexConfig, function(string $index, int $total, int $count) use (&$counter) {
             $counter = $count;
-        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line
+        }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
         $this->assertSame(0, $counter);
     }
