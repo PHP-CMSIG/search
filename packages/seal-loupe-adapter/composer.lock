@@ -414,16 +414,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "0.13.7",
+            "version": "0.13.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "eaec295de865f29cb8c8e86111f6faaaefb7d0d7"
+                "reference": "1c47333c0843ddbbe2b90211bc9d44c1e516b867"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/eaec295de865f29cb8c8e86111f6faaaefb7d0d7",
-                "reference": "eaec295de865f29cb8c8e86111f6faaaefb7d0d7",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/1c47333c0843ddbbe2b90211bc9d44c1e516b867",
+                "reference": "1c47333c0843ddbbe2b90211bc9d44c1e516b867",
                 "shasum": ""
             },
             "require": {
@@ -469,7 +469,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/0.13.7"
+                "source": "https://github.com/loupe-php/loupe/tree/0.13.12"
             },
             "funding": [
                 {
@@ -477,7 +477,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-12T15:43:54+00:00"
+            "time": "2026-04-07T06:59:06+00:00"
         },
         {
             "name": "loupe/matcher",
@@ -922,16 +922,16 @@
         },
         {
             "name": "toflar/state-set-index",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Toflar/state-set-index.git",
-                "reference": "c374bc1efd56a91a547c8dfdc3facbfa09e1b295"
+                "reference": "29df429b827676c9cf64cb79b5e8411dd9e0bd7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Toflar/state-set-index/zipball/c374bc1efd56a91a547c8dfdc3facbfa09e1b295",
-                "reference": "c374bc1efd56a91a547c8dfdc3facbfa09e1b295",
+                "url": "https://api.github.com/repos/Toflar/state-set-index/zipball/29df429b827676c9cf64cb79b5e8411dd9e0bd7e",
+                "reference": "29df429b827676c9cf64cb79b5e8411dd9e0bd7e",
                 "shasum": ""
             },
             "require": {
@@ -939,6 +939,8 @@
                 "php": "^8.1"
             },
             "require-dev": {
+                "fakerphp/faker": "^1.24",
+                "phpbench/phpbench": "^1.4",
                 "phpunit/phpunit": "^10.2",
                 "symplify/easy-coding-standard": "^11.3"
             },
@@ -961,9 +963,9 @@
             "description": "Implementation of the State Set Index Algorithm",
             "support": {
                 "issues": "https://github.com/Toflar/state-set-index/issues",
-                "source": "https://github.com/Toflar/state-set-index/tree/3.1.0"
+                "source": "https://github.com/Toflar/state-set-index/tree/3.2.0"
             },
-            "time": "2025-08-12T07:23:44+00:00"
+            "time": "2026-03-31T12:30:08+00:00"
         },
         {
             "name": "wamania/php-stemmer",
@@ -1361,8 +1363,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee25c7b32af5e356a3902b427cd60931ecdae5cd",
-                "reference": "ee25c7b32af5e356a3902b427cd60931ecdae5cd",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b4219aee1045a464b83d89e8140d8c0784f5ed56",
+                "reference": "b4219aee1045a464b83d89e8140d8c0784f5ed56",
                 "shasum": ""
             },
             "require": {
@@ -1386,6 +1388,17 @@
             "license": [
                 "MIT"
             ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
             "description": "PHPStan - PHP Static Analysis Tool",
             "keywords": [
                 "dev",
@@ -1408,7 +1421,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-23T14:11:10+00:00"
+            "time": "2026-04-08T18:01:43+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -1856,12 +1869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "51b1715e0d2781a6c7be69b011e4f1b42112ffc8"
+                "reference": "e48ec15bbc8c36f57fee45bcf3765c07c613b526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/51b1715e0d2781a6c7be69b011e4f1b42112ffc8",
-                "reference": "51b1715e0d2781a6c7be69b011e4f1b42112ffc8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e48ec15bbc8c36f57fee45bcf3765c07c613b526",
+                "reference": "e48ec15bbc8c36f57fee45bcf3765c07c613b526",
                 "shasum": ""
             },
             "require": {
@@ -1941,25 +1954,25 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-03-07T17:10:43+00:00"
+            "time": "2026-04-08T15:25:25+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "2.3.9",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "917842143fd9f5331a2adefc214b8d7143bd32c4"
+                "reference": "000b7050b9e4fe98db2192971e56eb0b302b3feb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/917842143fd9f5331a2adefc214b8d7143bd32c4",
-                "reference": "917842143fd9f5331a2adefc214b8d7143bd32c4",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/000b7050b9e4fe98db2192971e56eb0b302b3feb",
+                "reference": "000b7050b9e4fe98db2192971e56eb0b302b3feb",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.40"
+                "phpstan/phpstan": "^2.1.41"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -1993,7 +2006,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.3.9"
+                "source": "https://github.com/rectorphp/rector/tree/2.4.1"
             },
             "funding": [
                 {
@@ -2001,7 +2014,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-16T09:43:55+00:00"
+            "time": "2026-04-08T08:43:56+00:00"
         },
         {
             "name": "sebastian/cli-parser",

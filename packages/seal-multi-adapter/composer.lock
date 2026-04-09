@@ -504,8 +504,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee25c7b32af5e356a3902b427cd60931ecdae5cd",
-                "reference": "ee25c7b32af5e356a3902b427cd60931ecdae5cd",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b4219aee1045a464b83d89e8140d8c0784f5ed56",
+                "reference": "b4219aee1045a464b83d89e8140d8c0784f5ed56",
                 "shasum": ""
             },
             "require": {
@@ -529,6 +529,17 @@
             "license": [
                 "MIT"
             ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
             "description": "PHPStan - PHP Static Analysis Tool",
             "keywords": [
                 "dev",
@@ -551,7 +562,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-23T14:11:10+00:00"
+            "time": "2026-04-08T18:01:43+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -999,12 +1010,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "51b1715e0d2781a6c7be69b011e4f1b42112ffc8"
+                "reference": "e48ec15bbc8c36f57fee45bcf3765c07c613b526"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/51b1715e0d2781a6c7be69b011e4f1b42112ffc8",
-                "reference": "51b1715e0d2781a6c7be69b011e4f1b42112ffc8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e48ec15bbc8c36f57fee45bcf3765c07c613b526",
+                "reference": "e48ec15bbc8c36f57fee45bcf3765c07c613b526",
                 "shasum": ""
             },
             "require": {
@@ -1084,25 +1095,25 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-03-07T17:10:43+00:00"
+            "time": "2026-04-08T15:25:25+00:00"
         },
         {
             "name": "rector/rector",
-            "version": "2.3.9",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "917842143fd9f5331a2adefc214b8d7143bd32c4"
+                "reference": "000b7050b9e4fe98db2192971e56eb0b302b3feb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/917842143fd9f5331a2adefc214b8d7143bd32c4",
-                "reference": "917842143fd9f5331a2adefc214b8d7143bd32c4",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/000b7050b9e4fe98db2192971e56eb0b302b3feb",
+                "reference": "000b7050b9e4fe98db2192971e56eb0b302b3feb",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.40"
+                "phpstan/phpstan": "^2.1.41"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -1136,7 +1147,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.3.9"
+                "source": "https://github.com/rectorphp/rector/tree/2.4.1"
             },
             "funding": [
                 {
@@ -1144,7 +1155,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-16T09:43:55+00:00"
+            "time": "2026-04-08T08:43:56+00:00"
         },
         {
             "name": "sebastian/cli-parser",
