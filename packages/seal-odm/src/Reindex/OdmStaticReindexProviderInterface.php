@@ -4,7 +4,7 @@ namespace CmsIg\Seal\Odm\Reindex;
 
 use CmsIg\Seal\Reindex\ReindexConfig;
 
-interface OdmReindexProviderInterface
+interface OdmStaticReindexProviderInterface
 {
     /**
      * Returns how many documents this provider will provide. Returns `null` if the total is unknown.

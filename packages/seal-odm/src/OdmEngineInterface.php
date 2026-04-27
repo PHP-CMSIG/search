@@ -3,10 +3,9 @@
 namespace CmsIg\Seal\Odm;
 
 use CmsIg\Seal\Exception\DocumentNotFoundException;
-use CmsIg\Seal\Odm\Reindex\OdmReindexProviderInterface;
+use CmsIg\Seal\Odm\Reindex\OdmStaticReindexProviderInterface;
 use CmsIg\Seal\Odm\Search\OdmSearchBuilder;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Task\TaskInterface;
 
@@ -81,7 +80,7 @@ interface OdmEngineInterface
      * @experimental This method is experimental and may change in future versions, we are not sure if it stays here or the syntax change completely.
      *               For framework users it is uninteresting as there it is handled via CLI commands.
      *
-     * @param iterable<OdmReindexProviderInterface> $odmReindexProviders
+     * @param iterable<OdmStaticReindexProviderInterface> $odmReindexProviders
      * @param callable(string, int, int|null): void|null $progressCallback
      * @param array{return_slow_promise_result?: true} $options
      *
