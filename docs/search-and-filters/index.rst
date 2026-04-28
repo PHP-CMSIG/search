@@ -612,6 +612,54 @@ mapping, use ``build()`` instead:
         ->build('blog', $config, $requestData)
         ->getResult();
 
+If you accept regular form submissions and work with ``$_POST``, normalize
+string values before building the search. This allows you to build a tiny
+controller while giving your designer's the full flexibility once they understand
+how to build the form inputs:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\SearchBuilderFactory\FormSearchInputNormalizer;
+
+    $requestData = FormSearchInputNormalizer::normalize($_POST);
+
+    $result = $searchBuilderFactory
+        ->build('blog', $config, $requestData)
+        ->getResult();
+
+Example HTML form for a more complex nested structure (top-level ``or`` with a nested
+``and``):
+
+.. code-block:: html
+
+    <form method="post">
+        <input type="text" name="limit" value="20">
+        <input type="text" name="offset" value="10">
+
+        <input type="text" name="filters[0][type]" value="or">
+
+        <input type="text" name="filters[0][conditions][0][type]" value="geoDistance">
+        <input type="text" name="filters[0][conditions][0][field]" value="location">
+        <input type="text" name="filters[0][conditions][0][latitude]" value="45.472735">
+        <input type="text" name="filters[0][conditions][0][longitude]" value="9.184019">
+        <input type="text" name="filters[0][conditions][0][distance]" value="2000">
+
+        <input type="text" name="filters[0][conditions][1][type]" value="and">
+
+        <input type="text" name="filters[0][conditions][1][conditions][0][type]" value="geoBoundingBox">
+        <input type="text" name="filters[0][conditions][1][conditions][0][field]" value="location">
+        <input type="text" name="filters[0][conditions][1][conditions][0][northLatitude]" value="45.494181">
+        <input type="text" name="filters[0][conditions][1][conditions][0][eastLongitude]" value="9.214024">
+        <input type="text" name="filters[0][conditions][1][conditions][0][southLatitude]" value="45.449484">
+        <input type="text" name="filters[0][conditions][1][conditions][0][westLongitude]" value="9.179175">
+
+        <input type="text" name="filters[0][conditions][1][conditions][1][type]" value="equal">
+        <input type="text" name="filters[0][conditions][1][conditions][1][field]" value="tags">
+        <input type="text" name="filters[0][conditions][1][conditions][1][value]" value="php">
+    </form>
+
 --------------
 
 Counting documents

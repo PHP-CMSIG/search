@@ -229,4 +229,30 @@ final class TypeUtil
 
         return $value;
     }
+
+    public static function toIntValue(mixed $value, string $context): int
+    {
+        if (\is_int($value)) {
+            return $value;
+        }
+
+        if (\is_string($value) && '' !== $value && 1 === \preg_match('/^-?\d+$/', $value)) {
+            return (int) $value;
+        }
+
+        throw new \InvalidArgumentException(\sprintf('Form value for "%s" must be an integer-compatible value.', $context));
+    }
+
+    public static function toFloatValue(mixed $value, string $context): float
+    {
+        if (\is_float($value) || \is_int($value)) {
+            return (float) $value;
+        }
+
+        if (\is_string($value) && '' !== $value && \is_numeric($value)) {
+            return (float) $value;
+        }
+
+        throw new \InvalidArgumentException(\sprintf('Form value for "%s" must be a numeric-compatible value.', $context));
+    }
 }
