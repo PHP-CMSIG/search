@@ -68,6 +68,21 @@ loupe://var/indexes/
 loupe://
 ```
 
+You can also pass a custom Loupe configuration as a DSN query parameter:
+
+```php
+<?php
+
+use Loupe\Loupe\Configuration;
+
+$configuration = Configuration::create()
+    ->withMaxTotalHits(5000);
+
+$dsn = 'loupe://var/indexes/?configuration=' . rawurlencode($configuration->toString());
+```
+
+The `configuration` value must be a Loupe configuration string (`Configuration::toString()`), URL-encoded for DSN usage.
+
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)

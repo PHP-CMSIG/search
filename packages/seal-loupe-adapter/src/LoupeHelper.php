@@ -35,6 +35,7 @@ final class LoupeHelper
     public function __construct(
         private readonly LoupeFactory $loupeFactory,
         string $directory,
+        private readonly Configuration|null $configuration = null,
     ) {
         $this->directory = '' !== $directory ? (\rtrim($directory, '/') . '/') : '';
     }
@@ -144,7 +145,7 @@ final class LoupeHelper
             $index->facetFields,
         ));
 
-        return Configuration::create()
+        return ($this->configuration ?? Configuration::create())
             ->withPrimaryKey($index->getIdentifierField()->name)
             ->withSearchableAttributes(\array_map($this->formatField(...), $index->searchableFields))
             ->withFilterableAttributes(\array_map($this->formatField(...), $filterableFields))
