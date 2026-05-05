@@ -28,6 +28,7 @@ use CmsIg\Seal\Search\Condition\NotEqualCondition;
 use CmsIg\Seal\Search\Condition\NotInCondition;
 use CmsIg\Seal\Search\Condition\SearchCondition;
 use CmsIg\Seal\Search\Facet\AbstractFacet;
+use CmsIg\Seal\Search\TypeUtil;
 
 final class SearchBuilderFactoryConfig
 {
@@ -48,6 +49,59 @@ final class SearchBuilderFactoryConfig
         public readonly bool $allowIdentifier = false,
         public readonly int|null $maxLimit = 0,
     ) {
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public static function fromArray(array $data): self
+    {
+        $allowSearch = $data['allowSearch'] ?? false;
+        if (!\is_bool($allowSearch)) {
+            throw new \InvalidArgumentException('Value for "allowSearch" must be a boolean.');
+        }
+
+        $allowIdentifier = $data['allowIdentifier'] ?? false;
+        if (!\is_bool($allowIdentifier)) {
+            throw new \InvalidArgumentException('Value for "allowIdentifier" must be a boolean.');
+        }
+
+        return new self(
+            TypeUtil::readStringListByKey($data, 'filterFields', []),
+            TypeUtil::readStringListByKey($data, 'sortFields', []),
+            TypeUtil::readStringListByKey($data, 'facetFields', []),
+            TypeUtil::readStringListByKey($data, 'distinctFields', []),
+            TypeUtil::readStringListByKey($data, 'highlightFields', []),
+            $allowSearch,
+            $allowIdentifier,
+            TypeUtil::readNullableNonNegativeIntByKey($data, 'maxLimit', 0),
+        );
+    }
+
+    /**
+     * @return array{
+     *     filterFields: array<string>,
+     *     sortFields: array<string>,
+     *     facetFields: array<string>,
+     *     distinctFields: array<string>,
+     *     highlightFields: array<string>,
+     *     allowSearch: bool,
+     *     allowIdentifier: bool,
+     *     maxLimit: int|null
+     * }
+     */
+    public function toArray(): array
+    {
+        return [
+            'filterFields' => $this->filterFields,
+            'sortFields' => $this->sortFields,
+            'facetFields' => $this->facetFields,
+            'distinctFields' => $this->distinctFields,
+            'highlightFields' => $this->highlightFields,
+            'allowSearch' => $this->allowSearch,
+            'allowIdentifier' => $this->allowIdentifier,
+            'maxLimit' => $this->maxLimit,
+        ];
     }
 
     public function validateCondition(object $condition, Index $index): void
