@@ -66,4 +66,44 @@ class LoupeAdapterFactoryTest extends TestCase
             ],
         ]);
     }
+
+    public function testCreateHelperWithIndexSpecificConfigurationString(): void
+    {
+        $directory = \sys_get_temp_dir() . '/seal-loupe-adapter-factory-test-' . \uniqid('', true);
+        \mkdir($directory, 0777, true);
+
+        $defaultConfiguration = Configuration::create()->withMaxTotalHits(42);
+        $blogConfiguration = Configuration::create()->withMaxTotalHits(13);
+
+        $dsn = 'loupe://' . $directory
+            . '?configuration=' . \rawurlencode($defaultConfiguration->toString())
+            . '&configuration[blog]=' . \rawurlencode($blogConfiguration->toString());
+
+        $loupeAdapterFactory = new LoupeAdapterFactory();
+        $factory = new AdapterFactory([
+            'loupe' => $loupeAdapterFactory,
+        ]);
+
+        $parsedDsn = $factory->parseDsn($dsn);
+        $helper = $loupeAdapterFactory->createHelper($parsedDsn);
+
+        $blogIndex = new Index('blog', [
+            'id' => new IdentifierField('id'),
+            'title' => new TextField('title'),
+        ]);
+        $newsIndex = new Index('news', [
+            'id' => new IdentifierField('id'),
+            'title' => new TextField('title'),
+        ]);
+
+        $helper->createIndex($blogIndex);
+        $helper->createIndex($newsIndex);
+
+        self::assertSame(13, $helper->getLoupe($blogIndex)->getConfiguration()->getMaxTotalHits());
+        self::assertSame(42, $helper->getLoupe($newsIndex)->getConfiguration()->getMaxTotalHits());
+
+        $helper->dropIndex($blogIndex);
+        $helper->dropIndex($newsIndex);
+        \rmdir($directory);
+    }
 }

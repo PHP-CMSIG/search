@@ -83,6 +83,26 @@ $dsn = 'loupe://var/indexes/?configuration=' . rawurlencode($configuration->toSt
 
 The `configuration` value must be a Loupe configuration string (`Configuration::toString()`), URL-encoded for DSN usage.
 
+You can also configure specific indexes via `configuration[<index>]`:
+
+```php
+<?php
+
+use Loupe\Loupe\Configuration;
+
+$defaultConfiguration = Configuration::create()
+    ->withMaxTotalHits(5000);
+
+$blogConfiguration = Configuration::create()
+    ->withMaxTotalHits(1000);
+
+$dsn = 'loupe://var/indexes/'
+    . '?configuration=' . rawurlencode($defaultConfiguration->toString())
+    . '&configuration[blog]=' . rawurlencode($blogConfiguration->toString());
+```
+
+When both are present, `configuration[<index>]` overrides the default `configuration` for that index.
+
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
