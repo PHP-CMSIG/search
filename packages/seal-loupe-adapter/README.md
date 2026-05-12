@@ -68,22 +68,7 @@ loupe://var/indexes/
 loupe://
 ```
 
-You can also pass a custom Loupe configuration as a DSN query parameter:
-
-```php
-<?php
-
-use Loupe\Loupe\Configuration;
-
-$configuration = Configuration::create()
-    ->withMaxTotalHits(5000);
-
-$dsn = 'loupe://var/indexes/?configuration=' . rawurlencode($configuration->toString());
-```
-
-The `configuration` value must be a Loupe configuration string (`Configuration::toString()`), URL-encoded for DSN usage.
-
-You can also configure specific indexes via `configuration[<index>]`:
+You can pass custom Loupe configurations via the DSN `configuration[...]` query parameter:
 
 ```php
 <?php
@@ -97,11 +82,12 @@ $blogConfiguration = Configuration::create()
     ->withMaxTotalHits(1000);
 
 $dsn = 'loupe://var/indexes/'
-    . '?configuration=' . rawurlencode($defaultConfiguration->toString())
+    . '?configuration[*]=' . rawurlencode($defaultConfiguration->toString())
     . '&configuration[blog]=' . rawurlencode($blogConfiguration->toString());
 ```
 
-When both are present, `configuration[<index>]` overrides the default `configuration` for that index.
+Use `configuration[*]` as default fallback and `configuration[<index>]` for index-specific overrides.
+Each `configuration[...]` value must be a Loupe configuration string (`Configuration::toString()`), URL-encoded for DSN usage.
 
 ## Authors
 

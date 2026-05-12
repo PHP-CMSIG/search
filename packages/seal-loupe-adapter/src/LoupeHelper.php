@@ -39,7 +39,6 @@ final class LoupeHelper
         private readonly LoupeFactory $loupeFactory,
         string $directory,
         private readonly array $indexConfigurations = [],
-        private readonly Configuration|null $defaultConfiguration = null,
     ) {
         $this->directory = '' !== $directory ? (\rtrim($directory, '/') . '/') : '';
     }
@@ -149,7 +148,7 @@ final class LoupeHelper
             $index->facetFields,
         ));
 
-        return ($this->indexConfigurations[$index->name] ?? $this->defaultConfiguration ?? Configuration::create())
+        return ($this->indexConfigurations[$index->name] ?? $this->indexConfigurations['*'] ?? Configuration::create())
             ->withPrimaryKey($index->getIdentifierField()->name)
             ->withSearchableAttributes(\array_map($this->formatField(...), $index->searchableFields))
             ->withFilterableAttributes(\array_map($this->formatField(...), $filterableFields))

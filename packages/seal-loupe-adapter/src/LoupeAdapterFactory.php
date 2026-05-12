@@ -53,45 +53,48 @@ class LoupeAdapterFactory implements AdapterFactoryInterface
             : new LoupeFactory();
 
         $directory = $dsn['host'] . ($dsn['path'] ?? '');
-        $configuration = null;
-        $indexConfigurations = [];
-        $configurationString = $dsn['query']['configuration'] ?? null;
-        if (null !== $configurationString) {
-            if (\is_array($configurationString)) {
-                foreach ($configurationString as $indexName => $indexConfigurationString) {
-                    if (!\is_string($indexName)) {
-                        throw new \InvalidArgumentException('The "configuration" query param array keys must be strings.');
-                    }
-
-                    if (!\is_string($indexConfigurationString)) {
-                        throw new \InvalidArgumentException(\sprintf('The "configuration[%s]" query param must be a string.', $indexName));
-                    }
-
-                    try {
-                        $indexConfigurations[$indexName] = Configuration::fromString($indexConfigurationString);
-                    } catch (\JsonException $exception) {
-                        throw new \InvalidArgumentException(\sprintf('The "configuration[%s]" query param must contain a Loupe\\Loupe\\Configuration string.', $indexName), 0, $exception);
-                    }
-                }
+        $configurationQuery = $dsn['query']['configuration'] ?? null;
+        if (!\is_array($configurationQuery)) {
+            if (null === $configurationQuery) {
+                $configurationQuery = [];
             } else {
-                if (!\is_string($configurationString)) {
-                    throw new \InvalidArgumentException('The "configuration" query param must be a string or an array of strings.');
-                }
-
-                try {
-                    $configuration = Configuration::fromString($configurationString);
-                } catch (\JsonException $exception) {
-                    throw new \InvalidArgumentException('The "configuration" query param must contain a Loupe\\Loupe\\Configuration string.', 0, $exception);
-                }
+                throw new \InvalidArgumentException('The "configuration" query param must be an array of strings (e.g. configuration[*]=...&configuration[blog]=...).');
             }
         }
 
         return new LoupeHelper(
             $loupeFactory,
             $directory,
-            $indexConfigurations,
-            $configuration,
+            $this->parseIndexConfigurations($configurationQuery, 'configuration'),
         );
+    }
+
+    /**
+     * @param array<mixed> $indexConfigurationQuery
+     *
+     * @return array<string, Configuration>
+     */
+    private function parseIndexConfigurations(array $indexConfigurationQuery, string $queryParam): array
+    {
+        $indexConfigurations = [];
+
+        foreach ($indexConfigurationQuery as $indexName => $indexConfigurationString) {
+            if (!\is_string($indexName)) {
+                throw new \InvalidArgumentException(\sprintf('The "%s" query param array keys must be strings.', $queryParam));
+            }
+
+            if (!\is_string($indexConfigurationString)) {
+                throw new \InvalidArgumentException(\sprintf('The "%s[%s]" query param must be a string.', $queryParam, $indexName));
+            }
+
+            try {
+                $indexConfigurations[$indexName] = Configuration::fromString($indexConfigurationString);
+            } catch (\JsonException $exception) {
+                throw new \InvalidArgumentException(\sprintf('The "%s[%s]" query param must contain a Loupe\\Loupe\\Configuration string.', $queryParam, $indexName), 0, $exception);
+            }
+        }
+
+        return $indexConfigurations;
     }
 
     public static function getName(): string
