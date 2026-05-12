@@ -42,7 +42,7 @@ class LoupeAdapterFactory implements AdapterFactoryInterface
      * @param array{
      *     host: string,
      *     path?: string,
-     *     query: array<string, string|string[]>,
+     *     query: array<string, mixed>,
      * } $dsn
      */
     public function createHelper(array $dsn): LoupeHelper
@@ -59,17 +59,25 @@ class LoupeAdapterFactory implements AdapterFactoryInterface
         if (null !== $configurationString) {
             if (\is_array($configurationString)) {
                 foreach ($configurationString as $indexName => $indexConfigurationString) {
-                    \assert(\is_string($indexConfigurationString), 'The "configuration" query param values must be strings.');
+                    if (!\is_string($indexName)) {
+                        throw new \InvalidArgumentException('The "configuration" query param array keys must be strings.');
+                    }
+
+                    if (!\is_string($indexConfigurationString)) {
+                        throw new \InvalidArgumentException(\sprintf('The "configuration[%s]" query param must be a string.', $indexName));
+                    }
+
                     try {
                         $indexConfigurations[$indexName] = Configuration::fromString($indexConfigurationString);
                     } catch (\JsonException $exception) {
                         throw new \InvalidArgumentException(\sprintf('The "configuration[%s]" query param must contain a Loupe\\Loupe\\Configuration string.', $indexName), 0, $exception);
                     }
                 }
-
-                \assert([] !== $indexConfigurations);
             } else {
-                \assert(\is_string($configurationString), 'The "configuration" query param must be a string or an array of strings.');
+                if (!\is_string($configurationString)) {
+                    throw new \InvalidArgumentException('The "configuration" query param must be a string or an array of strings.');
+                }
+
                 try {
                     $configuration = Configuration::fromString($configurationString);
                 } catch (\JsonException $exception) {

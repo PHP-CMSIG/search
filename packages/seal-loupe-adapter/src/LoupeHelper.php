@@ -32,6 +32,9 @@ final class LoupeHelper
 
     private readonly string $directory;
 
+    /**
+     * @param array<string, Configuration> $indexConfigurations
+     */
     public function __construct(
         private readonly LoupeFactory $loupeFactory,
         string $directory,
