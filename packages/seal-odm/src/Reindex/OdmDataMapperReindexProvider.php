@@ -1,18 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Odm\Reindex;
 
 use CmsIg\Seal\Odm\Mapper\OdmDataMapperInterface;
-use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
+use CmsIg\Seal\Reindex\ReindexConfig;
 
 /**
- * @internal This class is only intended to be used internally by the Seal ODM package.
+ * @internal this class is only intended to be used internally by the Seal ODM package
  */
 final class OdmDataMapperReindexProvider implements DynamicReindexProviderInterface
 {
     /**
-     * @var iterable<OdmStaticReindexProviderInterface> $providers
+     * @param iterable<OdmStaticReindexProviderInterface> $providers
      */
     public function __construct(
         private readonly iterable $providers,
@@ -29,7 +40,7 @@ final class OdmDataMapperReindexProvider implements DynamicReindexProviderInterf
             }
 
             $newTotal = $provider->total();
-            if (\is_null($newTotal)) {
+            if (null === $newTotal) {
                 return null;
             }
 
@@ -46,7 +57,7 @@ final class OdmDataMapperReindexProvider implements DynamicReindexProviderInterf
                 continue;
             }
 
-            foreach ($this->provider->provide($reindexConfig) as $object) {
+            foreach ($provider->provide($reindexConfig) as $object) {
                 yield $this->dataMapper->objectToArray($index, $object);
             }
         }

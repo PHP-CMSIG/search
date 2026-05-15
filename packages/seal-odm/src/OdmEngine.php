@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Odm;
 
 use CmsIg\Seal\EngineInterface;
@@ -7,17 +18,13 @@ use CmsIg\Seal\Odm\Mapper\OdmDataMapperInterface;
 use CmsIg\Seal\Odm\Reindex\OdmDataMapperReindexProvider;
 use CmsIg\Seal\Odm\Search\OdmSearchBuilder;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Task\TaskInterface;
 
 final class OdmEngine implements OdmEngineInterface
 {
-    /**
-     * @param EngineInterface $engine
-     */
     public function __construct(
-        protected readonly EngineInterface $engine,
-        protected readonly OdmDataMapperInterface $dataMapper,
+        private readonly EngineInterface $engine,
+        private readonly OdmDataMapperInterface $dataMapper,
     ) {
     }
 
@@ -35,7 +42,7 @@ final class OdmEngine implements OdmEngineInterface
 
     public function bulk(string $index, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null
     {
-        return $this->engine->bulk($index, (function(string $index, iterable $objects) {
+        return $this->engine->bulk($index, (function (string $index, iterable $objects) {
             foreach ($objects as $object) {
                 yield $this->dataMapper->objectToArray($index, $object);
             }
@@ -87,18 +94,17 @@ final class OdmEngine implements OdmEngineInterface
         return $this->engine->dropSchema($options);
     }
 
-    public function reindex(// @phpstan-ignore-line parameter.notFound
+    public function reindex(
         iterable $odmReindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
         array $options = [],
     ): TaskInterface|null {
-        $reindexProviders = (function(iterable $providers) {
-            foreach ($providers as $provider) {
-                yield new OdmDataMapperReindexProvider($provider, $this->dataMapper);
-            }
-        })($odmReindexProviders);
-
-        return $this->engine->reindex($reindexProviders, $reindexConfig, $progressCallback, $options);
+        return $this->engine->reindex(
+            [new OdmDataMapperReindexProvider($odmReindexProviders, $this->dataMapper)],
+            $reindexConfig,
+            $progressCallback,
+            $options,
+        );
     }
 }
