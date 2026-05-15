@@ -43,7 +43,53 @@ composer require cmsig/seal cmsig/seal-odm
 
 ## Usage
 
-ToDo
+Define your schema metadata directly on PHP classes:
+
+```php
+<?php
+
+use CmsIg\Seal\Odm\Attribute\Field;
+use CmsIg\Seal\Odm\Attribute\Identifier;
+use CmsIg\Seal\Odm\Attribute\Index;
+
+#[Index(name: 'blog')]
+final class BlogDocument
+{
+    #[Identifier]
+    public string $id;
+
+    #[Field(sortable: true)]
+    public string $title;
+
+    /**
+     * @var list<string>
+     */
+    #[Field(filterable: true, facet: true)]
+    public array $tags;
+}
+```
+
+Load the schema from a directory containing annotated classes:
+
+```php
+<?php
+
+use CmsIg\Seal\Engine;
+use CmsIg\Seal\Odm\Mapper\OdmDataMapper;
+use CmsIg\Seal\Odm\OdmEngine;
+use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
+
+$schema = (new AttributeLoader([__DIR__ . '/src/Search']))->load();
+$engine = new Engine($adapter, $schema);
+$odmEngine = new OdmEngine($engine, new OdmDataMapper($schema));
+```
+
+Supported inferred field types are `string`, `int`, `float`, `bool`, `DateTimeInterface` implementations,
+object types as nested `ObjectField`s, and `array`/`list` properties with element types declared in PHPDoc.
+
+The `OdmDataMapper` creates objects without calling constructors and reads or writes mapped values directly
+through reflected properties. To preserve the metadata required for that behavior, build the schema with
+`AttributeLoader` and pass the same `Schema` instance to both `Engine` and `OdmDataMapper`.
 
 ## Authors
 

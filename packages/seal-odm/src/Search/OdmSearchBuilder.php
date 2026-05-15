@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Odm\Search;
 
 use CmsIg\Seal\Adapter\SearcherInterface;
@@ -11,7 +22,7 @@ use CmsIg\Seal\Search\SearchBuilder;
 final class OdmSearchBuilder
 {
     public function __construct(
-        private readonly SearchBuilder          $searchBuilder,
+        private readonly SearchBuilder $searchBuilder,
         private readonly OdmDataMapperInterface $dataMapper,
     ) {
     }
@@ -95,7 +106,7 @@ final class OdmSearchBuilder
         $result = $this->searchBuilder->getSearcher()->search($search);
 
         return new OdmResult(
-            (function(iterable $documents) use ($index): \Generator {
+            (function (iterable $documents) use ($index): \Generator {
                 foreach ($documents as $document) {
                     yield $this->dataMapper->arrayToObject($index, $document);
                 }

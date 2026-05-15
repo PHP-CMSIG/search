@@ -1,9 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Odm\Search;
 
+/**
+ * @extends \IteratorIterator<int, object, \Generator<int, object, mixed, void>>
+ */
 final class OdmResult extends \IteratorIterator
 {
+    /**
+     * @param \Generator<int, object, mixed, void> $documents
+     * @param array<string, mixed> $facets
+     */
     public function __construct(
         \Generator $documents,
         private readonly int $total,

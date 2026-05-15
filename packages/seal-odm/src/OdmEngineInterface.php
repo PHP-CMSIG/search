@@ -1,12 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace CmsIg\Seal\Odm;
 
 use CmsIg\Seal\Exception\DocumentNotFoundException;
 use CmsIg\Seal\Odm\Reindex\OdmStaticReindexProviderInterface;
 use CmsIg\Seal\Odm\Search\OdmSearchBuilder;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Task\TaskInterface;
 
 interface OdmEngineInterface
@@ -37,8 +47,6 @@ interface OdmEngineInterface
 
     /**
      * @throws DocumentNotFoundException
-     *
-     * @return object
      */
     public function getDocument(string $index, string $identifier): object;
 
@@ -86,7 +94,7 @@ interface OdmEngineInterface
      *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
-    public function reindex(// @phpstan-ignore-line parameter.notFound
+    public function reindex(
         iterable $odmReindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
