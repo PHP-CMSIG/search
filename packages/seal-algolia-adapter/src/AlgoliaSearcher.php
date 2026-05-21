@@ -130,6 +130,9 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         $searchParams['facets'] = \array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets);
+        if ([] !== \array_filter($search->facets, static fn (AbstractFacet $facet) => $facet instanceof CountFacet)) {
+            $searchParams['maxValuesPerFacet'] = CountFacet::DEFAULT_MAX_VALUES;
+        }
 
         $data = $this->client->searchSingleIndex($indexName, $searchParams);
         \assert(\is_array($data) && isset($data['hits']) && \is_array($data['hits']), 'The "hits" array is expected to be returned by algolia client.');

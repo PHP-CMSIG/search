@@ -18,4 +18,6 @@ namespace CmsIg\Seal\Search\Facet;
  */
 class CountFacet extends AbstractFacet
 {
+    /** @internal */
+    final public const DEFAULT_MAX_VALUES = 100;
 }

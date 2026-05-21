@@ -16,6 +16,7 @@ namespace CmsIg\Seal\Adapter\Meilisearch;
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Schema\Field\GeoPointField;
 use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Search\Facet\CountFacet;
 use CmsIg\Seal\Task\AsyncTask;
 use CmsIg\Seal\Task\TaskInterface;
 use Meilisearch\Client;
@@ -75,6 +76,9 @@ final class MeilisearchSchemaManager implements SchemaManagerInterface
             'searchableAttributes' => $index->searchableFields,
             'filterableAttributes' => $filterableFields,
             'sortableAttributes' => $index->sortableFields,
+            'faceting' => [
+                'maxValuesPerFacet' => CountFacet::DEFAULT_MAX_VALUES,
+            ],
         ];
 
         $geoPointField = $index->getGeoPointField();

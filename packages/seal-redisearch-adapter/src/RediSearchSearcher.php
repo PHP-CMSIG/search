@@ -386,6 +386,7 @@ final class RediSearchSearcher implements SearcherInterface
                 $arguments = \array_merge($arguments, [
                     'GROUPBY', '1', '@' . $this->getFilterField($search->index, $facet->field),
                     'REDUCE', 'COUNT', '0', 'AS', 'count',
+                    'LIMIT', '0', (string) CountFacet::DEFAULT_MAX_VALUES,
                 ]);
 
                 $arguments[] = 'DIALECT';

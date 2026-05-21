@@ -133,6 +133,7 @@ final class SolrSearcher implements SearcherInterface
             /** @var SolariumFacetField $facetField */
             $facetField = $facetSet->createFacetField($this->getFilterField($search->index, $facet->field));
             $facetField->setField($this->getFilterField($search->index, $facet->field));
+            $facetField->setLimit(CountFacet::DEFAULT_MAX_VALUES);
         }
 
         if ([] !== $search->highlightFields) {

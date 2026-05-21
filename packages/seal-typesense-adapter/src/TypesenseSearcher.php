@@ -118,6 +118,9 @@ final class TypesenseSearcher implements SearcherInterface
         }
 
         $searchParams['facet_by'] = \implode(',', \array_map(static fn (AbstractFacet $facet) => $facet->field, $search->facets));
+        if ([] !== \array_filter($search->facets, static fn (AbstractFacet $facet) => $facet instanceof CountFacet)) {
+            $searchParams['max_facet_values'] = CountFacet::DEFAULT_MAX_VALUES;
+        }
 
         $data = $this->client->collections[$search->index->name]->documents->search($searchParams);
 

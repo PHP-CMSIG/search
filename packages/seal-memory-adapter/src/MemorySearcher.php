@@ -556,6 +556,8 @@ final class MemorySearcher implements SearcherInterface
 
                         ++$facets[$facet->field]['count'][$value];
                     }
+
+                    $facets[$facet->field]['count'] = \array_slice($facets[$facet->field]['count'] ?? [], 0, CountFacet::DEFAULT_MAX_VALUES, true);
                 }
 
                 if ($facet instanceof MinMaxFacet) {

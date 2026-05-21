@@ -19,6 +19,7 @@ use CmsIg\Seal\Adapter\SchemaManagerInterface;
 use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Condition\Condition;
+use CmsIg\Seal\Search\Facet\CountFacet;
 use CmsIg\Seal\Search\Facet\Facet;
 use CmsIg\Seal\Search\SearchBuilder;
 use PHPUnit\Framework\TestCase;
@@ -297,6 +298,48 @@ abstract class AbstractSearcherTestCase extends TestCase
                 ['return_slow_promise_result' => true],
             );
         }
+    }
+
+    public function testCountFacetIsTrimmedToDefaultMaxValues(): void
+    {
+        $schema = self::getSchema();
+        $index = $schema->indexes[TestingHelper::INDEX_COMPLEX];
+        $documents = [];
+
+        for ($i = 1; $i <= CountFacet::DEFAULT_MAX_VALUES + 11; ++$i) {
+            $documents[] = [
+                'uuid' => 'facet-trim-' . $i,
+                'rating' => (float) $i,
+            ];
+        }
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $index,
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFacet(Facet::count(field: 'rating'));
+
+        /** @var array{rating: array{count: array<string, int>}} $facets */
+        $facets = $search->getResult()->facets();
+        $ratingFacetCount = $facets['rating']['count'];
+
+        $this->assertCount(CountFacet::DEFAULT_MAX_VALUES, $ratingFacetCount);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $index,
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
     }
 
     public function testCount(): void

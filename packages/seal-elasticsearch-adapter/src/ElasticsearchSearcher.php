@@ -139,6 +139,7 @@ final class ElasticsearchSearcher implements SearcherInterface
         foreach ($search->facets as $facet) {
             if ($facet instanceof CountFacet) {
                 $body['aggs'][$facet->field . '_count']['terms']['field'] = $this->getFilterField($search->index, $facet->field);
+                $body['aggs'][$facet->field . '_count']['terms']['size'] = CountFacet::DEFAULT_MAX_VALUES;
             }
             if ($facet instanceof MinMaxFacet) {
                 $body['aggs'][$facet->field . '_min']['min']['field'] = $this->getFilterField($search->index, $facet->field);
@@ -312,7 +313,7 @@ final class ElasticsearchSearcher implements SearcherInterface
             if ($facet instanceof CountFacet && isset($aggregations[$facet->field . '_count']['buckets'])) {
                 foreach ($aggregations[$facet->field . '_count']['buckets'] as $bucket) {
                     $key = (string) ($bucket['key_as_string'] ?? $bucket['key']);
-                    $formatted[$facet->field]['count'][$key] = $bucket['doc_count']; // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+                    $formatted[$facet->field]['count'][$key] = $bucket['doc_count'];
                 }
             }
         }
