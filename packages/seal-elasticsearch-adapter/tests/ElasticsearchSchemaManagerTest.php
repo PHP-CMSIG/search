@@ -178,6 +178,15 @@ class ElasticsearchSchemaManagerTest extends AbstractSchemaManagerTestCase
                 'type' => 'boolean',
                 'index' => false,
             ],
+            'locale' => [
+                'type' => 'text',
+                'index' => false,
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword',
+                    ],
+                ],
+            ],
             'location' => [
                 'type' => 'geo_point',
                 'index' => false,

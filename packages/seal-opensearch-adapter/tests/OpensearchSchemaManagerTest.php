@@ -166,6 +166,14 @@ class OpensearchSchemaManagerTest extends AbstractSchemaManagerTestCase
             'isSpecial' => [
                 'type' => 'boolean',
             ],
+            'locale' => [
+                'type' => 'text',
+                'fields' => [
+                    'raw' => [
+                        'type' => 'keyword',
+                    ],
+                ],
+            ],
             'location' => [
                 'type' => 'geo_point',
             ],
