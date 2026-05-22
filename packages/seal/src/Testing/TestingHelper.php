@@ -48,6 +48,7 @@ final class TestingHelper
         $complexFields = [
             'uuid' => new Field\IdentifierField('uuid'),
             'title' => new Field\TextField('title', sortable: true),
+            'locale' => new Field\TextField('locale', searchable: false, filterable: true),
             'header' => new Field\TypedField('header', 'type', [
                 'image' => [
                     'media' => new Field\IntegerField('media'),
@@ -104,6 +105,7 @@ final class TestingHelper
      * @return array<array{
      *     uuid: string,
      *     title?: string|null,
+     *     locale?: string|null,
      *     header?: array{
      *         type: string,
      *         media: int|string,
@@ -138,6 +140,7 @@ final class TestingHelper
             [
                 'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
                 'title' => 'New Blog',
+                'locale' => 'en_GB',
                 'header' => [
                     'type' => 'image',
                     'media' => 1,
@@ -200,6 +203,7 @@ final class TestingHelper
             [
                 'uuid' => '79848403-c1a1-4420-bcc2-06ed537e0d4d',
                 'title' => 'Other Blog',
+                'locale' => 'en_US',
                 'header' => [
                     'type' => 'video',
                     'media' => 'https://www.youtube.com/watch?v=iYM2zFP3Zn0',
@@ -229,6 +233,7 @@ final class TestingHelper
             [
                 'uuid' => '8d90e7d9-2b56-4980-90ce-f91d020cee53',
                 'title' => 'Other Thing',
+                'locale' => 'en_GB',
                 'article' => '<article><h2>Other Thing</h2><p>A html field with some content</p></article>',
                 'footer' => [
                     'title' => 'Other Footer',

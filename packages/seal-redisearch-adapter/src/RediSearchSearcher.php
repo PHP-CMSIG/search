@@ -32,7 +32,6 @@ final class RediSearchSearcher implements SearcherInterface
     ) {
         $this->marshaller = new Marshaller(
             dateFormat: 'U',
-            addRawFilterTextField: true,
             geoPointFieldConfig: [
                 'latitude' => 1,
                 'longitude' => 0,

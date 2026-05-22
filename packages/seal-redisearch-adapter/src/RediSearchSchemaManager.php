@@ -68,7 +68,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
             $properties[] = \str_replace('.', '__', $name);
             $properties[] = $indexField['type'];
 
-            if (!$indexField['searchable'] && !$indexField['filterable']) { // TODO check if we can make something filterable but not searchable
+            if (!$indexField['searchable'] && !$indexField['filterable']) {
                 $properties[] = 'NOINDEX';
             }
 
@@ -117,10 +117,8 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
 
         foreach ($fields as $name => $field) {
             $jsonPath = $jsonPathPrefix . '[\'' . $name . '\']';
-            $jsonPathRaw = $jsonPathPrefix . '[\'' . $name . '.raw\']';
             if ($field->multiple) {
                 $jsonPath .= '[*]';
-                $jsonPathRaw .= '[*]';
             }
             $name = $prefix . $name;
 
@@ -147,7 +145,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
                     ],
                 ] : [], $field->filterable || $field->facet || $field->sortable ? [
                     $name . '.raw' => [
-                        'jsonPath' => $jsonPathRaw,
+                        'jsonPath' => $jsonPath,
                         'type' => 'TAG',
                         'searchable' => false,
                         'sortable' => $field->sortable,
