@@ -100,6 +100,7 @@ class AlgoliaSchemaManagerTest extends AbstractSchemaManagerTestCase
             ],
             'attributesForFaceting' => [
                 'uuid',
+                'locale',
                 'created',
                 'commentsCount',
                 'rating',
