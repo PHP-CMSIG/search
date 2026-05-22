@@ -73,6 +73,7 @@ class MarshallerTest extends TestCase
         return [
             'uuid' => '23b30f01-d8fd-4dca-b36a-4710e360a965',
             'title' => 'New Blog',
+            'locale' => 'en_GB',
             'header' => [
                 'image' => [
                     'media' => 1,
