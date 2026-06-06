@@ -13,6 +13,12 @@ parameters:
 			path: app/Http/Controllers/SearchController.php
 
 		-
+			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:artisan\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/CommandTest.php
+
+		-
 			message: '#^Cannot call method assertExitCode\(\) on mixed\.$#'
 			identifier: method.nonObject
 			count: 3
@@ -25,10 +31,16 @@ parameters:
 			path: tests/CommandTest.php
 
 		-
-			message: '#^Cannot call method toBe\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/Pest.php
+			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:crawler\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/SearchControllerTest.php
+
+		-
+			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/SearchControllerTest.php
 
 		-
 			message: '#^Cannot call method attr\(\) on mixed\.$#'
