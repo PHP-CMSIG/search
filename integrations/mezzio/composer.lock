@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af664c264e6f22913b4f7f8a68f98d67",
+    "content-hash": "186c68b08d89ff2d535c44771d6da39f",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -12,10 +12,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal",
-                "reference": "36ef56d7728d7ccd4a8cd6be6de6b4c0f66adc69"
+                "reference": "49d477ccfbccaff0290bd7247db33df1005ec66d"
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "replace": {
                 "schranz-search/seal": "self.version"
@@ -1343,12 +1343,12 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-algolia-adapter",
-                "reference": "4a76fc456deebaa8ded74e5db3ee0fbf7007744d"
+                "reference": "00239c0e84a0461def31ed83527944c0a938d5ae"
             },
             "require": {
                 "algolia/algoliasearch-client-php": "^4.4",
                 "cmsig/seal": "^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -1439,12 +1439,12 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-elasticsearch-adapter",
-                "reference": "cffe1a9a6588d408cb7a4c03a4a2d2607df6eaca"
+                "reference": "9db8ddf6c253a8e53c1d834c3a250b02f59f6941"
             },
             "require": {
                 "cmsig/seal": "^0.13",
                 "elasticsearch/elasticsearch": "^8.5.3 || ^9.0",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -1538,12 +1538,12 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-loupe-adapter",
-                "reference": "95e1bc5c8b6258d92879f26351c98fd7839b3d39"
+                "reference": "9c42d2fa06f233cef72239030a367fb718621be6"
             },
             "require": {
                 "cmsig/seal": "^0.13",
                 "loupe/loupe": "^0.12.11 || ^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -1634,12 +1634,12 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-meilisearch-adapter",
-                "reference": "5082e9c89a08cab055040a3ab2fb346024c14396"
+                "reference": "206241634435940b56b5a65697e366f71a9a5e87"
             },
             "require": {
                 "cmsig/seal": "^0.13",
                 "meilisearch/meilisearch-php": "^1.2",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -1732,11 +1732,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-memory-adapter",
-                "reference": "bee919929e1cf8f5c6221c6ac1c754e080a40bee"
+                "reference": "349b5cb53e0a89e43c7bf9de81b7756b61d8fc0d"
             },
             "require": {
                 "cmsig/seal": "^0.13",
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "provide": {
                 "cmsig/seal-adapter-implementation": "self.version"
@@ -1825,11 +1825,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-multi-adapter",
-                "reference": "5c3359c40da9d65e824a9968e7c8480473364162"
+                "reference": "8c9c9c0d14bceba784165ae213dd61d05a453ba0"
             },
             "require": {
                 "cmsig/seal": "^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -1919,12 +1919,12 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-opensearch-adapter",
-                "reference": "1bd38b596ace1992a4992a5ca9e9a9436aa799db"
+                "reference": "2eb4e8b42233d60ba0dab0d909fe46f69a0ddc9c"
             },
             "require": {
                 "cmsig/seal": "^0.13",
                 "opensearch-project/opensearch-php": "^2.0",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -2019,11 +2019,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-read-write-adapter",
-                "reference": "b6dec65daecbdc285fe1cdee014fdabb6db9560c"
+                "reference": "00a06dbd0785eb9019a4994f60e44cb35704c978"
             },
             "require": {
                 "cmsig/seal": "^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -2113,13 +2113,13 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-redisearch-adapter",
-                "reference": "28e59f1f2b1af931fc95661fabb2c42fd148bbd2"
+                "reference": "2bc27ca5ec50ced2a165c750f83a224651656bb7"
             },
             "require": {
                 "cmsig/seal": "^0.13",
                 "ext-json": "*",
                 "ext-redis": "^5 || ^6.0",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0"
             },
             "provide": {
@@ -2211,11 +2211,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-solr-adapter",
-                "reference": "6c960c0c48b401a7c32e861fb832d00b2538e9c7"
+                "reference": "0a5d1a206c28b94b9f4b416c11dafab953a7bcb8"
             },
             "require": {
                 "cmsig/seal": "^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0",
                 "solarium/solarium": "^6.3"
             },
@@ -2312,11 +2312,11 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/seal-typesense-adapter",
-                "reference": "854a069aeffacf17d037e41de536e7dc6868176e"
+                "reference": "6d581a841a060ff63e4d5ef97e552603af5fd15c"
             },
             "require": {
                 "cmsig/seal": "^0.13",
-                "php": "^8.1",
+                "php": "^8.2",
                 "psr/container": "^1.0 || ^2.0",
                 "symfony/http-client": "^5.4 || ^6.0 || ^7.0 || ^8.0",
                 "typesense/typesense-php": "^4.8.1 || ^5.0 || ^6.0"
@@ -7496,7 +7496,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.2"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4409f23b18b7f4486ad3e5e298670b49",
+    "content-hash": "b6e1fa843b54552cc2c3bd9e3c44c9f8",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -79,10 +79,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../seal",
-                "reference": "36ef56d7728d7ccd4a8cd6be6de6b4c0f66adc69"
+                "reference": "49d477ccfbccaff0290bd7247db33df1005ec66d"
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.2"
             },
             "replace": {
                 "schranz-search/seal": "self.version"
@@ -2708,7 +2708,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.2"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"
