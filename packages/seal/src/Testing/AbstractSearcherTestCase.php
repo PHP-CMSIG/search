@@ -415,6 +415,13 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(Condition::search('Other Thing'));
+
+        // some search engines will find more and some less so we just search for common match
+        $this->assertContains($documents[2], [...$search->getResult()]);
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
         $search->addFilter(Condition::search('FARA25008/B'));
 
         $this->assertSame([$documents[0]], [...$search->getResult()]);
