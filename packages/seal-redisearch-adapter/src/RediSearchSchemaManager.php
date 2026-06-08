@@ -143,7 +143,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
                         'sortable' => false,
                         'filterable' => false,
                     ],
-                ] : [], $field->filterable || $field->facet || $field->sortable ? [ // @phpstan-ignore-line
+                ] : [], $field->filterable || $field->facet || $field->sortable ? [
                     $name . '.raw' => [
                         'jsonPath' => $jsonPath,
                         'type' => 'TAG',

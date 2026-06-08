@@ -7457,12 +7457,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "06043033fd11b9a6fcf30da73a294f1a92c8d8e5"
+                "reference": "d8cf0d8190183451cc01c0faeae9fcd1a76e2de2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/06043033fd11b9a6fcf30da73a294f1a92c8d8e5",
-                "reference": "06043033fd11b9a6fcf30da73a294f1a92c8d8e5",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d8cf0d8190183451cc01c0faeae9fcd1a76e2de2",
+                "reference": "d8cf0d8190183451cc01c0faeae9fcd1a76e2de2",
                 "shasum": ""
             },
             "require": {
@@ -7555,7 +7555,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-25T18:10:15+00:00"
+            "time": "2026-06-07T23:39:01+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -7913,12 +7913,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "7090e18b24f9a9d1a35aa5d8fac5a8513501c540"
+                "reference": "4de687326a0931eaa11bf4c23059f29380c24da7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7090e18b24f9a9d1a35aa5d8fac5a8513501c540",
-                "reference": "7090e18b24f9a9d1a35aa5d8fac5a8513501c540",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/4de687326a0931eaa11bf4c23059f29380c24da7",
+                "reference": "4de687326a0931eaa11bf4c23059f29380c24da7",
                 "shasum": ""
             },
             "require": {
@@ -8033,7 +8033,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-06T15:27:44+00:00"
+            "time": "2026-06-07T22:55:39+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -9787,8 +9787,8 @@
             "version": "2.2.x-dev",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/792edea2d7199383ca15b72eb7513cbfd6dffc91",
-                "reference": "792edea2d7199383ca15b72eb7513cbfd6dffc91",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e17e04976d94eb47a7333cd950131ab22331ffc8",
+                "reference": "e17e04976d94eb47a7333cd950131ab22331ffc8",
                 "shasum": ""
             },
             "require": {
@@ -9845,7 +9845,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-06T13:33:01+00:00"
+            "time": "2026-06-07T16:13:01+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -10258,12 +10258,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9e9c2c6dddf3089dddc2c6f32d52535d4d86d294"
+                "reference": "7a2a976a8fdf9b5ce84403bf173f56c903e5e3b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9e9c2c6dddf3089dddc2c6f32d52535d4d86d294",
-                "reference": "9e9c2c6dddf3089dddc2c6f32d52535d4d86d294",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7a2a976a8fdf9b5ce84403bf173f56c903e5e3b1",
+                "reference": "7a2a976a8fdf9b5ce84403bf173f56c903e5e3b1",
                 "shasum": ""
             },
             "require": {
@@ -10344,7 +10344,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-06-04T12:53:07+00:00"
+            "time": "2026-06-07T12:39:38+00:00"
         },
         {
             "name": "psr/cache",
