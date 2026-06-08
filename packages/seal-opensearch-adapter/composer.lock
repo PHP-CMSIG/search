@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1444459c3bf1eaa768ba3feaff053211",
+    "content-hash": "b24fbc0af4180c4a2826837621363364",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -3892,7 +3892,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1"
+        "php": "^8.2"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Adapter\Opensearch\Tests;
 
+use CmsIg\Seal\Adapter\AdapterFactory;
+use CmsIg\Seal\Adapter\Opensearch\OpensearchAdapterFactory;
 use OpenSearch\Client;
-use OpenSearch\ClientBuilder;
 
 final class ClientHelper
 {
@@ -23,11 +24,67 @@ final class ClientHelper
     public static function getClient(): Client
     {
         if (!self::$client instanceof Client) {
-            self::$client = ClientBuilder::create()->setHosts([
-                $_ENV['OPENSEARCH_HOST'] ?? '127.0.0.1:9200',
-            ])->build();
+            $host = $_ENV['OPENSEARCH_HOST'] ?? '127.0.0.1:9200';
+            $host = \is_string($host) ? $host : '127.0.0.1:9200';
+
+            $adapterFactory = new AdapterFactory([
+                OpensearchAdapterFactory::getName() => new OpensearchAdapterFactory(),
+            ]);
+
+            self::$client = (new OpensearchAdapterFactory())->createClient(
+                $adapterFactory->parseDsn(self::normalizeDsn($host)),
+            );
         }
 
         return self::$client;
+    }
+
+    public static function normalizeDsn(string $host): string
+    {
+        if (\str_starts_with($host, 'opensearch://')) {
+            return $host;
+        }
+
+        if (\str_starts_with($host, 'http://') || \str_starts_with($host, 'https://')) {
+            $parsedHost = \parse_url($host);
+            \assert(false !== $parsedHost, 'Expected OPENSEARCH_HOST to be a valid URL.');
+
+            $dsn = 'opensearch://';
+
+            if (isset($parsedHost['user'])) {
+                $dsn .= $parsedHost['user'];
+
+                if (isset($parsedHost['pass'])) {
+                    $dsn .= ':' . $parsedHost['pass'];
+                }
+
+                $dsn .= '@';
+            }
+
+            $dsn .= $parsedHost['host'] ?? '';
+
+            if (isset($parsedHost['port'])) {
+                $dsn .= ':' . $parsedHost['port'];
+            }
+
+            $dsn .= $parsedHost['path'] ?? '';
+
+            $query = [];
+            if (isset($parsedHost['query'])) {
+                \parse_str($parsedHost['query'], $query);
+            }
+
+            if ('https' === ($parsedHost['scheme'] ?? '')) {
+                $query['tls'] = 'true';
+            }
+
+            if ([] !== $query) {
+                $dsn .= '?' . \http_build_query($query);
+            }
+
+            return $dsn;
+        }
+
+        return 'opensearch://' . $host;
     }
 }

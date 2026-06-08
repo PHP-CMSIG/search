@@ -24,8 +24,8 @@ use CmsIg\Seal\Search\Facet\MinMaxFacet;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\Search;
 use OpenSearch\Client;
-use OpenSearch\Common\Exceptions\Missing404Exception;
-use OpenSearch\Common\Exceptions\OpenSearchException;
+use OpenSearch\Exception\NotFoundHttpException;
+use OpenSearch\Exception\OpenSearchExceptionInterface;
 
 final class OpensearchSearcher implements SearcherInterface
 {
@@ -46,7 +46,7 @@ final class OpensearchSearcher implements SearcherInterface
     {
         try {
             return $this->client->count(['index' => $index->name])['count'] ?? 0; // @phpstan-ignore-line return-type
-        } catch (OpenSearchException) {
+        } catch (OpenSearchExceptionInterface) {
             return 0;
         }
     }
@@ -66,7 +66,7 @@ final class OpensearchSearcher implements SearcherInterface
                     'index' => $search->index->name,
                     'id' => $search->filters[0]->identifier,
                 ]);
-            } catch (Missing404Exception) {
+            } catch (NotFoundHttpException) {
                 return new Result(
                     $this->hitsToDocuments($search->index, [], []),
                     0,

@@ -15,8 +15,10 @@ namespace CmsIg\Seal\Adapter\Opensearch;
 
 use CmsIg\Seal\Adapter\AdapterFactoryInterface;
 use CmsIg\Seal\Adapter\AdapterInterface;
+use Http\Discovery\Psr17FactoryDiscovery;
 use OpenSearch\Client;
-use OpenSearch\ClientBuilder;
+use OpenSearch\EndpointFactory;
+use OpenSearch\TransportFactory;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -44,6 +46,7 @@ class OpensearchAdapterFactory implements AdapterFactoryInterface
      *     port?: int,
      *     user?: string,
      *     pass?: string,
+     *     path?: string,
      *     query: array<string, string|string[]>,
      * } $dsn
      */
@@ -59,24 +62,20 @@ class OpensearchAdapterFactory implements AdapterFactoryInterface
             return $client;
         }
 
-        $tlsQuery = $dsn['query']['tls'] ?? 'false';
-        \assert(\is_string($tlsQuery), 'The "tls" query param must be a string.');
-        $useTls = \filter_var($tlsQuery, \FILTER_VALIDATE_BOOLEAN, \FILTER_REQUIRE_SCALAR);
-        $scheme = $useTls ? 'https' : 'http';
-        $port = $dsn['port'] ?? ($useTls ? 443 : 9200);
+        $psrRequestFactory = Psr17FactoryDiscovery::findRequestFactory();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        $uriFactory = Psr17FactoryDiscovery::findUriFactory();
 
-        $client = ClientBuilder::create()->setHosts([
-            $scheme . '://' . $dsn['host'] . ':' . $port,
-        ]);
+        $transport = (new TransportFactory())
+            ->setRequestFactory(BaseUriRequestFactory::fromDsn(
+                $dsn,
+                $psrRequestFactory,
+                $streamFactory,
+                $uriFactory,
+            ))
+            ->create();
 
-        $user = $dsn['user'] ?? '';
-        $pass = $dsn['pass'] ?? '';
-
-        if ($user || $pass) {
-            $client->setBasicAuthentication($user, $pass);
-        }
-
-        return $client->build();
+        return new Client($transport, new EndpointFactory());
     }
 
     public static function getName(): string
