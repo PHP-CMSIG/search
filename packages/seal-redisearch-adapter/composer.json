@@ -29,7 +29,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-redis": "^5 || ^6.0",
         "ext-json": "*",
         "cmsig/seal": "^0.13",
