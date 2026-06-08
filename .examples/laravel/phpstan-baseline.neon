@@ -13,7 +13,7 @@ parameters:
 			path: app/Http/Controllers/SearchController.php
 
 		-
-			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:artisan\(\)\.$#'
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:artisan\(\)\.$#'
 			identifier: method.notFound
 			count: 3
 			path: tests/CommandTest.php
@@ -31,13 +31,25 @@ parameters:
 			path: tests/CommandTest.php
 
 		-
-			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:crawler\(\)\.$#'
+			message: '#^Cannot call method toBe\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/Pest.php
+
+		-
+			message: '#^Undefined variable\: \$this$#'
+			identifier: variable.undefined
+			count: 1
+			path: tests/Pest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:crawler\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: tests/SearchControllerTest.php
 
 		-
-			message: '#^Call to an undefined method Pest\\PendingCalls\\TestCall\:\:get\(\)\.$#'
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: tests/SearchControllerTest.php
