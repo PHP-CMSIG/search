@@ -158,14 +158,7 @@ final class LoupeSearcher implements SearcherInterface
             );
 
             foreach ($highlightFields as $highlightField) {
-                \assert(
-                    isset($hit['_formatted'])
-                    && \is_array($hit['_formatted'])
-                    && isset($hit['_formatted'][$highlightField]),
-                    \sprintf('Expected highlight field "%s" to be available in the search hit.', $highlightField),
-                );
-
-                $value = $hit['_formatted'][$highlightField];
+                $value = $hit['_formatted'][$highlightField] ?? null;
 
                 if (!\is_string($value)
                     || !\str_contains($value, $highlightPreTag)
