@@ -526,11 +526,15 @@ abstract class AbstractSearcherTestCase extends TestCase
         $search->highlight(['title', 'article'], '<mark>', '</mark>');
 
         $expectedDocumentA = $documents[0];
-        $expectedDocumentA['_formatted']['title'] = null;
-        $expectedDocumentA['_formatted']['article'] = null;
+        $expectedDocumentA['_formatted'] = [
+            'title' => null,
+            'article' => null,
+        ];
         $expectedDocumentB = $documents[2];
-        $expectedDocumentB['_formatted']['title'] = null;
-        $expectedDocumentB['_formatted']['article'] = null;
+        $expectedDocumentB['_formatted'] = [
+            'title' => null,
+            'article' => null,
+        ];
 
         $this->assertSame([$expectedDocumentA, $expectedDocumentB], [...$search->getResult()]);
 

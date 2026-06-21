@@ -45,6 +45,14 @@ class RediSearchSearcherTest extends AbstractSearcherTestCase
     /**
      * @doesNotPerformAssertions
      */
+    public function testFilterSearchWithHighlightWithoutQuery(): void
+    {
+        $this->markTestSkipped('Not supported by RediSearch: https://github.com/RediSearch/RediSearch/issues/4420 or https://redis.io/docs/latest/develop/interact/search-and-query/indexing/#limitations');
+    }
+
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testCountFacetOnMultiValue(): void
     {
         $this->markTestSkipped('Not supported by RediSearch: https://github.com/PHP-CMSIG/search/issues/583');
