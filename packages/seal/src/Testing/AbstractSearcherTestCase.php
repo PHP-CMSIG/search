@@ -504,6 +504,45 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
+    public function testFilterSearchWithHighlightWithoutQuery(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(Condition::equal('locale', 'en_GB'));
+        $search->addSortBy('title', 'asc');
+        $search->highlight(['title', 'article'], '<mark>', '</mark>');
+
+        $expectedDocumentA = $documents[0];
+        $expectedDocumentA['_formatted']['title'] = null;
+        $expectedDocumentA['_formatted']['article'] = null;
+        $expectedDocumentB = $documents[2];
+        $expectedDocumentB['_formatted']['title'] = null;
+        $expectedDocumentB['_formatted']['article'] = null;
+
+        $this->assertSame([$expectedDocumentA, $expectedDocumentB], [...$search->getResult()]);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
     public function testNoneSearchableFields(): void
     {
         $documents = TestingHelper::createComplexFixtures();
