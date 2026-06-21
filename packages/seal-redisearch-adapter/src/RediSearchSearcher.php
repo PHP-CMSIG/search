@@ -268,10 +268,19 @@ final class RediSearchSearcher implements SearcherInterface
             };
 
             match (true) {
-                $filter instanceof Condition\SearchCondition => $filters[] = '%%' . \implode('%% %%', \array_map(
-                    $this->escapeFilterValue(...),
-                    \explode(' ', $filter->query),
-                )) . '%%', // levenshtein of 2 per word
+                $filter instanceof Condition\SearchCondition => $filters[] = \implode(' ', \array_map(
+                    function (string $term) {
+                        $escapedTerm = $this->escapeFilterValue($term);
+
+                        // levenshtein algorithm per word length
+                        return match (\strlen($escapedTerm)) {
+                            0, 1 => $escapedTerm,
+                            2 => '%' . $escapedTerm . '%',
+                            default => '%%' . $escapedTerm . '%%',
+                        };
+                    },
+                    \array_filter(\explode(' ', $filter->query), \trim(...)), // @phpstan-ignore-line argument.type
+                )),
                 $filter instanceof Condition\IdentifierCondition => $filters[] = '@' . $index->getIdentifierField()->name . ':{' . $this->escapeFilterValue($filter->identifier) . '}',
                 $filter instanceof Condition\EqualCondition => $filters[] = '@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . '}',
                 $filter instanceof Condition\NotEqualCondition => $filters[] = '-@' . $this->getFilterField($index, $filter->field) . ':{' . $this->escapeFilterValue($this->convertValue($index, $filter->field, $filter->value)) . '}',

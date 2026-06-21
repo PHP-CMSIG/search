@@ -415,10 +415,11 @@ abstract class AbstractSearcherTestCase extends TestCase
 
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);
-        $search->addFilter(Condition::search('Other Thing'));
+        $search->addFilter(Condition::search('Other Thing ')); // test multi word and space behind
 
         // some search engines will find more and some less so we just search for common match
         $this->assertContains($documents[2], [...$search->getResult()]);
+        $this->assertLessThanOrEqual(2, \count([...$search->getResult()]));
 
         $search = new SearchBuilder($schema, self::$searcher);
         $search->index(TestingHelper::INDEX_COMPLEX);

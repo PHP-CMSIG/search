@@ -165,7 +165,7 @@ final class MemorySearcher implements SearcherInterface
 
                 $text = \json_encode($searchableDocument, \JSON_THROW_ON_ERROR);
                 $query = \trim(\json_encode($filter->query, \JSON_THROW_ON_ERROR), '"');
-                $terms = \explode(' ', $query);
+                $terms = \array_filter(\explode(' ', $query), \trim(...)); // @phpstan-ignore-line argument.type
                 $searchTerms = \array_unique([...$searchTerms, ...$terms]);
 
                 $hasSomeMatch = false;
