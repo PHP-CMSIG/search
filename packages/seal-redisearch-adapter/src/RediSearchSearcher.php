@@ -273,7 +273,7 @@ final class RediSearchSearcher implements SearcherInterface
                         $escapedTerm = $this->escapeFilterValue($term);
 
                         // levenshtein algorithm per word length
-                        return match (\strlen($escapedTerm)) {
+                        return match (\strlen($term)) {
                             0, 1 => $escapedTerm,
                             2 => '%' . $escapedTerm . '%',
                             default => '%%' . $escapedTerm . '%%',
