@@ -75,8 +75,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $document = [];
 
         foreach ($fields as $fieldName => $field) {
-            $metadata = $this->getFieldMetadata($index, $fieldName, $field);
-            $property = $this->getReflectionProperty($metadata['declaringClass'], $metadata['property']);
+            $property = $this->getReflectionProperty($object::class, $fieldName);
 
             if (!$property->isInitialized($object)) {
                 continue;
@@ -122,91 +121,17 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 continue;
             }
 
-            $metadata = $this->getFieldMetadata($index, $fieldName, $field);
-            $property = $this->getReflectionProperty($metadata['declaringClass'], $metadata['property']);
+            $property = $this->getReflectionProperty($className, $fieldName);
             $value = $document[$fieldName];
 
             $property->setValue($object, match (true) {
-                $field instanceof Field\ObjectField => $this->hydrateObjectField($index, $fieldName, $value, $field, $metadata),
-                $field instanceof Field\DateTimeField => $this->hydrateDateTimeField($index, $fieldName, $value, $field, $property),
+                $field instanceof Field\ObjectField => $this->hydrateObjectField($index, $fieldName, $value, $field),
+                $field instanceof Field\DateTimeField => $this->hydrateDateTimeField($index, $fieldName, $value, $field),
                 default => $this->hydrateScalarField($index, $fieldName, $value, $field),
             });
         }
 
         return $object;
-    }
-
-    /**
-     * @return array{
-     *     property: string,
-     *     declaringClass: class-string,
-     *     multiple: bool,
-     *     class?: class-string,
-     *     hydrateClass?: class-string<\DateTimeInterface>,
-     * }
-     */
-    private function getFieldMetadata(string $index, string $fieldName, Field\AbstractField $field): array
-    {
-        $metadata = $field->options['odm'] ?? null;
-        if (!\is_array($metadata)) {
-            throw new \RuntimeException(\sprintf(
-                'Field "%s" on index "%s" is missing ODM metadata. Build the schema with "%s".',
-                $fieldName,
-                $index,
-                AttributeLoader::class,
-            ));
-        }
-
-        if (!isset($metadata['property'], $metadata['declaringClass'], $metadata['multiple'])) {
-            throw new \RuntimeException(\sprintf(
-                'Field "%s" on index "%s" contains invalid ODM metadata.',
-                $fieldName,
-                $index,
-            ));
-        }
-
-        $property = $metadata['property'];
-        $declaringClass = $metadata['declaringClass'];
-        $multiple = $metadata['multiple'];
-        if (!\is_string($property) || !\is_string($declaringClass) || !\is_bool($multiple)) {
-            throw new \RuntimeException(\sprintf(
-                'Field "%s" on index "%s" contains invalid ODM metadata.',
-                $fieldName,
-                $index,
-            ));
-        }
-
-        $normalizedMetadata = [
-            'property' => $property,
-            'declaringClass' => $this->normalizeClassName($declaringClass, $fieldName, $index),
-            'multiple' => $multiple,
-        ];
-
-        if (isset($metadata['class'])) {
-            if (!\is_string($metadata['class'])) {
-                throw new \RuntimeException(\sprintf(
-                    'Field "%s" on index "%s" contains invalid ODM metadata.',
-                    $fieldName,
-                    $index,
-                ));
-            }
-
-            $normalizedMetadata['class'] = $this->normalizeClassName($metadata['class'], $fieldName, $index);
-        }
-
-        if (isset($metadata['hydrateClass'])) {
-            if (!\is_string($metadata['hydrateClass']) || !\is_a($metadata['hydrateClass'], \DateTimeInterface::class, true)) {
-                throw new \RuntimeException(\sprintf(
-                    'Field "%s" on index "%s" contains invalid ODM metadata.',
-                    $fieldName,
-                    $index,
-                ));
-            }
-
-            $normalizedMetadata['hydrateClass'] = $metadata['hydrateClass'];
-        }
-
-        return $normalizedMetadata;
     }
 
     /**
@@ -289,13 +214,6 @@ final class OdmDataMapper implements OdmDataMapperInterface
     }
 
     /**
-     * @param array{
-     *     property: string,
-     *     declaringClass: class-string,
-     *     multiple: bool,
-     *     class?: class-string,
-     * } $metadata
-     *
      * @return object|array<object>|null
      */
     private function hydrateObjectField(
@@ -303,13 +221,12 @@ final class OdmDataMapper implements OdmDataMapperInterface
         string $fieldName,
         mixed $value,
         Field\ObjectField $field,
-        array $metadata,
     ): object|array|null {
         if (null === $value) {
             return null;
         }
 
-        $nestedClass = $this->getNestedClass($index, $fieldName, $metadata);
+        $nestedClass = $this->getNestedClass($index, $fieldName, $field);
 
         if (!$field->multiple) {
             return $this->hydrateObject(
@@ -356,7 +273,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 ));
             }
 
-            return $value->format('c');
+            return $value->format('Y-m-d H:i:s');
         }
 
         if (!\is_array($value)) {
@@ -369,7 +286,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         }
 
         $values = [];
-        foreach ($value as $item) {
+        foreach ($value as $key => $item) {
             if (!$item instanceof \DateTimeInterface) {
                 throw new \RuntimeException(\sprintf(
                     'DateTime field "%s" on index "%s" expects an array of "%s" instances.',
@@ -379,7 +296,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 ));
             }
 
-            $values[] = $item->format('c');
+            $values[$key] = $item->format('Y-m-d H:i:s');
         }
 
         return $values;
@@ -393,16 +310,13 @@ final class OdmDataMapper implements OdmDataMapperInterface
         string $fieldName,
         mixed $value,
         Field\DateTimeField $field,
-        array $metadata,
     ): \DateTimeInterface|array|null {
         if (null === $value) {
             return null;
         }
 
-        $hydrateClass = $this->getHydrateClass($index, $fieldName, $metadata);
-
         if (!$field->multiple) {
-            return $this->hydrateDateTimeValue($index, $fieldName, $value, $hydrateClass);
+            return $this->hydrateDateTimeValue($index, $fieldName, $value);
         }
 
         if (!\is_array($value)) {
@@ -415,23 +329,20 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
         $values = [];
         foreach ($value as $key => $item) {
-            $values[$key] = $this->hydrateDateTimeValue($index, $fieldName, $item, $hydrateClass);
+            $values[$key] = $this->hydrateDateTimeValue($index, $fieldName, $item);
         }
 
         return $values;
     }
 
-    /**
-     * @param class-string<\DateTimeInterface> $hydrateClass
-     */
-    private function hydrateDateTimeValue(string $index, string $fieldName, mixed $value, string $hydrateClass): \DateTimeInterface
+    private function hydrateDateTimeValue(string $index, string $fieldName, mixed $value): \DateTimeImmutable
     {
-        if ($value instanceof $hydrateClass) {
+        if ($value instanceof \DateTimeImmutable) {
             return $value;
         }
 
         if ($value instanceof \DateTimeInterface) {
-            return new $hydrateClass($value->format('c'));
+            return new \DateTimeImmutable($value->format('c'));
         }
 
         if (!\is_string($value)) {
@@ -443,7 +354,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
             ));
         }
 
-        return new $hydrateClass($value);
+        return new \DateTimeImmutable($value);
     }
 
     private function extractScalarField(string $index, string $fieldName, mixed $value, Field\AbstractField $field): mixed
@@ -500,28 +411,22 @@ final class OdmDataMapper implements OdmDataMapperInterface
             $property = $this->getReflectionClass($className)->getProperty($propertyName);
         } catch (\ReflectionException $exception) {
             throw new \RuntimeException(\sprintf(
-                'Property "%s::$%s" referenced by ODM metadata does not exist.',
+                'Property "%s::$%s" mapped by field name does not exist.',
                 $className,
                 $propertyName,
-            ), previous: $exception);
+            ), $exception->getCode(), previous: $exception);
         }
 
         return $this->reflectionProperties[$cacheKey] = $property;
     }
 
     /**
-     * @param array{
-     *     property: string,
-     *     declaringClass: class-string,
-     *     multiple: bool,
-     *     class?: class-string,
-     * } $metadata
-     *
      * @return class-string
      */
-    private function getNestedClass(string $index, string $fieldName, array $metadata): string
+    private function getNestedClass(string $index, string $fieldName, Field\ObjectField $field): string
     {
-        if (!isset($metadata['class'])) {
+        $metadata = $field->options['odm'] ?? null;
+        if (!\is_array($metadata) || !isset($metadata['class'])) {
             throw new \RuntimeException(\sprintf(
                 'Object field "%s" on index "%s" is missing nested ODM metadata.',
                 $fieldName,
@@ -529,32 +434,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
             ));
         }
 
-        return $metadata['class'];
-    }
-
-    /**
-     * @param array{
-     *     property: string,
-     *     declaringClass: class-string,
-     *     multiple: bool,
-     *     class?: class-string,
-     *     hydrateClass?: class-string<\DateTimeInterface>,
-     * } $metadata
-     *
-     * @return class-string<\DateTimeInterface>
-     */
-    private function getHydrateClass(string $index, string $fieldName, array $metadata): string
-    {
-        $hydrateClass = $metadata['hydrateClass'] ?? null;
-        if (!\is_string($hydrateClass) || !\is_a($hydrateClass, \DateTimeInterface::class, true)) {
-            throw new \RuntimeException(\sprintf(
-                'DateTime field "%s" on index "%s" is missing hydration ODM metadata.',
-                $fieldName,
-                $index,
-            ));
-        }
-
-        return $hydrateClass;
+        return $this->normalizeClassName($metadata['class'], $fieldName, $index);
     }
 
     /**
