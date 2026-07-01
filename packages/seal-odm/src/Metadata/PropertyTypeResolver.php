@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace CmsIg\Seal\Odm\Metadata;
 
-/** @phpstan-type ResolvedPropertyType array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, class?: class-string} */
+/**
+ * @internal this class is only intended to be used internally by the Seal ODM package
+ *
+ * @phpstan-type ResolvedPropertyType array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, class?: class-string}
+ */
 final class PropertyTypeResolver
 {
     /**
@@ -39,11 +43,22 @@ final class PropertyTypeResolver
         $reflectionClass = $property->getDeclaringClass();
         $nativeType = $property->getType();
         if (!$nativeType instanceof \ReflectionType) {
-            throw new \RuntimeException(\sprintf(
-                'Property "%s" on class "%s" must have a native type.',
-                $property->getName(),
-                $reflectionClass->getName(),
-            ));
+            $phpDocType = $this->extractPhpDocVarType($property);
+            if (null === $phpDocType) {
+                throw new \RuntimeException(\sprintf(
+                    'Property "%s" on class "%s" must have a native type or a supported @var type declaration.',
+                    $property->getName(),
+                    $reflectionClass->getName(),
+                ));
+            }
+
+            return $this->resolvedTypes[$cacheKey] = $this->normalizeResolvedType(
+                $reflectionClass,
+                $property,
+                $phpDocType['type'],
+                $phpDocType['multiple'],
+                $phpDocType['nullable'],
+            );
         }
 
         $nullable = $nativeType->allowsNull();
@@ -103,8 +118,8 @@ final class PropertyTypeResolver
      */
     private function resolveArrayPropertyType(\ReflectionClass $reflectionClass, \ReflectionProperty $property, bool $nullable): array
     {
-        $varType = $this->extractPhpDocVarType($property);
-        if (null === $varType) {
+        $phpDocType = $this->extractPhpDocVarType($property);
+        if (null === $phpDocType || !$phpDocType['multiple']) {
             throw new \RuntimeException(\sprintf(
                 'Array property "%s" on class "%s" requires a supported @var element type declaration.',
                 $property->getName(),
@@ -115,9 +130,9 @@ final class PropertyTypeResolver
         return $this->normalizeResolvedType(
             $reflectionClass,
             $property,
-            $varType,
+            $phpDocType['type'],
             true,
-            $nullable,
+            $nullable || $phpDocType['nullable'],
         );
     }
 
@@ -212,7 +227,10 @@ final class PropertyTypeResolver
         return $parentClass->getName();
     }
 
-    private function extractPhpDocVarType(\ReflectionProperty $property): string|null
+    /**
+     * @return array{type: string, multiple: bool, nullable: bool}|null
+     */
+    private function extractPhpDocVarType(\ReflectionProperty $property): array|null
     {
         $docComment = $property->getDocComment();
         if (false === $docComment) {
@@ -224,7 +242,9 @@ final class PropertyTypeResolver
         }
 
         $declaredType = $matches[1];
-        $types = \array_values(\array_filter(\explode('|', $declaredType), static fn (string $type): bool => 'null' !== $type));
+        $rawTypes = \array_map(trim(...), \explode('|', $declaredType));
+        $nullable = \in_array('null', $rawTypes, true);
+        $types = \array_values(\array_filter($rawTypes, static fn (string $type): bool => '' !== $type && 'null' !== $type));
         if (1 !== \count($types)) {
             return null;
         }
@@ -232,14 +252,30 @@ final class PropertyTypeResolver
         $type = \trim($types[0]);
 
         if (\preg_match('/^(.+)\[\]$/', $type, $arrayMatches)) {
-            return $this->resolvePhpDocTypeName($property->getDeclaringClass(), \trim($arrayMatches[1]));
+            return [
+                'type' => $this->resolvePhpDocTypeName($property->getDeclaringClass(), \trim($arrayMatches[1])),
+                'multiple' => true,
+                'nullable' => $nullable,
+            ];
         }
 
         if (\preg_match('/^(array|list)<\s*(.+)\s*>$/', $type, $arrayMatches)) {
-            return $this->resolvePhpDocTypeName($property->getDeclaringClass(), \trim($arrayMatches[2]));
+            $genericType = \trim($arrayMatches[2]);
+            $genericTypes = \array_map(trim(...), \explode(',', $genericType));
+            $elementType = $genericTypes[\count($genericTypes) - 1];
+
+            return [
+                'type' => $this->resolvePhpDocTypeName($property->getDeclaringClass(), $elementType),
+                'multiple' => true,
+                'nullable' => $nullable,
+            ];
         }
 
-        return null;
+        return [
+            'type' => $this->resolvePhpDocTypeName($property->getDeclaringClass(), $type),
+            'multiple' => false,
+            'nullable' => $nullable,
+        ];
     }
 
     /**

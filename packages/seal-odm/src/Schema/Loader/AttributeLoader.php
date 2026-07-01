@@ -186,18 +186,23 @@ final class AttributeLoader implements LoaderInterface
         $distinct = $fieldAttribute instanceof FieldAttribute ? $fieldAttribute->distinct : false;
         $facet = $fieldAttribute instanceof FieldAttribute ? $fieldAttribute->facet : false;
         $options = $fieldAttribute instanceof FieldAttribute ? $fieldAttribute->options : [];
-        $options['odm'] = $this->createFieldMetadata($property, $resolvedType);
+        $odmOptions = $this->createFieldMetadata($property, $resolvedType);
 
         if ($isIdentifier) {
-            if ('string' !== $resolvedType['kind']) {
+            if ('int' === $resolvedType['kind']) {
+                $odmOptions['type'] = $resolvedType['kind'];
+            } elseif ('string' !== $resolvedType['kind']) {
                 throw new \RuntimeException(\sprintf(
-                    'Identifier property "%s" on class "%s" must resolve to string.',
+                    'Identifier property "%s" on class "%s" must resolve to string or int.',
                     $property->getName(),
                     $reflectionClass->getName(),
                 ));
             }
 
-            return new Field\IdentifierField($fieldName, options: $options);
+            return new Field\IdentifierField($fieldName, options: \array_replace_recursive(
+                $options,
+                [] !== $odmOptions ? ['odm' => $odmOptions] : [],
+            ));
         }
 
         if ('object' === $resolvedType['kind']) {
@@ -230,7 +235,10 @@ final class AttributeLoader implements LoaderInterface
                 $fieldName,
                 $this->createFields($objectClass, $classStack),
                 multiple: $resolvedType['multiple'],
-                options: $options,
+                options: \array_replace_recursive(
+                    $options,
+                    [] !== $odmOptions ? ['odm' => $odmOptions] : [],
+                ),
             );
         }
 
@@ -304,11 +312,7 @@ final class AttributeLoader implements LoaderInterface
      */
     private function createFieldMetadata(\ReflectionProperty $property, array $resolvedType): array
     {
-        $metadata = [
-            'property' => $property->getName(),
-            'declaringClass' => $property->getDeclaringClass()->getName(),
-            'multiple' => $resolvedType['multiple'],
-        ];
+        $metadata = [];
 
         if ('object' === $resolvedType['kind']) {
             $className = $resolvedType['class'] ?? null;
