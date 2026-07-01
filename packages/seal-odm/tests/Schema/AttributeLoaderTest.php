@@ -31,7 +31,7 @@ class AttributeLoaderTest extends TestCase
 
         $schema = $attributeLoader->load();
 
-        self::assertSchema(require_once(__DIR__ . '/Fixtures/basic.php'), $schema);
+        self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/basic.php'), $schema);
     }
 
     public function testFlags(): void
@@ -42,7 +42,7 @@ class AttributeLoaderTest extends TestCase
 
         $schema = $attributeLoader->load();
 
-        self::assertSchema(require_once(__DIR__ . '/Fixtures/flags.php'), $schema);
+        self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/flags.php'), $schema);
     }
 
     public function testMultiple(): void
@@ -53,7 +53,7 @@ class AttributeLoaderTest extends TestCase
 
         $schema = $attributeLoader->load();
 
-        self::assertSchema(require_once(__DIR__ . '/Fixtures/multiple.php'), $schema);
+        self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/multiple.php'), $schema);
     }
 
     public function testObject(): void
@@ -64,7 +64,7 @@ class AttributeLoaderTest extends TestCase
 
         $schema = $attributeLoader->load();
 
-        self::assertSchema(require_once(__DIR__ . '/Fixtures/object.php'), $schema);
+        self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/object.php'), $schema);
     }
 
     public function testPhpDoc(): void
@@ -75,7 +75,15 @@ class AttributeLoaderTest extends TestCase
 
         $schema = $attributeLoader->load();
 
-        self::assertSchema(require_once(__DIR__ . '/Fixtures/phpdoc.php'), $schema);
+        self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/phpdoc.php'), $schema);
+    }
+
+    private static function requireSchema(string $file): Schema
+    {
+        /** @var Schema $schema */
+        $schema = require $file;
+
+        return $schema;
     }
 
     private static function assertSchema(Schema $expectedSchema, Schema $actualSchema): void
