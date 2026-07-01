@@ -33,7 +33,7 @@ class OdmDataMapperReindexProviderTest extends TestCase
         $odmDataMapper = new OdmDataMapper($attributeLoader->load());
 
         $odmProviders = new class() implements OdmStaticReindexProviderInterface {
-            public function total(): int|null
+            public function total(): int
             {
                 return 2;
             }

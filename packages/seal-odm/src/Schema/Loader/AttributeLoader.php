@@ -199,10 +199,7 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            return new Field\IdentifierField($fieldName, options: \array_replace_recursive(
-                $options,
-                [] !== $odmOptions ? ['odm' => $odmOptions] : [],
-            ));
+            return new Field\IdentifierField($fieldName, options: $this->mergeOdmOptions($options, $odmOptions));
         }
 
         if ('object' === $resolvedType['kind']) {
@@ -235,10 +232,7 @@ final class AttributeLoader implements LoaderInterface
                 $fieldName,
                 $this->createFields($objectClass, $classStack),
                 multiple: $resolvedType['multiple'],
-                options: \array_replace_recursive(
-                    $options,
-                    [] !== $odmOptions ? ['odm' => $odmOptions] : [],
-                ),
+                options: $this->mergeOdmOptions($options, $odmOptions),
             );
         }
 
@@ -341,6 +335,21 @@ final class AttributeLoader implements LoaderInterface
         }
 
         return $metadata;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $odmOptions
+     *
+     * @return array<string, mixed>
+     */
+    private function mergeOdmOptions(array $options, array $odmOptions): array
+    {
+        if ([] !== $odmOptions) {
+            $options['odm'] = $odmOptions;
+        }
+
+        return $options;
     }
 
     /**

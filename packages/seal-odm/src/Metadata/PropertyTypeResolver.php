@@ -374,7 +374,7 @@ final class PropertyTypeResolver
                 }
 
                 $aliasParts = \preg_split('/\s+as\s+/i', $useStatement);
-                if (false === $aliasParts || [] === $aliasParts) {
+                if (false === $aliasParts) {
                     continue;
                 }
 
@@ -389,7 +389,7 @@ final class PropertyTypeResolver
                     ? $alias
                     : \substr($className, (int) \strrpos($className, '\\') + 1);
 
-                if (!\is_string($shortName) || '' === $shortName) {
+                if ('' === $shortName) {
                     continue;
                 }
 

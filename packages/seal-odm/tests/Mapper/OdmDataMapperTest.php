@@ -61,10 +61,10 @@ class OdmDataMapperTest extends TestCase
      */
     public static function provideFiles(): \Generator
     {
-        yield 'basic' => require __DIR__ . '/Fixtures/basic.php';
-        yield 'basic_empty' => require __DIR__ . '/Fixtures/basic_empty.php';
-        yield 'nested' => require __DIR__ . '/Fixtures/nested.php';
-        yield 'nested_empty' => require __DIR__ . '/Fixtures/nested_empty.php';
+        yield 'basic' => require __DIR__ . '/Fixtures/basic.php'; // @phpstan-ignore-line generator.valueType
+        yield 'basic_empty' => require __DIR__ . '/Fixtures/basic_empty.php'; // @phpstan-ignore-line generator.valueType
+        yield 'nested' => require __DIR__ . '/Fixtures/nested.php'; // @phpstan-ignore-line generator.valueType
+        yield 'nested_empty' => require __DIR__ . '/Fixtures/nested_empty.php'; // @phpstan-ignore-line generator.valueType
     }
 
     private function createInstance(string $schemaDirectory): OdmDataMapper
