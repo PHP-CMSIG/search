@@ -14,7 +14,7 @@ jobs:
                   echo "${{ github.event.pull_request.head.sha }}"
 
             - name: Checkout project
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   ref: "${{ github.event.pull_request.head.sha }}"
 
@@ -23,7 +23,7 @@ jobs:
                   git rev-parse HEAD
                   git branch --show-current
 
-            - uses: actions/setup-python@v5
+            - uses: actions/setup-python@v7
               with:
                   python-version: 3.12
 

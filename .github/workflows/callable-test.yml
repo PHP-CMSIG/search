@@ -40,7 +40,7 @@ jobs:
                   echo "${{ github.event.pull_request.head.sha }}"
 
             - name: Checkout project
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   ref: "${{ github.event.pull_request.head.sha }}"
 
@@ -75,7 +75,7 @@ jobs:
                   fi
 
             - name: Install composer dependencies
-              uses: ramsey/composer-install@v2
+              uses: ramsey/composer-install@v4
               env:
                   COMPOSER_ROOT_VERSION: "${{ steps.composer-root-version.outputs.value }}"
               with:

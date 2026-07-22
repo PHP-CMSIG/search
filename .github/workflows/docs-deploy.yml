@@ -20,7 +20,7 @@ jobs:
                   echo "${{ github.event.pull_request.head.sha }}"
 
             - name: Checkout project
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   ref: "${{ github.event.pull_request.head.sha }}"
 
@@ -29,7 +29,7 @@ jobs:
                   git rev-parse HEAD
                   git branch --show-current
 
-            - uses: actions/setup-python@v5
+            - uses: actions/setup-python@v7
               with:
                   python-version: 3.12
 
@@ -46,7 +46,7 @@ jobs:
                   sphinx-build docs docs/_build
 
             - name: Deploy
-              uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
+              uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
               with:
                   publish_branch: gh-pages
                   github_token: ${{ secrets.GITHUB_TOKEN }}
