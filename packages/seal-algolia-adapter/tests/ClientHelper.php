@@ -25,13 +25,12 @@ final class ClientHelper
     {
         if (!self::$client instanceof SearchClient) {
             if (!empty($_ENV['ALGOLIA_DSN'])) {
-                \assert(\is_string($_ENV['ALGOLIA_DSN']), 'The "ALGOLIA_DSN" environment variable must be a string.');
-
                 $algoliaAdapterFactory = new AlgoliaAdapterFactory();
                 $factory = new AdapterFactory([
                     'algolia' => $algoliaAdapterFactory,
                 ]);
 
+                \assert(\is_string($_ENV['ALGOLIA_DSN']), 'The "ALGOLIA_DSN" environment variable must be a string.');
                 $parsedDsn = $factory->parseDsn(\trim($_ENV['ALGOLIA_DSN']));
                 self::$client = $algoliaAdapterFactory->createClient($parsedDsn);
             } elseif (empty($_ENV['ALGOLIA_APPLICATION_ID']) || empty($_ENV['ALGOLIA_ADMIN_API_KEY'])) {
