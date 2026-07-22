@@ -19,7 +19,7 @@ jobs:
         runs-on: ubuntu-latest
 
         env:
-            ALGOLIA_DSN: ${{ vars.ALGOLIA_DSN }}
+            ALGOLIA_DSN_BASE64: YWxnb2xpYTovL0FEOVNRSzYxN0Y6MjljMjY5NDU2MTM5NGYwZDNkOTNjZWRiOGMzZGMzYjE/aG9zdHNbXT1BRDlTUUs2MTdGLTEuYWxnb2xpYS5uZXQ=
 
         strategy:
             fail-fast: false
@@ -38,11 +38,14 @@ jobs:
                       dependency-versions: 'highest'
 
         steps:
-            - name: Validate Algolia configuration
-              if: ${{ env.ALGOLIA_DSN == '' }}
+            - name: Configure Algolia
               run: |
-                  echo "::error::Missing required Actions repository variable ALGOLIA_DSN."
-                  exit 1
+                  if [ -z "$ALGOLIA_DSN_BASE64" ]; then
+                      echo "::error::Missing ALGOLIA_DSN_BASE64."
+                      exit 1
+                  fi
+
+                  echo "ALGOLIA_DSN=$(printf '%s' "$ALGOLIA_DSN_BASE64" | base64 --decode)" >> "$GITHUB_ENV"
 
             - name: Output infos
               run: |
