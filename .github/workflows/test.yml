@@ -1,10 +1,13 @@
 name: Test
 
 on:
-    pull_request_target:
+    pull_request:
     push:
         branches:
             - '[0-9]+.[0-9]+'
+
+permissions:
+    contents: read
 
 jobs:
     seal-core:
@@ -48,7 +51,6 @@ jobs:
         with:
             directory: 'packages/seal-algolia-adapter'
             docker: false
-        secrets: inherit
 
     loupe-adapter:
         name: Loupe Adapter
@@ -63,7 +65,6 @@ jobs:
         with:
             directory: 'packages/seal-redisearch-adapter'
             docker: true
-        secrets: inherit
 
     solr-adapter:
         name: Solr Adapter
@@ -71,7 +72,6 @@ jobs:
         with:
             directory: 'packages/seal-solr-adapter'
             docker: true
-        secrets: inherit
 
     typesense-adapter:
         name: Typesense Adapter
@@ -86,7 +86,6 @@ jobs:
         with:
             directory: '.examples/symfony'
             docker: true
-        secrets: inherit
 
     laravel-integration-example:
         name: Laravel Integration Example
@@ -94,7 +93,6 @@ jobs:
         with:
             directory: '.examples/laravel'
             docker: true
-        secrets: inherit
 
     spiral-integration-example:
         name: Spiral Integration Example
@@ -102,7 +100,6 @@ jobs:
         with:
             directory: '.examples/spiral'
             docker: true
-        secrets: inherit
 
     mezzio-integration-example:
         name: Mezzio Integration Example
@@ -110,7 +107,6 @@ jobs:
         with:
             directory: '.examples/mezzio'
             docker: true
-        secrets: inherit
 
     yii-integration-example:
         name: Yii Integration Example
@@ -118,4 +114,3 @@ jobs:
         with:
             directory: '.examples/yii'
             docker: true
-        secrets: inherit

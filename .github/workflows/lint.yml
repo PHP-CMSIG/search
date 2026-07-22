@@ -1,10 +1,13 @@
 name: Lint
 
 on:
-    pull_request_target:
+    pull_request:
     push:
         branches:
             - '[0-9]+.[0-9]+'
+
+permissions:
+    contents: read
 
 jobs:
     lint:
@@ -19,8 +22,6 @@ jobs:
 
             - name: Checkout project
               uses: actions/checkout@v7
-              with:
-                  ref: "${{ github.event.pull_request.head.sha }}"
 
             - name: Git infos
               run: |

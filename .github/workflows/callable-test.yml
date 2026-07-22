@@ -10,12 +10,16 @@ on:
                 required: true
                 type: boolean
 
+permissions:
+    contents: read
+
 jobs:
     test:
         name: "PHP ${{ matrix.php-version }}"
         runs-on: ubuntu-latest
 
-        env: ${{ secrets }}
+        env:
+            ALGOLIA_DSN: ${{ vars.ALGOLIA_DSN }}
 
         strategy:
             fail-fast: false
@@ -34,6 +38,12 @@ jobs:
                       dependency-versions: 'highest'
 
         steps:
+            - name: Validate Algolia configuration
+              if: ${{ env.ALGOLIA_DSN == '' }}
+              run: |
+                  echo "::error::Missing required Actions repository variable ALGOLIA_DSN."
+                  exit 1
+
             - name: Output infos
               run: |
                   echo "${{ github.event.pull_request.merge_commit_sha }}"
@@ -41,8 +51,6 @@ jobs:
 
             - name: Checkout project
               uses: actions/checkout@v7
-              with:
-                  ref: "${{ github.event.pull_request.head.sha }}"
 
             - name: Git infos
               run: |
