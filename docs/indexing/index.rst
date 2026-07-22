@@ -37,6 +37,8 @@ value.
     not yet exist. If provided in future it will be part of an own package which make usage of SEAL.
     Example like doctrine/orm using doctrine/dbal. See `ODM issue <https://github.com/php-cmsig/search/issues/81>`__.
 
+.. include:: ../_shared/html-converter.rst
+
 Delete document
 ---------------
 
@@ -98,6 +100,8 @@ the ``ReindexProviderInterface`` and provides the documents for your index.
             return 'blog';
         }
     }
+
+.. include:: ../_shared/html-converter.rst
 
 If you are using Doctrine you might be interested in the :doc:`../cookbooks/orm-examples` cookbook.
 
