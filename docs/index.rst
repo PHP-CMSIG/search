@@ -69,6 +69,7 @@ Contents
     indexing/index
     search-and-filters/index
     cookbooks/index
+    use-cases/index
     research/index
 
 ..
