@@ -10,7 +10,7 @@ Flow PHP
 `Flow PHP <https://flow-php.com/>`__ uses the ``flow-php/etl-adapter-seal``
 package to write rows from its data pipelines to search indexes. Flow replaced
 its dedicated Elasticsearch adapter with SEAL so the same pipeline can target
-Elasticsearch, OpenSearch, Meilisearch, Solr, Typesense, Algolia, RediSearch,
+Elasticsearch, Opensearch, Meilisearch, Solr, Typesense, Algolia, RediSearch,
 or Loupe.
 
 - `SEAL DSL reference in Flow PHP <https://flow-php.com/documentation/dsl/seal/>`__
