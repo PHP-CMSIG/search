@@ -16,8 +16,8 @@ or Loupe.
 - `SEAL DSL reference in Flow PHP <https://flow-php.com/documentation/dsl/seal/>`__
 - `Flow PHP migration guide <https://flow-php.com/documentation/upgrading/#removal-of-elasticsearch-adapter>`__
 
-Other systems
--------------
+Content management systems
+--------------------------
 
 Contao CMS
 ~~~~~~~~~~
