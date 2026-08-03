@@ -50,11 +50,11 @@ This way it is easy to switch between different search engine software and servi
    * - ``Engine``
      - The main class and service responsible to provide the basic interface for add, remove and search and filters for documents.
    * - ``Schema``
-     - Defines the different ``Indexes`` and their ``Fields``, for every field a specific type need to be defined and what you want todo with them via flags like ``searchable``, ``filterable`` and ``sortable``.
+     - Defines the different ``Indexes`` and their ``Fields``, for every field a specific type needs to be defined and what you want todo with them via flags like ``searchable``, ``filterable`` and ``sortable``.
    * - ``Adapter``
      - Provides the communication between the Engine and the Search Engine software and services.
    * - ``Documents``
-     - A structure of data that you want to index need to follow the structure of the fields of the index schema.
+     - A structure of data that you want to index needs to follow the structure of the fields of the index schema.
    * - ``Search Engine``
      - Search Engine software or service where the data will actually be stored currently ``Meilisearch``, ``Opensearch``, ``Elasticsearch``, ``Algolia``, ``Loupe``, ``Redisearch``, ``Solr`` and ``Typesense`` is supported.
 
