@@ -587,7 +587,7 @@ In the next step we will create the engine which will be use our created ``Schem
 The ``Engine`` is the main class which will be used to communicate with the search engine.
 So for all kind of operations like add, remove, search, filter, drop, create, ... we need to use the ``Engine``.
 
-It requires an instance of the ``Adapter`` which we did install before to connect to the correct Search engine.
+It requires an instance of the ``Adapter`` we installed before to connect to the correct Search engine.
 
 .. tabs::
 
