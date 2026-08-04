@@ -142,7 +142,7 @@ search engine.
 
     .. group-tab:: Loupe
 
-        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no service other service required to use it.
+        As `Loupe <https://github.com/loupe-php/loupe>`__ is PHP based build on top of SQLite, there is no other service required to use it.
         You just need to make sure that you have the required `sqlite php extension <https://www.php.net/pdo_sqlite>`__ installed. The
         php package manager `composer <https://getcomposer.org/>`__ should already tell you if you are missing the extension.
 
