@@ -520,8 +520,7 @@ via ``multiple`` and define different types for it.
 Create and Drop a Schema
 ------------------------
 
-After you have defined your ``Schema`` with one or multiple ``Indexes`` you need to create based on your used
-integration the ``Indexes`` over the following way:
+Once you have defined a ``Schema`` with one or more ``Indexes``, you must create those ``Indexes``. The procedure depends on the integration you use:
 
 .. tabs::
 
