@@ -18,7 +18,7 @@ TextField
 The ``Text`` field type is the most important field type. It is used to store PHP ``string`` values.
 It is also the only field type that is ``searchable`` via a ``SearchCondition``.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -82,7 +82,7 @@ it can not be nullable and need always given to the document. It can only be def
 
 The defaults can not be changed and so are same for every index.
 
-Lets have a look at the following example fields of a document:
+Let's have a look at the following example fields of a document:
 
 .. code-block:: php
 
@@ -119,7 +119,7 @@ The ``Float`` field type is used to store numeric values. Unlike the text field 
 **not** ``searchable``, but the field can be marked as ``filterable`` and ``sortable``.
 It is used to store PHP ``float`` values.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -167,7 +167,7 @@ The ``Integer`` field type is used to store numeric values. Unlike the text fiel
 **not** ``searchable``, but the field can be marked as ``filterable`` and ``sortable``.
 It is used to store PHP ``int`` values.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -215,7 +215,7 @@ The ``Boolean`` field type is used to store flags. Unlike the text field type it
 **not** ``searchable``, but the field can be marked as ``filterable`` and ``sortable``.
 It is used to store PHP ``bool`` values.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -266,7 +266,7 @@ Depending on the used search engine it maybe is stored as a Unix timestamp. If t
 is read from the index it will be converted back to ``ISO 8601`` format in the current configured
 timezone of your ``php.ini``.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -318,7 +318,7 @@ The ``JsonObject`` field type is used to index json string object. Unlike the ot
 
 It is represented in PHP as an ``associative array``.
 
-Lets have a look at the following example field:
+Let's have a look at the following example field:
 
 .. code-block:: php
 
@@ -357,7 +357,7 @@ which are.
 
 It is represented in PHP as an ``associative array``.
 
-Lets have a look at the following example fields:
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
@@ -411,12 +411,11 @@ via ``multiple`` flags.
 TypedField
 ~~~~~~~~~~
 
-The ``Typed`` field type is a special ``Object`` field type and provides the same functionality.
-It is represented in PHP as an ``associative array``. The difference to the ``Object`` field type
-is that ``Typed`` can be used to index objects containing different types of fields byed on the
-``type`` field.
+The ``Typed`` field type indexes objects of differing structures in a single field. It is represented in PHP as an ``associative array``. Whereas an ``Object`` field defines one fixed structure, a ``Typed`` field defines several named structures called types, each equivalent to its own ``Object`` field. Objects remain rigid — every object must match the structure of the type it declares — but different objects in the same field may declare different types. Without this, each structure would require its own ``Object`` field or, alternatively, one large ``Object`` field with many null fields.
 
-Lets have a look at the following example fields:
+Which type a given object belongs to is determined by a discriminator field. Its name is ``type`` by convention — as in the examples below — but any field name can be used; its value must match one of the declared type names.
+
+Let's have a look at the following example fields:
 
 .. code-block:: php
 
