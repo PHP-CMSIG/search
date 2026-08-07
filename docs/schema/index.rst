@@ -75,12 +75,12 @@ via ``sortable``, ``multiple``, ``filterable``, ``searchable`` and ``distinct`` 
 IdentifierField
 ~~~~~~~~~~~~~~~
 
-The ``Identifier`` field type is a ``Text`` field type that is used to
+The ``Identifier`` field type is used to
 identify a document in the Index. Its value is a PHP ``string``.
 
 Unlike ``Text`` and the other field types, it cannot be nullable. Every Index must have exactly one ``Identifier``. 
 
-The ``Identifier`` field type uses the ``Text`` field type's defaults as its options. The ``Identifier``'s options cannot be changed and are therefore the same for every Index.
+The ``Identifier`` field type's defaults are unchangeable and are therefore the same for every Index.
 
 Lets have a look at the following example fields of a document:
 
@@ -108,7 +108,7 @@ The following field definition will show us how to define our ``Identifier`` fie
 
 **Options:**
 
-Has no configurable options it is always  ``filterable``, but not ``searchable``, ``sortable`` or ``multiple``.
+The ``Identifier`` field type is always ``filterable`` and has no other options.
 
 .. include:: ../_shared/identifier-value.rst
 
