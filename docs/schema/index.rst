@@ -319,8 +319,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
     use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
-        'published' => new Field\DateTime('isSpecial', sortable: true, filterable: true),
-        'nextDates' => new Field\DateTime('flags', multiple: true),
+        'published' => new Field\DateTimeField('isSpecial', sortable: true, filterable: true),
+        'nextDates' => new Field\DateTimeField('flags', multiple: true),
     ]);
 
 **DateTimeField Options:**
