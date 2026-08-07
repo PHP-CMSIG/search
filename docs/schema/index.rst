@@ -24,9 +24,12 @@ field types accept the options below; the complex types (``Object``, ``Typed``,
     Must be true to order search results by this field.
 
 ``multiple``
-    Must be true if the field holds an array rather than a scalar value. The array is
-    required even for a single value: pass ``[10]``, not ``10``. Conflicts with
-    ``sortable``, as most search engines do not define a sort order for arrays.
+    Must be true to store more than one value in this field. The value is then always an
+    array. For example, an ``Integer`` field with ``multiple`` enabled accepts ``[8, 9, 10]`` and
+    ``[9]``, but not ``9``.
+
+    Cannot be combined with ``sortable``, because not all search engines define a sort order for
+    arrays.
 
 ``facet``
     Must be true to make distribution information for this field available. The
