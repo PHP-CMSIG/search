@@ -189,6 +189,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
 +-----------------+-----------------+
+| ``facet``       | ``false``       |
++-----------------+-----------------+
 
 IntegerField
 ~~~~~~~~~~~~
@@ -237,6 +239,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
 +-----------------+-----------------+
+| ``facet``       | ``false``       |
++-----------------+-----------------+
 
 BooleanField
 ~~~~~~~~~~~~
@@ -284,6 +288,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
++-----------------+-----------------+
+| ``facet``       | ``false``       |
 +-----------------+-----------------+
 
 DateTimeField
@@ -335,6 +341,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
++-----------------+-----------------+
+| ``facet``       | ``false``       |
 +-----------------+-----------------+
 
 Complex Field Types
