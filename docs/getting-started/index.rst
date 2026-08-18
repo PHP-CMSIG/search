@@ -583,7 +583,7 @@ only required field is the ``IdentifierField`` which can appear only once per in
 Configure Engine
 ----------------
 
-In the next step we will create the engine which will be use our created ``Schema``.
+In the next step we will create the engine which will use our created ``Schema``.
 The ``Engine`` is the main class which will be used to communicate with the search engine.
 So for all kind of operations like add, remove, search, filter, drop, create, ... we need to use the ``Engine``.
 
