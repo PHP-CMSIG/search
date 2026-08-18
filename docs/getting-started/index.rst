@@ -375,7 +375,7 @@ search engine.
 Create Indexes
 --------------
 
-Before you can use the search engine you need to create the indexes.
+Before you can use the search engine you need to create the indexes. This requires a ``Schema`` implementation.
 
 .. tabs::
 
