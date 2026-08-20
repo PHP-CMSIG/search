@@ -183,7 +183,9 @@ final class Index
                 }
 
                 continue;
-            } elseif ($field instanceof Field\TypedField) {
+            }
+
+            if ($field instanceof Field\TypedField) {
                 foreach ($field->types as $type => $fields) {
                     foreach ($this->getAttributes($fields, true) as $attributeType => $fieldNames) {
                         foreach ($fieldNames as $fieldName) {
