@@ -101,7 +101,7 @@ final class Marshaller
             }
 
             if ($this->geoPointFieldConfig['multiple'] ?? false) {
-                $value = [$value];
+                return [$value];
             }
 
             return $value;
