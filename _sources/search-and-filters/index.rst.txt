@@ -1,0 +1,551 @@
+Search & Filter Conditions
+==========================
+
+In the :doc:`../getting-started/index` documentation we already saw how we can use the ``SearchBuilder`` to
+search for different documents in our indexes.
+
+Beside search functionality the abstraction provides also different kind of filter conditions to build
+also complex overview pages for e-commerce or other kind of applications.
+
+The following shows the basic usage as already shown in the "Getting Started" documentation. Under the
+``$this->engine`` variable we assume that you have already injected your created ``Engine`` instance.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(/* ... */)
+        ->getResult();
+
+    foreach ($result as $document) {
+        // do something with the document
+    }
+
+    $total = $result->total();
+
+.. note::
+
+    It is also possible to change the index after creating the searchbuilder via ``$searchBuilder->index('other')``.
+
+Conditions
+----------
+
+SearchCondition
+~~~~~~~~~~~~~~~
+
+The ``SearchCondition`` is the most basic condition and can be used to search for a specific:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::search('Search Term'))
+        ->getResult();
+
+The condition does only search on fields which are marked as ``searchable`` in the index configuration.
+
+EqualCondition
+~~~~~~~~~~~~~~
+
+The ``EqualCondition`` is used to filter the result by a specific field value matching a given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::equal('tags', 'UI'))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration, it can be also
+used on fields which are marked as ``multiple``.
+
+NotEqualCondition
+~~~~~~~~~~~~~~~~~
+
+The ``NotEqualCondition`` is used to filter the result by a specific field value not matching a given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::notEqual('tags', 'UI'))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration, it can be also
+used on fields which are marked as ``multiple``.
+
+IdentifierCondition
+~~~~~~~~~~~~~~~~~~~
+
+The ``IdentifierCondition`` is a special kind of ``EqualCondition`` on the identifier field,
+if you want to load a document by its identifier this condition is faster in most search engines
+then using a ``EqualCondition``.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::identifier('23b30f01-d8fd-4dca-b36a-4710e360a965'))
+        ->getResult();
+
+InCondition
+~~~~~~~~~~~
+
+The ``InCondition`` is used to filter the result by a specific field value matching one of the given values.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::in('tags', ['UI', 'UX']))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration, it can be also
+used on fields which are marked as ``multiple``.
+
+NotInCondition
+~~~~~~~~~~~~~~
+
+The ``NotInCondition`` is used to filter the result by a specific field value not matching one of the a given values.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::notIn('tags', ['UI', 'UX']))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration, it can be also
+used on fields which are marked as ``multiple``.
+
+GreaterThanCondition
+~~~~~~~~~~~~~~~~~~~~
+
+The ``GreaterThanCondition`` is used to filter the result by a specific field value be greater than (``>``)
+the given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::greaterThan('rating', 2.5))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+GreaterThanEqualCondition
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``GreaterThanEqualCondition`` is used to filter the result by a specific field value be greater than equal (``>=``)
+the given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::greaterThanEqual('rating', 2.5))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+LessThanCondition
+~~~~~~~~~~~~~~~~~
+
+The ``LessThanCondition`` is used to filter the result by a specific field value be less than equal (``<``)
+the given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::lessThan('rating', 2.5))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+LessThanEqualCondition
+~~~~~~~~~~~~~~~~~~~~~~
+
+The ``LessThanEqualCondition`` is used to filter the result by a specific field value be less than equal (``<=``)
+the given value.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::lessThanEqual('rating', 2.5))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+GeoDistanceCondition
+~~~~~~~~~~~~~~~~~~~~
+
+The ``GeoDistanceCondition`` is used to filter results within a radius by specifying a latitude, longitude and distance in meters.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('restaurants')
+        ->addFilter(Condition::geoDistance('location', 45.472735, 9.184019, 2000))
+        ->getResult();
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+GeoBoundingBoxCondition
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``GeoBoundingBoxCondition`` is used to filter results within a bounding box by specifying a min latitude, min longitude, max latitude and max longitude.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('restaurants')
+        ->addFilter(Condition::geoBoundingBox('location', 45.494181, 9.214024, 45.449484, 9.179175))
+        ->getResult();
+
+
+The field is required to be marked as ``filterable`` in the index configuration.
+
+.. note::
+
+    The ``GeoBoundingBoxCondition`` is currently not supported by ``RediSearch`` adapter.
+    See `this GitHub Issue <https://github.com/PHP-CMSIG/search/issues/422>`__ for more information.
+
+OrCondition
+~~~~~~~~~~~
+
+The ``OrCondition`` is used to filter by two or more conditions where at least one condition needs to match.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::or(
+            Condition::greaterThan('rating', 2.5),
+            Condition::equal('isSpecial', true),
+        ))
+        ->getResult();
+
+The fields are required to be marked as ``filterable`` in the index configuration.
+
+AndCondition
+~~~~~~~~~~~~
+
+The ``AndCondition`` is used to combine two or more conditions where all conditions need to match.
+By default, all conditions are connected with ``AND``, so it only makes sense to use an ``AndCondition``
+in combination with ``OrCondition`` filters.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::and(
+            Condition::equal('tags', 'Tech'),
+            Condition::or(
+                Condition::equal('tags', 'UX'),
+                Condition::equal('isSpecial', true),
+            ),
+        ))
+        ->getResult();
+
+The fields are required to be marked as ``filterable`` in the index configuration.
+
+
+.. note::
+
+    If the ``Algolia`` Adapter is used not all kind of combination with ``OrCondition`` are possible.
+    See `this GitHub Issue <https://github.com/algolia/algoliasearch-client-php/issues/385>`__ for more information.
+
+Filter on Objects and Typed Fields
+----------------------------------
+
+To filter on ``Objects`` and ``Typed`` fields you need to use the ``.`` symbol
+as a separator between the object and the field.
+
+For example for a document like this where the rating value is filterable:
+
+.. code-block:: php
+
+    <?php
+
+    $document = [
+        'rating' => [
+            'value' => '1.5'
+        ],
+    ];
+
+Need to be queried this way `<object>.<field>`:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::lessThanEqual('rating.value', 2.5))
+        ->getResult();
+
+To filter on ``Typed`` objects also the `.` symbol is used but the type name need to be included as well.
+
+For example for a document like this where header media is filterable:
+
+.. code-block:: php
+
+    <?php
+
+    $document = [
+        'header' => [
+            'type' => 'image',
+            'media' => 1
+        ],
+    ];
+
+Need to be queried this way `<object>.<type>.<field>`:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::equal('header.image.media', 21))
+        ->getResult();
+
+Also nested objects and types can be queried the same way.
+
+--------------
+
+Pagination
+----------
+
+Beside the searches and filters you can also limit the result by a given ``limit`` and/or ``offset``.
+
+.. code-block:: php
+
+    <?php
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(/* ... */)
+        ->limit(10)
+        ->offset(20)
+        ->getResult();
+
+With the ``limit`` and ``offset`` also a basic pagination can be created this way:
+
+.. code-block:: php
+
+    <?php
+
+    $page = 1; // get from query parameter
+    $pageSize = 10;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(/* ... */)
+        ->limit($pageSize)
+        ->offset(($page - 1) * $pageSize)
+        ->getResult();
+
+    $total = $result->total();
+    $maxPage = ceil($total / $pageSize) ?: 1;
+
+    foreach ($result as $document) {
+        // do something with the document
+    }
+
+--------------
+
+Sorting
+-------
+
+The abstraction can also be used to create complex overview pages where you not only can search or filter
+your results but also ``sort`` them by a given field.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addSortBy('rating', 'desc')
+        ->getResult();
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addSortBy('rating', 'asc')
+        ->getResult();
+
+The field is required to be marked as ``sortable`` in the index configuration.
+
+--------------
+
+Highlighting
+------------
+
+The abstraction can also be used to highlight the search term in the result.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::search('Search Term'))
+        ->highlight(['title'], '<mark>', '</mark>');
+        ->getResult();
+
+    foreach ($result as $document) {
+        $titleWithHighlight = $document['_formatted']['title']
+            ?? $document['title']
+            ?? '';
+    }
+
+If the highlight is applied to multiple fields, only the fields that had a match are returned inside ``_formatted``.
+Fields without a match are returned as ``null``. You might want to use the null coalescing operator (``??``)
+to fall back to the original field, as shown above.
+
+.. note::
+
+    The ``Highlighting`` is currently not supported by ``RediSearch`` adapter.
+    See `this GitHub Issue <https://github.com/PHP-CMSIG/search/issues/491>`__ for more information.
+
+If your adapter does not support highlighting or you want to crop the context around a highlighted
+text, you may install the `loupe/matcher <https://github.com/loupe-php/matcher>`__
+package via Composer.
+
+The ``loupe/matcher`` package is a lightweight string manipulation library specifically designed for
+this purpose. It is independent of Loupe Search usage — with zero dependencies.
+
+--------------
+
+Faceting
+--------
+
+SEAL also supports search facets which are currently limited to the ``MinMaxFacet`` and ``CountFacet`` which is what most
+search engines support:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Facet\Facet;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFacet(Facet::minMax('rating'))
+        ->addFacet(Facet::count('tags'))
+        ->getResult();
+
+    $facets = $result->facets(); // Output depends on the facet type
+
+.. note::
+
+    For ``->addFacet()`` to work, your fields (``rating`` and ``tags`` in our our example) have to be configured using
+    `facet: true` in the index schema.
+
+.. note::
+
+    Facets on fields that are configured ``multiple`` is currently not supported by ``RediSearch`` adapter.
+    See `this GitHub Issue <https://github.com/PHP-CMSIG/search/issues/583>`__ for more information.
+
+--------------
+
+Distinct fields
+---------------
+
+Sometimes it's better to group search results by a distinct value in order to reduce the result set
+and improve the UX. Think of a product that exists in 20 variants for the different sizes and colors
+for example. Instead of displaying all the product variants, you may group them via their common identifier.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+
+    $result = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::search('product title'))
+        ->distinct('product_id')
+        ->getResult();
+    }
+
+.. note::
+
+    For `->distinct()` to work, your field (`product_id` in our example) has to be configured using
+    `distinct: true` in the  index schema.
+
+--------------
+
+Counting documents
+------------------
+
+If you need to know the number of documents in your index, simply ask the engine for it:
+
+.. code-block:: php
+
+    <?php
+
+    $count = $this->engine->countDocuments('blog');
+
+Summary
+-------
+
+After reading this documentation you should have a basic understanding how to use the abstraction
+to manage Indexes, add and remove Documents and how to search and filter the results. You should
+now be ready to start using the abstraction for your different kind of needs.
+
+Missing something? Let us know by creating an issue
+on our `GitHub Repository <https://github.com/php-cmsig/search>`_.
