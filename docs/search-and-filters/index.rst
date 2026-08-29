@@ -520,12 +520,97 @@ for example. Instead of displaying all the product variants, you may group them 
         ->addFilter(Condition::search('product title'))
         ->distinct('product_id')
         ->getResult();
-    }
 
 .. note::
 
     For `->distinct()` to work, your field (`product_id` in our example) has to be configured using
     `distinct: true` in the  index schema.
+
+--------------
+
+Serializing searches
+--------------------
+
+SEAL keeps the core ``SearchBuilder``, conditions and facets focused on building searches. If you
+want to exchange search state with a UI, for example through a single request query parameter such
+as ``?search=<json>``, use the ``ArraySearchBuilderFactory``.
+
+The factory translates between a ``SearchBuilder`` and an array or JSON payload. The index name is
+not part of the serialized payload. Your application still decides which index to target.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\Condition\Condition;
+    use CmsIg\Seal\Search\Facet\Facet;
+    use CmsIg\Seal\Search\SearchBuilderFactory\ArraySearchBuilderFactory;
+
+    $searchBuilderFactory = new ArraySearchBuilderFactory($this->engine);
+
+    $searchBuilder = $this->engine->createSearchBuilder('blog')
+        ->addFilter(Condition::search('product title'))
+        ->addFilter(Condition::equal('tags', 'php'))
+        ->addSortBy('rating', 'desc')
+        ->limit(20)
+        ->addFacet(Facet::count('tags'));
+
+    $json = $searchBuilderFactory->toJson($searchBuilder);
+
+You can also work with arrays directly instead of JSON:
+
+.. code-block:: php
+
+    <?php
+
+    $payload = $searchBuilderFactory->toArray($searchBuilder);
+
+To build a ``SearchBuilder`` back from external input, pass a
+``SearchBuilderFactoryConfig`` explicitly. This is required on purpose. The config defines exactly
+which parts of the search language your endpoint wants to expose.
+
+Nothing is allowed by default.
+
+Only after a field or feature is allowed in the config can it be used. Even then, SEAL still checks
+the index schema. So a field must be allowed by your config and configured in the schema as
+``filterable``, ``sortable``, ``facet``, ``distinct`` or ``searchable`` where applicable.
+
+This is especially important for public APIs. An index may support internal fields such as
+``authorEmail`` or ``internalStatus`` for back office workflows, while a public endpoint should only
+accept a small safe subset.
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Search\SearchBuilderFactory\ArraySearchBuilderFactory;
+    use CmsIg\Seal\Search\SearchBuilderFactory\SearchBuilderFactoryConfig;
+
+    $searchBuilderFactory = new ArraySearchBuilderFactory($this->engine);
+
+    $config = new SearchBuilderFactoryConfig(
+        filterFields: ['tags', 'rating'],
+        sortFields: ['rating'],
+        facetFields: ['tags'],
+        highlightFields: ['title', 'article'],
+        allowSearch: true,
+        maxLimit: 100,
+    );
+
+    $result = $searchBuilderFactory
+        ->buildFromJson('blog', $config, $_GET['search'])
+        ->getResult();
+
+If your input already arrives as an array, for example from a custom request
+mapping, use ``build()`` instead:
+
+.. code-block:: php
+
+    <?php
+
+    $result = $searchBuilderFactory
+        ->build('blog', $config, $requestData)
+        ->getResult();
 
 --------------
 
