@@ -32,7 +32,10 @@ namespace CmsIg\Seal\Schema\Field;
  */
 final class IdentifierField extends AbstractField
 {
-    public function __construct(string $name)
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(string $name, array $options = [])
     {
         parent::__construct(
             $name,
@@ -42,7 +45,7 @@ final class IdentifierField extends AbstractField
             sortable: true,
             distinct: false,
             facet: false,
-            options: [],
+            options: $options,
         );
     }
 }

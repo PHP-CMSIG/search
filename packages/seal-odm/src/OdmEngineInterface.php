@@ -11,24 +11,23 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace CmsIg\Seal;
+namespace CmsIg\Seal\Odm;
 
 use CmsIg\Seal\Exception\DocumentNotFoundException;
-use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
+use CmsIg\Seal\Odm\Reindex\OdmStaticReindexProviderInterface;
+use CmsIg\Seal\Odm\Search\OdmSearchBuilder;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
-use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Task\TaskInterface;
 
-interface EngineInterface
+interface OdmEngineInterface
 {
     /**
-     * @param array<string, mixed> $document
+     * @param $object $object
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<array<string, mixed>> : null)
      */
-    public function saveDocument(string $index, array $document, array $options = []): TaskInterface|null;
+    public function saveDocument(string $index, object $object, array $options = []): TaskInterface|null;
 
     /**
      * @param array{return_slow_promise_result?: true} $options
@@ -38,24 +37,22 @@ interface EngineInterface
     public function deleteDocument(string $index, string $identifier, array $options = []): TaskInterface|null;
 
     /**
-     * @param iterable<array<string, mixed>> $saveDocuments
-     * @param iterable<string> $deleteDocumentIdentifiers
+     * @param iterable<object> $saveObjects
+     * @param iterable<string> $deleteObjectIdentifiers
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function bulk(string $index, iterable $saveDocuments, iterable $deleteDocumentIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null;
+    public function bulk(string $index, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null;
 
     /**
      * @throws DocumentNotFoundException
-     *
-     * @return array<string, mixed>
      */
-    public function getDocument(string $index, string $identifier): array;
+    public function getDocument(string $index, string $identifier): object;
 
-    public function countDocuments(string $index): int;
+    public function countObjects(string $index): int;
 
-    public function createSearchBuilder(string $index): SearchBuilder;
+    public function createSearchBuilder(string $index): OdmSearchBuilder;
 
     /**
      * @param array{return_slow_promise_result?: true} $options
@@ -91,15 +88,14 @@ interface EngineInterface
      * @experimental This method is experimental and may change in future versions, we are not sure if it stays here or the syntax change completely.
      *               For framework users it is uninteresting as there it is handled via CLI commands.
      *
-     * @param iterable<DynamicReindexProviderInterface|StaticReindexProviderInterface> $reindexProviders
+     * @param iterable<OdmStaticReindexProviderInterface> $odmReindexProviders
      * @param callable(string, int, int|null): void|null $progressCallback
-     *
-     * TODO: native return type in next minor, major release
+     * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
     public function reindex(
-        iterable $reindexProviders,
+        iterable $odmReindexProviders,
         ReindexConfig $reindexConfig,
         callable|null $progressCallback = null,
         array $options = [],
