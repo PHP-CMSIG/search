@@ -1,13 +1,46 @@
 Schema
 ======
 
-In the :doc:`../getting-started/index` documentation we already saw how to define a schema for our indexes
-and where we have to define them based on our used ``Framework`` or how the create the ``Schema`` instance in
-the ``Standalone`` usage.
+The :doc:`../getting-started/index` documentation already covered how to define a schema for our
+indexes, where to define it depending on the ``Framework`` we use, and how to create the ``Schema``
+instance in ``Standalone`` usage.
 
-A Schema is a collection of one or more ``Index`` definitions. An ``Index`` is defined by a name and a list of ``Fields``.
-Where every field is defined by a name and a type. All fields types with exception from the ``Identifier``
-are possible to be defined as ``filterable``, ``sortable``, ``multiple``, ``facet`` and ``distinct``.
+A Schema is a collection of one or more ``Index`` definitions. An ``Index`` is defined by a
+name and a list of ``Fields``, where every field is defined by a name and a type. The basic
+field types accept the options below; the complex types (``Object``, ``Typed``,
+``JsonObject``) and ``Identifier`` accept only a subset, listed with each type.
+
+**Field Options:**
+
+``searchable``
+    Only available on the ``Text`` field type, where it is enabled by default. Set it to
+    false to store a value without matching it in a ``SearchCondition``.
+
+``filterable``
+    Must be true to filter documents on this field, for example via an ``EqualCondition``
+    (see :doc:`../search-and-filters/index`).
+
+``sortable``
+    Must be true to order search results by this field.
+
+``multiple``
+    Must be true to store more than one value in this field. The value is then always an
+    array. For example, an ``Integer`` field with ``multiple`` enabled accepts ``[8, 9, 10]`` and
+    ``[9]``, but not ``9``.
+
+    Cannot be combined with ``sortable``, because not all search engines define a sort order for
+    arrays.
+
+``facet``
+    Must be true to make distribution information for this field available. The
+    distribution is not returned automatically. Each query requests the facets it needs.
+
+``distinct``
+    Must be true to collapse search results on this field, keeping one document per
+    distinct value. A shirt available in three colours may be stored as three documents
+    sharing ``productId = '42'``; a query marking ``productId`` as distinct returns one
+    of them instead of all three. The document kept is the best-ranked one, so combining
+    this with ``orderBy`` on price yields the cheapest variant.
 
 Basic Field Types
 -----------------
@@ -32,7 +65,7 @@ Let's have a look at the following example fields:
     ];
 
 The following field definitions will show us how we can use ``Text`` fields to index the above fields
-via ``sortable``, ``multiple``, ``filterable``, ``searchable`` and ``distinct`` flags:
+via ``sortable``, ``multiple``, ``filterable``, ``searchable``, ``facet`` and ``distinct`` flags:
 
 .. code-block:: php
 
@@ -159,6 +192,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
 +-----------------+-----------------+
+| ``facet``       | ``false``       |
++-----------------+-----------------+
 
 IntegerField
 ~~~~~~~~~~~~
@@ -206,6 +241,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
++-----------------+-----------------+
+| ``facet``       | ``false``       |
 +-----------------+-----------------+
 
 BooleanField
@@ -255,6 +292,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
 +-----------------+-----------------+
+| ``facet``       | ``false``       |
++-----------------+-----------------+
 
 DateTimeField
 ~~~~~~~~~~~~~
@@ -289,8 +328,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
     use CmsIg\Seal\Schema\Index;
 
     $index = new Index('blog', [
-        'published' => new Field\DateTime('isSpecial', sortable: true, filterable: true),
-        'nextDates' => new Field\DateTime('flags', multiple: true),
+        'published' => new Field\DateTimeField('isSpecial', sortable: true, filterable: true),
+        'nextDates' => new Field\DateTimeField('flags', multiple: true),
     ]);
 
 **DateTimeField Options:**
@@ -305,6 +344,8 @@ via ``sortable``, ``multiple`` and ``filterable`` flags.
 | ``multiple``    | ``false``       |
 +-----------------+-----------------+
 | ``distinct``    | ``false``       |
++-----------------+-----------------+
+| ``facet``       | ``false``       |
 +-----------------+-----------------+
 
 Complex Field Types
@@ -520,8 +561,7 @@ via ``multiple`` and define different types for it.
 Create and Drop a Schema
 ------------------------
 
-After you have defined your ``Schema`` with one or multiple ``Indexes`` you need to create based on your used
-integration the ``Indexes`` over the following way:
+Once you have defined a ``Schema`` with one or more ``Indexes``, you must create those ``Indexes``. The procedure depends on the integration you use:
 
 .. tabs::
 
