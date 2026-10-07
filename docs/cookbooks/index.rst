@@ -15,3 +15,4 @@ and over connecting Index updates to your favorite ``ORM`` or persistent layer.
 
     create-own-adapter
     orm-examples
+    functional-tests
