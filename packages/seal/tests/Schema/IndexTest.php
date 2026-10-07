@@ -43,6 +43,27 @@ class IndexTest extends TestCase
         ], $index->searchableFields);
     }
 
+    public function testIdentifierFieldSortableByDefault(): void
+    {
+        $index = new Index('test', [
+            'uuid' => new Field\IdentifierField('uuid'),
+        ]);
+
+        $this->assertTrue($index->getIdentifierField()->sortable);
+        $this->assertSame(['uuid'], $index->sortableFields);
+    }
+
+    public function testIdentifierFieldNotSortable(): void
+    {
+        $index = new Index('test', [
+            'uuid' => new Field\IdentifierField('uuid', sortable: false),
+        ]);
+
+        $this->assertFalse($index->getIdentifierField()->sortable);
+        $this->assertSame([], $index->sortableFields);
+        $this->assertSame(['uuid'], $index->filterableFields);
+    }
+
     public function testFalseRootFieldMapping(): void
     {
         $this->expectException(\AssertionError::class);

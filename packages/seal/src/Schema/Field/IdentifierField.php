@@ -24,7 +24,7 @@ namespace CmsIg\Seal\Schema\Field;
  * @property false $multiple
  * @property false $searchable
  * @property true $filterable
- * @property true $sortable
+ * @property bool $sortable
  * @property false $distinct
  * @property false $facet
  *
@@ -32,14 +32,14 @@ namespace CmsIg\Seal\Schema\Field;
  */
 final class IdentifierField extends AbstractField
 {
-    public function __construct(string $name)
+    public function __construct(string $name, bool $sortable = true)
     {
         parent::__construct(
             $name,
             multiple: false,
             searchable: false,
             filterable: true,
-            sortable: true,
+            sortable: $sortable,
             distinct: false,
             facet: false,
             options: [],
