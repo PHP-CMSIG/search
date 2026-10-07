@@ -1427,6 +1427,45 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
+    public function testEqualAndInConditionInBothOrders(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        $conditions = [
+            Condition::equal('locale', 'en_GB'),
+            Condition::in('tags', ['UI']),
+        ];
+
+        foreach ([$conditions, \array_reverse($conditions)] as $orderedConditions) {
+            $search = new SearchBuilder($schema, self::$searcher);
+            $search->index(TestingHelper::INDEX_COMPLEX);
+            foreach ($orderedConditions as $condition) {
+                $search->addFilter($condition);
+            }
+
+            $this->assertSame([$documents[0]], [...$search->getResult()]);
+        }
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
     public function testNotInCondition(): void
     {
         $documents = TestingHelper::createComplexFixtures();

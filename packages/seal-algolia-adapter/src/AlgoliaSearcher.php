@@ -92,13 +92,12 @@ final class AlgoliaSearcher implements SearcherInterface
 
         $query = '';
         $geoFilters = [];
-        $filters = $this->recursiveResolveFilterConditions($search->index, $search->filters, true, $query, $geoFilters);
+        // Algolia rejects an AND group containing another group, so topmost AND groups are merged into
+        // the topmost conjunction instead of being wrapped in brackets.
+        $filters = $this->recursiveResolveFilterConditions($search->index, $this->flattenAndConditions($search->filters), true, $query, $geoFilters);
 
         $searchParams = [];
         if ('' !== $filters) {
-            // Algolia does not like useless brackets around the topmost group so we remove them if present
-            $filters = \preg_replace('#(^\(|\)$)#', '', $filters);
-
             $searchParams = ['filters' => $filters];
         }
 
@@ -198,6 +197,27 @@ final class AlgoliaSearcher implements SearcherInterface
 
             yield $document;
         }
+    }
+
+    /**
+     * @param object[] $conditions
+     *
+     * @return object[]
+     */
+    private function flattenAndConditions(array $conditions): array
+    {
+        $flattenedConditions = [];
+        foreach ($conditions as $condition) {
+            if ($condition instanceof Condition\AndCondition) {
+                \array_push($flattenedConditions, ...$this->flattenAndConditions($condition->conditions));
+
+                continue;
+            }
+
+            $flattenedConditions[] = $condition;
+        }
+
+        return $flattenedConditions;
     }
 
     private function escapeFilterValue(string|int|float|bool $value): string
