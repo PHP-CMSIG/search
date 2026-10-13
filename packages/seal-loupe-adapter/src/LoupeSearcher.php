@@ -251,7 +251,7 @@ final class LoupeSearcher implements SearcherInterface
         foreach ($facets as $facet) {
             $field = $this->loupeHelper->formatField($facet->field);
 
-            if ($facet instanceof MinMaxFacet && isset($facetStats[$field])) {
+            if ($facet instanceof MinMaxFacet && isset($facetStats[$field]['min'], $facetStats[$field]['max'])) {
                 $formatted[$facet->field]['min'] = $facetStats[$field]['min'];
                 $formatted[$facet->field]['max'] = $facetStats[$field]['max'];
                 continue;
