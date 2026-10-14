@@ -110,7 +110,7 @@ final class AlgoliaSearcher implements SearcherInterface
             $searchParams['offset'] = $search->offset;
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $searchParams['length'] = $search->limit;
             $searchParams['offset'] ??= 0; // length would be ignored without offset see: https://www.algolia.com/doc/api-reference/api-parameters/length/
         }

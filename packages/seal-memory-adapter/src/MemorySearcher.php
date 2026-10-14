@@ -92,6 +92,8 @@ final class MemorySearcher implements SearcherInterface
             });
         }
 
+        $total = \count($documents);
+        $facets = $this->generateFacets($documents, $search);
         $documents = \array_slice($documents, $search->offset, $search->limit);
 
         $generator = (static function () use ($documents, $search, $searchTerms): \Generator {
@@ -138,8 +140,8 @@ final class MemorySearcher implements SearcherInterface
 
         return new Result(
             $generator(),
-            \count($documents),
-            $this->generateFacets($documents, $search),
+            $total,
+            $facets,
         );
     }
 

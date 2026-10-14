@@ -570,6 +570,104 @@ abstract class AbstractSearcherTestCase extends TestCase
         $this->assertCount(0, [...$search->getResult()]);
     }
 
+    public function testZeroLimit(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+        $schema = self::getSchema();
+        $index = $schema->indexes[TestingHelper::INDEX_COMPLEX];
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $index,
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        foreach ([0, 1] as $offset) {
+            $search = (new SearchBuilder($schema, self::$searcher))
+                ->index(TestingHelper::INDEX_COMPLEX)
+                ->offset($offset)
+                ->limit(0);
+
+            $result = $search->getResult();
+            $this->assertSame([], [...$result]);
+        }
+
+        $search = (new SearchBuilder($schema, self::$searcher))
+            ->index(TestingHelper::INDEX_COMPLEX)
+            ->addFilter(Condition::identifier($documents[0]['uuid']))
+            ->limit(0);
+
+        $result = $search->getResult();
+        $this->assertSame([], [...$result]);
+
+        $search = (new SearchBuilder($schema, self::$searcher))
+            ->index(TestingHelper::INDEX_COMPLEX)
+            ->distinct('commentsCount')
+            ->limit(0);
+
+        $this->assertSame([], [...$search->getResult()]);
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $index,
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
+    public function testZeroLimitWithFacets(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+        $schema = self::getSchema();
+        $index = $schema->indexes[TestingHelper::INDEX_COMPLEX];
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->save(
+                $index,
+                $document,
+                ['return_slow_promise_result' => true],
+            );
+        }
+        self::$taskHelper->waitForAll();
+
+        foreach ([0, 1] as $offset) {
+            $search = (new SearchBuilder($schema, self::$searcher))
+                ->index(TestingHelper::INDEX_COMPLEX)
+                ->addFilter(Condition::search('Other'))
+                ->addFacet(Facet::count(field: 'isSpecial'))
+                ->addFacet(Facet::minMax(field: 'rating'))
+                ->offset($offset)
+                ->limit(0);
+
+            $result = $search->getResult();
+            $this->assertSame([], [...$result]);
+            $facets = $result->facets();
+            TestingHelper::recursiveKeySort($facets);
+
+            $this->assertSame([
+                'isSpecial' => [
+                    'count' => ['false' => 1],
+                ],
+                'rating' => [
+                    'max' => 2.5,
+                    'min' => 2.5,
+                ],
+            ], $facets);
+        }
+
+        foreach ($documents as $document) {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $index,
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
     public function testLimitAndOffset(): void
     {
         $documents = TestingHelper::createComplexFixtures();

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10fb4713e228fa7894211209b335d84a",
+    "content-hash": "e9481e066db58b853b43144ac0cc8522",
     "packages": [
         {
             "name": "cmsig/seal",
@@ -109,12 +109,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "d31bcf0272fe2f579ac328f1e5b8bc7af8ab2410"
+                "reference": "70c35c43d3b514512f680295049d51a85b659702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/d31bcf0272fe2f579ac328f1e5b8bc7af8ab2410",
-                "reference": "d31bcf0272fe2f579ac328f1e5b8bc7af8ab2410",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/70c35c43d3b514512f680295049d51a85b659702",
+                "reference": "70c35c43d3b514512f680295049d51a85b659702",
                 "shasum": ""
             },
             "require": {
@@ -130,15 +130,16 @@
                 "phpstan/phpstan": "2.1.30",
                 "phpstan/phpstan-phpunit": "2.0.7",
                 "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "11.5.50",
-                "slevomat/coding-standard": "8.27.1",
-                "squizlabs/php_codesniffer": "4.0.1",
+                "phpunit/phpunit": "11.5.56",
+                "slevomat/coding-standard": "8.31.1",
+                "squizlabs/php_codesniffer": "4.0.4",
                 "symfony/cache": "^6.3.8|^7.0|^8.0",
                 "symfony/console": "^5.4|^6.3|^7.0|^8.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -207,7 +208,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-26T15:20:21+00:00"
+            "time": "2026-10-05T03:37:49+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -263,12 +264,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "200aa4fbd2df429ad49fcee637f05d44c32c2d17"
+                "reference": "7a378be1fc09acf38fcce6ceb8d7fc1b648f7607"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/200aa4fbd2df429ad49fcee637f05d44c32c2d17",
-                "reference": "200aa4fbd2df429ad49fcee637f05d44c32c2d17",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/7a378be1fc09acf38fcce6ceb8d7fc1b648f7607",
+                "reference": "7a378be1fc09acf38fcce6ceb8d7fc1b648f7607",
                 "shasum": ""
             },
             "require": {
@@ -276,8 +277,8 @@
             },
             "require-dev": {
                 "doctrine/coding-standard": "^14",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^10.5.58"
+                "phpstan/phpstan": "^2",
+                "phpunit/phpunit": "^10.5.58 || ^12.5.4"
             },
             "type": "library",
             "autoload": {
@@ -330,7 +331,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-24T20:53:36+00:00"
+            "time": "2026-10-01T18:58:38+00:00"
         },
         {
             "name": "joomla/string",
@@ -388,16 +389,16 @@
         },
         {
             "name": "loupe/loupe",
-            "version": "1.0.1",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/loupe.git",
-                "reference": "06872e08eac9ddebcb99161482c64a32546a6311"
+                "reference": "a54e1d68dc8fe9f7187af8f7f4abac64634aadb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/06872e08eac9ddebcb99161482c64a32546a6311",
-                "reference": "06872e08eac9ddebcb99161482c64a32546a6311",
+                "url": "https://api.github.com/repos/loupe-php/loupe/zipball/a54e1d68dc8fe9f7187af8f7f4abac64634aadb5",
+                "reference": "a54e1d68dc8fe9f7187af8f7f4abac64634aadb5",
                 "shasum": ""
             },
             "require": {
@@ -407,7 +408,7 @@
                 "ext-pdo": "*",
                 "ext-pdo_sqlite": "*",
                 "lib-pdo_sqlite-sqlite": ">= 3.35.0",
-                "loupe/matcher": "^0.3.2",
+                "loupe/matcher": "^0.4",
                 "mjaschen/phpgeo": "^5.0 || ^6.0",
                 "nitotm/efficient-language-detector": "^3.1",
                 "php": "^8.1",
@@ -443,7 +444,7 @@
             "description": "A full text search engine with tokenization, stemming, typo tolerance, filters and geo support based on only PHP and SQLite",
             "support": {
                 "issues": "https://github.com/loupe-php/loupe/issues",
-                "source": "https://github.com/loupe-php/loupe/tree/1.0.1"
+                "source": "https://github.com/loupe-php/loupe/tree/1.1.4"
             },
             "funding": [
                 {
@@ -451,20 +452,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-30T09:33:17+00:00"
+            "time": "2026-10-14T10:12:22+00:00"
         },
         {
             "name": "loupe/matcher",
-            "version": "0.3.2",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loupe-php/matcher.git",
-                "reference": "8fe4aa1c30088ff053d37498fcca28840e19c6f3"
+                "reference": "68a2e6b7b3667a601f50bd0185bb00e1bdef7b04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loupe-php/matcher/zipball/8fe4aa1c30088ff053d37498fcca28840e19c6f3",
-                "reference": "8fe4aa1c30088ff053d37498fcca28840e19c6f3",
+                "url": "https://api.github.com/repos/loupe-php/matcher/zipball/68a2e6b7b3667a601f50bd0185bb00e1bdef7b04",
+                "reference": "68a2e6b7b3667a601f50bd0185bb00e1bdef7b04",
                 "shasum": ""
             },
             "require": {
@@ -515,7 +516,7 @@
             ],
             "support": {
                 "issues": "https://github.com/loupe-php/matcher/issues",
-                "source": "https://github.com/loupe-php/matcher/tree/0.3.2"
+                "source": "https://github.com/loupe-php/matcher/tree/0.4.1"
             },
             "funding": [
                 {
@@ -523,7 +524,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-30T08:14:15+00:00"
+            "time": "2026-10-12T08:34:55+00:00"
         },
         {
             "name": "mjaschen/phpgeo",
@@ -842,12 +843,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d"
+                "reference": "feb1edf4e546af3b85c5caebe8359a20db230ca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/f3202fa1b5097b0af062dc978b32ecf63404e31d",
-                "reference": "f3202fa1b5097b0af062dc978b32ecf63404e31d",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/feb1edf4e546af3b85c5caebe8359a20db230ca3",
+                "reference": "feb1edf4e546af3b85c5caebe8359a20db230ca3",
                 "shasum": ""
             },
             "require": {
@@ -861,7 +862,7 @@
                     "name": "symfony/contracts"
                 },
                 "branch-alias": {
-                    "dev-main": "3.7-dev"
+                    "dev-main": "3.8-dev"
                 }
             },
             "autoload": {
@@ -906,7 +907,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-05T06:23:12+00:00"
+            "time": "2026-09-16T14:15:10+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -914,12 +915,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
                 "shasum": ""
             },
             "require": {
@@ -992,7 +993,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-27T06:59:30+00:00"
+            "time": "2026-09-24T15:19:04+00:00"
         },
         {
             "name": "toflar/fast-set",
@@ -3090,9 +3091,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phpstan/phpstan": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

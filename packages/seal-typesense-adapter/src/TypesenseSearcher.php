@@ -86,11 +86,11 @@ final class TypesenseSearcher implements SearcherInterface
             $searchParams['filter_by'] = $filters;
         }
 
-        if (0 !== $search->offset) {
+        if (0 !== $search->offset && 0 !== $search->limit) {
             $searchParams['page'] = ($search->offset / $search->limit) + 1;
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $searchParams['per_page'] = $search->limit;
         }
 
@@ -141,7 +141,7 @@ final class TypesenseSearcher implements SearcherInterface
         $facetCounts = $data['facet_counts'] ?? [];
 
         return new Result(
-            $this->hitsToDocuments($search->index, $isGrouped ? $data['grouped_hits'][0]['hits'] : $data['hits'], $search->highlightFields), // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+            $this->hitsToDocuments($search->index, $isGrouped ? ($data['grouped_hits'][0]['hits'] ?? []) : $data['hits'], $search->highlightFields), // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
             $data['found'] ?? 0, // @phpstan-ignore-line argument.type
             $this->formatFacets($facetCounts, $search->facets),
         );

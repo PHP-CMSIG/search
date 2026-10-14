@@ -114,7 +114,7 @@ final class SolrSearcher implements SearcherInterface
             $query->setStart($search->offset);
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $query->setRows($search->limit);
         }
 

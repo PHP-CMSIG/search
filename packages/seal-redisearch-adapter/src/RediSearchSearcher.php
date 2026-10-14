@@ -156,10 +156,11 @@ final class RediSearchSearcher implements SearcherInterface
             $arguments[] = \strtoupper((string) $this->escapeFilterValue($direction));
         }
 
-        if ($search->offset || $search->limit) {
+        if (0 !== $search->offset || null !== $search->limit) {
             $arguments[] = 'LIMIT';
-            $arguments[] = $search->offset;
-            $arguments[] = ($search->limit ?: 10);
+            // RediSearch requires a zero offset when no documents are requested
+            $arguments[] = 0 === $search->limit ? 0 : $search->offset;
+            $arguments[] = ($search->limit ?? 10);
         }
 
         if ([] !== $parameters) {
