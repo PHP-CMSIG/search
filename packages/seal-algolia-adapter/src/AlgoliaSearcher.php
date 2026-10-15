@@ -219,7 +219,16 @@ final class AlgoliaSearcher implements SearcherInterface
     {
         $filters = [];
 
-        foreach ($this->flattenConditions($conditions, $conjunctive) as $filter) {
+        foreach ($conditions as $filter) {
+            $filter = $this->simplifyInConditions($filter);
+            $filter = $this->simplifyAndOrCondition($filter);
+
+            $requiresBrackets = match (true) {
+                $filter instanceof Condition\AndCondition => !$conjunctive,
+                $filter instanceof Condition\OrCondition => $conjunctive && 1 !== \count($conditions),
+                default => false,
+            };
+
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ':' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
@@ -240,8 +249,8 @@ final class AlgoliaSearcher implements SearcherInterface
                 $filter instanceof Condition\GeoBoundingBoxCondition => $geoFilters = [
                     'insideBoundingBox' => [[$filter->northLatitude, $filter->westLongitude, $filter->southLatitude, $filter->eastLongitude]],
                 ],
-                $filter instanceof Condition\AndCondition => $filters[] = '(' . $this->recursiveResolveFilterConditions($index, $filter->conditions, true, $query, $geoFilters) . ')',
-                $filter instanceof Condition\OrCondition => $filters[] = '(' . $this->recursiveResolveFilterConditions($index, $filter->conditions, false, $query, $geoFilters) . ')',
+                $filter instanceof Condition\AndCondition => $filters[] = ($requiresBrackets ? '(' : '') . $this->recursiveResolveFilterConditions($index, $filter->conditions, true, $query, $geoFilters) . ($requiresBrackets ? ')' : ''),
+                $filter instanceof Condition\OrCondition => $filters[] = ($requiresBrackets ? '(' : '') . $this->recursiveResolveFilterConditions($index, $filter->conditions, false, $query, $geoFilters) . ($requiresBrackets ? ')' : ''),
                 default => throw new \LogicException($filter::class . ' filter not implemented.'),
             };
         }
@@ -253,52 +262,24 @@ final class AlgoliaSearcher implements SearcherInterface
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
     }
 
-    /**
-     * Algolia has no support for `In` and `NotIn` conditions, so we need to convert them into `Or` and `And` conditions.
-     *         Also, Algolia has no support for nested conditions, so we need to flatten them as long as possible.
-     *
-     * @param object[] $conditions
-     *
-     * @return iterable<object>
-     */
-    private function flattenConditions(array $conditions, bool $conjunctive): iterable
-    {
-        foreach ($conditions as $filter) {
-            $filter = $this->simplifyInCondition($filter);
-
-            $filter = match (true) {
-                (
-                    (
-                        $filter instanceof Condition\AndCondition
-                        || $filter instanceof Condition\OrCondition
-                    ) && \count($filter->conditions) === 1
-                ) => $this->simplifyInCondition($filter->conditions[0]),
-                default => $filter,
-            };
-
-            if ($conjunctive && $filter instanceof Condition\AndCondition) {
-                foreach ($filter->conditions as $subFilter) {
-                    yield $subFilter;
-                }
-                continue;
-            }
-
-            if (!$conjunctive && $filter instanceof Condition\OrCondition) {
-                foreach ($filter->conditions as $subFilter) {
-                    yield $subFilter;
-                }
-                continue;
-            }
-
-            yield $filter;
-        }
-    }
-
-    private function simplifyInCondition(object $filter): object
+    private function simplifyInConditions(object $filter): object
     {
         return match (true) {
             $filter instanceof Condition\InCondition => $filter->createOrCondition(),
             $filter instanceof Condition\NotInCondition => $filter->createAndCondition(),
+            default => $filter,
+        };
+    }
+
+    private function simplifyAndOrCondition(object $filter): object
+    {
+        return match (true) {
+            (
+                (
+                    $filter instanceof Condition\AndCondition
+                    || $filter instanceof Condition\OrCondition
+                ) && 1 === \count($filter->conditions)
+            ) => $this->simplifyAndOrCondition($this->simplifyInConditions($filter->conditions[0])),
             default => $filter,
         };
     }
