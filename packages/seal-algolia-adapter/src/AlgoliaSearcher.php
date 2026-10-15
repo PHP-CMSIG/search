@@ -92,9 +92,7 @@ final class AlgoliaSearcher implements SearcherInterface
 
         $query = '';
         $geoFilters = [];
-        // Algolia rejects an AND group containing another group, so topmost AND groups are merged into
-        // the topmost conjunction instead of being wrapped in brackets.
-        $filters = $this->recursiveResolveFilterConditions($search->index, $this->flattenAndConditions($search->filters), true, $query, $geoFilters);
+        $filters = $this->recursiveResolveFilterConditions($search->index, $search->filters, true, $query, $geoFilters);
 
         $searchParams = [];
         if ('' !== $filters) {
@@ -199,27 +197,6 @@ final class AlgoliaSearcher implements SearcherInterface
         }
     }
 
-    /**
-     * @param object[] $conditions
-     *
-     * @return object[]
-     */
-    private function flattenAndConditions(array $conditions): array
-    {
-        $flattenedConditions = [];
-        foreach ($conditions as $condition) {
-            if ($condition instanceof Condition\AndCondition) {
-                \array_push($flattenedConditions, ...$this->flattenAndConditions($condition->conditions));
-
-                continue;
-            }
-
-            $flattenedConditions[] = $condition;
-        }
-
-        return $flattenedConditions;
-    }
-
     private function escapeFilterValue(string|int|float|bool $value): string
     {
         return match (true) {
@@ -242,13 +219,7 @@ final class AlgoliaSearcher implements SearcherInterface
     {
         $filters = [];
 
-        foreach ($conditions as $filter) {
-            $filter = match (true) {
-                $filter instanceof Condition\InCondition => $filter->createOrCondition(),
-                $filter instanceof Condition\NotInCondition => $filter->createAndCondition(),
-                default => $filter,
-            };
-
+        foreach ($this->flattenConditions($conditions, $conjunctive) as $filter) {
             match (true) {
                 $filter instanceof Condition\IdentifierCondition => $filters[] = $index->getIdentifierField()->name . ':' . $this->escapeFilterValue($filter->identifier),
                 $filter instanceof Condition\SearchCondition => $query = $filter->query,
@@ -280,6 +251,56 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    /**
+     * Algolia has no support for `In` and `NotIn` conditions, so we need to convert them into `Or` and `And` conditions.
+     *         Also, Algolia has no support for nested conditions, so we need to flatten them as long as possible.
+     *
+     * @param object[] $conditions
+     *
+     * @return iterable<object>
+     */
+    private function flattenConditions(array $conditions, bool $conjunctive): iterable
+    {
+        foreach ($conditions as $filter) {
+            $filter = $this->simplifyInCondition($filter);
+
+            $filter = match (true) {
+                (
+                    (
+                        $filter instanceof Condition\AndCondition
+                        || $filter instanceof Condition\OrCondition
+                    ) && \count($filter->conditions) === 1
+                ) => $this->simplifyInCondition($filter->conditions[0]),
+                default => $filter,
+            };
+
+            if ($conjunctive && $filter instanceof Condition\AndCondition) {
+                foreach ($filter->conditions as $subFilter) {
+                    yield $subFilter;
+                }
+                continue;
+            }
+
+            if (!$conjunctive && $filter instanceof Condition\OrCondition) {
+                foreach ($filter->conditions as $subFilter) {
+                    yield $subFilter;
+                }
+                continue;
+            }
+
+            yield $filter;
+        }
+    }
+
+    private function simplifyInCondition(object $filter): object
+    {
+        return match (true) {
+            $filter instanceof Condition\InCondition => $filter->createOrCondition(),
+            $filter instanceof Condition\NotInCondition => $filter->createAndCondition(),
+            default => $filter,
+        };
     }
 
     private function getFilterField(Index $index, string $name): string
