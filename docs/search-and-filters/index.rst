@@ -36,7 +36,7 @@ Conditions
 SearchCondition
 ~~~~~~~~~~~~~~~
 
-The ``SearchCondition`` is the most basic condition and can be used to search for a specific:
+The ``SearchCondition`` is the most basic condition and can be used to search for a specific string:
 
 .. code-block:: php
 
