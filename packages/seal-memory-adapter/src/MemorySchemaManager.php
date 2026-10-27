@@ -36,6 +36,17 @@ final class MemorySchemaManager implements SchemaManagerInterface
         return new SyncTask(null);
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        MemoryStorage::updateIndex($index);
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         MemoryStorage::createIndex($index);

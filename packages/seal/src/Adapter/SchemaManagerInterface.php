@@ -37,4 +37,16 @@ interface SchemaManagerInterface
      * @return (T is true ? TaskInterface<void|null> : null)
      */
     public function createIndex(Index $index, array $options = []): TaskInterface|null;
+
+    /**
+     * Updates an existing index to the given definition. Currently only adding new fields is supported,
+     * changing or removing existing fields is out of scope and the behaviour is undefined.
+     *
+     * @template T of bool
+     *
+     * @param array{return_slow_promise_result?: T} $options
+     *
+     * @return (T is true ? TaskInterface<void|null> : null)
+     */
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null;
 }

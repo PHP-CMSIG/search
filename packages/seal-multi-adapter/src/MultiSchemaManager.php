@@ -64,6 +64,27 @@ final class MultiSchemaManager implements SchemaManagerInterface
         });
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        $tasks = [];
+        foreach ($this->schemaManagers as $schemaManager) {
+            $task = $schemaManager->updateIndex($index, $options);
+
+            if ($task instanceof TaskInterface) {
+                $tasks[] = $task;
+            }
+        }
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new AsyncTask(static function () use ($tasks): void {
+            $multiTask = new MultiTask($tasks);
+            $multiTask->wait();
+        });
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         $tasks = [];

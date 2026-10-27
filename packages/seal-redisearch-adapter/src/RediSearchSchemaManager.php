@@ -59,23 +59,7 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
 
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
-        $indexFields = $this->createJsonFields($index->fields);
-
-        $properties = [];
-        foreach ($indexFields as $name => $indexField) {
-            $properties[] = $indexField['jsonPath'];
-            $properties[] = 'AS';
-            $properties[] = \str_replace('.', '__', $name);
-            $properties[] = $indexField['type'];
-
-            if (!$indexField['searchable'] && !$indexField['filterable']) {
-                $properties[] = 'NOINDEX';
-            }
-
-            if ($indexField['sortable']) {
-                $properties[] = 'SORTABLE';
-            }
-        }
+        $properties = $this->createSchemaProperties($this->createJsonFields($index->fields));
 
         $createIndex = $this->client->rawCommand(
             'FT.CREATE',
@@ -98,6 +82,69 @@ final class RediSearchSchemaManager implements SchemaManagerInterface
         }
 
         return new SyncTask(null);
+    }
+
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        // FT.INFO can not be used to read the existing fields as phpredis converts its status replies to booleans,
+        // so every field is added on its own and fields which already exist in the schema are skipped
+        foreach ($this->createJsonFields($index->fields) as $name => $indexField) {
+            try {
+                $alterIndex = $this->client->rawCommand(
+                    'FT.ALTER',
+                    $index->name,
+                    'SCHEMA',
+                    'ADD',
+                    ...$this->createSchemaProperties([$name => $indexField]),
+                );
+
+                if (false === $alterIndex) {
+                    throw $this->createRedisLastErrorException();
+                }
+            } catch (\RedisException $exception) {
+                if (!\str_contains(\strtolower($exception->getMessage()), 'duplicate field')) {
+                    throw $exception;
+                }
+            }
+        }
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
+    /**
+     * @param array<string, array{
+     *     jsonPath: string,
+     *     type: string,
+     *     searchable: bool,
+     *     sortable: bool,
+     *     filterable: bool,
+     * }> $indexFields
+     *
+     * @return string[]
+     */
+    private function createSchemaProperties(array $indexFields): array
+    {
+        $properties = [];
+        foreach ($indexFields as $name => $indexField) {
+            $properties[] = $indexField['jsonPath'];
+            $properties[] = 'AS';
+            $properties[] = \str_replace('.', '__', $name);
+            $properties[] = $indexField['type'];
+
+            if (!$indexField['searchable'] && !$indexField['filterable']) {
+                $properties[] = 'NOINDEX';
+            }
+
+            if ($indexField['sortable']) {
+                $properties[] = 'SORTABLE';
+            }
+        }
+
+        return $properties;
     }
 
     /**

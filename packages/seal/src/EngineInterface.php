@@ -71,6 +71,15 @@ interface EngineInterface
      */
     public function dropIndex(string $index, array $options = []): TaskInterface|null;
 
+    /**
+     * Updates an existing index to the current schema definition, currently only adding new fields is supported.
+     *
+     * @param array{return_slow_promise_result?: true} $options
+     *
+     * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
+     */
+    public function updateIndex(string $index, array $options = []): TaskInterface|null;
+
     public function existIndex(string $index): bool;
 
     /**
@@ -86,6 +95,15 @@ interface EngineInterface
      * @return ($options is non-empty-array ? TaskInterface<null> : null)
      */
     public function dropSchema(array $options = []): TaskInterface|null;
+
+    /**
+     * Updates all existing indexes to the current schema definition, currently only adding new fields is supported.
+     *
+     * @param array{return_slow_promise_result?: true} $options
+     *
+     * @return ($options is non-empty-array ? TaskInterface<null> : null)
+     */
+    public function updateSchema(array $options = []): TaskInterface|null;
 
     /**
      * @experimental This method is experimental and may change in future versions, we are not sure if it stays here or the syntax change completely.

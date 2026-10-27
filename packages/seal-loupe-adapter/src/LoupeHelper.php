@@ -108,6 +108,21 @@ final class LoupeHelper
         \file_put_contents($this->getConfigurationFile($index), \serialize($configuration));
     }
 
+    public function updateIndex(Index $index): void
+    {
+        $configuration = $this->createConfiguration($index);
+
+        if ('' === $this->directory) {
+            $this->inMemoryConfigurations[$index->name] = $configuration;
+        } else {
+            \file_put_contents($this->getConfigurationFile($index), \serialize($configuration));
+        }
+
+        // the new configuration is picked up by the next created Loupe instance
+        unset($this->loupe[$index->name]);
+        $this->loupe[$index->name] = $this->createLoupe($index, $configuration);
+    }
+
     public function reset(): void
     {
         $this->loupe = [];

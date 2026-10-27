@@ -51,6 +51,24 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
         return new SyncTask(null); // TODO wait for index drop
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        $properties = $this->createPropertiesMapping($index->fields);
+
+        $this->client->indices()->putMapping([
+            'index' => $index->name,
+            'body' => [
+                'properties' => $properties,
+            ],
+        ]);
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         $properties = $this->createPropertiesMapping($index->fields);

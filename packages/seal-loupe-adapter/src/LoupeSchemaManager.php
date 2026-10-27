@@ -41,6 +41,17 @@ final class LoupeSchemaManager implements SchemaManagerInterface
         return new SyncTask(null);
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        $this->loupeHelper->updateIndex($index);
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         $this->loupeHelper->createIndex($index);

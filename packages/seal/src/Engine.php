@@ -106,6 +106,11 @@ final class Engine implements EngineInterface
         return $this->adapter->getSchemaManager()->dropIndex($this->schema->indexes[$index], $options);
     }
 
+    public function updateIndex(string $index, array $options = []): TaskInterface|null // @phpstan-ignore-line return.unusedType
+    {
+        return $this->adapter->getSchemaManager()->updateIndex($this->schema->indexes[$index], $options);
+    }
+
     public function existIndex(string $index): bool
     {
         return $this->adapter->getSchemaManager()->existIndex($this->schema->indexes[$index]);
@@ -130,6 +135,20 @@ final class Engine implements EngineInterface
         $tasks = [];
         foreach ($this->schema->indexes as $index) {
             $tasks[] = $this->adapter->getSchemaManager()->dropIndex($index, $options);
+        }
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new MultiTask($tasks);
+    }
+
+    public function updateSchema(array $options = []): TaskInterface|null
+    {
+        $tasks = [];
+        foreach ($this->schema->indexes as $index) {
+            $tasks[] = $this->adapter->getSchemaManager()->updateIndex($index, $options);
         }
 
         if (!($options['return_slow_promise_result'] ?? false)) {

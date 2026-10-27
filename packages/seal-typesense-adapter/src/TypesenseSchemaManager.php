@@ -67,6 +67,30 @@ final class TypesenseSchemaManager implements SchemaManagerInterface
         return new SyncTask(null);
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        /** @var array{fields: array<int, array{name: string}>} $collection */
+        $collection = $this->client->collections[$index->name]->retrieve();
+        $existingFields = [$index->getIdentifierField()->name, ...\array_column($collection['fields'], 'name')]; // the identifier is implicit and can not be altered
+
+        $newFields = \array_values(\array_filter(
+            $this->createFields($index->fields),
+            static fn (array $field): bool => !\in_array($field['name'], $existingFields, true),
+        ));
+
+        if ([] !== $newFields) {
+            $this->client->collections[$index->name]->update([
+                'fields' => $newFields,
+            ]);
+        }
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
     /**
      * @param Field\AbstractField[] $indexFields
      *

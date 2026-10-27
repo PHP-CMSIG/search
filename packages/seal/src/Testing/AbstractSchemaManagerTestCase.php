@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Testing;
 
 use CmsIg\Seal\Adapter\SchemaManagerInterface;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -43,6 +45,27 @@ abstract class AbstractSchemaManagerTestCase extends TestCase
         $task->wait();
 
         $this->assertFalse(static::$schemaManager->existIndex($index));
+    }
+
+    public function testUpdateIndexAddField(): void
+    {
+        $simpleIndex = $this->schema->indexes[TestingHelper::INDEX_SIMPLE];
+        $updatedIndex = new Index($simpleIndex->name, [
+            ...$simpleIndex->fields,
+            'description' => new Field\TextField('description'),
+        ]);
+
+        static::$schemaManager->createIndex($simpleIndex, ['return_slow_promise_result' => true])->wait();
+
+        $this->assertTrue(static::$schemaManager->existIndex($simpleIndex));
+
+        static::$schemaManager->updateIndex($updatedIndex, ['return_slow_promise_result' => true])->wait();
+
+        $this->assertTrue(static::$schemaManager->existIndex($updatedIndex));
+
+        static::$schemaManager->dropIndex($updatedIndex, ['return_slow_promise_result' => true])->wait();
+
+        $this->assertFalse(static::$schemaManager->existIndex($updatedIndex));
     }
 
     public function testComplexSchema(): void

@@ -93,6 +93,18 @@ final class MemoryStorage
         self::$documents[$index->name] = [];
     }
 
+    public static function updateIndex(Index $index): void
+    {
+        if (!\array_key_exists($index->name, self::$indexes)) {
+            self::createIndex($index);
+
+            return;
+        }
+
+        // keep the documents, only the index definition changes
+        self::$indexes[$index->name] = $index;
+    }
+
     public static function existIndex(Index $index): bool
     {
         return \array_key_exists($index->name, self::$indexes);
