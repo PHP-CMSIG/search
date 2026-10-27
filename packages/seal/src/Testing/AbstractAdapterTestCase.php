@@ -132,6 +132,15 @@ abstract class AbstractAdapterTestCase extends TestCase
             $this->assertCount(1, $documents);
             $this->assertSame('3', $documents[0]['id']);
         } finally {
+            // some adapters keep the documents after dropping the index, so they are deleted explicitly
+            foreach (['1', '2', '3'] as $identifier) {
+                try {
+                    $indexer->delete($updatedIndex, $identifier, ['return_slow_promise_result' => true])->wait();
+                } catch (\Exception) {
+                    // document was not saved when the test failed before
+                }
+            }
+
             // dropSchema in tearDown stops at the first not existing index, so this index is dropped here
             $schemaManager->dropIndex($updatedIndex, ['return_slow_promise_result' => true])->wait();
         }
@@ -142,21 +151,32 @@ abstract class AbstractAdapterTestCase extends TestCase
         $engine = self::getEngine();
         $engine->createSchema(['return_slow_promise_result' => true])->wait();
 
-        $engine->saveDocument(TestingHelper::INDEX_SIMPLE, ['id' => '1', 'title' => 'Simple'], ['return_slow_promise_result' => true])->wait();
-        foreach (TestingHelper::createComplexFixtures() as $document) {
-            self::$taskHelper->tasks[] = $engine->saveDocument(TestingHelper::INDEX_COMPLEX, $document, ['return_slow_promise_result' => true]);
+        $complexDocuments = TestingHelper::createComplexFixtures();
+
+        try {
+            $engine->saveDocument(TestingHelper::INDEX_SIMPLE, ['id' => '1', 'title' => 'Simple'], ['return_slow_promise_result' => true])->wait();
+            foreach ($complexDocuments as $document) {
+                self::$taskHelper->tasks[] = $engine->saveDocument(TestingHelper::INDEX_COMPLEX, $document, ['return_slow_promise_result' => true]);
+            }
+            self::$taskHelper->waitForAll();
+
+            $complexCount = $engine->countDocuments(TestingHelper::INDEX_COMPLEX);
+            $this->assertSame(\count($complexDocuments), $complexCount);
+
+            $engine->updateIndex(TestingHelper::INDEX_SIMPLE, ['return_slow_promise_result' => true])->wait();
+            $this->assertTrue($engine->existIndex(TestingHelper::INDEX_SIMPLE));
+            $this->assertSame(1, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
+
+            $engine->updateSchema(['return_slow_promise_result' => true])->wait();
+            $this->assertSame(1, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
+            $this->assertSame($complexCount, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
+        } finally {
+            // some adapters keep the documents after dropping the index, so they are deleted explicitly
+            $engine->deleteDocument(TestingHelper::INDEX_SIMPLE, '1', ['return_slow_promise_result' => true])->wait();
+            foreach ($complexDocuments as $document) {
+                $engine->deleteDocument(TestingHelper::INDEX_COMPLEX, $document['uuid'], ['return_slow_promise_result' => true])->wait();
+            }
         }
-        self::$taskHelper->waitForAll();
-
-        $complexCount = $engine->countDocuments(TestingHelper::INDEX_COMPLEX);
-
-        $engine->updateIndex(TestingHelper::INDEX_SIMPLE, ['return_slow_promise_result' => true])->wait();
-        $this->assertTrue($engine->existIndex(TestingHelper::INDEX_SIMPLE));
-        $this->assertSame(1, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
-
-        $engine->updateSchema(['return_slow_promise_result' => true])->wait();
-        $this->assertSame(1, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
-        $this->assertSame($complexCount, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
     }
 
     public function testSchema(): void
