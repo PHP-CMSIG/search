@@ -90,7 +90,7 @@ final class MeilisearchSearcher implements SearcherInterface
             $searchParams['offset'] = $search->offset;
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $searchParams['limit'] = $search->limit;
         }
 

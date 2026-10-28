@@ -29,7 +29,7 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
 
     public function existIndex(Index $index): bool
     {
-        return $this->client->indexExists($index->name); // @phpstan-ignore-line return.type
+        return $this->client->indexExists($index->name);
     }
 
     public function dropIndex(Index $index, array $options = []): TaskInterface|null

@@ -46,9 +46,7 @@ final class LoupeHelper
 
     public function getLoupe(Index $index): Loupe
     {
-        if (!isset($this->loupe[$index->name])) {
-            $this->loupe[$index->name] = $this->createLoupe($index);
-        }
+        $this->loupe[$index->name] ??= $this->createLoupe($index);
 
         return $this->loupe[$index->name];
     }

@@ -92,7 +92,7 @@ final class LoupeSearcher implements SearcherInterface
             $searchParameters = $searchParameters->withOffset($search->offset);
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $searchParameters = $searchParameters->withLimit($search->limit);
         }
 

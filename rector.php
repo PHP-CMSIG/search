@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\Concat\DirnameDirConcatStringToDirectStringPathRector;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
@@ -23,5 +24,9 @@ return static function (RectorConfig $rectorConfig, string $directory): void {
     $rectorConfig->sets([
         SetList::CODE_QUALITY,
         LevelSetList::UP_TO_PHP_81,
+    ]);
+
+    $rectorConfig->skip([
+        DirnameDirConcatStringToDirectStringPathRector::class,
     ]);
 };

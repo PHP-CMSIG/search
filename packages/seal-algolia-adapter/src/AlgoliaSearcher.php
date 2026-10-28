@@ -96,9 +96,6 @@ final class AlgoliaSearcher implements SearcherInterface
 
         $searchParams = [];
         if ('' !== $filters) {
-            // Algolia does not like useless brackets around the topmost group so we remove them if present
-            $filters = \preg_replace('#(^\(|\)$)#', '', $filters);
-
             $searchParams = ['filters' => $filters];
         }
 
@@ -110,7 +107,7 @@ final class AlgoliaSearcher implements SearcherInterface
             $searchParams['offset'] = $search->offset;
         }
 
-        if ($search->limit) {
+        if (null !== $search->limit) {
             $searchParams['length'] = $search->limit;
             $searchParams['offset'] ??= 0; // length would be ignored without offset see: https://www.algolia.com/doc/api-reference/api-parameters/length/
         }
@@ -223,10 +220,13 @@ final class AlgoliaSearcher implements SearcherInterface
         $filters = [];
 
         foreach ($conditions as $filter) {
-            $filter = match (true) {
-                $filter instanceof Condition\InCondition => $filter->createOrCondition(),
-                $filter instanceof Condition\NotInCondition => $filter->createAndCondition(),
-                default => $filter,
+            $filter = $this->simplifyInConditions($filter);
+            $filter = $this->simplifyAndOrCondition($filter);
+
+            $requiresBrackets = match (true) {
+                $filter instanceof Condition\AndCondition => !$conjunctive,
+                $filter instanceof Condition\OrCondition => $conjunctive && 1 !== \count($conditions),
+                default => false,
             };
 
             match (true) {
@@ -249,8 +249,8 @@ final class AlgoliaSearcher implements SearcherInterface
                 $filter instanceof Condition\GeoBoundingBoxCondition => $geoFilters = [
                     'insideBoundingBox' => [[$filter->northLatitude, $filter->westLongitude, $filter->southLatitude, $filter->eastLongitude]],
                 ],
-                $filter instanceof Condition\AndCondition => $filters[] = '(' . $this->recursiveResolveFilterConditions($index, $filter->conditions, true, $query, $geoFilters) . ')',
-                $filter instanceof Condition\OrCondition => $filters[] = '(' . $this->recursiveResolveFilterConditions($index, $filter->conditions, false, $query, $geoFilters) . ')',
+                $filter instanceof Condition\AndCondition => $filters[] = ($requiresBrackets ? '(' : '') . $this->recursiveResolveFilterConditions($index, $filter->conditions, true, $query, $geoFilters) . ($requiresBrackets ? ')' : ''),
+                $filter instanceof Condition\OrCondition => $filters[] = ($requiresBrackets ? '(' : '') . $this->recursiveResolveFilterConditions($index, $filter->conditions, false, $query, $geoFilters) . ($requiresBrackets ? ')' : ''),
                 default => throw new \LogicException($filter::class . ' filter not implemented.'),
             };
         }
@@ -260,6 +260,28 @@ final class AlgoliaSearcher implements SearcherInterface
         }
 
         return \implode($conjunctive ? ' AND ' : ' OR ', $filters);
+    }
+
+    private function simplifyInConditions(object $filter): object
+    {
+        return match (true) {
+            $filter instanceof Condition\InCondition => $filter->createOrCondition(),
+            $filter instanceof Condition\NotInCondition => $filter->createAndCondition(),
+            default => $filter,
+        };
+    }
+
+    private function simplifyAndOrCondition(object $filter): object
+    {
+        return match (true) {
+            (
+                (
+                    $filter instanceof Condition\AndCondition
+                    || $filter instanceof Condition\OrCondition
+                ) && 1 === \count($filter->conditions)
+            ) => $this->simplifyAndOrCondition($this->simplifyInConditions($filter->conditions[0])),
+            default => $filter,
+        };
     }
 
     private function getFilterField(Index $index, string $name): string
