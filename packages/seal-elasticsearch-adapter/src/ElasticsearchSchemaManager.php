@@ -51,6 +51,37 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
         return new SyncTask(null); // TODO wait for index drop
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        /** @var Elasticsearch $response */
+        $response = $this->client->indices()->getMapping([
+            'index' => $index->name,
+        ]);
+
+        /** @var array<string, array{mappings?: array{properties?: array<string, mixed>}}> $mapping */
+        $mapping = $response->asArray();
+
+        $properties = $this->filterNewProperties(
+            $this->createPropertiesMapping($index->fields),
+            \array_values($mapping)[0]['mappings']['properties'] ?? [],
+        );
+
+        if ([] !== $properties) {
+            $this->client->indices()->putMapping([
+                'index' => $index->name,
+                'body' => [
+                    'properties' => $properties,
+                ],
+            ]);
+        }
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         $properties = $this->createPropertiesMapping($index->fields);
@@ -70,6 +101,45 @@ final class ElasticsearchSchemaManager implements SchemaManagerInterface
         }
 
         return new SyncTask(null); // TODO wait for index create
+    }
+
+    /**
+     * Only properties missing in the existing mapping are returned, as the mapping of existing fields can not be changed.
+     *
+     * @param array<string, mixed> $properties
+     * @param array<string, mixed> $existingProperties
+     *
+     * @return array<string, mixed>
+     */
+    private function filterNewProperties(array $properties, array $existingProperties): array
+    {
+        $newProperties = [];
+
+        foreach ($properties as $name => $property) {
+            /** @var array<string, mixed> $property */
+            if (!isset($existingProperties[$name])) {
+                $newProperties[$name] = $property;
+
+                continue;
+            }
+
+            if (isset($property['properties'])) {
+                /** @var array<string, mixed> $existingProperty */
+                $existingProperty = $existingProperties[$name];
+                /** @var array<string, mixed> $nestedProperties */
+                $nestedProperties = $property['properties'];
+                /** @var array<string, mixed> $existingNestedProperties */
+                $existingNestedProperties = $existingProperty['properties'] ?? [];
+
+                $newNestedProperties = $this->filterNewProperties($nestedProperties, $existingNestedProperties);
+
+                if ([] !== $newNestedProperties) {
+                    $newProperties[$name] = ['type' => 'object', 'properties' => $newNestedProperties];
+                }
+            }
+        }
+
+        return $newProperties;
     }
 
     /**

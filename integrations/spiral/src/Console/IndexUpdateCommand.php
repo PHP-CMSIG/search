@@ -1,0 +1,71 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the CMS-IG SEAL project.
+ *
+ * (c) Alexander Schranz <alexander@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace CmsIg\Seal\Integration\Spiral\Console;
+
+use CmsIg\Seal\EngineRegistry;
+use Spiral\Boot\Environment\AppEnvironment;
+use Spiral\Console\Attribute\AsCommand;
+use Spiral\Console\Attribute\Option;
+use Spiral\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+
+/**
+ * @experimental
+ */
+#[AsCommand(
+    name: 'cmsig:seal:index-update',
+    description: 'Update configured search indexes.',
+)]
+final class IndexUpdateCommand extends Command
+{
+    #[Option(name: 'engine', description: 'The name of the engine', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $engineName = null; // @phpstan-ignore-line property.unusedType
+
+    #[Option(name: 'index', description: 'The name of the index', mode: InputOption::VALUE_REQUIRED)]
+    private string|null $indexName = null; // @phpstan-ignore-line property.unusedType
+
+    #[Option(shortcut: 'f', description: 'Force to update the indexes')]
+    private bool $force = false;
+
+    public function __invoke(EngineRegistry $engineRegistry, AppEnvironment $env): int
+    {
+        if ($env->isProduction() && !$this->force) {
+            $this->error('You need to use the --force option to update the search indexes in production mode.');
+
+            return self::FAILURE;
+        }
+
+        foreach ($engineRegistry->getEngines() as $name => $engine) {
+            if ($this->engineName && $this->engineName !== $name) {
+                continue;
+            }
+
+            if ($this->indexName) {
+                $this->line('Updating search index "' . $this->indexName . '" of "' . $name . '" ...');
+                $task = $engine->updateIndex($this->indexName, ['return_slow_promise_result' => true]);
+                $task->wait();
+
+                continue;
+            }
+
+            $this->line('Updating search indexes of "' . $name . '" ...');
+            $task = $engine->updateSchema(['return_slow_promise_result' => true]);
+            $task->wait();
+        }
+
+        $this->info('Search indexes updated.');
+
+        return self::SUCCESS;
+    }
+}

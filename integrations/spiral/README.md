@@ -187,6 +187,12 @@ The package provides the following commands:
 php app.php cmsig:seal:index-create --help
 ```
 
+**Update configured indexes** (adds new fields, keeps documents)
+
+```bash
+php app.php cmsig:seal:index-update --help
+```
+
 **Drop configured indexes**
 
 ```bash

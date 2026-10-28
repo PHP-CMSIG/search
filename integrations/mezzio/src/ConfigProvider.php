@@ -65,6 +65,7 @@ final class ConfigProvider
             'commands' => [
                 'cmsig:seal:index-create' => Command\IndexCreateCommand::class,
                 'cmsig:seal:index-drop' => Command\IndexDropCommand::class,
+                'cmsig:seal:index-update' => Command\IndexUpdateCommand::class,
                 'cmsig:seal:reindex' => Command\ReindexCommand::class,
             ],
         ];
@@ -92,6 +93,7 @@ final class ConfigProvider
                 SealContainer::class => SealContainerFactory::class,
                 Command\IndexCreateCommand::class => CommandAbstractFactory::class,
                 Command\IndexDropCommand::class => CommandAbstractFactory::class,
+                Command\IndexUpdateCommand::class => CommandAbstractFactory::class,
                 Command\ReindexCommand::class => CommandAbstractFactory::class,
                 ...$adapterFactories,
             ],

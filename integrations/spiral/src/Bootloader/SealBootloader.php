@@ -33,6 +33,7 @@ use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Spiral\Config\SealConfig;
 use CmsIg\Seal\Integration\Spiral\Console\IndexCreateCommand;
 use CmsIg\Seal\Integration\Spiral\Console\IndexDropCommand;
+use CmsIg\Seal\Integration\Spiral\Console\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Spiral\Console\ReindexCommand;
 use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
@@ -78,6 +79,7 @@ final class SealBootloader extends Bootloader
     ): void {
         $console->addCommand(IndexCreateCommand::class);
         $console->addCommand(IndexDropCommand::class);
+        $console->addCommand(IndexUpdateCommand::class);
         $console->addCommand(ReindexCommand::class);
 
         $this->config->setDefaults(

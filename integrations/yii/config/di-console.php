@@ -14,6 +14,7 @@ declare(strict_types=1);
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Yii\Command\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
 use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
@@ -37,6 +38,13 @@ $diConfig[IndexDropCommand::class] = static function (ContainerInterface $contai
     $engineRegistry = $container->get(EngineRegistry::class);
 
     return new IndexDropCommand($engineRegistry);
+};
+
+$diConfig[IndexUpdateCommand::class] = static function (ContainerInterface $container) {
+    /** @var EngineRegistry $engineRegistry */
+    $engineRegistry = $container->get(EngineRegistry::class);
+
+    return new IndexUpdateCommand($engineRegistry);
 };
 
 $diConfig[ReindexCommand::class] = static function (ContainerInterface $container) use ($reindexProviderNames) {

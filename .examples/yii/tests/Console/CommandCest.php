@@ -15,6 +15,13 @@ final class CommandCest
         $I->seeInShellOutput('Search indexes created.');
     }
 
+    public function testUpdate(ConsoleTester $I): void
+    {
+        $command = \dirname(__DIR__, 2) . '/yii';
+        $I->runShellCommand($command . ' cmsig:seal:index-update --force');
+        $I->seeInShellOutput('Search indexes updated.');
+    }
+
     public function testReindex(ConsoleTester $I): void
     {
         $command = \dirname(__DIR__, 2) . '/yii';

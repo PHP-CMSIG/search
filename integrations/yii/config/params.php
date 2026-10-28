@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use CmsIg\Seal\Integration\Yii\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Yii\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Yii\Command\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Yii\Command\ReindexCommand;
 
 return [
@@ -36,6 +37,7 @@ return [
         'commands' => [
             'cmsig:seal:index-create' => IndexCreateCommand::class,
             'cmsig:seal:index-drop' => IndexDropCommand::class,
+            'cmsig:seal:index-update' => IndexUpdateCommand::class,
             'cmsig:seal:reindex' => ReindexCommand::class,
         ],
     ],

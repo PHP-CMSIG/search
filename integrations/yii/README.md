@@ -193,6 +193,12 @@ The package provides the following commands:
 ./yii cmsig:seal:index-create
 ```
 
+**Update configured indexes** (adds new fields, keeps documents)
+
+```bash
+./yii cmsig:seal:index-update
+```
+
 **Drop configured indexes**
 
 ```bash

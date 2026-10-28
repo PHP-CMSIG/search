@@ -87,8 +87,41 @@ final class SolrSchemaManager implements SchemaManagerInterface
 
         $this->client->collections($collectionQuery);
 
-        $indexFields = $this->createIndexFields($index->fields);
+        $this->addIndexFields($index, $this->createIndexFields($index->fields));
 
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        $query = $this->client->createApi([
+            'version' => Request::API_V1,
+            'handler' => $index->name . '/schema/fields',
+            'method' => Request::METHOD_GET,
+        ]);
+
+        /** @var array{fields: array<array{name: string}>} $response */
+        $response = \json_decode($this->client->execute($query)->getResponse()->getBody(), true, flags: \JSON_THROW_ON_ERROR);
+        $existingFields = \array_column($response['fields'], 'name');
+
+        $this->addIndexFields($index, \array_diff_key($this->createIndexFields($index->fields), \array_flip($existingFields)));
+
+        if (!($options['return_slow_promise_result'] ?? false)) {
+            return null;
+        }
+
+        return new SyncTask(null);
+    }
+
+    /**
+     * @param array<string, array<string, mixed>> $indexFields
+     */
+    private function addIndexFields(Index $index, array $indexFields): void
+    {
         foreach ($indexFields as $indexField) {
             $query = $this->client->createApi([
                 'version' => Request::API_V1,
@@ -101,12 +134,6 @@ final class SolrSchemaManager implements SchemaManagerInterface
 
             $this->client->execute($query);
         }
-
-        if (!($options['return_slow_promise_result'] ?? false)) {
-            return null;
-        }
-
-        return new SyncTask(null);
     }
 
     /**

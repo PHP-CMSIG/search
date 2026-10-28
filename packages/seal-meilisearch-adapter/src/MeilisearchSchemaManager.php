@@ -66,6 +66,11 @@ final class MeilisearchSchemaManager implements SchemaManagerInterface
             ],
         );
 
+        return $this->updateIndex($index, $options);
+    }
+
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
         $filterableFields = \array_unique(\array_merge(
             $index->filterableFields,
             $index->distinctFields, // to use distinct the field also need to be filterable

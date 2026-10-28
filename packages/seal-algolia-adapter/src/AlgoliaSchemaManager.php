@@ -78,6 +78,12 @@ final class AlgoliaSchemaManager implements SchemaManagerInterface
         });
     }
 
+    public function updateIndex(Index $index, array $options = []): TaskInterface|null
+    {
+        // setSettings overwrites the settings of the existing index and its replicas, documents are kept
+        return $this->createIndex($index, $options);
+    }
+
     public function createIndex(Index $index, array $options = []): TaskInterface|null
     {
         if (\count($index->distinctFields) > 1) {
