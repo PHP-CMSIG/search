@@ -709,10 +709,10 @@ dropping the ``Index`` and without losing its documents:
         .. code-block:: bash
 
             # update all indexes
-            php artisan cmsig:seal:index-update
+            php artisan cmsig:seal:index-update --force
 
             # update specific index
-            php artisan cmsig:seal:index-update --index=blog
+            php artisan cmsig:seal:index-update --index=blog --force
 
     .. group-tab:: Symfony
 
@@ -721,10 +721,10 @@ dropping the ``Index`` and without losing its documents:
         .. code-block:: bash
 
             # update all indexes
-            bin/console cmsig:seal:index-update
+            bin/console cmsig:seal:index-update --force
 
             # update specific index
-            bin/console cmsig:seal:index-update --index=blog
+            bin/console cmsig:seal:index-update --index=blog --force
 
     .. group-tab:: Spiral
 
@@ -733,10 +733,10 @@ dropping the ``Index`` and without losing its documents:
         .. code-block:: bash
 
             # update all indexes
-            php app.php cmsig:seal:index-update
+            php app.php cmsig:seal:index-update --force
 
             # update specific index
-            php app.php cmsig:seal:index-update --index=blog
+            php app.php cmsig:seal:index-update --index=blog --force
 
     .. group-tab:: Mezzio
 
@@ -745,10 +745,10 @@ dropping the ``Index`` and without losing its documents:
         .. code-block:: bash
 
             # update all indexes
-            vendor/bin/laminas cmsig:seal:index-update
+            vendor/bin/laminas cmsig:seal:index-update --force
 
             # update specific index
-            vendor/bin/laminas cmsig:seal:index-update --index=blog
+            vendor/bin/laminas cmsig:seal:index-update --index=blog --force
 
     .. group-tab:: Yii
 
@@ -757,12 +757,14 @@ dropping the ``Index`` and without losing its documents:
         .. code-block:: bash
 
             # update all indexes
-            ./yii cmsig:seal:index-update
+            ./yii cmsig:seal:index-update --force
 
             # update specific index
-            ./yii cmsig:seal:index-update --index=blog
+            ./yii cmsig:seal:index-update --index=blog --force
 
 .. note::
+
+    The commands of the integrations need the ``--force`` option, like the drop commands (in Spiral only in production).
 
     Only the adding of new ``Fields`` is supported. Removed ``Fields`` are not removed from the search engine
     and changed ``Field`` settings (``searchable``, ``filterable``, ``sortable``, ...) or types are not applied

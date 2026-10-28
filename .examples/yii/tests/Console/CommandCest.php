@@ -18,7 +18,7 @@ final class CommandCest
     public function testUpdate(ConsoleTester $I): void
     {
         $command = \dirname(__DIR__, 2) . '/yii';
-        $I->runShellCommand($command . ' cmsig:seal:index-update');
+        $I->runShellCommand($command . ' cmsig:seal:index-update --force');
         $I->seeInShellOutput('Search indexes updated.');
     }
 

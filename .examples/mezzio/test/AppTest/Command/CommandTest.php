@@ -32,7 +32,9 @@ final class CommandTest extends FunctionalTestCase
         /** @var IndexUpdateCommand $command */
         $command = $this->container->get(IndexUpdateCommand::class);
 
-        $input = new ArrayInput([]);
+        $input = new ArrayInput([
+            '--force' => true,
+        ]);
         $output = new BufferedOutput();
 
         $this->assertSame(0, $command->run($input, $output));

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Integration\Spiral\Console;
 
 use CmsIg\Seal\EngineRegistry;
+use Spiral\Boot\Environment\AppEnvironment;
 use Spiral\Console\Attribute\AsCommand;
 use Spiral\Console\Attribute\Option;
 use Spiral\Console\Command;
@@ -34,8 +35,17 @@ final class IndexUpdateCommand extends Command
     #[Option(name: 'index', description: 'The name of the index', mode: InputOption::VALUE_REQUIRED)]
     private string|null $indexName = null; // @phpstan-ignore-line property.unusedType
 
-    public function __invoke(EngineRegistry $engineRegistry): int
+    #[Option(shortcut: 'f', description: 'Force to update the indexes')]
+    private bool $force = false;
+
+    public function __invoke(EngineRegistry $engineRegistry, AppEnvironment $env): int
     {
+        if ($env->isProduction() && !$this->force) {
+            $this->error('You need to use the --force option to update the search indexes in production mode.');
+
+            return self::FAILURE;
+        }
+
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($this->engineName && $this->engineName !== $name) {
                 continue;

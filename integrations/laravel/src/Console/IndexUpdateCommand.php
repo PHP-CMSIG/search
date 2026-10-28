@@ -26,7 +26,7 @@ final class IndexUpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'cmsig:seal:index-update {--engine= : The name of the engine} {--index= : The name of the index}';
+    protected $signature = 'cmsig:seal:index-update {--engine= : The name of the engine} {--index= : The name of the index} {--force : Force to update the indexes}';
 
     /**
      * The console command description.
@@ -44,6 +44,14 @@ final class IndexUpdateCommand extends Command
         $engineName = $this->option('engine');
         /** @var string|null $indexName */
         $indexName = $this->option('index');
+        /** @var bool $force */
+        $force = $this->option('force') ?: false;
+
+        if (!$force) {
+            $this->error('You need to use the --force option to update the search indexes.');
+
+            return 1;
+        }
 
         foreach ($engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {

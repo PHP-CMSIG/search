@@ -17,7 +17,7 @@ final class CommandTest extends TestCase
     public function testUpdate(): void
     {
         $this->assertCommandRegistered('cmsig:seal:index-update');
-        $output = $this->runCommand('cmsig:seal:index-update');
+        $output = $this->runCommand('cmsig:seal:index-update', ['--force' => true]);
 
         $this->assertStringContainsString('Search indexes updated.', $output);
     }

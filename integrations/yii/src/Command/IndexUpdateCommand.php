@@ -35,6 +35,7 @@ final class IndexUpdateCommand extends Command
         $this->setDescription('Update configured search indexes.');
         $this->addOption('engine', null, InputOption::VALUE_REQUIRED, 'The name of the engine to update the schema for.');
         $this->addOption('index', null, InputOption::VALUE_REQUIRED, 'The name of the index to update the schema for.');
+        $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Without force nothing will happen in this command.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -44,6 +45,13 @@ final class IndexUpdateCommand extends Command
         $engineName = $input->getOption('engine');
         /** @var string|null $indexName */
         $indexName = $input->getOption('index');
+        $force = $input->getOption('force');
+
+        if (!$force) {
+            $ui->error('You need to use the --force option to update the search indexes.');
+
+            return Command::FAILURE;
+        }
 
         foreach ($this->engineRegistry->getEngines() as $name => $engine) {
             if ($engineName && $engineName !== $name) {

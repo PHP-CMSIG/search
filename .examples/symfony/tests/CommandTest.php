@@ -29,7 +29,9 @@ final class CommandTest extends KernelTestCase
 
         $command = $application->find('cmsig:seal:index-update');
         $commandTester = new CommandTester($command);
-        $commandTester->execute([]);
+        $commandTester->execute([
+            '--force' => true,
+        ]);
 
         $commandTester->assertCommandIsSuccessful();
     }

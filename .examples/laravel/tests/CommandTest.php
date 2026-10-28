@@ -8,7 +8,7 @@ it('test create', function () {
 });
 
 it('test update', function () {
-    $this->artisan('cmsig:seal:index-update')
+    $this->artisan('cmsig:seal:index-update --force')
         ->assertExitCode(0);
 });
 
