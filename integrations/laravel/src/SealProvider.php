@@ -32,6 +32,7 @@ use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Laravel\Console\IndexCreateCommand;
 use CmsIg\Seal\Integration\Laravel\Console\IndexDropCommand;
+use CmsIg\Seal\Integration\Laravel\Console\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Laravel\Console\ReindexCommand;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
@@ -64,6 +65,7 @@ final class SealProvider extends ServiceProvider
         $this->commands([
             IndexCreateCommand::class,
             IndexDropCommand::class,
+            IndexUpdateCommand::class,
             ReindexCommand::class,
         ]);
 

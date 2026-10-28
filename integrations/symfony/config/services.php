@@ -28,6 +28,7 @@ use CmsIg\Seal\Adapter\Typesense\TypesenseAdapterFactory;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Integration\Symfony\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Symfony\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Symfony\Command\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Symfony\Command\ReindexCommand;
 
 /*
@@ -46,6 +47,13 @@ return static function (ContainerConfigurator $container) {
 
     $container->services()
         ->set('cmsig_seal.index_drop_command', IndexDropCommand::class)
+        ->args([
+            service('cmsig_seal.engine_registry'),
+        ])
+        ->tag('console.command');
+
+    $container->services()
+        ->set('cmsig_seal.index_update_command', IndexUpdateCommand::class)
         ->args([
             service('cmsig_seal.engine_registry'),
         ])

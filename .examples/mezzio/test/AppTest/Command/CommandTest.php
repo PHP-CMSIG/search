@@ -7,6 +7,7 @@ namespace AppTest\Command;
 use AppTest\FunctionalTestCase;
 use CmsIg\Seal\Integration\Mezzio\Command\IndexCreateCommand;
 use CmsIg\Seal\Integration\Mezzio\Command\IndexDropCommand;
+use CmsIg\Seal\Integration\Mezzio\Command\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Mezzio\Command\ReindexCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -24,6 +25,19 @@ final class CommandTest extends FunctionalTestCase
         $this->assertSame(0, $indexCreateCommand->run($input, $output));
 
         $this->assertStringContainsString('Search indexes created.', $output->fetch());
+    }
+
+    public function testUpdate(): void
+    {
+        /** @var IndexUpdateCommand $command */
+        $command = $this->container->get(IndexUpdateCommand::class);
+
+        $input = new ArrayInput([]);
+        $output = new BufferedOutput();
+
+        $this->assertSame(0, $command->run($input, $output));
+
+        $this->assertStringContainsString('Search indexes updated.', $output->fetch());
     }
 
     public function testReindex(): void

@@ -205,6 +205,12 @@ The package provides the following commands:
 vendor/bin/laminas cmsig:seal:index-create --help
 ```
 
+**Update configured indexes** (adds new fields, keeps documents)
+
+```bash
+vendor/bin/laminas cmsig:seal:index-update --help
+```
+
 **Drop configured indexes**
 
 ```bash

@@ -172,6 +172,12 @@ The bundle provides the following commands:
 bin/console cmsig:seal:index-create --help
 ```
 
+**Update configured indexes** (adds new fields, keeps documents)
+
+```bash
+bin/console cmsig:seal:index-update --help
+```
+
 **Drop configured indexes**
 
 ```bash

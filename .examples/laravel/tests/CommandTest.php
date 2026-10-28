@@ -7,6 +7,11 @@ it('test create', function () {
         ->assertExitCode(0);
 });
 
+it('test update', function () {
+    $this->artisan('cmsig:seal:index-update')
+        ->assertExitCode(0);
+});
+
 it('test reindex', function () {
     $this->artisan('cmsig:seal:reindex --drop')
         ->assertExitCode(0)

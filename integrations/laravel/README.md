@@ -236,6 +236,12 @@ The package provides the following commands:
 php artisan cmsig:seal:index-create --help
 ```
 
+**Update configured indexes** (adds new fields, keeps documents)
+
+```bash
+php artisan cmsig:seal:index-update --help
+```
+
 **Drop configured indexes**
 
 ```bash

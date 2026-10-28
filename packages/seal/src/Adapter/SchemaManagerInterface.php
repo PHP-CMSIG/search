@@ -39,8 +39,9 @@ interface SchemaManagerInterface
     public function createIndex(Index $index, array $options = []): TaskInterface|null;
 
     /**
-     * Updates an existing index to the given definition. Currently only adding new fields is supported,
-     * changing or removing existing fields is out of scope and the behaviour is undefined.
+     * Updates an existing index to the given definition, keeping its documents. Only adding new fields is supported:
+     * removed fields are not removed and changed fields (settings or type) are not guaranteed to be applied,
+     * some adapters ignore them while others apply them. Such changes require a reindex of the documents.
      *
      * @template T of bool
      *

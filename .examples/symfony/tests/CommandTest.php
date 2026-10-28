@@ -22,6 +22,18 @@ final class CommandTest extends KernelTestCase
         $commandTester->assertCommandIsSuccessful();
     }
 
+    public function testUpdate(): void
+    {
+        $kernel = self::bootKernel();
+        $application = new Application($kernel);
+
+        $command = $application->find('cmsig:seal:index-update');
+        $commandTester = new CommandTester($command);
+        $commandTester->execute([]);
+
+        $commandTester->assertCommandIsSuccessful();
+    }
+
     public function testReindex(): void
     {
         $kernel = self::bootKernel();

@@ -14,6 +14,14 @@ final class CommandTest extends TestCase
         $this->assertStringContainsString('Search indexes created.', $output);
     }
 
+    public function testUpdate(): void
+    {
+        $this->assertCommandRegistered('cmsig:seal:index-update');
+        $output = $this->runCommand('cmsig:seal:index-update');
+
+        $this->assertStringContainsString('Search indexes updated.', $output);
+    }
+
     public function testReindex(): void
     {
         $this->assertCommandRegistered('cmsig:seal:reindex');

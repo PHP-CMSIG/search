@@ -679,6 +679,98 @@ To drop a ``Schema`` or an ``Index`` you can use the following:
             # create specific index
             ./yii cmsig:seal:index-drop --index=blog
 
+Update a Schema
+---------------
+
+When new ``Fields`` are added to an existing ``Index`` they can be added to the search engine without
+dropping the ``Index`` and without losing its documents:
+
+.. tabs::
+
+    .. group-tab:: Standalone use
+
+        When using the ``Standalone`` version you need to update the ``Indexes``
+        in your search engines via the ``Engine`` instance which was created before:
+
+        .. code-block:: php
+
+            <?php
+
+            // update all indexes
+            $engine->updateSchema();
+
+            // update specific index
+            $engine->updateIndex('blog');
+
+    .. group-tab:: Laravel
+
+        To update the indexes in Laravel the following command:
+
+        .. code-block:: bash
+
+            # update all indexes
+            php artisan cmsig:seal:index-update
+
+            # update specific index
+            php artisan cmsig:seal:index-update --index=blog
+
+    .. group-tab:: Symfony
+
+        To update the indexes in Symfony the following command:
+
+        .. code-block:: bash
+
+            # update all indexes
+            bin/console cmsig:seal:index-update
+
+            # update specific index
+            bin/console cmsig:seal:index-update --index=blog
+
+    .. group-tab:: Spiral
+
+        To update the indexes in Spiral the following command:
+
+        .. code-block:: bash
+
+            # update all indexes
+            php app.php cmsig:seal:index-update
+
+            # update specific index
+            php app.php cmsig:seal:index-update --index=blog
+
+    .. group-tab:: Mezzio
+
+        To update the indexes in Mezzio the following command:
+
+        .. code-block:: bash
+
+            # update all indexes
+            vendor/bin/laminas cmsig:seal:index-update
+
+            # update specific index
+            vendor/bin/laminas cmsig:seal:index-update --index=blog
+
+    .. group-tab:: Yii
+
+        To update the indexes in Yii the following command:
+
+        .. code-block:: bash
+
+            # update all indexes
+            ./yii cmsig:seal:index-update
+
+            # update specific index
+            ./yii cmsig:seal:index-update --index=blog
+
+.. note::
+
+    Only the adding of new ``Fields`` is supported. Removed ``Fields`` are not removed from the search engine
+    and changed ``Field`` settings (``searchable``, ``filterable``, ``sortable``, ...) or types are not applied
+    reliably: some adapters ignore them while others apply them with the new settings.
+    For those changes drop and create the ``Index`` and reindex your documents.
+
+    Existing documents do not contain the new ``Fields`` until they are saved or reindexed again.
+
 ----------
 
 Complex Example
