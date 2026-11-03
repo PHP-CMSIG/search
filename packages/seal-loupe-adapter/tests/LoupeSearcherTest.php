@@ -15,7 +15,6 @@ namespace CmsIg\Seal\Adapter\Loupe\Tests;
 
 use CmsIg\Seal\Adapter\Loupe\LoupeAdapter;
 use CmsIg\Seal\Testing\AbstractSearcherTestCase;
-use Composer\InstalledVersions;
 
 class LoupeSearcherTest extends AbstractSearcherTestCase
 {
@@ -25,15 +24,5 @@ class LoupeSearcherTest extends AbstractSearcherTestCase
         self::$adapter = new LoupeAdapter($helper);
 
         parent::setUpBeforeClass();
-    }
-
-    public function testZeroLimitWithFacets(): void
-    {
-        // Loupe below 1.1.4 returned empty facets when the limit was zero
-        if (\version_compare((string) InstalledVersions::getVersion('loupe/loupe'), '1.1.4.0', '<')) {
-            $this->markTestSkipped('Facets with a zero limit require loupe/loupe 1.1.4 or newer.');
-        }
-
-        parent::testZeroLimitWithFacets();
     }
 }
