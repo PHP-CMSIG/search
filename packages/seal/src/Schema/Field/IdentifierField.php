@@ -32,7 +32,7 @@ namespace CmsIg\Seal\Schema\Field;
  */
 final class IdentifierField extends AbstractField
 {
-    public function __construct(string $name, bool $sortable = true)
+    public function __construct(string $name, bool $sortable = false)
     {
         parent::__construct(
             $name,

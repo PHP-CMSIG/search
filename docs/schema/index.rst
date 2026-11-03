@@ -106,7 +106,7 @@ The following field definition will show us how to define our ``Identifier`` fie
 
 **Options:**
 
-The ``Identifier`` field type is always ``filterable``. It is ``sortable`` by default, which can be disabled:
+The ``Identifier`` field type is always ``filterable``. It is **not** ``sortable`` by default, as sortable fields can require additional replicas on some search engines (e.g. Algolia), which can be enabled:
 
 .. code-block:: php
 
@@ -114,7 +114,7 @@ The ``Identifier`` field type is always ``filterable``. It is ``sortable`` by de
 
     use CmsIg\Seal\Schema\Field;
 
-    new Field\IdentifierField('id', sortable: false);
+    new Field\IdentifierField('id', sortable: true);
 
 .. include:: ../_shared/identifier-value.rst
 
