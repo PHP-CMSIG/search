@@ -183,11 +183,20 @@ final class LoupeHelper
             $index->facetFields,
         ));
 
-        return Configuration::create()
+        $configuration = Configuration::create()
             ->withPrimaryKey($index->getIdentifierField()->name)
             ->withSearchableAttributes(\array_map($this->formatField(...), $index->searchableFields))
             ->withFilterableAttributes(\array_map($this->formatField(...), $filterableFields))
             ->withSortableAttributes(\array_map($this->formatField(...), $index->sortableFields));
+
+        /** @var array{languages?: string[]} $options */
+        $options = $index->options['loupe'] ?? [];
+
+        if (isset($options['languages'])) {
+            return $configuration->withLanguages($options['languages']);
+        }
+
+        return $configuration;
     }
 
     private function getIndexDirectory(Index $index): string
