@@ -160,8 +160,7 @@ final class AttributeLoader implements LoaderInterface
         $fields = [];
         foreach ($this->getSchemaProperties($reflectionClass) as [$property, $fieldAttribute, $identifierAttribute]) {
             $fieldName = $fieldAttribute instanceof FieldAttribute && null !== $fieldAttribute->name ? $fieldAttribute->name : $property->getName();
-            $isIdentifier = $identifierAttribute instanceof IdentifierAttribute;
-            $fields[$fieldName] = $this->createField($reflectionClass, $property, $fieldAttribute, $fieldName, $isIdentifier, $classStack);
+            $fields[$fieldName] = $this->createField($reflectionClass, $property, $fieldAttribute, $fieldName, $identifierAttribute, $classStack);
         }
 
         return $fields;
@@ -176,7 +175,7 @@ final class AttributeLoader implements LoaderInterface
         \ReflectionProperty $property,
         FieldAttribute|null $fieldAttribute,
         string $fieldName,
-        bool $isIdentifier,
+        IdentifierAttribute|null $identifierAttribute,
         array $classStack,
     ): Field\AbstractField {
         $resolvedType = $this->propertyTypeResolver->resolve($property);
@@ -188,7 +187,7 @@ final class AttributeLoader implements LoaderInterface
         $options = $fieldAttribute instanceof FieldAttribute ? $fieldAttribute->options : [];
         $odmOptions = $this->createFieldMetadata($property, $resolvedType);
 
-        if ($isIdentifier) {
+        if ($identifierAttribute instanceof IdentifierAttribute) {
             if ('int' === $resolvedType['kind']) {
                 $odmOptions['type'] = $resolvedType['kind'];
             } elseif ('string' !== $resolvedType['kind']) {
@@ -199,7 +198,11 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            return new Field\IdentifierField($fieldName, options: $this->mergeOdmOptions($options, $odmOptions));
+            return new Field\IdentifierField(
+                $fieldName,
+                sortable: $identifierAttribute->sortable,
+                options: $this->mergeOdmOptions(\array_replace($options, $identifierAttribute->options), $odmOptions),
+            );
         }
 
         if ('object' === $resolvedType['kind']) {

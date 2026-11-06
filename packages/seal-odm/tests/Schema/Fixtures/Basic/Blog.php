@@ -20,7 +20,7 @@ use CmsIg\Seal\Odm\Attribute\Index;
 #[Index('blog')]
 class Blog
 {
-    #[Identifier]
+    #[Identifier(options: ['customKey' => 'customValue'])]
     public int $id;
 
     #[Field]

@@ -69,6 +69,9 @@ final class BlogDocument
 }
 ```
 
+Identifiers are not sortable by default. Enable sorting and pass adapter options with
+`#[Identifier(sortable: true, options: ['customKey' => 'customValue'])]`.
+
 Load the schema from a directory containing annotated classes:
 
 ```php

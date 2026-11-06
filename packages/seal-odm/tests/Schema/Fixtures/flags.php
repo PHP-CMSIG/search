@@ -21,6 +21,8 @@ return new Schema([
         fields: [
             'uuid' => new Field\IdentifierField(
                 name: 'uuid',
+                sortable: true,
+                options: ['customKey' => 'customValue'],
             ),
             'text' => new Field\TextField(
                 name: 'text',
