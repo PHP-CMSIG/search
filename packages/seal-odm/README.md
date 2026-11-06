@@ -91,6 +91,12 @@ The `OdmDataMapper` creates objects without calling constructors and reads or wr
 through reflected properties. To preserve the metadata required for that behavior, build the schema with
 `AttributeLoader` and pass the same `Schema` instance to both `Engine` and `OdmDataMapper`.
 
+The ODM metadata uses `mappedClass` consistently for document, nested object, and date classes:
+
+```php
+options: ['odm' => ['mappedClass' => BlogDocument::class]]
+```
+
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)

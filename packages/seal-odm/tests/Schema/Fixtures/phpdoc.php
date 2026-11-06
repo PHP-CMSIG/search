@@ -45,7 +45,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\PhpDoc\PhpDoc::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\PhpDoc\PhpDoc::class,
             ],
         ],
     ),

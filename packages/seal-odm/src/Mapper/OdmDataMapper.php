@@ -40,11 +40,11 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $schemaIndex = $this->getSchemaIndex($index);
         $odmMetadata = $this->getIndexMetadata($index, $schemaIndex);
 
-        if (!$object instanceof $odmMetadata['class']) {
+        if (!$object instanceof $odmMetadata['mappedClass']) {
             throw new \RuntimeException(\sprintf(
                 'Object for index "%s" must be an instance of "%s", got "%s".',
                 $index,
-                $odmMetadata['class'],
+                $odmMetadata['mappedClass'],
                 $object::class,
             ));
         }
@@ -59,7 +59,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
         return $this->hydrateObject(
             $index,
-            $odmMetadata['class'],
+            $odmMetadata['mappedClass'],
             $document,
             $schemaIndex->fields,
         );
@@ -136,7 +136,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
     /**
      * @return array{
-     *     class: class-string,
+     *     mappedClass: class-string,
      * }
      */
     private function getIndexMetadata(string $index, Index $schemaIndex): array
@@ -144,8 +144,8 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $metadata = $schemaIndex->options['odm'] ?? null;
         if (
             !\is_array($metadata)
-            || !isset($metadata['class'])
-            || !\is_string($metadata['class'])
+            || !isset($metadata['mappedClass'])
+            || !\is_string($metadata['mappedClass'])
         ) {
             throw new \RuntimeException(\sprintf(
                 'Index "%s" is missing ODM metadata. Build the schema with "%s".',
@@ -155,7 +155,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         }
 
         return [
-            'class' => $this->normalizeClassName($metadata['class'], $index, $index),
+            'mappedClass' => $this->normalizeClassName($metadata['mappedClass'], $index, $index),
         ];
     }
 
@@ -426,7 +426,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
     private function getNestedClass(string $index, string $fieldName, Field\ObjectField $field): string
     {
         $metadata = $field->options['odm'] ?? null;
-        if (!\is_array($metadata) || !isset($metadata['class'])) {
+        if (!\is_array($metadata) || !isset($metadata['mappedClass'])) {
             throw new \RuntimeException(\sprintf(
                 'Object field "%s" on index "%s" is missing nested ODM metadata.',
                 $fieldName,
@@ -434,7 +434,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
             ));
         }
 
-        return $this->normalizeClassName($metadata['class'], $fieldName, $index);
+        return $this->normalizeClassName($metadata['mappedClass'], $fieldName, $index);
     }
 
     /**

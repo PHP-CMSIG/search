@@ -45,7 +45,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\Multiple::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\Multiple::class,
             ],
         ],
     ),
@@ -78,7 +78,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\MultipleList::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\MultipleList::class,
             ],
         ],
     ),

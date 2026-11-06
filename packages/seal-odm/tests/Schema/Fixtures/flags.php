@@ -66,7 +66,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Flags\Flags::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Flags\Flags::class,
             ],
         ],
     ),

@@ -33,7 +33,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\Blog::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\Blog::class,
             ],
         ],
     ),
@@ -61,7 +61,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\News::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\News::class,
             ],
         ],
     ),
