@@ -20,7 +20,7 @@ use CmsIg\Seal\Odm\Attribute\Index;
 #[Index('flags')]
 class Flags
 {
-    #[Identifier()]
+    #[Identifier(sortable: true, options: ['customKey' => 'customValue'])]
     public string $uuid;
 
     #[Field(searchable: false, filterable: true, sortable: true, distinct: true, facet: true, options: ['customKey' => 'customValue'])]

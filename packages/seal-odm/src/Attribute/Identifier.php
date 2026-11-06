@@ -16,4 +16,12 @@ namespace CmsIg\Seal\Odm\Attribute;
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
 final class Identifier
 {
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function __construct(
+        public readonly bool $sortable = false,
+        public readonly array $options = [],
+    ) {
+    }
 }

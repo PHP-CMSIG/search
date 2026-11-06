@@ -22,6 +22,7 @@ return new Schema([
             'id' => new Field\IdentifierField(
                 name: 'id',
                 options: [
+                    'customKey' => 'customValue',
                     'odm' => [
                         'type' => 'int',
                     ],
