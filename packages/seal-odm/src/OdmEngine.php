@@ -28,20 +28,25 @@ final class OdmEngine implements OdmEngineInterface
     ) {
     }
 
-    public function saveDocument(string $index, object $object, array $options = []): TaskInterface|null
+    public function saveDocument(object $object, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($object::class);
         $document = $this->dataMapper->objectToArray($index, $object);
 
         return $this->engine->saveDocument($index, $document, $options);
     }
 
-    public function deleteDocument(string $index, string $identifier, array $options = []): TaskInterface|null
+    public function deleteDocument(string $documentClass, string $identifier, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->deleteDocument($index, $identifier, $options);
     }
 
-    public function bulk(string $index, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null
+    public function bulk(string $documentClass, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->bulk($index, (function (string $index, iterable $objects) {
             foreach ($objects as $object) {
                 yield $this->dataMapper->objectToArray($index, $object);
@@ -49,43 +54,63 @@ final class OdmEngine implements OdmEngineInterface
         })($index, $saveObjects), $deleteObjectIdentifiers, $bulkSize, $options);
     }
 
-    public function getDocument(string $index, string $identifier): object
+    public function getDocument(string $documentClass, string $identifier): object
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         $document = $this->engine->getDocument($index, $identifier);
 
-        return $this->dataMapper->arrayToObject($index, $document);
+        $object = $this->dataMapper->arrayToObject($index, $document);
+        if (!$object instanceof $documentClass) {
+            throw new \RuntimeException(\sprintf('Expected document of class "%s", got "%s".', $documentClass, $object::class));
+        }
+
+        return $object;
     }
 
-    public function countDocuments(string $index): int
+    public function countDocuments(string $documentClass): int
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->countDocuments($index);
     }
 
-    public function createSearchBuilder(string $index): OdmSearchBuilder
+    public function createSearchBuilder(string $documentClass): OdmSearchBuilder
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return new OdmSearchBuilder(
             $this->engine->createSearchBuilder($index),
             $this->dataMapper,
+            $documentClass,
         );
     }
 
-    public function createIndex(string $index, array $options = []): TaskInterface|null
+    public function createIndex(string $documentClass, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->createIndex($index, $options);
     }
 
-    public function dropIndex(string $index, array $options = []): TaskInterface|null
+    public function dropIndex(string $documentClass, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->dropIndex($index, $options);
     }
 
-    public function updateIndex(string $index, array $options = []): TaskInterface|null
+    public function updateIndex(string $documentClass, array $options = []): TaskInterface|null
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->updateIndex($index, $options);
     }
 
-    public function existIndex(string $index): bool
+    public function existIndex(string $documentClass): bool
     {
+        $index = $this->dataMapper->getIndexName($documentClass);
+
         return $this->engine->existIndex($index);
     }
 

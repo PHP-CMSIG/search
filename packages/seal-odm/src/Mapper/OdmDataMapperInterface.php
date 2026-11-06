@@ -16,6 +16,11 @@ namespace CmsIg\Seal\Odm\Mapper;
 interface OdmDataMapperInterface
 {
     /**
+     * @param class-string $documentClass
+     */
+    public function getIndexName(string $documentClass): string;
+
+    /**
      * @return array<string, mixed>
      */
     public function objectToArray(string $index, object $object): array;

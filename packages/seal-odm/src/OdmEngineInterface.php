@@ -22,64 +22,89 @@ use CmsIg\Seal\Task\TaskInterface;
 interface OdmEngineInterface
 {
     /**
-     * @param $object $object
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<array<string, mixed>> : null)
      */
-    public function saveDocument(string $index, object $object, array $options = []): TaskInterface|null;
+    public function saveDocument(object $object, array $options = []): TaskInterface|null;
 
     /**
+     * @param class-string $documentClass
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function deleteDocument(string $index, string $identifier, array $options = []): TaskInterface|null;
+    public function deleteDocument(string $documentClass, string $identifier, array $options = []): TaskInterface|null;
 
     /**
-     * @param iterable<object> $saveObjects
+     * @template T of object
+     *
+     * @param class-string<T> $documentClass
+     * @param iterable<T> $saveObjects
      * @param iterable<string> $deleteObjectIdentifiers
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function bulk(string $index, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null;
+    public function bulk(string $documentClass, iterable $saveObjects, iterable $deleteObjectIdentifiers, int $bulkSize = 100, array $options = []): TaskInterface|null;
 
     /**
+     * @template T of object
+     *
+     * @param class-string<T> $documentClass
+     *
      * @throws DocumentNotFoundException
+     *
+     * @return T
      */
-    public function getDocument(string $index, string $identifier): object;
-
-    public function countDocuments(string $index): int;
-
-    public function createSearchBuilder(string $index): OdmSearchBuilder;
+    public function getDocument(string $documentClass, string $identifier): object;
 
     /**
+     * @param class-string $documentClass
+     */
+    public function countDocuments(string $documentClass): int;
+
+    /**
+     * @template T of object
+     *
+     * @param class-string<T> $documentClass
+     *
+     * @return OdmSearchBuilder<T>
+     */
+    public function createSearchBuilder(string $documentClass): OdmSearchBuilder;
+
+    /**
+     * @param class-string $documentClass
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function createIndex(string $index, array $options = []): TaskInterface|null;
+    public function createIndex(string $documentClass, array $options = []): TaskInterface|null;
 
     /**
+     * @param class-string $documentClass
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function dropIndex(string $index, array $options = []): TaskInterface|null;
+    public function dropIndex(string $documentClass, array $options = []): TaskInterface|null;
 
     /**
      * Updates an existing index to the current schema definition, keeping its documents. Only adding new fields is supported:
      * removed fields are not removed and changed fields (settings or type) are not guaranteed to be applied,
      * some adapters ignore them while others apply them. Such changes require a reindex of the documents.
      *
+     * @param class-string $documentClass
      * @param array{return_slow_promise_result?: true} $options
      *
      * @return ($options is non-empty-array ? TaskInterface<void|null> : null)
      */
-    public function updateIndex(string $index, array $options = []): TaskInterface|null;
+    public function updateIndex(string $documentClass, array $options = []): TaskInterface|null;
 
-    public function existIndex(string $index): bool;
+    /**
+     * @param class-string $documentClass
+     */
+    public function existIndex(string $documentClass): bool;
 
     /**
      * @param array{return_slow_promise_result?: true} $options

@@ -84,6 +84,37 @@ $engine = new Engine($adapter, $schema);
 $odmEngine = new OdmEngine($engine, new OdmDataMapper($schema));
 ```
 
+Save objects directly; use the document class for reads, bulk operations, and index management:
+
+```php
+$blog = new BlogDocument();
+$blog->id = '1';
+$blog->title = 'My first post';
+$blog->tags = [];
+
+$odmEngine->saveDocument($blog);
+$blog = $odmEngine->getDocument(BlogDocument::class, '1');
+$odmEngine->bulk(BlogDocument::class, [$blog], ['2']);
+$odmEngine->deleteDocument(BlogDocument::class, '1');
+$odmEngine->countDocuments(BlogDocument::class);
+
+$result = $odmEngine->createSearchBuilder(BlogDocument::class)->getResult();
+foreach ($result as $blog) {
+    echo $blog->title;
+}
+
+$odmEngine->createIndex(BlogDocument::class);
+$odmEngine->updateIndex(BlogDocument::class);
+$odmEngine->existIndex(BlogDocument::class);
+$odmEngine->dropIndex(BlogDocument::class);
+```
+
+Each document class must map to exactly one index in the loaded schema. Unknown or ambiguous
+class mappings throw an exception. `getDocument()` and search results preserve the requested
+class through PHPDoc generics for IDEs and static analysis. Calling `index(OtherDocument::class)`
+on a search builder returns a new builder for that class, preserving the original builder.
+Schema-wide operations still apply to all indexes, and reindex providers still declare index names.
+
 Supported inferred field types are `string`, `int`, `float`, `bool`, `DateTimeInterface` implementations,
 object types as nested `ObjectField`s, and `array`/`list` properties with element types declared in PHPDoc.
 

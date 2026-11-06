@@ -19,19 +19,34 @@ use CmsIg\Seal\Search\Facet\AbstractFacet;
 use CmsIg\Seal\Search\Search;
 use CmsIg\Seal\Search\SearchBuilder;
 
+/**
+ * @template T of object
+ */
 final class OdmSearchBuilder
 {
+    /**
+     * @param class-string<T> $documentClass
+     */
     public function __construct(
         private readonly SearchBuilder $searchBuilder,
         private readonly OdmDataMapperInterface $dataMapper,
+        private readonly string $documentClass,
     ) {
     }
 
-    public function index(string $name): static
+    /**
+     * @template U of object
+     *
+     * @param class-string<U> $documentClass
+     *
+     * @return OdmSearchBuilder<U>
+     */
+    public function index(string $documentClass): self
     {
-        $this->searchBuilder->index($name);
+        $searchBuilder = clone $this->searchBuilder;
+        $searchBuilder->index($this->dataMapper->getIndexName($documentClass));
 
-        return $this;
+        return new self($searchBuilder, $this->dataMapper, $documentClass);
     }
 
     public function addFilter(object $filter): static
@@ -65,7 +80,7 @@ final class OdmSearchBuilder
         return $this;
     }
 
-    public function distinct(string|null $field): self
+    public function distinct(string|null $field): static
     {
         $this->searchBuilder->distinct($field);
 
@@ -82,7 +97,7 @@ final class OdmSearchBuilder
         return $this;
     }
 
-    public function addFacet(AbstractFacet $facet): self
+    public function addFacet(AbstractFacet $facet): static
     {
         $this->searchBuilder->addFacet($facet);
 
@@ -99,6 +114,9 @@ final class OdmSearchBuilder
         return $this->searchBuilder->getSearch();
     }
 
+    /**
+     * @return OdmResult<T>
+     */
     public function getResult(): OdmResult
     {
         $search = $this->searchBuilder->getSearch();
@@ -108,7 +126,12 @@ final class OdmSearchBuilder
         return new OdmResult(
             (function (iterable $documents) use ($index): \Generator {
                 foreach ($documents as $document) {
-                    yield $this->dataMapper->arrayToObject($index, $document);
+                    $object = $this->dataMapper->arrayToObject($index, $document);
+                    if (!$object instanceof $this->documentClass) {
+                        throw new \RuntimeException(\sprintf('Expected document of class "%s", got "%s".', $this->documentClass, $object::class));
+                    }
+
+                    yield $object;
                 }
             })($result),
             $result->total(),
