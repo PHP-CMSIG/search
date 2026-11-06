@@ -56,7 +56,7 @@ final class OdmEngine implements OdmEngineInterface
         return $this->dataMapper->arrayToObject($index, $document);
     }
 
-    public function countObjects(string $index): int
+    public function countDocuments(string $index): int
     {
         return $this->engine->countDocuments($index);
     }
@@ -79,6 +79,11 @@ final class OdmEngine implements OdmEngineInterface
         return $this->engine->dropIndex($index, $options);
     }
 
+    public function updateIndex(string $index, array $options = []): TaskInterface|null
+    {
+        return $this->engine->updateIndex($index, $options);
+    }
+
     public function existIndex(string $index): bool
     {
         return $this->engine->existIndex($index);
@@ -92,6 +97,11 @@ final class OdmEngine implements OdmEngineInterface
     public function dropSchema(array $options = []): TaskInterface|null
     {
         return $this->engine->dropSchema($options);
+    }
+
+    public function updateSchema(array $options = []): TaskInterface|null
+    {
+        return $this->engine->updateSchema($options);
     }
 
     public function reindex(
