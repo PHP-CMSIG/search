@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Odm\Search;
 
 /**
- * @extends \IteratorIterator<int, object, \Generator<int, object>>
+ * @template T of object
+ *
+ * @extends \IteratorIterator<int, T, \Generator<int, T>>
  */
 final class OdmResult extends \IteratorIterator
 {
     /**
-     * @param \Generator<int, object> $documents
+     * @param \Generator<int, T> $documents
      * @param array<string, mixed> $facets
      */
     public function __construct(

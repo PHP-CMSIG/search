@@ -30,9 +30,44 @@ final class OdmDataMapper implements OdmDataMapperInterface
      */
     private array $reflectionProperties = [];
 
+    /**
+     * @var array<class-string, string>
+     */
+    private array $indexNames = [];
+
     public function __construct(
         private readonly Schema $schema,
     ) {
+    }
+
+    /**
+     * @param class-string $documentClass
+     */
+    public function getIndexName(string $documentClass): string
+    {
+        if (isset($this->indexNames[$documentClass])) {
+            return $this->indexNames[$documentClass];
+        }
+
+        $indexName = null;
+        foreach ($this->schema->indexes as $index) {
+            $metadata = $index->options['odm'] ?? null;
+            if (!\is_array($metadata) || ($metadata['mappedClass'] ?? null) !== $documentClass) {
+                continue;
+            }
+
+            if (null !== $indexName) {
+                throw new \RuntimeException(\sprintf('Document class "%s" is mapped to multiple indexes.', $documentClass));
+            }
+
+            $indexName = $index->name;
+        }
+
+        if (null === $indexName) {
+            throw new \RuntimeException(\sprintf('Document class "%s" is not mapped to an index.', $documentClass));
+        }
+
+        return $this->indexNames[$documentClass] = $indexName;
     }
 
     public function objectToArray(string $index, object $object): array
