@@ -129,7 +129,7 @@ final class AttributeLoader implements LoaderInterface
     {
         $options = $indexAttribute->options;
         $options['odm'] = [
-            'class' => $reflectionClass->getName(),
+            'mappedClass' => $reflectionClass->getName(),
         ];
 
         return new Index(
@@ -217,7 +217,7 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            $objectClassName = $resolvedType['class'] ?? null;
+            $objectClassName = $resolvedType['mappedClass'] ?? null;
             if (!\is_string($objectClassName)) {
                 throw new \RuntimeException(\sprintf(
                     'Object field "%s" on class "%s" is missing resolved class metadata.',
@@ -300,7 +300,7 @@ final class AttributeLoader implements LoaderInterface
     }
 
     /**
-     * @param array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, class?: class-string} $resolvedType
+     * @param array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, mappedClass?: class-string} $resolvedType
      *
      * @return array<string, mixed>
      */
@@ -309,7 +309,7 @@ final class AttributeLoader implements LoaderInterface
         $metadata = [];
 
         if ('object' === $resolvedType['kind']) {
-            $className = $resolvedType['class'] ?? null;
+            $className = $resolvedType['mappedClass'] ?? null;
             if (!\is_string($className)) {
                 throw new \RuntimeException(\sprintf(
                     'Object field "%s" on class "%s" is missing resolved class metadata.',
@@ -318,12 +318,12 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            $metadata['class'] = $className;
+            $metadata['mappedClass'] = $className;
         }
 
         if ('datetime' === $resolvedType['kind']) {
-            $hydrateClass = $resolvedType['class'] ?? null;
-            if (!\is_string($hydrateClass)) {
+            $mappedClass = $resolvedType['mappedClass'] ?? null;
+            if (!\is_string($mappedClass)) {
                 throw new \RuntimeException(\sprintf(
                     'DateTime field "%s" on class "%s" is missing resolved class metadata.',
                     $property->getName(),
@@ -331,7 +331,7 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            $metadata['hydrateClass'] = $hydrateClass;
+            $metadata['mappedClass'] = $mappedClass;
         }
 
         return $metadata;

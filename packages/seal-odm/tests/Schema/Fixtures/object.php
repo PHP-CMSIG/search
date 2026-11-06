@@ -43,7 +43,7 @@ return new Schema([
                 ],
                 options: [
                     'odm' => [
-                        'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
+                        'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
                     ],
                 ],
             ),
@@ -69,14 +69,14 @@ return new Schema([
                 multiple: true,
                 options: [
                     'odm' => [
-                        'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
+                        'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
                     ],
                 ],
             ),
         ],
         options: [
             'odm' => [
-                'class' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\NestedObject::class,
+                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\NestedObject::class,
             ],
         ],
     ),
