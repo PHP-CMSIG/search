@@ -33,7 +33,6 @@ final class AttributeLoader implements LoaderInterface
      */
     public function __construct(
         private readonly array $directories,
-        private readonly string $indexNamePrefix = '',
     ) {
         $this->indexMerger = new IndexMerger();
         $this->propertyTypeResolver = new PropertyTypeResolver();
@@ -60,7 +59,6 @@ final class AttributeLoader implements LoaderInterface
                     $indexes = $this->indexMerger->mergeIndexes(
                         $indexes,
                         $this->createIndex($reflectionClass, $indexAttribute),
-                        $this->indexNamePrefix,
                     );
                 }
             }

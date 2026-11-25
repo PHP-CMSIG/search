@@ -16,6 +16,7 @@ namespace CmsIg\Seal\Odm\Tests\Schema;
 use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,21 @@ class AttributeLoaderTest extends TestCase
         $schema = $attributeLoader->load();
 
         self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/basic.php'), $schema);
+    }
+
+    public function testPrefixLoader(): void
+    {
+        $attributeLoader = new AttributeLoader([__DIR__ . '/Fixtures/Basic']);
+        $schema = $attributeLoader->load();
+        $prefixedSchema = (new PrefixLoader($attributeLoader, 'test_'))->load();
+
+        self::assertSame(\array_keys($schema->indexes), \array_keys($prefixedSchema->indexes));
+        foreach ($schema->indexes as $name => $index) {
+            $expectedIndex = self::indexToArray($index);
+            $expectedIndex['name'] = 'test_' . $index->name;
+
+            self::assertSame($expectedIndex, self::indexToArray($prefixedSchema->indexes[$name]));
+        }
     }
 
     public function testFlags(): void
