@@ -48,7 +48,7 @@
         "spiral/config": "^3.6",
         "spiral/console": "^3.6",
         "spiral/core": "^3.6",
-        "cmsig/seal": "^0.12"
+        "cmsig/seal": "^0.12.20"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.51",
