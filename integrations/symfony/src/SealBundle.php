@@ -21,6 +21,7 @@ use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -96,8 +97,11 @@ final class SealBundle extends AbstractBundle
 
             $dirs = $engineSchemaDirs[$name] ?? [];
 
-            $builder->register($schemaLoaderServiceId, PhpFileLoader::class)
-                ->setArguments([$dirs, $indexNamePrefix]);
+            $builder->register($schemaLoaderServiceId . '.php', PhpFileLoader::class)
+                ->setArguments([$dirs]);
+
+            $builder->register($schemaLoaderServiceId, PrefixLoader::class)
+                ->setArguments([new Reference($schemaLoaderServiceId . '.php'), $indexNamePrefix]);
 
             $builder->register($schemaId, Schema::class)
                 ->setFactory([new Reference($schemaLoaderServiceId), 'load']);

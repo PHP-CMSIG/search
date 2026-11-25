@@ -46,7 +46,7 @@
     "require": {
         "php": "^8.1",
         "psr/container": "^1.0 || ^2.0",
-        "cmsig/seal": "^0.12",
+        "cmsig/seal": "^0.12.20",
         "laminas/laminas-cli": "^1.0",
         "symfony/console": "^6.1 || ^7.0"
     },

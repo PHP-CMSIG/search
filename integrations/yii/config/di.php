@@ -30,6 +30,7 @@ use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use Psr\Container\ContainerInterface;
 
@@ -145,7 +146,7 @@ foreach ($engines as $name => $engineConfig) {
         return $factory->createAdapter($adapterDsn);
     };
 
-    $diConfig[$schemaLoaderServiceId] = static fn (ContainerInterface $container) => new PhpFileLoader($dirs, $indexNamePrefix);
+    $diConfig[$schemaLoaderServiceId] = static fn (ContainerInterface $container) => new PrefixLoader(new PhpFileLoader($dirs), $indexNamePrefix);
 
     $diConfig[$schemaId] = static function (ContainerInterface $container) use ($schemaLoaderServiceId) {
         /** @var LoaderInterface $loader */
