@@ -39,6 +39,7 @@ use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Boot\DirectoriesInterface;
@@ -128,7 +129,7 @@ final class SealBootloader extends Bootloader
 
             $container->bindSingleton(
                 $schemaLoaderServiceId,
-                static fn (Container $container): PhpFileLoader => new PhpFileLoader($dirs, $config->getIndexNamePrefix()),
+                static fn (Container $container): PrefixLoader => new PrefixLoader(new PhpFileLoader($dirs), $config->getIndexNamePrefix()),
             );
 
             $container->bindSingleton(

@@ -36,6 +36,7 @@ use CmsIg\Seal\Integration\Laravel\Console\IndexUpdateCommand;
 use CmsIg\Seal\Integration\Laravel\Console\ReindexCommand;
 use CmsIg\Seal\Schema\Loader\LoaderInterface;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -109,7 +110,7 @@ final class SealProvider extends ServiceProvider
                 return $factory->createAdapter($adapterDsn);
             });
 
-            $this->app->singleton($schemaLoaderServiceId, static fn () => new PhpFileLoader($dirs, $indexNamePrefix));
+            $this->app->singleton($schemaLoaderServiceId, static fn () => new PrefixLoader(new PhpFileLoader($dirs), $indexNamePrefix));
 
             $this->app->singleton($schemaId, static function (Application $app) use ($schemaLoaderServiceId) {
                 /** @var LoaderInterface $loader */
