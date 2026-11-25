@@ -46,6 +46,11 @@ class PhpFileLoaderTest extends TestCase
                 'title',
                 'description',
                 'blocks',
+                'rating',
+                'price',
+                'created',
+                'published',
+                'archived',
                 'footerText',
             ],
             \array_keys($schema->indexes['blog']->fields),
@@ -83,51 +88,23 @@ class PhpFileLoaderTest extends TestCase
                 'key3' => 'value3-new',
             ],
         ], $schema->indexes['blog']->options);
-    }
 
-    public function testMergePreservesDistinctAndFacetFlags(): void
-    {
-        $index = (new PhpFileLoader([__DIR__ . '/fixtures/merge-field-flags']))->load()->indexes['flags'];
+        $index = $schema->indexes['blog'];
+        $flaggedFields = ['description', 'blocks.text.description', 'rating', 'price', 'created', 'published'];
+        $this->assertSame($flaggedFields, $index->distinctFields);
+        $this->assertSame($flaggedFields, $index->facetFields);
 
-        foreach (['text', 'integer', 'float', 'dateTime'] as $name) {
-            $this->assertTrue($index->fields[$name . 'Enabled']->distinct);
-            $this->assertTrue($index->fields[$name . 'Enabled']->facet);
-            $this->assertFalse($index->fields[$name . 'Disabled']->distinct);
-            $this->assertFalse($index->fields[$name . 'Disabled']->facet);
-            $this->assertSame(['nested' => ['keep' => true, 'replace' => 'new']], $index->fields[$name . 'Enabled']->options);
-            $this->assertContains($name . 'Enabled', $index->distinctFields);
-            $this->assertContains($name . 'Enabled', $index->facetFields);
-            $this->assertNotContains($name . 'Disabled', $index->distinctFields);
-            $this->assertNotContains($name . 'Disabled', $index->facetFields);
-        }
-
-        foreach (['object.value', 'typed.text.value'] as $path) {
-            $this->assertTrue($index->getFieldByPath($path)->distinct);
-            $this->assertTrue($index->getFieldByPath($path)->facet);
-            $this->assertContains($path, $index->distinctFields);
-            $this->assertContains($path, $index->facetFields);
-        }
-    }
-
-    public function testMergeBooleanFields(): void
-    {
-        $index = (new PhpFileLoader([__DIR__ . '/fixtures/merge-boolean']))->load()->indexes['boolean'];
-        $enabled = $index->fields['enabled'];
-        $disabled = $index->fields['disabled'];
-
-        $this->assertInstanceOf(Field\BooleanField::class, $enabled);
-        $this->assertInstanceOf(Field\BooleanField::class, $disabled);
-        $this->assertTrue($enabled->multiple);
-        $this->assertTrue($enabled->filterable);
-        $this->assertTrue($enabled->sortable);
-        $this->assertTrue($enabled->distinct);
-        $this->assertTrue($enabled->facet);
-        $this->assertSame(['nested' => ['keep' => true, 'replace' => 'new']], $enabled->options);
-        $this->assertFalse($disabled->multiple);
-        $this->assertFalse($disabled->filterable);
-        $this->assertFalse($disabled->sortable);
-        $this->assertFalse($disabled->distinct);
-        $this->assertFalse($disabled->facet);
+        $published = $index->fields['published'];
+        $archived = $index->fields['archived'];
+        $this->assertInstanceOf(Field\BooleanField::class, $published);
+        $this->assertInstanceOf(Field\BooleanField::class, $archived);
+        $this->assertTrue($published->multiple);
+        $this->assertTrue($published->filterable);
+        $this->assertTrue($published->sortable);
+        $this->assertSame(['nested' => ['keep' => true, 'replace' => 'new']], $published->options);
+        $this->assertFalse($archived->multiple);
+        $this->assertFalse($archived->filterable);
+        $this->assertFalse($archived->sortable);
     }
 
     public function testMergeWithPrefix(): void

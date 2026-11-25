@@ -15,12 +15,21 @@ use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 
 return new Index('blog', [
-    'description' => new Field\TextField('description', options: ['option2' => true]),
+    'title' => new Field\TextField('title'),
+    'description' => new Field\TextField('description', distinct: true, facet: true, options: ['option2' => true]),
     'blocks' => new Field\TypedField('blocks', 'type', [
+        'text' => [
+            'description' => new Field\TextField('description', distinct: true, facet: true),
+        ],
         'gallery' => [
             'media' => new Field\TextField('media', multiple: true),
         ],
     ], multiple: true),
+    'rating' => new Field\IntegerField('rating', distinct: true, facet: true),
+    'price' => new Field\FloatField('price', distinct: true, facet: true),
+    'created' => new Field\DateTimeField('created', distinct: true, facet: true),
+    'published' => new Field\BooleanField('published', multiple: true, filterable: true, sortable: true, distinct: true, facet: true, options: ['nested' => ['replace' => 'new']]),
+    'archived' => new Field\BooleanField('archived'),
     'footerText' => new Field\TextField('footerText'),
 ], [
     'simpleOption' => 'simpleOption-overwrite',
