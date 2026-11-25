@@ -61,10 +61,7 @@ class AlgoliaSchemaManagerTest extends AbstractSchemaManagerTestCase
             'attributesForFaceting' => [
                 'id',
             ],
-            'replicas' => [
-                $index->name . '__id_asc',
-                $index->name . '__id_desc',
-            ],
+            'replicas' => null,
             'attributeForDistinct' => null,
         ], $settings);
 
@@ -110,8 +107,6 @@ class AlgoliaSchemaManagerTest extends AbstractSchemaManagerTestCase
                 '_geoloc',
             ],
             'replicas' => [
-                $index->name . '__uuid_asc',
-                $index->name . '__uuid_desc',
                 $index->name . '__title_asc',
                 $index->name . '__title_desc',
                 $index->name . '__created_asc',
