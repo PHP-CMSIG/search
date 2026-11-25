@@ -15,12 +15,85 @@ namespace CmsIg\Seal\Tests\Schema\Loader;
 
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(PhpFileLoader::class)]
 class PhpFileLoaderTest extends TestCase
 {
+    #[DataProvider('provideLegacyPrefixes')]
+    public function testLegacyPrefix(string $fixture, string $prefix, bool $named): void
+    {
+        $directories = [__DIR__ . '/fixtures/' . $fixture];
+        $deprecations = [];
+        \set_error_handler(static function (int $severity, string $message) use (&$deprecations): bool {
+            $deprecations[] = [$severity, $message];
+
+            return true;
+        }, \E_USER_DEPRECATED);
+
+        try {
+            $loader = $named
+                ? new PhpFileLoader(directories: $directories, indexNamePrefix: $prefix)
+                : new PhpFileLoader($directories, $prefix);
+
+            $this->assertCount(1, $deprecations);
+            $schema = $loader->load();
+            $again = $loader->load();
+            $expected = (new PrefixLoader(new PhpFileLoader($directories), $prefix))->load();
+
+            $this->assertSame(\array_keys($expected->indexes), \array_keys($schema->indexes));
+            $this->assertEqualsCanonicalizing($expected, $schema);
+            $this->assertEqualsCanonicalizing($schema, $again);
+            $this->assertSame([[
+                \E_USER_DEPRECATED,
+                'Passing a non-empty $indexNamePrefix to PhpFileLoader is deprecated and will no longer be supported in 0.13. Use new PrefixLoader(new PhpFileLoader($directories), $indexNamePrefix) instead.',
+            ]], $deprecations);
+        } finally {
+            \restore_error_handler();
+        }
+    }
+
+    /**
+     * @return iterable<string, array{string, string, bool}>
+     */
+    public static function provideLegacyPrefixes(): iterable
+    {
+        yield 'basic positional' => ['basic', 'prefix_', false];
+        yield 'basic named' => ['basic', 'prefix_', true];
+        yield 'merged positional' => ['merge', 'prefix_', false];
+        yield 'merged named' => ['merge', 'prefix_', true];
+        yield 'zero string is non-empty' => ['basic', '0', false];
+    }
+
+    public function testNoDeprecationWithoutPrefix(): void
+    {
+        $deprecations = [];
+        \set_error_handler(static function (int $severity, string $message) use (&$deprecations): bool {
+            $deprecations[] = [$severity, $message];
+
+            return true;
+        }, \E_USER_DEPRECATED);
+
+        try {
+            $directories = [__DIR__ . '/fixtures/basic'];
+            $schema = (new PhpFileLoader($directories))->load();
+            $emptyPrefix = (new PhpFileLoader($directories, ''))->load();
+            $namedEmptyPrefix = (new PhpFileLoader(directories: $directories, indexNamePrefix: ''))->load();
+            $decorated = (new PrefixLoader(new PhpFileLoader($directories), 'prefix_'))->load();
+
+            $this->assertSame('blog', $schema->indexes['blog']->name);
+            $this->assertEqualsCanonicalizing($schema, $emptyPrefix);
+            $this->assertEqualsCanonicalizing($schema, $namedEmptyPrefix);
+            $this->assertSame('prefix_blog', $decorated->indexes['blog']->name);
+            $this->assertSame([], $deprecations);
+        } finally {
+            \restore_error_handler();
+        }
+    }
+
     public function testLoadBasic(): void
     {
         $schema = (new PhpFileLoader([__DIR__ . '/fixtures/basic']))->load();

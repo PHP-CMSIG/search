@@ -22,10 +22,16 @@ final class PhpFileLoader implements LoaderInterface
 
     /**
      * @param string[] $directories
+     * @param string $indexNamePrefix Deprecated since 0.12; use PrefixLoader instead. Removed in 0.13.
      */
     public function __construct(
         private readonly array $directories,
+        private readonly string $indexNamePrefix = '',
     ) {
+        if ('' !== $this->indexNamePrefix) {
+            @\trigger_error('Passing a non-empty $indexNamePrefix to PhpFileLoader is deprecated and will no longer be supported in 0.13. Use new PrefixLoader(new PhpFileLoader($directories), $indexNamePrefix) instead.', \E_USER_DEPRECATED);
+        }
+
         $this->indexMerger = new IndexMerger();
     }
 
@@ -64,6 +70,12 @@ final class PhpFileLoader implements LoaderInterface
 
             foreach ($pathIndexes as $index) {
                 $indexes = $this->indexMerger->mergeIndexes($indexes, $index);
+            }
+        }
+
+        if ('' !== $this->indexNamePrefix) {
+            foreach ($indexes as $name => $index) {
+                $indexes[$name] = new Index($this->indexNamePrefix . $index->name, $index->fields, $index->options);
             }
         }
 
