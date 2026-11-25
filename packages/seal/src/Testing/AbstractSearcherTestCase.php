@@ -1198,9 +1198,9 @@ abstract class AbstractSearcherTestCase extends TestCase
         foreach ($loadedDocuments as $loadedDocument) {
             /** @var int[] $categoryIds */
             $categoryIds = $loadedDocument['categoryIds'];
-            $biggestCategoryId = \array_reduce($categoryIds, \max(...)); // @phpstan-ignore-line argument.type
+            $this->assertNotEmpty($categoryIds);
+            $biggestCategoryId = \max($categoryIds);
 
-            $this->assertNotNull($biggestCategoryId);
             $this->assertGreaterThanOrEqual(3.0, $biggestCategoryId);
         }
 

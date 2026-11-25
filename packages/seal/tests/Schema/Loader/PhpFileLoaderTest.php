@@ -46,6 +46,11 @@ class PhpFileLoaderTest extends TestCase
                 'title',
                 'description',
                 'blocks',
+                'rating',
+                'price',
+                'created',
+                'published',
+                'archived',
                 'footerText',
             ],
             \array_keys($schema->indexes['blog']->fields),
@@ -83,6 +88,23 @@ class PhpFileLoaderTest extends TestCase
                 'key3' => 'value3-new',
             ],
         ], $schema->indexes['blog']->options);
+
+        $index = $schema->indexes['blog'];
+        $flaggedFields = ['description', 'blocks.text.description', 'rating', 'price', 'created', 'published'];
+        $this->assertSame($flaggedFields, $index->distinctFields);
+        $this->assertSame($flaggedFields, $index->facetFields);
+
+        $published = $index->fields['published'];
+        $archived = $index->fields['archived'];
+        $this->assertInstanceOf(Field\BooleanField::class, $published);
+        $this->assertInstanceOf(Field\BooleanField::class, $archived);
+        $this->assertTrue($published->multiple);
+        $this->assertTrue($published->filterable);
+        $this->assertTrue($published->sortable);
+        $this->assertSame(['nested' => ['keep' => true, 'replace' => 'new']], $published->options);
+        $this->assertFalse($archived->multiple);
+        $this->assertFalse($archived->filterable);
+        $this->assertFalse($archived->sortable);
     }
 
     public function testMergeWithPrefix(): void

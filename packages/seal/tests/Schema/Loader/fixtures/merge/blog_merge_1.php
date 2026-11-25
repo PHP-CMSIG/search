@@ -16,7 +16,7 @@ use CmsIg\Seal\Schema\Index;
 
 return new Index('blog', [
     'id' => new Field\IdentifierField('id'),
-    'title' => new Field\TextField('title'),
+    'title' => new Field\TextField('title', distinct: true, facet: true),
     'description' => new Field\TextField('description', options: ['option1' => true]),
     'blocks' => new Field\TypedField('blocks', 'type', [
         'text' => [
@@ -29,6 +29,11 @@ return new Index('blog', [
             'media' => new Field\TextField('media'),
         ],
     ], multiple: true),
+    'rating' => new Field\IntegerField('rating'),
+    'price' => new Field\FloatField('price'),
+    'created' => new Field\DateTimeField('created'),
+    'published' => new Field\BooleanField('published', options: ['nested' => ['keep' => true, 'replace' => 'old']]),
+    'archived' => new Field\BooleanField('archived', multiple: true, filterable: true, sortable: true, distinct: true, facet: true),
 ], [
     'keepOption' => 'keepValue',
     'simpleOption' => 'simpleValue',

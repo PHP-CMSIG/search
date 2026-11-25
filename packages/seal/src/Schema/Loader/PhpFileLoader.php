@@ -131,6 +131,8 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
+                distinct: $newField->distinct,
+                facet: $newField->facet,
                 options: $this->mergeOptions($field->options, $newField->options),
             );
         }
@@ -143,6 +145,8 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
+                distinct: $newField->distinct,
+                facet: $newField->facet,
                 options: $this->mergeOptions($field->options, $newField->options),
             );
         }
@@ -155,6 +159,22 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
+                distinct: $newField->distinct,
+                facet: $newField->facet,
+                options: $this->mergeOptions($field->options, $newField->options),
+            );
+        }
+
+        if ($field instanceof Field\BooleanField && $newField instanceof Field\BooleanField) {
+            // @phpstan-ignore-next-line
+            return new Field\BooleanField(
+                $newField->name,
+                multiple: $newField->multiple,
+                searchable: $newField->searchable,
+                filterable: $newField->filterable,
+                sortable: $newField->sortable,
+                distinct: $newField->distinct,
+                facet: $newField->facet,
                 options: $this->mergeOptions($field->options, $newField->options),
             );
         }
@@ -167,6 +187,8 @@ final class PhpFileLoader implements LoaderInterface
                 searchable: $newField->searchable,
                 filterable: $newField->filterable,
                 sortable: $newField->sortable,
+                distinct: $newField->distinct,
+                facet: $newField->facet,
                 options: $this->mergeOptions($field->options, $newField->options),
             );
         }
