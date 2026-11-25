@@ -21,6 +21,7 @@ use CmsIg\Seal\Engine;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\EngineRegistry;
 use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use Doctrine\DBAL\Schema\Schema;
 use Psr\Container\ContainerInterface;
 
@@ -93,7 +94,7 @@ final class SealContainerFactory
             $dirs = $engineSchemaDirs[$name] ?? [];
 
             $adapter = $adapterFactory->createAdapter($adapterDsn);
-            $loader = new PhpFileLoader($dirs, $indexNamePrefix);
+            $loader = new PrefixLoader(new PhpFileLoader($dirs), $indexNamePrefix);
             $schema = $loader->load();
 
             $engine = new Engine($adapter, $schema);

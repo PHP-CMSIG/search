@@ -9,6 +9,34 @@ A Schema is a collection of one or more ``Index`` definitions. An ``Index`` is d
 Where every field is defined by a name and a type. All fields types with exception from the ``Identifier``
 are possible to be defined as ``filterable``, ``sortable``, ``multiple``, ``facet`` and ``distinct``.
 
+Index Name Prefixes
+-------------------
+
+Use ``PrefixLoader`` to prefix the physical index names produced by any schema loader:
+
+.. code-block:: php
+
+    <?php
+
+    use CmsIg\Seal\Schema\Loader\PhpFileLoader;
+    use CmsIg\Seal\Schema\Loader\PrefixLoader;
+
+    $schema = (new PrefixLoader(
+        new PhpFileLoader([__DIR__ . '/schema']),
+        'my_app_',
+    ))->load();
+
+The logical schema keys remain unchanged: ``$schema->indexes['blog']->name`` is ``my_app_blog``.
+PHP schema definitions are merged before the prefix is applied. Framework integrations compose
+these loaders automatically through the existing ``index_name_prefix`` configuration.
+
+.. warning::
+
+    Breaking change in 0.13: ``PhpFileLoader`` no longer accepts the ``indexNamePrefix`` constructor
+    argument. Replace ``new PhpFileLoader($directories, $prefix)`` with
+    ``new PrefixLoader(new PhpFileLoader($directories), $prefix)``. Calls using only the directories
+    argument and framework ``index_name_prefix`` configuration remain unchanged.
+
 Basic Field Types
 -----------------
 

@@ -106,29 +106,4 @@ class PhpFileLoaderTest extends TestCase
         $this->assertFalse($archived->filterable);
         $this->assertFalse($archived->sortable);
     }
-
-    public function testMergeWithPrefix(): void
-    {
-        $schema = (new PhpFileLoader([__DIR__ . '/fixtures/merge'], 'prefix_'))->load();
-
-        $this->assertSame(['blog'], \array_keys($schema->indexes));
-
-        $this->assertSame('prefix_blog', $schema->indexes['blog']->name);
-    }
-
-    public function testLoadBasicWithPrefix(): void
-    {
-        $schema = (new PhpFileLoader([__DIR__ . '/fixtures/basic'], 'prefix_'))->load();
-
-        $this->assertEqualsCanonicalizing(
-            [
-                'news',
-                'blog',
-            ],
-            \array_keys($schema->indexes),
-        );
-
-        $this->assertSame('prefix_blog', $schema->indexes['blog']->name);
-        $this->assertSame('prefix_news', $schema->indexes['news']->name);
-    }
 }
