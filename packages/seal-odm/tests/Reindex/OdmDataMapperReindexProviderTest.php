@@ -50,21 +50,23 @@ class OdmDataMapperReindexProviderTest extends TestCase
             }
         };
 
-        $this->provider = new OdmDataMapperReindexProvider($odmProviders, $odmDataMapper);
+        $this->provider = new OdmDataMapperReindexProvider([
+            'blog' => $odmProviders,
+        ], $odmDataMapper);
     }
 
     public function testTotal(): void
     {
         self::assertSame(
             2,
-            $this->provider->total(),
+            $this->provider->total('blog'),
         );
     }
 
     public function testProvide(): void
     {
         $result = [
-            ...$this->provider->provide(ReindexConfig::create()->withIndex('blog')),
+            ...$this->provider->provide('blog', ReindexConfig::create()->withIndex('blog')),
         ];
 
         self::assertCount(

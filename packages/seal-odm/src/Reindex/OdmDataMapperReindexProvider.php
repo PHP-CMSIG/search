@@ -14,34 +14,62 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Odm\Reindex;
 
 use CmsIg\Seal\Odm\Mapper\OdmDataMapperInterface;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 
 /**
  * @internal this class is only intended to be used internally by the Seal ODM package
  */
-final class OdmDataMapperReindexProvider implements StaticReindexProviderInterface
+final class OdmDataMapperReindexProvider implements DynamicReindexProviderInterface
 {
+    /**
+     * @var list<OdmStaticReindexProviderInterface>
+     */
+    private readonly array $providers;
+
+    /**
+     * @param iterable<OdmStaticReindexProviderInterface> $providers
+     */
     public function __construct(
-        private readonly OdmStaticReindexProviderInterface $provider,
+        iterable $providers,
         private readonly OdmDataMapperInterface $dataMapper,
     ) {
+        $providerList = [];
+        foreach ($providers as $provider) {
+            $providerList[] = $provider;
+        }
+        $this->providers = $providerList;
     }
 
-    public function getIndexName(): string
+    public function total(string $index): int|null
     {
-        return $this->provider->getIndexName();
+        $total = 0;
+        foreach ($this->providers as $provider) {
+            if ($index !== $provider->getIndexName()) {
+                continue;
+            }
+
+            $newTotal = $provider->total();
+            if (null === $newTotal) {
+                return null;
+            }
+
+            $total += $newTotal;
+        }
+
+        return $total;
     }
 
-    public function total(): int|null
+    public function provide(string $index, ReindexConfig $reindexConfig): \Generator
     {
-        return $this->provider->total();
-    }
+        foreach ($this->providers as $provider) {
+            if ($index !== $provider->getIndexName()) {
+                continue;
+            }
 
-    public function provide(ReindexConfig $reindexConfig): \Generator
-    {
-        foreach ($this->provider->provide($reindexConfig) as $object) {
-            yield $this->dataMapper->objectToArray($this->getIndexName(), $object);
+            foreach ($provider->provide($reindexConfig) as $object) {
+                yield $this->dataMapper->objectToArray($index, $object);
+            }
         }
     }
 }

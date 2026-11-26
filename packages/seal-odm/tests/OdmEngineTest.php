@@ -20,8 +20,8 @@ use CmsIg\Seal\Odm\OdmEngine;
 use CmsIg\Seal\Odm\Reindex\OdmStaticReindexProviderInterface;
 use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
 use CmsIg\Seal\Odm\Tests\Reindex\Fixtures\Schema\Blog;
+use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
-use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
@@ -126,7 +126,7 @@ class OdmEngineTest extends TestCase
         self::assertSame(['tags' => []], $result->facets());
     }
 
-    public function testReindexKeepsStaticScopeAndAcceptsGenerator(): void
+    public function testReindexUsesDynamicBridgeAndAcceptsGenerator(): void
     {
         $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
         $provider = $this->createMock(OdmStaticReindexProviderInterface::class);
@@ -141,11 +141,12 @@ class OdmEngineTest extends TestCase
             self::assertSame($config, $actualConfig);
             $providers = [...$providers];
             self::assertCount(1, $providers);
-            self::assertInstanceOf(StaticReindexProviderInterface::class, $providers[0]);
-            self::assertSame('blog', $providers[0]->getIndexName());
-            self::assertSame(1, $providers[0]->total());
-            self::assertSame([['id' => '1', 'text' => 'Test']], [...$providers[0]->provide($config)]);
-            self::assertSame(1, $providers[0]->total());
+            self::assertInstanceOf(DynamicReindexProviderInterface::class, $providers[0]);
+            self::assertSame(1, $providers[0]->total('blog'));
+            self::assertSame([['id' => '1', 'text' => 'Test']], [...$providers[0]->provide('blog', $config)]);
+            self::assertSame(0, $providers[0]->total('unrelated'));
+            self::assertSame([], [...$providers[0]->provide('unrelated', $config)]);
+            self::assertSame(1, $providers[0]->total('blog'));
 
             return null;
         });
