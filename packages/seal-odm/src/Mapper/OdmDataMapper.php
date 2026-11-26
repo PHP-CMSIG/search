@@ -52,7 +52,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $indexName = null;
         foreach ($this->schema->indexes as $name => $index) {
             $metadata = $index->options['odm'] ?? null;
-            if (!\is_array($metadata) || ($metadata['mappedClass'] ?? null) !== $documentClass) {
+            if (!\is_array($metadata) || ($metadata['type'] ?? null) !== $documentClass) {
                 continue;
             }
 
@@ -75,11 +75,11 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $schemaIndex = $this->getSchemaIndex($index);
         $odmMetadata = $this->getIndexMetadata($index, $schemaIndex);
 
-        if (!$object instanceof $odmMetadata['mappedClass']) {
+        if (!$object instanceof $odmMetadata['type']) {
             throw new \RuntimeException(\sprintf(
                 'Object for index "%s" must be an instance of "%s", got "%s".',
                 $index,
-                $odmMetadata['mappedClass'],
+                $odmMetadata['type'],
                 $object::class,
             ));
         }
@@ -94,7 +94,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
         return $this->hydrateObject(
             $index,
-            $odmMetadata['mappedClass'],
+            $odmMetadata['type'],
             $document,
             $schemaIndex->fields,
         );
@@ -171,7 +171,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
     /**
      * @return array{
-     *     mappedClass: class-string,
+     *     type: class-string,
      * }
      */
     private function getIndexMetadata(string $index, Index $schemaIndex): array
@@ -179,8 +179,8 @@ final class OdmDataMapper implements OdmDataMapperInterface
         $metadata = $schemaIndex->options['odm'] ?? null;
         if (
             !\is_array($metadata)
-            || !isset($metadata['mappedClass'])
-            || !\is_string($metadata['mappedClass'])
+            || !isset($metadata['type'])
+            || !\is_string($metadata['type'])
         ) {
             throw new \RuntimeException(\sprintf(
                 'Index "%s" is missing ODM metadata. Build the schema with "%s".',
@@ -190,7 +190,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         }
 
         return [
-            'mappedClass' => $this->normalizeClassName($metadata['mappedClass'], $index, $index),
+            'type' => $this->normalizeClassName($metadata['type'], $index, $index),
         ];
     }
 
@@ -351,7 +351,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         }
 
         if (!$field->multiple) {
-            return $this->hydrateDateTimeValue($index, $fieldName, $value);
+            return $this->hydrateDateTimeValue($index, $fieldName, $value, $field);
         }
 
         if (!\is_array($value)) {
@@ -364,20 +364,26 @@ final class OdmDataMapper implements OdmDataMapperInterface
 
         $values = [];
         foreach ($value as $key => $item) {
-            $values[$key] = $this->hydrateDateTimeValue($index, $fieldName, $item);
+            $values[$key] = $this->hydrateDateTimeValue($index, $fieldName, $item, $field);
         }
 
         return $values;
     }
 
-    private function hydrateDateTimeValue(string $index, string $fieldName, mixed $value): \DateTimeImmutable
+    private function hydrateDateTimeValue(string $index, string $fieldName, mixed $value, Field\DateTimeField $field): \DateTime|\DateTimeImmutable
     {
-        if ($value instanceof \DateTimeImmutable) {
-            return $value;
+        $metadata = $field->options['odm'] ?? [];
+        $type = \is_array($metadata) ? ($metadata['type'] ?? \DateTimeImmutable::class) : null;
+        if (!\in_array($type, [\DateTime::class, \DateTimeImmutable::class], true)) {
+            throw new \RuntimeException(\sprintf(
+                'DateTime field "%s" on index "%s" contains unsupported ODM type metadata.',
+                $fieldName,
+                $index,
+            ));
         }
 
         if ($value instanceof \DateTimeInterface) {
-            return new \DateTimeImmutable($value->format('c'));
+            return $type::createFromInterface($value);
         }
 
         if (!\is_string($value)) {
@@ -389,7 +395,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
             ));
         }
 
-        return new \DateTimeImmutable($value);
+        return new $type($value);
     }
 
     private function extractScalarField(string $index, string $fieldName, mixed $value, Field\AbstractField $field): mixed
@@ -461,7 +467,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
     private function getNestedClass(string $index, string $fieldName, Field\ObjectField $field): string
     {
         $metadata = $field->options['odm'] ?? null;
-        if (!\is_array($metadata) || !isset($metadata['mappedClass'])) {
+        if (!\is_array($metadata) || !isset($metadata['type'])) {
             throw new \RuntimeException(\sprintf(
                 'Object field "%s" on index "%s" is missing nested ODM metadata.',
                 $fieldName,
@@ -469,7 +475,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
             ));
         }
 
-        return $this->normalizeClassName($metadata['mappedClass'], $fieldName, $index);
+        return $this->normalizeClassName($metadata['type'], $fieldName, $index);
     }
 
     /**

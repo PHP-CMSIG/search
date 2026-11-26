@@ -16,7 +16,7 @@ namespace CmsIg\Seal\Odm\Metadata;
 /**
  * @internal this class is only intended to be used internally by the Seal ODM package
  *
- * @phpstan-type ResolvedPropertyType array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, mappedClass?: class-string}
+ * @phpstan-type ResolvedPropertyType array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, type?: class-string}
  */
 final class PropertyTypeResolver
 {
@@ -153,9 +153,9 @@ final class PropertyTypeResolver
             'int' => ['kind' => 'int', 'multiple' => $multiple, 'nullable' => $nullable],
             'float' => ['kind' => 'float', 'multiple' => $multiple, 'nullable' => $nullable],
             'bool' => ['kind' => 'bool', 'multiple' => $multiple, 'nullable' => $nullable],
-            \DateTimeInterface::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'mappedClass' => \DateTimeImmutable::class],
-            \DateTime::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'mappedClass' => \DateTime::class],
-            \DateTimeImmutable::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'mappedClass' => \DateTimeImmutable::class],
+            \DateTimeInterface::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'type' => \DateTimeImmutable::class],
+            \DateTime::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'type' => \DateTime::class],
+            \DateTimeImmutable::class => ['kind' => 'datetime', 'multiple' => $multiple, 'nullable' => $nullable, 'type' => \DateTimeImmutable::class],
             'array', 'iterable', 'mixed' => throw new \RuntimeException(\sprintf(
                 'Property "%s" on class "%s" uses unsupported type "%s".',
                 $property->getName(),
@@ -169,7 +169,7 @@ final class PropertyTypeResolver
     /**
      * @param \ReflectionClass<object> $reflectionClass
      *
-     * @return array{kind: 'object', multiple: bool, nullable: bool, mappedClass: class-string}
+     * @return array{kind: 'object', multiple: bool, nullable: bool, type: class-string}
      */
     private function normalizeResolvedObjectType(
         \ReflectionClass $reflectionClass,
@@ -195,8 +195,17 @@ final class PropertyTypeResolver
             ));
         }
 
+        if (\is_a($typeName, \DateTimeInterface::class, true)) {
+            throw new \RuntimeException(\sprintf(
+                'DateTime subclass "%s" on property "%s" of class "%s" is not supported. Use DateTime, DateTimeImmutable or DateTimeInterface.',
+                $typeName,
+                $property->getName(),
+                $reflectionClass->getName(),
+            ));
+        }
+
         /** @var class-string $typeName */
-        return ['kind' => 'object', 'multiple' => $multiple, 'nullable' => $nullable, 'mappedClass' => $typeName];
+        return ['kind' => 'object', 'multiple' => $multiple, 'nullable' => $nullable, 'type' => $typeName];
     }
 
     /**

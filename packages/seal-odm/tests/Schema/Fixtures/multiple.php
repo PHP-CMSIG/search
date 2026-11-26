@@ -41,11 +41,12 @@ return new Schema([
             'createds' => new Field\DateTimeField(
                 name: 'createds',
                 multiple: true,
+                options: ['odm' => ['type' => \DateTimeImmutable::class]],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\Multiple::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\Multiple::class,
             ],
         ],
     ),
@@ -74,11 +75,12 @@ return new Schema([
             'createds' => new Field\DateTimeField(
                 name: 'createds',
                 multiple: true,
+                options: ['odm' => ['type' => \DateTimeImmutable::class]],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\MultipleList::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Multiple\MultipleList::class,
             ],
         ],
     ),

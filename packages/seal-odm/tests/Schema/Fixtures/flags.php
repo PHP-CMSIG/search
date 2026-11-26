@@ -63,12 +63,15 @@ return new Schema([
                 sortable: true,
                 distinct: true,
                 facet: true,
-                options: ['customKey' => 'customValue'],
+                options: [
+                    'customKey' => 'customValue',
+                    'odm' => ['type' => \DateTimeImmutable::class],
+                ],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Flags\Flags::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Flags\Flags::class,
             ],
         ],
     ),

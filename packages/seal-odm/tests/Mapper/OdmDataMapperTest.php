@@ -17,6 +17,7 @@ namespace CmsIg\Seal\Odm\Tests\Mapper;
 
 use CmsIg\Seal\Odm\Mapper\OdmDataMapper;
 use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
+use CmsIg\Seal\Odm\Tests\Schema\Fixtures\Dates\Document;
 use CmsIg\Seal\Schema\Field;
 use CmsIg\Seal\Schema\Index;
 use CmsIg\Seal\Schema\Schema;
@@ -84,7 +85,7 @@ class OdmDataMapperTest extends TestCase
             'dates' => new Index('dates', [
                 'created' => new Field\DateTimeField('created'),
                 'dates' => new Field\DateTimeField('dates', multiple: true),
-            ], options: ['odm' => ['mappedClass' => $object::class]]),
+            ], options: ['odm' => ['type' => $object::class]]),
         ]));
         $originalTimezone = \date_default_timezone_get();
         \date_default_timezone_set('UTC');
@@ -100,6 +101,62 @@ class OdmDataMapperTest extends TestCase
         } finally {
             \date_default_timezone_set($originalTimezone);
         }
+    }
+
+    public function testDateTypesRoundTrip(): void
+    {
+        $mapper = $this->createInstance(__DIR__ . '/../Schema/Fixtures/Dates');
+        $object = new Document();
+        $object->mutable = new \DateTime('2026-11-26T12:00:00+01:00');
+        $object->immutable = new \DateTimeImmutable('2026-07-01T12:00:00+02:00');
+        $object->interface = new \DateTime('2026-01-01T12:00:00-05:00');
+        $object->dates = ['first' => new \DateTime('2026-06-01T10:00:00+02:00')];
+
+        $document = $mapper->objectToArray('dates', $object);
+        self::assertSame('2026-11-26T12:00:00+01:00', $document['mutable']);
+        self::assertSame(['first' => '2026-06-01T10:00:00+02:00'], $document['dates']);
+        $loaded = $mapper->arrayToObject('dates', $document);
+        self::assertInstanceOf(Document::class, $loaded);
+        self::assertSame(\DateTime::class, $loaded->mutable::class);
+        self::assertSame(\DateTimeImmutable::class, $loaded->immutable::class);
+        self::assertInstanceOf(\DateTimeImmutable::class, $loaded->interface);
+        self::assertNull($loaded->nullable);
+        self::assertSame($object->mutable->getTimestamp(), $loaded->mutable->getTimestamp());
+        self::assertSame($object->interface->getTimestamp(), $loaded->interface->getTimestamp());
+        self::assertSame(\DateTime::class, $loaded->dates['first']::class);
+        self::assertSame($object->dates['first']->getTimestamp(), $loaded->dates['first']->getTimestamp());
+    }
+
+    public function testDateObjectInputsUseConfiguredType(): void
+    {
+        $mapper = $this->createInstance(__DIR__ . '/../Schema/Fixtures/Dates');
+        $mutable = new \DateTime('2026-07-01T12:00:00+02:00');
+        $immutable = \DateTimeImmutable::createFromMutable($mutable);
+        $loaded = $mapper->arrayToObject('dates', [
+            'mutable' => $immutable,
+            'immutable' => $mutable,
+            'interface' => $mutable,
+            'dates' => ['first' => $immutable],
+        ]);
+        self::assertInstanceOf(Document::class, $loaded);
+        self::assertSame(\DateTime::class, $loaded->mutable::class);
+        self::assertSame(\DateTimeImmutable::class, $loaded->immutable::class);
+        self::assertInstanceOf(\DateTimeImmutable::class, $loaded->interface);
+        self::assertSame(\DateTime::class, $loaded->dates['first']::class);
+        self::assertSame($mutable->format('c'), $loaded->mutable->format('c'));
+        self::assertNotSame($mutable, $loaded->immutable);
+    }
+
+    public function testInvalidDateTypeMetadataIsRejected(): void
+    {
+        $mapper = new OdmDataMapper(new Schema([
+            'dates' => new Index('dates', [
+                'mutable' => new Field\DateTimeField('mutable', options: ['odm' => ['type' => \stdClass::class]]),
+            ], options: ['odm' => ['type' => Document::class]]),
+        ]));
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('unsupported ODM type metadata');
+        $mapper->arrayToObject('dates', ['mutable' => '2026-11-26T12:00:00+01:00']);
     }
 
     private function createInstance(string $schemaDirectory): OdmDataMapper

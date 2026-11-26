@@ -39,11 +39,12 @@ return new Schema([
                     ),
                     'created' => new Field\DateTimeField(
                         name: 'created',
+                        options: ['odm' => ['type' => \DateTimeImmutable::class]],
                     ),
                 ],
                 options: [
                     'odm' => [
-                        'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
+                        'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
                     ],
                 ],
             ),
@@ -64,19 +65,20 @@ return new Schema([
                     ),
                     'created' => new Field\DateTimeField(
                         name: 'created',
+                        options: ['odm' => ['type' => \DateTimeImmutable::class]],
                     ),
                 ],
                 multiple: true,
                 options: [
                     'odm' => [
-                        'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
+                        'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\SubObject::class,
                     ],
                 ],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\NestedObject::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Object\NestedObject::class,
             ],
         ],
     ),

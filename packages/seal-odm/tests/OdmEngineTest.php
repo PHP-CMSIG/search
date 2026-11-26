@@ -158,7 +158,7 @@ class OdmEngineTest extends TestCase
     public function testMappingUsesLoadedSchema(): void
     {
         $mapper = new OdmDataMapper(new Schema([
-            'custom' => new Index('custom', [], options: ['odm' => ['mappedClass' => Blog::class]]),
+            'custom' => new Index('custom', [], options: ['odm' => ['type' => Blog::class]]),
         ]));
 
         self::assertSame('custom', $mapper->getIndexName(Blog::class));
@@ -175,8 +175,8 @@ class OdmEngineTest extends TestCase
     public function testAmbiguousClassIsRejected(): void
     {
         $mapper = new OdmDataMapper(new Schema([
-            'one' => new Index('one', [], options: ['odm' => ['mappedClass' => Blog::class]]),
-            'two' => new Index('two', [], options: ['odm' => ['mappedClass' => Blog::class]]),
+            'one' => new Index('one', [], options: ['odm' => ['type' => Blog::class]]),
+            'two' => new Index('two', [], options: ['odm' => ['type' => Blog::class]]),
         ]));
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('is mapped to multiple indexes');

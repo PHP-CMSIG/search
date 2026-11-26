@@ -34,7 +34,7 @@ return new Schema([
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\Blog::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\Blog::class,
             ],
         ],
     ),
@@ -58,11 +58,12 @@ return new Schema([
             ),
             'created' => new Field\DateTimeField(
                 name: 'created',
+                options: ['odm' => ['type' => \DateTimeImmutable::class]],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\News::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\Basic\News::class,
             ],
         ],
     ),

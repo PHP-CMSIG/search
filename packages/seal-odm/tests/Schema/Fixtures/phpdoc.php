@@ -41,11 +41,12 @@ return new Schema([
             ),
             'created' => new Field\DateTimeField(
                 name: 'created',
+                options: ['odm' => ['type' => \DateTimeImmutable::class]],
             ),
         ],
         options: [
             'odm' => [
-                'mappedClass' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\PhpDoc\PhpDoc::class,
+                'type' => \CmsIg\Seal\Odm\Tests\Schema\Fixtures\PhpDoc\PhpDoc::class,
             ],
         ],
     ),

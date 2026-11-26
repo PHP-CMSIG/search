@@ -118,18 +118,30 @@ class through PHPDoc generics for IDEs and static analysis. Calling `index(Other
 on a search builder returns a new builder for that class, preserving the original builder.
 Schema-wide operations still apply to all indexes, and reindex providers still declare index names.
 
-Supported inferred field types are `string`, `int`, `float`, `bool`, `DateTimeInterface` implementations,
+Supported inferred field types are `string`, `int`, `float`, `bool`, `DateTime`, `DateTimeImmutable`, `DateTimeInterface`,
 object types as nested `ObjectField`s, and `array`/`list` properties with element types declared in PHPDoc.
 
 The `OdmDataMapper` creates objects without calling constructors and reads or writes mapped values directly
 through reflected properties. To preserve the metadata required for that behavior, build the schema with
 `AttributeLoader` and pass the same `Schema` instance to both `Engine` and `OdmDataMapper`.
 
-The ODM metadata uses `mappedClass` consistently for document, nested object, and date classes:
+The ODM metadata uses `type` for the target PHP type, both on indexes (the document class)
+and fields (nested object classes, date classes, or scalar types such as integer identifiers):
 
 ```php
-options: ['odm' => ['mappedClass' => BlogDocument::class]]
+options: ['odm' => ['type' => BlogDocument::class]] // Index
+options: ['odm' => ['type' => Comment::class]] // ObjectField
+options: ['odm' => ['type' => \DateTime::class]] // DateTimeField
+options: ['odm' => ['type' => 'int']] // IdentifierField
 ```
+
+For multiple fields, `type` describes each element. Scalar types already implied by the schema
+field do not need additional metadata.
+
+Date values are serialized as ISO 8601 strings. Hydration preserves `DateTime` and
+`DateTimeImmutable` property types; `DateTimeInterface` resolves to `DateTimeImmutable`.
+Manually defined date fields without ODM type metadata also default to `DateTimeImmutable`.
+Custom date subclasses are rejected because their construction and additional state are not supported.
 
 ## Authors
 

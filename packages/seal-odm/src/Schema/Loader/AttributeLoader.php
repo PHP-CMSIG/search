@@ -127,7 +127,7 @@ final class AttributeLoader implements LoaderInterface
     {
         $options = $indexAttribute->options;
         $options['odm'] = [
-            'mappedClass' => $reflectionClass->getName(),
+            'type' => $reflectionClass->getName(),
         ];
 
         return new Index(
@@ -220,7 +220,7 @@ final class AttributeLoader implements LoaderInterface
                 ));
             }
 
-            $objectClassName = $resolvedType['mappedClass'] ?? null;
+            $objectClassName = $resolvedType['type'] ?? null;
             if (!\is_string($objectClassName)) {
                 throw new \RuntimeException(\sprintf(
                     'Object field "%s" on class "%s" is missing resolved class metadata.',
@@ -297,47 +297,32 @@ final class AttributeLoader implements LoaderInterface
                 sortable: $sortable,
                 distinct: $distinct,
                 facet: $facet,
-                options: $options,
+                options: $this->mergeOdmOptions($options, $odmOptions),
             ),
         };
     }
 
     /**
-     * @param array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, mappedClass?: class-string} $resolvedType
+     * @param array{kind: 'string'|'int'|'float'|'bool'|'datetime'|'object', multiple: bool, nullable: bool, type?: class-string} $resolvedType
      *
      * @return array<string, mixed>
      */
     private function createFieldMetadata(\ReflectionProperty $property, array $resolvedType): array
     {
-        $metadata = [];
-
-        if ('object' === $resolvedType['kind']) {
-            $className = $resolvedType['mappedClass'] ?? null;
-            if (!\is_string($className)) {
-                throw new \RuntimeException(\sprintf(
-                    'Object field "%s" on class "%s" is missing resolved class metadata.',
-                    $property->getName(),
-                    $property->getDeclaringClass()->getName(),
-                ));
-            }
-
-            $metadata['mappedClass'] = $className;
+        if (!\in_array($resolvedType['kind'], ['object', 'datetime'], true)) {
+            return [];
         }
 
-        if ('datetime' === $resolvedType['kind']) {
-            $mappedClass = $resolvedType['mappedClass'] ?? null;
-            if (!\is_string($mappedClass)) {
-                throw new \RuntimeException(\sprintf(
-                    'DateTime field "%s" on class "%s" is missing resolved class metadata.',
-                    $property->getName(),
-                    $property->getDeclaringClass()->getName(),
-                ));
-            }
-
-            $metadata['mappedClass'] = $mappedClass;
+        $type = $resolvedType['type'] ?? null;
+        if (!\is_string($type)) {
+            throw new \RuntimeException(\sprintf(
+                'Property "%s" on class "%s" is missing resolved type metadata.',
+                $property->getName(),
+                $property->getDeclaringClass()->getName(),
+            ));
         }
 
-        return $metadata;
+        return ['type' => $type];
     }
 
     /**

@@ -116,6 +116,25 @@ class AttributeLoaderTest extends TestCase
         (new AttributeLoader([__DIR__ . '/Fixtures/InvalidStringIdentifier']))->load();
     }
 
+    public function testDateTypeMetadata(): void
+    {
+        $schema = (new AttributeLoader([__DIR__ . '/Fixtures/Dates']))->load();
+        $fields = $schema->indexes['dates']->fields;
+        self::assertSame(['custom' => true, 'odm' => ['type' => \DateTime::class]], $fields['mutable']->options);
+        self::assertSame(['odm' => ['type' => \DateTimeImmutable::class]], $fields['immutable']->options);
+        self::assertSame(['odm' => ['type' => \DateTimeImmutable::class]], $fields['interface']->options);
+        self::assertSame(['odm' => ['type' => \DateTime::class]], $fields['nullable']->options);
+        self::assertSame(['odm' => ['type' => \DateTime::class]], $fields['dates']->options);
+        self::assertTrue($fields['dates']->multiple);
+    }
+
+    public function testDateSubclassesAreRejected(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('DateTime subclass');
+        (new AttributeLoader([__DIR__ . '/Fixtures/InvalidDateSubclass']))->load();
+    }
+
     private static function requireSchema(string $file): Schema
     {
         /** @var Schema $schema */
