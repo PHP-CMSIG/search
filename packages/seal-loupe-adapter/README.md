@@ -68,6 +68,24 @@ loupe://var/indexes/
 loupe://
 ```
 
+The languages of the indexed documents can be configured via the index options. This improves the language
+detection, which Loupe uses for tokenization, stemming and the decomposition of compound words:
+
+```php
+<?php
+
+use CmsIg\Seal\Schema\Index;
+
+new Index('blog', $fields, options: [
+    'loupe' => [
+        'languages' => ['de', 'en'],
+    ],
+]);
+```
+
+As Loupe stores its configuration when the index is created, the index needs to be recreated after changing the
+languages.
+
 ## Authors
 
 - [Alexander Schranz](https://github.com/alexander-schranz/)
