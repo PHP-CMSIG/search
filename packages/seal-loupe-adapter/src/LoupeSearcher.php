@@ -157,20 +157,31 @@ final class LoupeSearcher implements SearcherInterface
                 'Document with key "_formatted" expected to be array.',
             );
 
-            foreach ($highlightFields as $highlightField) {
-                $value = null;
-                if (\is_array($hit['_formatted'] ?? null)
-                    && \is_string($hit['_formatted'][$highlightField] ?? null)
-                    && \str_contains($hit['_formatted'][$highlightField], $highlightPreTag)
-                ) {
-                    $value = $hit['_formatted'][$highlightField];
-                }
+            $formatted = \is_array($hit['_formatted'] ?? null) ? $hit['_formatted'] : [];
 
-                $document['_formatted'][$highlightField] = $value;
+            foreach ($highlightFields as $highlightField) {
+                $document['_formatted'][$highlightField] = $this->findHighlight(
+                    $formatted[$highlightField] ?? null,
+                    $highlightPreTag,
+                );
             }
 
             yield $document;
         }
+    }
+
+    /**
+     * Multiple fields return their first highlighted value, like the Elasticsearch adapter returns the first fragment.
+     */
+    private function findHighlight(mixed $value, string $highlightPreTag): string|null
+    {
+        foreach ((array) $value as $item) {
+            if (\is_string($item) && \str_contains($item, $highlightPreTag)) {
+                return $item;
+            }
+        }
+
+        return null;
     }
 
     /**

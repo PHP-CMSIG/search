@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace CmsIg\Seal\Adapter\Loupe\Tests;
 
 use CmsIg\Seal\Adapter\Loupe\LoupeAdapter;
+use CmsIg\Seal\Search\Condition\Condition;
+use CmsIg\Seal\Search\SearchBuilder;
 use CmsIg\Seal\Testing\AbstractSearcherTestCase;
+use CmsIg\Seal\Testing\TestingHelper;
 use Composer\InstalledVersions;
 
 class LoupeSearcherTest extends AbstractSearcherTestCase
@@ -35,5 +38,33 @@ class LoupeSearcherTest extends AbstractSearcherTestCase
         }
 
         parent::testZeroLimitWithFacets();
+    }
+
+    public function testSearchConditionWithHighlightOnMultipleField(): void
+    {
+        $documents = TestingHelper::createComplexFixtures();
+
+        $schema = self::getSchema();
+
+        foreach ($documents as $document) {
+            self::$indexer->save($schema->indexes[TestingHelper::INDEX_COMPLEX], $document);
+        }
+
+        $search = new SearchBuilder($schema, self::$searcher);
+        $search->index(TestingHelper::INDEX_COMPLEX);
+        $search->addFilter(Condition::search('UX'));
+        $search->highlight(['tags'], '<mark>', '</mark>');
+
+        $loadedDocuments = [...$search->getResult()];
+
+        $this->assertCount(2, $loadedDocuments);
+
+        foreach ($loadedDocuments as $loadedDocument) {
+            $this->assertSame(['tags' => '<mark>UX</mark>'], $loadedDocument['_formatted']);
+        }
+
+        foreach ($documents as $document) {
+            self::$indexer->delete($schema->indexes[TestingHelper::INDEX_COMPLEX], $document['uuid']);
+        }
     }
 }
