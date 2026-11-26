@@ -94,6 +94,28 @@ class AttributeLoaderTest extends TestCase
         self::assertSchema(self::requireSchema(__DIR__ . '/Fixtures/phpdoc.php'), $schema);
     }
 
+    public function testSearchableStringAndSpacedGeneric(): void
+    {
+        $schema = (new AttributeLoader([__DIR__ . '/Fixtures/Regression']))->load();
+        self::assertTrue($schema->indexes['regression']->fields['title']->searchable);
+        self::assertInstanceOf(Field\TextField::class, $schema->indexes['regression']->fields['tags']);
+        self::assertTrue($schema->indexes['regression']->fields['tags']->multiple);
+    }
+
+    public function testMultipleIntIdentifierIsRejected(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('must resolve to a single string or int');
+        (new AttributeLoader([__DIR__ . '/Fixtures/InvalidIntIdentifier']))->load();
+    }
+
+    public function testMultipleStringIdentifierIsRejected(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('must resolve to a single string or int');
+        (new AttributeLoader([__DIR__ . '/Fixtures/InvalidStringIdentifier']))->load();
+    }
+
     private static function requireSchema(string $file): Schema
     {
         /** @var Schema $schema */

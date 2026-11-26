@@ -237,7 +237,7 @@ final class PropertyTypeResolver
             return null;
         }
 
-        if (!\preg_match('/@var\s+([^\s\*]+)/', $docComment, $matches)) {
+        if (!\preg_match('/@var\s+((?:[^\s<>\*]+|<[^<>\*]*>)+)/', $docComment, $matches)) {
             return null;
         }
 

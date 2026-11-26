@@ -186,14 +186,16 @@ final class AttributeLoader implements LoaderInterface
         $odmOptions = $this->createFieldMetadata($property, $resolvedType);
 
         if ($identifierAttribute instanceof IdentifierAttribute) {
-            if ('int' === $resolvedType['kind']) {
-                $odmOptions['type'] = $resolvedType['kind'];
-            } elseif ('string' !== $resolvedType['kind']) {
+            if ($resolvedType['multiple'] || !\in_array($resolvedType['kind'], ['string', 'int'], true)) {
                 throw new \RuntimeException(\sprintf(
-                    'Identifier property "%s" on class "%s" must resolve to string or int.',
+                    'Identifier property "%s" on class "%s" must resolve to a single string or int.',
                     $property->getName(),
                     $reflectionClass->getName(),
                 ));
+            }
+
+            if ('int' === $resolvedType['kind']) {
+                $odmOptions['type'] = $resolvedType['kind'];
             }
 
             return new Field\IdentifierField(
@@ -237,7 +239,7 @@ final class AttributeLoader implements LoaderInterface
             );
         }
 
-        if (true === $searchable) {
+        if (true === $searchable && 'string' !== $resolvedType['kind']) {
             throw new \RuntimeException(\sprintf(
                 'Property "%s" on class "%s" does not support searchable=true for inferred type "%s".',
                 $property->getName(),

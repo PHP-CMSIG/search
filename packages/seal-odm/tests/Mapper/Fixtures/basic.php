@@ -29,6 +29,6 @@ return [
         'commentsCount' => 4,
         'rating' => 3.5,
         'isSpecial' => true,
-        'created' => '2023-01-01 00:00:00',
+        'created' => (new \DateTimeImmutable('2023-01-01 00:00:00'))->format('c'),
     ],
 ];

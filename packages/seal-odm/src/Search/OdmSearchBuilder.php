@@ -120,7 +120,7 @@ final class OdmSearchBuilder
     public function getResult(): OdmResult
     {
         $search = $this->searchBuilder->getSearch();
-        $index = $search->index->name;
+        $index = $this->dataMapper->getIndexName($this->documentClass);
         $result = $this->searchBuilder->getSearcher()->search($search);
 
         return new OdmResult(

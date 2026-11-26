@@ -135,8 +135,13 @@ final class OdmEngine implements OdmEngineInterface
         callable|null $progressCallback = null,
         array $options = [],
     ): TaskInterface|null {
+        $providers = [];
+        foreach ($odmReindexProviders as $provider) {
+            $providers[] = new OdmDataMapperReindexProvider($provider, $this->dataMapper);
+        }
+
         return $this->engine->reindex(
-            [new OdmDataMapperReindexProvider($odmReindexProviders, $this->dataMapper)],
+            $providers,
             $reindexConfig,
             $progressCallback,
             $options,

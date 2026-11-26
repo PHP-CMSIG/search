@@ -17,6 +17,9 @@ namespace CmsIg\Seal\Odm\Tests\Mapper;
 
 use CmsIg\Seal\Odm\Mapper\OdmDataMapper;
 use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
+use CmsIg\Seal\Schema\Field;
+use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Schema\Schema;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -65,6 +68,38 @@ class OdmDataMapperTest extends TestCase
         yield 'basic_empty' => require __DIR__ . '/Fixtures/basic_empty.php'; // @phpstan-ignore-line generator.valueType
         yield 'nested' => require __DIR__ . '/Fixtures/nested.php'; // @phpstan-ignore-line generator.valueType
         yield 'nested_empty' => require __DIR__ . '/Fixtures/nested_empty.php'; // @phpstan-ignore-line generator.valueType
+    }
+
+    public function testDateTimeRoundTripPreservesInstantsAcrossTimezones(): void
+    {
+        $object = new class() {
+            public \DateTimeImmutable $created;
+
+            /** @var list<\DateTimeImmutable> */
+            public array $dates;
+        };
+        $object->created = new \DateTimeImmutable('2026-07-01T12:00:00+02:00');
+        $object->dates = [new \DateTimeImmutable('2026-01-01T12:00:00-05:00')];
+        $mapper = new OdmDataMapper(new Schema([
+            'dates' => new Index('dates', [
+                'created' => new Field\DateTimeField('created'),
+                'dates' => new Field\DateTimeField('dates', multiple: true),
+            ], options: ['odm' => ['mappedClass' => $object::class]]),
+        ]));
+        $originalTimezone = \date_default_timezone_get();
+        \date_default_timezone_set('UTC');
+
+        try {
+            $document = $mapper->objectToArray('dates', $object);
+            self::assertSame('2026-07-01T12:00:00+02:00', $document['created']);
+            self::assertSame(['2026-01-01T12:00:00-05:00'], $document['dates']);
+            $hydrated = $mapper->arrayToObject('dates', $document);
+            self::assertInstanceOf($object::class, $hydrated);
+            self::assertSame($object->created->getTimestamp(), $hydrated->created->getTimestamp());
+            self::assertSame($object->dates[0]->getTimestamp(), $hydrated->dates[0]->getTimestamp());
+        } finally {
+            \date_default_timezone_set($originalTimezone);
+        }
     }
 
     private function createInstance(string $schemaDirectory): OdmDataMapper

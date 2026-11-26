@@ -17,9 +17,13 @@ use CmsIg\Seal\Adapter\SearcherInterface;
 use CmsIg\Seal\EngineInterface;
 use CmsIg\Seal\Odm\Mapper\OdmDataMapper;
 use CmsIg\Seal\Odm\OdmEngine;
+use CmsIg\Seal\Odm\Reindex\OdmStaticReindexProviderInterface;
 use CmsIg\Seal\Odm\Schema\Loader\AttributeLoader;
 use CmsIg\Seal\Odm\Tests\Reindex\Fixtures\Schema\Blog;
+use CmsIg\Seal\Reindex\ReindexConfig;
+use CmsIg\Seal\Reindex\StaticReindexProviderInterface;
 use CmsIg\Seal\Schema\Index;
+use CmsIg\Seal\Schema\Loader\PrefixLoader;
 use CmsIg\Seal\Schema\Schema;
 use CmsIg\Seal\Search\Result;
 use CmsIg\Seal\Search\SearchBuilder;
@@ -29,7 +33,7 @@ class OdmEngineTest extends TestCase
 {
     public function testObjectWritesAndClassReads(): void
     {
-        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $schema = (new PrefixLoader(new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']), 'prefix_'))->load();
         $engine = $this->createMock(EngineInterface::class);
         $odm = new OdmEngine($engine, new OdmDataMapper($schema));
         $blog = new Blog('1', 'Test');
@@ -48,7 +52,7 @@ class OdmEngineTest extends TestCase
 
     public function testIndexOperationsResolveClass(): void
     {
-        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $schema = (new PrefixLoader(new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']), 'prefix_'))->load();
         $engine = $this->createMock(EngineInterface::class);
         $odm = new OdmEngine($engine, new OdmDataMapper($schema));
         $options = ['return_slow_promise_result' => true];
@@ -65,7 +69,7 @@ class OdmEngineTest extends TestCase
 
     public function testDeletionOnlyBulkResolvesClass(): void
     {
-        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $schema = (new PrefixLoader(new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']), 'prefix_'))->load();
         $engine = $this->createMock(EngineInterface::class);
         $odm = new OdmEngine($engine, new OdmDataMapper($schema));
         $engine->expects(self::once())->method('bulk')->willReturnCallback(static function (string $index, iterable $saves, iterable $deletes, int $size, array $options) {
@@ -83,7 +87,7 @@ class OdmEngineTest extends TestCase
 
     public function testBulkRejectsWrongDocumentClass(): void
     {
-        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $schema = (new PrefixLoader(new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']), 'prefix_'))->load();
         $engine = $this->createMock(EngineInterface::class);
         $engine->method('bulk')->willReturnCallback(static function (string $index, iterable $saves) {
             foreach ($saves as $document) {
@@ -102,7 +106,7 @@ class OdmEngineTest extends TestCase
 
     public function testSearchHydratesRequestedClass(): void
     {
-        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $schema = (new PrefixLoader(new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']), 'prefix_'))->load();
         $engine = $this->createMock(EngineInterface::class);
         $searcher = $this->createMock(SearcherInterface::class);
         $searcher->method('search')->willReturn(new Result((static function (): \Generator {
@@ -120,6 +124,35 @@ class OdmEngineTest extends TestCase
         self::assertSame('Test', $objects[0]->text);
         self::assertSame(1, $result->total());
         self::assertSame(['tags' => []], $result->facets());
+    }
+
+    public function testReindexKeepsStaticScopeAndAcceptsGenerator(): void
+    {
+        $schema = (new AttributeLoader([__DIR__ . '/Reindex/Fixtures/Schema']))->load();
+        $provider = $this->createMock(OdmStaticReindexProviderInterface::class);
+        $provider->method('getIndexName')->willReturn('blog');
+        $provider->method('total')->willReturn(1);
+        $provider->method('provide')->willReturnCallback(static function (): \Generator {
+            yield new Blog('1', 'Test');
+        });
+        $engine = $this->createMock(EngineInterface::class);
+        $config = ReindexConfig::create()->withDropIndex(true);
+        $engine->expects(self::once())->method('reindex')->willReturnCallback(static function (iterable $providers, ReindexConfig $actualConfig) use ($config) {
+            self::assertSame($config, $actualConfig);
+            $providers = [...$providers];
+            self::assertCount(1, $providers);
+            self::assertInstanceOf(StaticReindexProviderInterface::class, $providers[0]);
+            self::assertSame('blog', $providers[0]->getIndexName());
+            self::assertSame(1, $providers[0]->total());
+            self::assertSame([['id' => '1', 'text' => 'Test']], [...$providers[0]->provide($config)]);
+            self::assertSame(1, $providers[0]->total());
+
+            return null;
+        });
+        $odm = new OdmEngine($engine, new OdmDataMapper($schema));
+        $odm->reindex((static function () use ($provider): \Generator {
+            yield $provider;
+        })(), $config);
     }
 
     public function testMappingUsesLoadedSchema(): void

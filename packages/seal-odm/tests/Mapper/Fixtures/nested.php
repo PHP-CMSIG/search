@@ -49,7 +49,7 @@ return [
             'commentsCount' => 4,
             'rating' => 3.5,
             'isSpecial' => true,
-            'created' => '2023-01-01 00:00:00',
+            'created' => (new \DateTimeImmutable('2023-01-01 00:00:00'))->format('c'),
         ],
         'subObjects' => [
             [
@@ -57,14 +57,14 @@ return [
                 'commentsCount' => 2,
                 'rating' => 1.25,
                 'isSpecial' => false,
-                'created' => '2025-12-08 12:12:12',
+                'created' => (new \DateTimeImmutable('2025-12-08 12:12:12'))->format('c'),
             ],
             [
                 'text' => 'Some Text B',
                 'commentsCount' => 3,
                 'rating' => 4.25,
                 'isSpecial' => true,
-                'created' => '2026-12-12 13:13:13',
+                'created' => (new \DateTimeImmutable('2026-12-12 13:13:13'))->format('c'),
             ],
         ],
     ],

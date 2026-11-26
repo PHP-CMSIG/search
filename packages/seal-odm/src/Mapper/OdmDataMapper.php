@@ -50,7 +50,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
         }
 
         $indexName = null;
-        foreach ($this->schema->indexes as $index) {
+        foreach ($this->schema->indexes as $name => $index) {
             $metadata = $index->options['odm'] ?? null;
             if (!\is_array($metadata) || ($metadata['mappedClass'] ?? null) !== $documentClass) {
                 continue;
@@ -60,7 +60,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 throw new \RuntimeException(\sprintf('Document class "%s" is mapped to multiple indexes.', $documentClass));
             }
 
-            $indexName = $index->name;
+            $indexName = $name;
         }
 
         if (null === $indexName) {
@@ -308,7 +308,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 ));
             }
 
-            return $value->format('Y-m-d H:i:s');
+            return $value->format('c');
         }
 
         if (!\is_array($value)) {
@@ -331,7 +331,7 @@ final class OdmDataMapper implements OdmDataMapperInterface
                 ));
             }
 
-            $values[$key] = $item->format('Y-m-d H:i:s');
+            $values[$key] = $item->format('c');
         }
 
         return $values;
