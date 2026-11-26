@@ -88,8 +88,13 @@ final class IndexMerger
      */
     public function mergeField(Field\AbstractField $field, Field\AbstractField $newField): Field\AbstractField
     {
-        if ($newField instanceof Field\IdentifierField) {
-            return $newField;
+        if ($field instanceof Field\IdentifierField && $newField instanceof Field\IdentifierField) {
+            // @phpstan-ignore-next-line
+            return new Field\IdentifierField(
+                $newField->name,
+                sortable: $newField->sortable,
+                options: $this->mergeOptions($field->options, $newField->options),
+            );
         }
 
         if ($field instanceof Field\TextField && $newField instanceof Field\TextField) {

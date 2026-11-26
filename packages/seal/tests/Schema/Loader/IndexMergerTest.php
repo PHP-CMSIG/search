@@ -120,12 +120,16 @@ class IndexMergerTest extends TestCase
         $this->assertSame(['keep' => true, 'add' => true], $merged->options);
     }
 
-    public function testIdentifierIsReplaced(): void
+    public function testIdentifierOptionsAreMerged(): void
     {
-        $old = new Field\IdentifierField('id', sortable: true);
-        $new = new Field\IdentifierField('id');
+        $old = new Field\IdentifierField('id', sortable: true, options: ['odm' => ['type' => 'int'], 'replace' => 'old']);
+        $new = new Field\IdentifierField('id', sortable: false, options: ['replace' => 'new']);
 
-        $this->assertSame($new, (new IndexMerger())->mergeFields(['id' => $old], ['id' => $new])['id']);
+        $merged = (new IndexMerger())->mergeFields(['id' => $old], ['id' => $new])['id'];
+
+        $this->assertFalse($merged->sortable);
+        $this->assertSame(['odm' => ['type' => 'int'], 'replace' => 'new'], $merged->options);
+        $this->assertSame(['odm' => ['type' => 'int'], 'replace' => 'old'], $old->options);
     }
 
     public function testConflictingFieldTypes(): void
