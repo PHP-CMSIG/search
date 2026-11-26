@@ -184,7 +184,11 @@ final class Engine implements EngineInterface
 
         $tasks = [];
         foreach ($reindexProvidersPerIndex as $index => $reindexProviders) {
-            if ($reindexConfig->shouldDropIndex() && $this->existIndex($index)) {
+            if (
+                $reindexConfig->shouldDropIndex()
+                && (null === $reindexConfig->getIndex() || $reindexConfig->getIndex() === $index)
+                && $this->existIndex($index)
+            ) {
                 $task = $this->dropIndex($index, ['return_slow_promise_result' => true]);
                 $task->wait();
                 $task = $this->createIndex($index, ['return_slow_promise_result' => true]);
