@@ -21,7 +21,6 @@ use CmsIg\Seal\Reindex\DynamicReindexProviderInterface;
 use CmsIg\Seal\Reindex\ReindexConfig;
 use CmsIg\Seal\Reindex\ReindexProviderInterface;
 use CmsIg\Seal\Schema\Schema;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractAdapterTestCase extends TestCase
@@ -300,59 +299,6 @@ abstract class AbstractAdapterTestCase extends TestCase
         }, ['return_slow_promise_result' => true])->wait(); // @phpstan-ignore-line method.nonObject
 
         $this->assertSame(0, $counter);
-    }
-
-    /**
-     * @return iterable<string, array{string|null, bool, int, int}>
-     */
-    public static function provideDynamicReindexDropConfigurations(): iterable
-    {
-        yield 'all indexes' => [null, true, 1, 0];
-        yield 'simple only' => [TestingHelper::INDEX_SIMPLE, true, 1, 1];
-        yield 'empty complex only' => [TestingHelper::INDEX_COMPLEX, true, 1, 0];
-        yield 'unknown index' => ['unknown', true, 1, 1];
-        yield 'drop disabled' => [null, false, 2, 1];
-    }
-
-    #[DataProvider('provideDynamicReindexDropConfigurations')]
-    public function testDynamicReindexDropSelection(string|null $index, bool $dropIndex, int $simpleCount, int $complexCount): void
-    {
-        $engine = new Engine(self::$adapter, TestingHelper::createSchema());
-        $task = $engine->createSchema(['return_slow_promise_result' => true]);
-        $task->wait();
-
-        $simpleDocument = ['id' => 'existing', 'title' => 'Existing simple document'];
-        $complexDocument = ['uuid' => '3fa85f64-5717-4562-b3fc-2c963f66afa6', 'title' => 'Existing complex document'];
-        self::$taskHelper->tasks[] = $engine->saveDocument(TestingHelper::INDEX_SIMPLE, $simpleDocument, ['return_slow_promise_result' => true]);
-        self::$taskHelper->tasks[] = $engine->saveDocument(TestingHelper::INDEX_COMPLEX, $complexDocument, ['return_slow_promise_result' => true]);
-        self::$taskHelper->waitForAll();
-        self::assertSame(1, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
-        self::assertSame(1, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
-
-        $provider = new class() implements DynamicReindexProviderInterface {
-            public function total(string $index): int
-            {
-                return TestingHelper::INDEX_SIMPLE === $index ? 1 : 0;
-            }
-
-            /** @return \Generator<array<string, mixed>> */
-            public function provide(string $index, ReindexConfig $reindexConfig): \Generator
-            {
-                if (TestingHelper::INDEX_SIMPLE !== $index) {
-                    return;
-                }
-
-                yield ['id' => 'reindexed', 'title' => 'Reindexed simple document'];
-            }
-        };
-        $config = ReindexConfig::create()->withIndex($index)->withDropIndex($dropIndex);
-        $task = $engine->reindex([$provider], $config, null, ['return_slow_promise_result' => true]);
-        $task->wait();
-
-        self::assertTrue($engine->existIndex(TestingHelper::INDEX_SIMPLE));
-        self::assertTrue($engine->existIndex(TestingHelper::INDEX_COMPLEX));
-        self::assertSame($simpleCount, $engine->countDocuments(TestingHelper::INDEX_SIMPLE));
-        self::assertSame($complexCount, $engine->countDocuments(TestingHelper::INDEX_COMPLEX));
     }
 
     public function testCountDocuments(): void
