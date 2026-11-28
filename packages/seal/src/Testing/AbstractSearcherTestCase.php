@@ -505,6 +505,50 @@ abstract class AbstractSearcherTestCase extends TestCase
         }
     }
 
+    /**
+     * Highlighted text is expected HTML escaped (`&lt;`, `&amp;`) with only the markers as HTML;
+     * engines returning the raw text are the unexpected behaviour.
+     *
+     * @see https://github.com/loupe-php/matcher/issues/23
+     */
+    public function testSearchConditionWithHighlightHtmlEscaping(): void
+    {
+        $document = TestingHelper::createComplexFixtures()[0];
+        $document['uuid'] = '5a7a4c3e-9b1f-4d5e-8c6a-2f1e3d4b5c6d';
+        $document['title'] = 'I <3 comparing apples & oranges and so on';
+
+        $schema = self::getSchema();
+
+        self::$taskHelper->tasks[] = self::$indexer->save(
+            $schema->indexes[TestingHelper::INDEX_COMPLEX],
+            $document,
+            ['return_slow_promise_result' => true],
+        );
+        self::$taskHelper->waitForAll();
+
+        try {
+            $search = new SearchBuilder($schema, self::$searcher);
+            $search->index(TestingHelper::INDEX_COMPLEX);
+            $search->addFilter(Condition::search('oranges'));
+            $search->highlight(['title'], '<mark>', '</mark>');
+
+            $loadedDocuments = [...$search->getResult()];
+
+            $this->assertCount(1, $loadedDocuments);
+
+            $this->assertSame(
+                'I &lt;3 comparing apples &amp; <mark>oranges</mark> and so on',
+                $loadedDocuments[0]['_formatted']['title'] ?? null, // @phpstan-ignore-line offsetAccess.nonOffsetAccessible
+            );
+        } finally {
+            self::$taskHelper->tasks[] = self::$indexer->delete(
+                $schema->indexes[TestingHelper::INDEX_COMPLEX],
+                $document['uuid'],
+                ['return_slow_promise_result' => true],
+            );
+        }
+    }
+
     public function testFilterSearchWithHighlightWithoutQuery(): void
     {
         $documents = TestingHelper::createComplexFixtures();
